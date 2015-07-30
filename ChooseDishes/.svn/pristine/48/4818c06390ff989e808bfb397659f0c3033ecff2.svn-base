@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace IShow.ChooseDishes.ViewModel
+{
+    public class DischesWayNameModel
+    {
+        //实例化对象时就给IDischesWayNameModel对象赋值，方便调用数据持久层操作数据库
+
+        //1.页面传入新增数据时，调用数据持久层的添加方法将做法类型添加到数据库
+
+        //2.页面操作修改做法类型时，调用数据持久层的修改方法将做法类型进行修改
+
+        //3.页面操作删除做法类型时，调用数据持久层删除对应做法类型，如果该做法类型下面有做法，则不能删除
+
+        //4.提供一个查询所有做法类型的功能，获取所有的做法类型
+    }
+}

@@ -1,0 +1,15 @@
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\IShowOrderUnitTest.dll.config
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\IShowOrderUnitTest.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\IShowOrderUnitTest.pdb
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\IShow.Service.exe
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\EntityFramework.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\GalaSoft.MvvmLight.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\System.Windows.Interactivity.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\IShow.Service.pdb
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\EntityFramework.xml
+D:\ChooseDishes\Build\IShowOrderUnitTest\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\obj\Debug\IShowOrderUnitTest.csprojResolveAssemblyReference.cache
+D:\ChooseDishes\Build\IShowOrderUnitTest\obj\Debug\IShowOrderUnitTest.dll
+D:\ChooseDishes\Build\IShowOrderUnitTest\obj\Debug\IShowOrderUnitTest.pdb

@@ -1,0 +1,127 @@
+﻿using IShow.Service.Data;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Windows;
+
+
+namespace IShow.Service
+{
+    public class ChooseDishesDataService : IChooseDishesDataService
+    {
+        public bool Login(string name, string password)
+        {
+
+            MessageBox.Show("登录成功");
+            OperationContext.Current.Channel.Closed += Channel_Closed;
+            return true;
+        }
+
+        void Channel_Closed(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        public List<Location> queryByLocation()
+        {
+            List<Location> local;
+            using (IShowOrderEntities entities = new IShowOrderEntities())
+            {
+                local = entities.Location.ToList();
+            }
+            return local;
+        }
+
+        public int addLocation(string name, string no)
+        {
+            int flag = 0;
+            using (IShowOrderEntities entities = new IShowOrderEntities())
+            {
+                Location local = new Location()
+                {
+                    Code = no,
+                    Name = name,
+                    CreateDatetime=DateTime.Now,
+                    CreateBy=1,
+                    Deleted=1,
+                    Status=1
+
+                };
+                entities.Location.Add(local);
+                try
+                {
+                    flag = entities.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+            return flag;
+        }
+
+        public int editByLocation(string id, string name, string no)
+        {
+            int flag = 0;
+            using (IShowOrderEntities entities = new IShowOrderEntities())
+            {
+                Location local = new Location()
+                {
+                    LocationId = int.Parse(id),
+                    Code = no,
+                    Name = name
+
+                };
+                DbEntityEntry<Location> entry = entities.Entry<Location>(local);
+                entry.State = System.Data.EntityState.Unchanged;
+                entry.Property("Code").IsModified = true;
+                entry.Property("Name").IsModified = true;
+                try
+                {
+                    flag=entities.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+            return flag;
+        }
+
+        public int delByLocation(string id)
+        {
+            int flag = 0;
+            using (IShowOrderEntities entities = new IShowOrderEntities())
+            {
+                Location local = new Location()
+                {
+                    LocationId = int.Parse(id),
+
+                };
+                DbEntityEntry<Location> entry = entities.Entry<Location>(local);
+                entry.State = System.Data.EntityState.Deleted;
+                try
+                {
+                    flag=entities.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+            return flag;
+        }
+
+
+        public IEnumerable<string> GetAllName()
+        {
+            yield return "test1";
+            yield return "test2";
+            yield return "test3";
+        }
+    }
+}
