@@ -1,0 +1,15 @@
+E:\ChooseDishes\src\IShow.Common\bin\Debug\IShow.Common.dll
+E:\ChooseDishes\src\IShow.Common\bin\Debug\IShow.Common.pdb
+E:\ChooseDishes\src\IShow.Common\bin\Debug\System.Windows.Interactivity.dll
+E:\ChooseDishes\src\IShow.Common\obj\Debug\IShow.Common.csprojResolveAssemblyReference.cache
+E:\ChooseDishes\src\IShow.Common\obj\Debug\Styles\IShowWindow\WindowCommandButtonStyle.baml
+E:\ChooseDishes\src\IShow.Common\obj\Debug\Themes\Generic.baml
+E:\ChooseDishes\src\IShow.Common\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\ChooseDishes\src\IShow.Common\obj\Debug\IShow.Common_MarkupCompile.cache
+E:\ChooseDishes\src\IShow.Common\obj\Debug\IShow.Common_MarkupCompile.lref
+E:\ChooseDishes\src\IShow.Common\obj\Debug\Styles\BusyIndicator\BusyIndicatorStyle.baml
+E:\ChooseDishes\src\IShow.Common\obj\Debug\Styles\IShowWindow\IShowWindowStyle.baml
+E:\ChooseDishes\src\IShow.Common\obj\Debug\Styles\SlideShow\SlideShowStyle.baml
+E:\ChooseDishes\src\IShow.Common\obj\Debug\IShow.Common.g.resources
+E:\ChooseDishes\src\IShow.Common\obj\Debug\IShow.Common.dll
+E:\ChooseDishes\src\IShow.Common\obj\Debug\IShow.Common.pdb

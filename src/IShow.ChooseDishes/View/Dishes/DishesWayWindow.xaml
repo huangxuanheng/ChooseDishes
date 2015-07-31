@@ -1,0 +1,109 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.dischesWayView.DischesWayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding DishesWay, Source={StaticResource ViewModelLocator}}"
+        Title="菜品做法" Height="400" Width="600">
+    <Window.Resources>
+        <HierarchicalDataTemplate x:Key="TreeNodeTemplate"  ItemsSource="{Binding Children}">
+            <StackPanel x:Name="TreeNodeStackPanel"  Orientation="Horizontal" Margin="2">
+                <ContentPresenter  Content="{Binding Path=Name,Mode=OneTime}" Margin="2,0"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <Style x:Key="TreeNodeStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="True" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        
+        <Menu Width="auto" Height="auto" HorizontalContentAlignment="Left" >
+            <MenuItem  Height="auto" Width="60" Grid.Row="0" Command="{Binding AddDishesWayMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="新增" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="60" Command="{Binding UpdateDishesWayMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="修改" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="60" Command="{Binding DeleteDishesWayMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="删除" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="auto" Command="{Binding DishesWayTypeMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="做法类型" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="auto" Command="{Binding PingYingMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="生成拼音简码" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="auto" Command="{Binding RefreshMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="刷新" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="auto" Command="{Binding PrintedMenu}">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="打印" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Height="auto" Width="auto" Click="MenuItem_Click">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/IShow.ChooseDishes;component/Image/Login/americal.png" Width="40"/>
+                        <TextBlock Text="退出" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView Grid.Column="0" ItemsSource="{Binding DishesWayNameTree}">
+            </TreeView>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DishesItems}" HorizontalAlignment="Left" Margin="2,2,0,0" Grid.Column="1" VerticalAlignment="Top" Height="503" Width="auto">
+                <DataGrid.Columns> 
+                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" Header="行号" />
+                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto"  ClipboardContentBinding="{x:Null}" Header="编码"/>
+                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="做法说明"/>
+                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="类型"/>
+                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="拼音简码"/>
+                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="加价"/>
+                    <DataGridCheckBoxColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="按数量加价" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
