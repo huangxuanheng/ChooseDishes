@@ -18,14 +18,22 @@ namespace IShow.Service.Services
         bool UpdateTakeoutClientInfo(TakeoutClientInfo info);
         //根据外卖客户id删除外卖客户信息
         [OperationContract]
-        bool DeletedTakeoutClientInfo(int id);
+        bool DeletedTakeoutClientInfoById(int id);
         //根据外卖客户id查找外卖客户信息
         [OperationContract]
         TakeoutClientInfo FindTakeoutClientInfoById(int id);
         //查找全部的外卖客户信息
         [OperationContract]
         List<TakeoutClientInfo> FindAllTakeoutClientInfo();
-
+        //根据外卖客户id修改外卖客户Deleted状态
+        [OperationContract]
+        bool UpdateTakeoutClientDeletedById(int id, int DeletedStatas);
+        //根据订餐人电话号码查找订餐人信息
+        [OperationContract]
+        TakeoutClientInfo FindTakeoutClientByTelephone(string phone);
+        //根据订餐人电话号码进行模糊查询所有外卖客户人的信息
+        [OperationContract]
+        List<TakeoutClientInfo> FindTakeoutClientListByTelephone(string phone);
 
 
         //添加外卖单

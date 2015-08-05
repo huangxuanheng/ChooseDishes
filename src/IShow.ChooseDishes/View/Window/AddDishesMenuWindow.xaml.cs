@@ -23,16 +23,16 @@ namespace IShow.ChooseDishes.View
             InitializeComponent();
         }
 
-        public string Id
+        public string Code
         {
             get;
             set;
         }
-        //public string Name
-        //{
-        //    get;
-        //    set;
-        //}
+        public string Name
+        {
+            get;
+            set;
+        }
 
 
         private void btn_Ok_Click(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace IShow.ChooseDishes.View
                 MessageBox.Show("菜牌名称不能为空！");
                 return;
             }
-            Id = text_id.Text;
+            Code = text_id.Text;
             Name=text_name.Text;
 
             this.DialogResult = true;

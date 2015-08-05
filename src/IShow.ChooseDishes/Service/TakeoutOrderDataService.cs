@@ -69,8 +69,36 @@ namespace IShow.Service.Services
                 return false;
             }
         }
+        //根据外卖客户id修改外卖客户Deleted状态
+        public bool UpdateTakeoutClientDeletedById(int id,int DeletedStatas)
+        {
+            if (id <0)
+            {
+                return false;
+            }
+            //修改  直接修改
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entities.TakeoutClientInfo.SingleOrDefault(bt => bt.OrderPeopleId == id);
+                    if (type != null)
+                    {
+                        type.Deleted = DeletedStatas;
+                        entities.SaveChanges();
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return false;
+                }
+                return false;
+            }
+        }
         //根据外卖客户id删除外卖客户信息,删除成功则返回true，删除失败则返回false
-        public bool DeletedTakeoutClientInfo(int id)
+        public bool DeletedTakeoutClientInfoById(int id)
         {
             if (id < 0)
             {
@@ -141,7 +169,50 @@ namespace IShow.Service.Services
             }
             return null;
         }
+        //根据订餐人电话号码查找订餐人信息
+        public TakeoutClientInfo FindTakeoutClientByTelephone(string phone)
+        {
+            if (phone== null)
+            {
+                return null;
+            }
+            
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entities.TakeoutClientInfo.SingleOrDefault(bt => bt.Telephone.Equals( phone));
+                    return type;
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return null;
+                }
 
+            }
+        }
+        //根据订餐人电话号码进行模糊查询所有外卖客户人的信息
+        public List<TakeoutClientInfo> FindTakeoutClientListByTelephone(string phone)
+        {
+            if (phone == null)
+            {
+                return null;
+            }
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entities.TakeoutClientInfo.Where(bt => bt.Telephone.Contains(phone)).ToList();  
+                    return type;
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return null;
+                }
+            }
+        }
 
 
         //添加外卖单

@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using IShow.Service.Data;
+using IShow.ChooseDishes.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -331,7 +331,7 @@ namespace IShow.ChooseDishes.Model.bean
             return this;
         }
 
-        private string TiQuName(int p)
+        public string TiQuName(int p)
         {
             switch(p)
             {

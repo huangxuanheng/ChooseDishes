@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="IShow.ChooseDishes.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="IShow.ChooseDishes.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AreaPrintPlan">
     <Key>
       <PropertyRef Name="AreaPlanId" />
@@ -84,7 +84,7 @@
       <PropertyRef Name="BearingId" />
     </Key>
     <Property Name="BearingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
     <Property Name="CreateBy" Type="int" Nullable="false" />
@@ -164,8 +164,8 @@
     <Property Name="ItemId" Type="int" Nullable="false" />
     <Property Name="Rule" Type="nvarchar" MaxLength="500" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.CheckoutIinfoItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.CheckoutIinfoItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CheckoutIinfoItem">
     <Key>
       <PropertyRef Name="Id" />
@@ -195,8 +195,8 @@
     <Property Name="TotalMoney" Type="float" Nullable="false" />
     <Property Name="TotalRmbMoney" Type="float" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.CheckoutSet”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.CheckoutSet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CheckoutSet">
     <Key>
       <PropertyRef Name="CalculationMode" />
@@ -223,8 +223,8 @@
     <Property Name="PrintWholeBill" Type="int" Nullable="false" />
     <Property Name="ChoiseTable" Type="int" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.ClearEstimate”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.ClearEstimate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ClearEstimate">
     <Key>
       <PropertyRef Name="Id" />
@@ -299,8 +299,8 @@
     <Property Name="TotalNum" Type="int" Nullable="false" />
     <Property Name="TotalMoney" Type="float" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.ConsumeItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ConsumeItem">
     <Key>
       <PropertyRef Name="id" />
@@ -490,8 +490,8 @@
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.DischesWayRef”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.DischesWayRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="DischesWayRef">
     <Key>
       <PropertyRef Name="DishId" />
@@ -580,8 +580,8 @@
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.dish_cents”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.dish_cents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="dish_cents">
     <Key>
       <PropertyRef Name="CreateDatetime" />
@@ -654,8 +654,8 @@
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.DishesMenuRef”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.DishesMenuRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="DishesMenuRef">
     <Key>
       <PropertyRef Name="DishId" />
@@ -761,6 +761,12 @@
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
     <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="Position" Type="nvarchar" MaxLength="20" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Code" Type="nchar" MaxLength="10" />
+    <Property Name="ResidentialAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="IDAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="GiveInvoice">
     <Key>
@@ -833,8 +839,8 @@
     <Property Name="UpdateBy" Type="nvarchar" MaxLength="20" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.KitchenBillItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.KitchenBillItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="KitchenBillItem">
     <Key>
       <PropertyRef Name="Id" />
@@ -972,8 +978,8 @@
     <Property Name="Rebate" Type="int" Nullable="false" />
     <Property Name="Discount" Type="int" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.OrderMateria”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.OrderMateria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="OrderMateria">
     <Key>
       <PropertyRef Name="OrderItemId" />
@@ -1000,8 +1006,8 @@
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.OrderPractice”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="OrderPractice">
     <Key>
       <PropertyRef Name="OrderItemId" />
@@ -1287,8 +1293,8 @@
     <Property Name="RefundDishNum" Type="int" Nullable="false" />
     <Property Name="RefundMoney" Type="float" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.RefundInfoItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.RefundInfoItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="RefundInfoItem">
     <Key>
       <PropertyRef Name="RefundId" />
@@ -1320,8 +1326,8 @@
     <Property Name="EditTime" Type="datetime" />
     <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.RoleRefPrivilege”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.RoleRefPrivilege' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="RoleRefPrivilege">
     <Key>
       <PropertyRef Name="PrivilegeId" />
@@ -1368,8 +1374,8 @@
     <Property Name="Deposit" Type="float" Nullable="false" />
     <Property Name="ReturnDeposit" Type="float" Nullable="false" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.ShiftItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ShiftItem">
     <Key>
       <PropertyRef Name="ShiftId" />
@@ -1531,8 +1537,8 @@
     <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
     <Property Name="Deleted" Type="int" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.UserRoleRef”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UserRoleRef">
     <Key>
       <PropertyRef Name="RoleId" />

@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IShow.ChooseDishes.ViewModel;
+using IShow.ChooseDishes.ViewModel.Common;
 
 namespace IShow.ChooseDishes.View
 {
@@ -22,5 +24,17 @@ namespace IShow.ChooseDishes.View
         {
             InitializeComponent();
         }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            DishesMenuViewModel model = this.DataContext as DishesMenuViewModel;
+            model.SelectedItemChanged(e.NewValue as TreeNodeModel);
+        }
+
+        private void EXIT_WIN(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

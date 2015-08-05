@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
-//using IShow.Service.Services;
 
 namespace IShow.ChooseDishes
 {
@@ -17,7 +16,8 @@ namespace IShow.ChooseDishes
         
         List<DishType> LoadType(DishType type);
 
-       
+        List<DishType> LoadSubType(DishType type);
+
         Hashtable SaveType(DishType type);
 
         
@@ -29,5 +29,18 @@ namespace IShow.ChooseDishes
         
         List<DishType> LoadTypeById(int id);
         #endregion
+
+
+        #region 菜品單位
+         List<DishUnit> QueryAllDishesUnits();
+
+         int[] BatchAddDishesUnit(DishUnit[] dishesUnits);
+        
+
+         int AddDishesUnit(DishUnit dishesUnit);
+
+        bool RemoveDishesUnitById(int dishUnitId);
+        #endregion 菜品單位
+
     }
 }

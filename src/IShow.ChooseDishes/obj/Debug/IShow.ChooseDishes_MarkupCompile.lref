@@ -1,6 +1,13 @@
 ﻿
 
 FE:\ChooseDishes\src\IShow.ChooseDishes\App.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\Common\TreeViewWindow.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\OrgInfo\EmployeeView.xaml;;
 FE:\ChooseDishes\src\IShow.ChooseDishes\View\Window\DishesMenuWindow.xaml;;
 FE:\ChooseDishes\src\IShow.ChooseDishes\View\Window\MainWindow.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\Dishes\ChooseForDishesMenu.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\Dishes\DishesUnitWindow.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\Dishes\DishesWin.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\Dishes\DishTypeWindow.xaml;;
+FE:\ChooseDishes\src\IShow.ChooseDishes\View\Dishes\MaterialView.xaml;;
 

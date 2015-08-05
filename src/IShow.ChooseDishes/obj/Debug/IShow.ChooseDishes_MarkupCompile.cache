@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-131264536502
+37-636226647
 
-121461666905
+173320852040
 25-1619203160
-App.xaml;Skins\CommonStyle.xaml;Skins\LoginStyle.xaml;View\Dishes\AddDishType.xaml;View\Dishes\DishesWaySettingWindow.xaml;View\Dishes\DishesWayWindow.xaml;View\OrgTable\addLocation.xaml;View\OrgTable\editLocation.xaml;View\OrgTable\OrgLocation.xaml;View\Window\AddDishesMenuWindow.xaml;View\Window\DishesMenuWindow.xaml;View\Window\MainWindow.xaml;View\Window\Login.xaml;
+App.xaml;Skins\CommonStyle.xaml;Skins\LoginStyle.xaml;View\CashWindow\AddCashType.xaml;View\CashWindow\CashWin.xaml;View\CashWindow\UpdateCashType.xaml;View\Common\TreeViewWindow.xaml;View\Dishes\AddDish.xaml;View\Dishes\AddDishMenusRef.xaml;View\Dishes\AddDishType.xaml;View\Dishes\ChooseForDishesMenu.xaml;View\Dishes\DishesUnitWindow.xaml;View\Dishes\DishesWaySettingWindow.xaml;View\Dishes\DishesWayTypeWindow.xaml;View\Dishes\DishesWayWindow.xaml;View\Dishes\DishesWin.xaml;View\Dishes\DishTypeWindow.xaml;View\Dishes\MaterialView.xaml;View\Dishes\UpdateDish.xaml;View\OrgInfo\AddEmployee.xaml;View\OrgInfo\Company.xaml;View\OrgInfo\DepartmentView.xaml;View\OrgInfo\EditEmployee.xaml;View\OrgInfo\EmployeeView.xaml;View\Table\AddBearing.xaml;View\Table\AddLocation.xaml;View\Table\EditBearing.xaml;View\Table\EditLocation.xaml;View\Table\OrgBearing.xaml;View\Table\OrgLocation.xaml;View\TakeOut\TakeOutClientInfoWindow.xaml;View\TakeOut\TakeoutOrderWindow.xaml;View\TakeOut\TakeoutSelectDeliveryman.xaml;View\Window\AddDishesMenuWindow.xaml;View\Window\DishesMenuWindow.xaml;View\Window\MainWindow.xaml;View\Window\Login.xaml;
 
 False
 

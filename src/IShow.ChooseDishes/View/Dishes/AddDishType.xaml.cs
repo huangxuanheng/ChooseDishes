@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace IShow.ChooseDishes.View.Dish
+namespace IShow.ChooseDishes.View.Dishes
 {
     /// <summary>
     /// Interaction logic for Dish.xaml

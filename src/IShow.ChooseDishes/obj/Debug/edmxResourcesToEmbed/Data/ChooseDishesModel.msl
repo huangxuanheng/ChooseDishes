@@ -85,21 +85,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Bearing">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Bearing">
-        <MappingFragment StoreEntitySet="Bearing">
-          <ScalarProperty Name="BearingId" ColumnName="BearingId" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CashBaseType">
       <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.CashBaseType">
         <MappingFragment StoreEntitySet="CashBaseType">
@@ -259,31 +244,6 @@
       <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DaySettlement">
         <MappingFragment StoreEntitySet="DaySettlement">
           <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DbBackup">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DbBackup">
-        <MappingFragment StoreEntitySet="DbBackup">
-          <ScalarProperty Name="BackupsId" ColumnName="BackupsId" />
-          <ScalarProperty Name="BackUrl" ColumnName="BackUrl" />
-          <ScalarProperty Name="BackDate" ColumnName="BackDate" />
-          <ScalarProperty Name="BackName" ColumnName="BackName" />
-          <ScalarProperty Name="BackPlanDate" ColumnName="BackPlanDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DepartmentInfo">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DepartmentInfo">
-        <MappingFragment StoreEntitySet="DepartmentInfo">
-          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -518,21 +478,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DishesMenu">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DishesMenu">
-        <MappingFragment StoreEntitySet="DishesMenu">
-          <ScalarProperty Name="MenusId" ColumnName="MenusId" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DishFinance">
       <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DishFinance">
         <MappingFragment StoreEntitySet="DishFinance">
@@ -610,26 +555,6 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
           <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employee">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-          <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ScalarProperty Name="Flag" ColumnName="Flag" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -958,22 +883,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Privilege">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Privilege">
-        <MappingFragment StoreEntitySet="Privilege">
-          <ScalarProperty Name="PrivilegeName" ColumnName="PrivilegeName" />
-          <ScalarProperty Name="PrivilegeType" ColumnName="PrivilegeType" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-          <ScalarProperty Name="EditTime" ColumnName="EditTime" />
-          <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
-          <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PromotionsDish">
       <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.PromotionsDish">
         <MappingFragment StoreEntitySet="PromotionsDish">
@@ -1107,22 +1016,6 @@
           <ScalarProperty Name="RefundNum" ColumnName="RefundNum" />
           <ScalarProperty Name="RefundDishNum" ColumnName="RefundDishNum" />
           <ScalarProperty Name="RefundMoney" ColumnName="RefundMoney" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Role">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Role">
-        <MappingFragment StoreEntitySet="Role">
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-          <ScalarProperty Name="Detail" ColumnName="Detail" />
-          <ScalarProperty Name="RoleType" ColumnName="RoleType" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-          <ScalarProperty Name="EditTime" ColumnName="EditTime" />
-          <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1302,21 +1195,6 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
           <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserInfo">
-      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.UserInfo">
-        <MappingFragment StoreEntitySet="UserInfo">
-          <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
-          <ScalarProperty Name="OperatorPwd" ColumnName="OperatorPwd" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-          <ScalarProperty Name="EditTime" ColumnName="EditTime" />
-          <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1505,21 +1383,149 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Bearing">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Bearing">
+        <MappingFragment StoreEntitySet="Bearing">
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="BearingId" ColumnName="BearingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentInfo">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DepartmentInfo">
+        <MappingFragment StoreEntitySet="DepartmentInfo">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DbBackup">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DbBackup">
+        <MappingFragment StoreEntitySet="DbBackup">
+          <ScalarProperty Name="BackPlanDate" ColumnName="BackPlanDate" />
+          <ScalarProperty Name="BackName" ColumnName="BackName" />
+          <ScalarProperty Name="BackDate" ColumnName="BackDate" />
+          <ScalarProperty Name="BackUrl" ColumnName="BackUrl" />
+          <ScalarProperty Name="BackupsId" ColumnName="BackupsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privilege">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Privilege">
+        <MappingFragment StoreEntitySet="Privilege">
+          <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
+          <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
+          <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+          <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="PrivilegeType" ColumnName="PrivilegeType" />
+          <ScalarProperty Name="PrivilegeName" ColumnName="PrivilegeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
+          <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+          <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
+          <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+          <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="OperatorPwd" ColumnName="OperatorPwd" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="RoleRefPrivilege" TypeName="IShow.ChooseDishes.Data.RoleRefPrivilege" StoreEntitySet="RoleRefPrivilege">
-      <EndProperty Name="Role">
-        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-      </EndProperty>
       <EndProperty Name="Privilege">
         <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
       </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UserRoleRef" TypeName="IShow.ChooseDishes.Data.UserRoleRef" StoreEntitySet="UserRoleRef">
-      <EndProperty Name="UserInfo">
-        <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
-      </EndProperty>
       <EndProperty Name="Role">
         <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRoleRef" TypeName="IShow.ChooseDishes.Data.UserRoleRef" StoreEntitySet="UserRoleRef">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="DishesMenu">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DishesMenu">
+        <MappingFragment StoreEntitySet="DishesMenu">
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="MenusId" ColumnName="MenusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IDAddress" ColumnName="IDAddress" />
+          <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

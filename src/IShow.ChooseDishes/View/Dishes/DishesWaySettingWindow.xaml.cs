@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace IShow.ChooseDishes.View.DischesWayView
+namespace IShow.ChooseDishes.View.Dishes
 {
     /// <summary>
     /// Interaction logic for DishesWayFrom.xaml

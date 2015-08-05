@@ -1,18 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShow.Common", "..\IShow.Common\IShow.Common.csproj", "{9508C285-A650-422C-8DF3-C87882774F6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShow.Service", "..\IShow.Service\IShow.Service.csproj", "{89785A32-1756-40B4-A58D-3D163076689E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShow.ChooseDishes", "..\IShow.ChooseDishes\IShow.ChooseDishes.csproj", "{1820A144-771D-462A-8D33-24D03532D1E3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{89785A32-1756-40B4-A58D-3D163076689E} = {89785A32-1756-40B4-A58D-3D163076689E}
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShowOrderUnitTest", "IShowOrderUnitTest\IShowOrderUnitTest.csproj", "{4DEEC7F8-562B-485C-B8BB-644A34341D8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShow.ChooseDishesTest", "..\IShow.ChooseDishesTest\IShow.ChooseDishesTest.csproj", "{3AC096D0-A1C2-E12C-1390-A8335801FDAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +29,6 @@ Global
 		{1820A144-771D-462A-8D33-24D03532D1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1820A144-771D-462A-8D33-24D03532D1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1820A144-771D-462A-8D33-24D03532D1E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DEEC7F8-562B-485C-B8BB-644A34341D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DEEC7F8-562B-485C-B8BB-644A34341D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DEEC7F8-562B-485C-B8BB-644A34341D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DEEC7F8-562B-485C-B8BB-644A34341D8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

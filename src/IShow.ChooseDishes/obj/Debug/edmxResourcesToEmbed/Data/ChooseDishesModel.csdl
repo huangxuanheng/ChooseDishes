@@ -89,20 +89,6 @@
     <NavigationProperty Name="DishPrint" Relationship="Self.FK_DISHPRIN_REFERENCE_BASICPRI" FromRole="BasicPrintPlan" ToRole="DishPrint" />
     <NavigationProperty Name="MaterialPrint" Relationship="Self.FK_MATERIAL_REFERENCE_BASICPRI" FromRole="BasicPrintPlan" ToRole="MaterialPrint" />
   </EntityType>
-  <EntityType Name="Bearing">
-    <Key>
-      <PropertyRef Name="BearingId" />
-    </Key>
-    <Property Name="BearingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" Nullable="false" />
-    <Property Name="Deleted" Type="Int32" Nullable="false" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
-    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-    <Property Name="UpdateBy" Type="Int32" />
-  </EntityType>
   <EntityType Name="CashBaseType">
     <Key>
       <PropertyRef Name="CashBaseTypeId" />
@@ -265,30 +251,6 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="DbBackup">
-    <Key>
-      <PropertyRef Name="BackupsId" />
-    </Key>
-    <Property Name="BackupsId" Type="Int32" Nullable="false" />
-    <Property Name="BackUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="BackDate" Type="DateTime" Precision="3" />
-    <Property Name="BackName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="BackPlanDate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="DepartmentInfo">
-    <Key>
-      <PropertyRef Name="DepartmentId" />
-    </Key>
-    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
-    <Property Name="DepartmentName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" />
-    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-    <Property Name="UpdateBy" Type="Int32" />
-    <Property Name="Deleted" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_USERINFO_REFERENCE_DEPARTME" FromRole="DepartmentInfo" ToRole="Employee" />
   </EntityType>
   <EntityType Name="DeskDishes">
     <Key>
@@ -534,21 +496,6 @@
     <Property Name="UpdateBy" Type="Int32" />
     <NavigationProperty Name="DishDao" Relationship="Self.FK_DISHDETA_REFERENCE_DISHDAO" FromRole="DishDetail" ToRole="DishDao" />
   </EntityType>
-  <EntityType Name="DishesMenu">
-    <Key>
-      <PropertyRef Name="MenusId" />
-    </Key>
-    <Property Name="MenusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" Nullable="false" />
-    <Property Name="Deleted" Type="Int32" Nullable="false" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
-    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-    <Property Name="UpdateBy" Type="Int32" />
-    <NavigationProperty Name="DishesMenuRef" Relationship="Self.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenu" ToRole="DishesMenuRef" />
-  </EntityType>
   <EntityType Name="DishFinance">
     <Key>
       <PropertyRef Name="DishFinanceId" />
@@ -628,27 +575,6 @@
     <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
     <Property Name="UpdateBy" Type="Int32" />
     <NavigationProperty Name="Dish" Relationship="Self.FK_DISH_REFERENCE_DISHUNIT" FromRole="DishUnit" ToRole="Dish" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-    <Property Name="JobNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Sex" Type="Int32" Nullable="false" />
-    <Property Name="Birthday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Flag" Type="Int32" />
-    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" />
-    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-    <Property Name="UpdateBy" Type="Int32" />
-    <Property Name="Deleted" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="DepartmentInfo" Relationship="Self.FK_USERINFO_REFERENCE_DEPARTME" FromRole="Employee" ToRole="DepartmentInfo" />
-    <NavigationProperty Name="UserInfo" Relationship="Self.FK_OPERATOR_REFERENCE_USERINFO" FromRole="Employee" ToRole="UserInfo" />
   </EntityType>
   <EntityType Name="GiveInvoice">
     <Key>
@@ -977,22 +903,6 @@
     <NavigationProperty Name="BasicPrintPlan" Relationship="Self.FK_BASICPRI_REFERENCE_PRINTSET" FromRole="PrintSet" ToRole="BasicPrintPlan" />
     <NavigationProperty Name="KitchenBillFormat" Relationship="Self.FK_PRINTSET_REFERENCE_KITCHENB" FromRole="PrintSet" ToRole="KitchenBillFormat" />
   </EntityType>
-  <EntityType Name="Privilege">
-    <Key>
-      <PropertyRef Name="PrivilegeId" />
-    </Key>
-    <Property Name="PrivilegeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PrivilegeType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Deleted" Type="Int32" Nullable="false" />
-    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="EditTime" Type="DateTime" Precision="3" />
-    <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PrivilegeId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Role" Relationship="Self.RoleRefPrivilege" FromRole="Privilege" ToRole="Role" />
-  </EntityType>
   <EntityType Name="PromotionsDish">
     <Key>
       <PropertyRef Name="PromotionsDishId" />
@@ -1129,23 +1039,6 @@
     <Property Name="RefundMoney" Type="Double" Nullable="false" />
     <NavigationProperty Name="RefundInfoItem" Relationship="Self.FK_REFUNDIN_REFERENCE_REFUNDIN" FromRole="RefundInfo" ToRole="RefundInfoItem" />
     <NavigationProperty Name="ShiftBill" Relationship="Self.FK_REFUNDIN_REFERENCE_SHIFTBIL" FromRole="RefundInfo" ToRole="ShiftBill" />
-  </EntityType>
-  <EntityType Name="Role">
-    <Key>
-      <PropertyRef Name="RoleId" />
-    </Key>
-    <Property Name="RoleId" Type="Int32" Nullable="false" />
-    <Property Name="OrgId" Type="Int32" Nullable="false" />
-    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Deleted" Type="Int32" Nullable="false" />
-    <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="RoleType" Type="Int32" Nullable="false" />
-    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="EditTime" Type="DateTime" Precision="3" />
-    <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Privilege" Relationship="Self.RoleRefPrivilege" FromRole="Role" ToRole="Privilege" />
-    <NavigationProperty Name="UserInfo" Relationship="Self.UserRoleRef" FromRole="Role" ToRole="UserInfo" />
   </EntityType>
   <EntityType Name="ShiftBill">
     <Key>
@@ -1331,22 +1224,6 @@
     <Property Name="UpdateBy" Type="Int32" />
     <NavigationProperty Name="DeskDishes" Relationship="Self.FK_TIMERPRO_REFERENCE_DESKDISH" FromRole="TimerProject" ToRole="DeskDishes" />
   </EntityType>
-  <EntityType Name="UserInfo">
-    <Key>
-      <PropertyRef Name="OperatorId" />
-    </Key>
-    <Property Name="OperatorId" Type="Int32" Nullable="false" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="OperatorName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="OperatorPwd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="EditTime" Type="DateTime" Precision="3" />
-    <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Deleted" Type="Int32" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_OPERATOR_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Employee" />
-    <NavigationProperty Name="Role" Relationship="Self.UserRoleRef" FromRole="UserInfo" ToRole="Role" />
-  </EntityType>
   <EntityType Name="CheckoutIinfoItem">
     <Key>
       <PropertyRef Name="Id" />
@@ -1504,7 +1381,7 @@
     <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Deleted" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Dish" Relationship="Self.FK_MENUSDIS_REFERENCE_DISH" FromRole="DishesMenuRef" ToRole="Dish" />
-    <NavigationProperty Name="DishesMenu" Relationship="Self.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenuRef" ToRole="DishesMenu" />
+    <NavigationProperty Name="DishesMenu" Relationship="IShow.ChooseDishes.Data.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenuRef" ToRole="DishesMenu" />
   </EntityType>
   <EntityType Name="KitchenBillItem">
     <Key>
@@ -1799,18 +1676,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_USERINFO_REFERENCE_DEPARTME">
-    <End Role="DepartmentInfo" Type="Self.DepartmentInfo" Multiplicity="1" />
-    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DepartmentInfo">
-        <PropertyRef Name="DepartmentId" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="DepartmentId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DESKORDE_REFERENCE_DESKDISH">
     <End Role="DeskDishes" Type="Self.DeskDishes" Multiplicity="0..1" />
     <End Role="DeskOrder" Type="Self.DeskOrder" Multiplicity="*" />
@@ -2000,30 +1865,6 @@
       </Principal>
       <Dependent Role="DishDetail">
         <PropertyRef Name="DishDaoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MENUSDIS_REFERENCE_MENUS">
-    <End Role="DishesMenu" Type="Self.DishesMenu" Multiplicity="1" />
-    <End Role="DishesMenuRef" Type="Self.DishesMenuRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DishesMenu">
-        <PropertyRef Name="MenusId" />
-      </Principal>
-      <Dependent Role="DishesMenuRef">
-        <PropertyRef Name="MenusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OPERATOR_REFERENCE_USERINFO">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="UserInfo">
-        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2243,21 +2084,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RoleRefPrivilege">
-    <End Role="Role" Type="Self.Role" Multiplicity="*" />
-    <End Role="Privilege" Type="Self.Privilege" Multiplicity="*" />
-  </Association>
-  <Association Name="UserRoleRef">
-    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-    <End Role="Role" Type="Self.Role" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="ChooseDishesEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AreaPrintPlan" EntityType="Self.AreaPrintPlan" />
     <EntitySet Name="BackupMoney" EntityType="Self.BackupMoney" />
     <EntitySet Name="BargainDish" EntityType="Self.BargainDish" />
     <EntitySet Name="BargainDishPrice" EntityType="Self.BargainDishPrice" />
     <EntitySet Name="BasicPrintPlan" EntityType="Self.BasicPrintPlan" />
-    <EntitySet Name="Bearing" EntityType="Self.Bearing" />
     <EntitySet Name="CashBaseType" EntityType="Self.CashBaseType" />
     <EntitySet Name="CashType" EntityType="Self.CashType" />
     <EntitySet Name="ChargeItem" EntityType="Self.ChargeItem" />
@@ -2268,8 +2100,6 @@
     <EntitySet Name="ConsumeInfo" EntityType="Self.ConsumeInfo" />
     <EntitySet Name="CreateDesk" EntityType="Self.CreateDesk" />
     <EntitySet Name="DaySettlement" EntityType="Self.DaySettlement" />
-    <EntitySet Name="DbBackup" EntityType="Self.DbBackup" />
-    <EntitySet Name="DepartmentInfo" EntityType="Self.DepartmentInfo" />
     <EntitySet Name="DeskDishes" EntityType="Self.DeskDishes" />
     <EntitySet Name="DeskOrder" EntityType="Self.DeskOrder" />
     <EntitySet Name="DeskOrderMateria" EntityType="Self.DeskOrderMateria" />
@@ -2281,13 +2111,11 @@
     <EntitySet Name="Dish" EntityType="Self.Dish" />
     <EntitySet Name="DishDao" EntityType="Self.DishDao" />
     <EntitySet Name="DishDetail" EntityType="Self.DishDetail" />
-    <EntitySet Name="DishesMenu" EntityType="Self.DishesMenu" />
     <EntitySet Name="DishFinance" EntityType="Self.DishFinance" />
     <EntitySet Name="DishPrice" EntityType="Self.DishPrice" />
     <EntitySet Name="DishPrint" EntityType="Self.DishPrint" />
     <EntitySet Name="DishType" EntityType="Self.DishType" />
     <EntitySet Name="DishUnit" EntityType="Self.DishUnit" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" />
     <EntitySet Name="GiveInvoice" EntityType="Self.GiveInvoice" />
     <EntitySet Name="KitchenBill" EntityType="Self.KitchenBill" />
     <EntitySet Name="KitchenBillFormat" EntityType="Self.KitchenBillFormat" />
@@ -2304,7 +2132,6 @@
     <EntitySet Name="PayRecord" EntityType="Self.PayRecord" />
     <EntitySet Name="Printer" EntityType="Self.Printer" />
     <EntitySet Name="PrintSet" EntityType="Self.PrintSet" />
-    <EntitySet Name="Privilege" EntityType="Self.Privilege" />
     <EntitySet Name="PromotionsDish" EntityType="Self.PromotionsDish" />
     <EntitySet Name="PromotionsDishDetail" EntityType="Self.PromotionsDishDetail" />
     <EntitySet Name="Raw" EntityType="Self.Raw" />
@@ -2312,7 +2139,6 @@
     <EntitySet Name="RawUnit" EntityType="Self.RawUnit" />
     <EntitySet Name="RechargeItem" EntityType="Self.RechargeItem" />
     <EntitySet Name="RefundInfo" EntityType="Self.RefundInfo" />
-    <EntitySet Name="Role" EntityType="Self.Role" />
     <EntitySet Name="ShiftBill" EntityType="Self.ShiftBill" />
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" />
     <EntitySet Name="Table" EntityType="Self.Table" />
@@ -2321,7 +2147,6 @@
     <EntitySet Name="TakeoutClientInfo" EntityType="Self.TakeoutClientInfo" />
     <EntitySet Name="TakeoutOrder" EntityType="Self.TakeoutOrder" />
     <EntitySet Name="TimerProject" EntityType="Self.TimerProject" />
-    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
     <EntitySet Name="CheckoutIinfoItem" EntityType="Self.CheckoutIinfoItem" />
     <EntitySet Name="CheckoutSet" EntityType="Self.CheckoutSet" />
     <EntitySet Name="ClearEstimate" EntityType="Self.ClearEstimate" />
@@ -2398,10 +2223,6 @@
       <End Role="CreateDesk" EntitySet="CreateDesk" />
       <End Role="DeskDishes" EntitySet="DeskDishes" />
     </AssociationSet>
-    <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="Self.FK_USERINFO_REFERENCE_DEPARTME">
-      <End Role="DepartmentInfo" EntitySet="DepartmentInfo" />
-      <End Role="Employee" EntitySet="Employee" />
-    </AssociationSet>
     <AssociationSet Name="FK_DESKORDE_REFERENCE_DESKDISH" Association="Self.FK_DESKORDE_REFERENCE_DESKDISH">
       <End Role="DeskDishes" EntitySet="DeskDishes" />
       <End Role="DeskOrder" EntitySet="DeskOrder" />
@@ -2465,14 +2286,6 @@
     <AssociationSet Name="FK_DISHDETA_REFERENCE_DISHDAO" Association="Self.FK_DISHDETA_REFERENCE_DISHDAO">
       <End Role="DishDao" EntitySet="DishDao" />
       <End Role="DishDetail" EntitySet="DishDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MENUSDIS_REFERENCE_MENUS" Association="Self.FK_MENUSDIS_REFERENCE_MENUS">
-      <End Role="DishesMenu" EntitySet="DishesMenu" />
-      <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OPERATOR_REFERENCE_USERINFO" Association="Self.FK_OPERATOR_REFERENCE_USERINFO">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="UserInfo" EntitySet="UserInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_KITCHENB_REFERENCE_KITCHENB" Association="Self.FK_KITCHENB_REFERENCE_KITCHENB">
       <End Role="KitchenBill" EntitySet="KitchenBill" />
@@ -2546,13 +2359,206 @@
       <End Role="TakeoutClientInfo" EntitySet="TakeoutClientInfo" />
       <End Role="TakeoutOrder" EntitySet="TakeoutOrder" />
     </AssociationSet>
-    <AssociationSet Name="RoleRefPrivilege" Association="Self.RoleRefPrivilege">
+    <EntitySet Name="Bearing" EntityType="IShow.ChooseDishes.Data.Bearing" />
+    <EntitySet Name="DepartmentInfo" EntityType="IShow.ChooseDishes.Data.DepartmentInfo" />
+    <EntitySet Name="DbBackup" EntityType="IShow.ChooseDishes.Data.DbBackup" />
+    <EntitySet Name="Privilege" EntityType="IShow.ChooseDishes.Data.Privilege" />
+    <EntitySet Name="Role" EntityType="IShow.ChooseDishes.Data.Role" />
+    <EntitySet Name="UserInfo" EntityType="IShow.ChooseDishes.Data.UserInfo" />
+    <AssociationSet Name="RoleRefPrivilege" Association="IShow.ChooseDishes.Data.RoleRefPrivilege">
       <End Role="Role" EntitySet="Role" />
       <End Role="Privilege" EntitySet="Privilege" />
     </AssociationSet>
-    <AssociationSet Name="UserRoleRef" Association="Self.UserRoleRef">
+    <AssociationSet Name="UserRoleRef" Association="IShow.ChooseDishes.Data.UserRoleRef">
       <End Role="UserInfo" EntitySet="UserInfo" />
       <End Role="Role" EntitySet="Role" />
     </AssociationSet>
+    <EntitySet Name="DishesMenu" EntityType="IShow.ChooseDishes.Data.DishesMenu" />
+    <AssociationSet Name="FK_MENUSDIS_REFERENCE_MENUS" Association="IShow.ChooseDishes.Data.FK_MENUSDIS_REFERENCE_MENUS">
+      <End Role="DishesMenu" EntitySet="DishesMenu" />
+      <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
+    </AssociationSet>
+    <EntitySet Name="Employee" EntityType="IShow.ChooseDishes.Data.Employee" />
+    <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME">
+      <End Role="DepartmentInfo" EntitySet="DepartmentInfo" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OPERATOR_REFERENCE_USERINFO" Association="IShow.ChooseDishes.Data.FK_OPERATOR_REFERENCE_USERINFO">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Bearing">
+    <Key>
+      <PropertyRef Name="BearingId" />
+    </Key>
+    <Property Name="BearingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DepartmentInfo">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="Deleted" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME" FromRole="DepartmentInfo" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="DbBackup">
+    <Key>
+      <PropertyRef Name="BackupsId" />
+    </Key>
+    <Property Name="BackupsId" Type="Int32" Nullable="false" />
+    <Property Name="BackUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BackDate" Type="DateTime" Precision="3" />
+    <Property Name="BackName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BackPlanDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Privilege">
+    <Key>
+      <PropertyRef Name="PrivilegeId" />
+    </Key>
+    <Property Name="PrivilegeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PrivilegeType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Deleted" Type="Int32" Nullable="false" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EditTime" Type="DateTime" Precision="3" />
+    <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PrivilegeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="IShow.ChooseDishes.Data.RoleRefPrivilege" FromRole="Privilege" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="OrgId" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Deleted" Type="Int32" Nullable="false" />
+    <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoleType" Type="Int32" Nullable="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EditTime" Type="DateTime" Precision="3" />
+    <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Privilege" Relationship="IShow.ChooseDishes.Data.RoleRefPrivilege" FromRole="Role" ToRole="Privilege" />
+    <NavigationProperty Name="UserInfo" Relationship="IShow.ChooseDishes.Data.UserRoleRef" FromRole="Role" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="OperatorId" />
+    </Key>
+    <Property Name="OperatorId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="OperatorName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="OperatorPwd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EditTime" Type="DateTime" Precision="3" />
+    <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Deleted" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="IShow.ChooseDishes.Data.UserRoleRef" FromRole="UserInfo" ToRole="Role" />
+    <NavigationProperty Name="Employee" Relationship="IShow.ChooseDishes.Data.FK_OPERATOR_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Employee" />
+  </EntityType>
+  <Association Name="RoleRefPrivilege">
+    <End Type="IShow.ChooseDishes.Data.Role" Role="Role" Multiplicity="*" />
+    <End Type="IShow.ChooseDishes.Data.Privilege" Role="Privilege" Multiplicity="*" />
+  </Association>
+  <Association Name="UserRoleRef">
+    <End Type="IShow.ChooseDishes.Data.UserInfo" Role="UserInfo" Multiplicity="*" />
+    <End Type="IShow.ChooseDishes.Data.Role" Role="Role" Multiplicity="*" />
+  </Association>
+  <EntityType Name="DishesMenu">
+    <Key>
+      <PropertyRef Name="MenusId" />
+    </Key>
+    <Property Name="MenusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <NavigationProperty Name="DishesMenuRef" Relationship="IShow.ChooseDishes.Data.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenu" ToRole="DishesMenuRef" />
+  </EntityType>
+  <Association Name="FK_MENUSDIS_REFERENCE_MENUS">
+    <End Type="IShow.ChooseDishes.Data.DishesMenu" Role="DishesMenu" Multiplicity="1" />
+    <End Type="IShow.ChooseDishes.Data.DishesMenuRef" Role="DishesMenuRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DishesMenu">
+        <PropertyRef Name="MenusId" />
+      </Principal>
+      <Dependent Role="DishesMenuRef">
+        <PropertyRef Name="MenusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="JobNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="Int32" Nullable="false" />
+    <Property Name="Birthday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Flag" Type="Int32" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="Deleted" Type="Int32" Nullable="false" />
+    <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ResidentialAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IDAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DepartmentInfo" Relationship="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME" FromRole="Employee" ToRole="DepartmentInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="IShow.ChooseDishes.Data.FK_OPERATOR_REFERENCE_USERINFO" FromRole="Employee" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_USERINFO_REFERENCE_DEPARTME">
+    <End Type="IShow.ChooseDishes.Data.DepartmentInfo" Role="DepartmentInfo" Multiplicity="1" />
+    <End Type="IShow.ChooseDishes.Data.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepartmentInfo">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OPERATOR_REFERENCE_USERINFO">
+    <End Type="IShow.ChooseDishes.Data.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="IShow.ChooseDishes.Data.UserInfo" Role="UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

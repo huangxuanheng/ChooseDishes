@@ -9,26 +9,43 @@ using System.Data.Entity.Infrastructure;
 using System.Windows;
 using IShow.ChooseDishes;
 using IShow.ChooseDishes.Data;
+using IShow.ChooseDishes.Model;
 
-namespace IShow.Service
+namespace IShow.ChooseDishes
 {
     public class DishService : IDishService
     {
         //菜品类型
         #region
         public List<DishType> LoadType(DishType type){
-            MessageBox.Show("进入查询");
+            //MessageBox.Show("进入查询");
             List<DishType> types;
-            //ProxyCreationEnabled = false;
-            //LazyLoadingEnabled=false
+            
             using (ChooseDishesEntities entities = new ChooseDishesEntities()) {
-                types=entities.DishType.Where(info=>info.Deleted==0).ToList();
+                types=entities.DishType.Where(info=>info.Deleted==0&&(type.ParentId!=null?true:(info.ParentId==type.ParentId))).ToList();
                 if (types == null || types.Count == 0) {
                      types =new List<DishType>();
                 }
-                MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
                 return types;
             };  
+        }
+
+        public List<DishType> LoadSubType(DishType type)
+        {
+            //MessageBox.Show("进入查询");
+            List<DishType> types;
+
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                types = entities.DishType.Where(info => info.Deleted == 0 && info.ParentId !=null).ToList();
+                if (types == null || types.Count == 0)
+                {
+                    types = new List<DishType>();
+                }
+                //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                return types;
+            };
         }
 
         public Hashtable SaveType(DishType type)
@@ -151,6 +168,47 @@ namespace IShow.Service
             };  
         }
         #endregion
+
+
+        public List<DishUnit> QueryAllDishesUnits() {
+            using (ChooseDishesEntities entities = new ChooseDishesEntities()) {
+                return entities.DishUnit.ToList();
+            }
+        }
+
+        public int[] BatchAddDishesUnit(DishUnit[] dishesUnits) {
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                foreach (var unit in dishesUnits) {
+                    unit.CreateDatetime = DateTime.Now;
+                    unit.CreateBy = 10000;
+                }
+                entities.DishUnit.AddRange(dishesUnits);
+                entities.SaveChanges();
+                return new int[]{};
+            }
+          
+        }
+
+        public int AddDishesUnit(DishUnit dishesUnit) {
+            using (ChooseDishesEntities entities = new ChooseDishesEntities()){
+                entities.DishUnit.Add(dishesUnit);
+                entities.SaveChanges();
+                return dishesUnit.DishUnitId;
+            }
+        }
+
+        public bool RemoveDishesUnitById(int dishUnitId) {
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                DishUnit dishUnit= entities.DishUnit.Find(dishUnitId);
+                if (null != dishUnit) {
+                    entities.DishUnit.Remove(dishUnit);
+                }
+                entities.SaveChanges();
+                return true;
+            }
+        }
 
         void Channel_Closed(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@ namespace IShow.ChooseDishes.Model.Util
 {
     public static class CommonUtil
     {
-        public static bool RegextNumber(String value)
+        public  static bool RegexpNumber(String value)
         {
             try
             {

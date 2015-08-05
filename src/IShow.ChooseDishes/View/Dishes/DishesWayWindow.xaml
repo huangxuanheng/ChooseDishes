@@ -1,4 +1,4 @@
-﻿<Window x:Class="IShow.ChooseDishes.View.dischesWayView.DischesWayWindow"
+﻿<Window x:Class="IShow.ChooseDishes.View.Dishes.DischesWayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding DishesWay, Source={StaticResource ViewModelLocator}}"
@@ -11,6 +11,7 @@
         </HierarchicalDataTemplate>
         <Style x:Key="TreeNodeStyle" TargetType="{x:Type TreeViewItem}">
             <Setter Property="IsExpanded" Value="True" />
+            <Setter Property="IsSelected" Value="{Binding Selected}" />
         </Style>
 
     </Window.Resources>
@@ -91,17 +92,17 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
-            <TreeView Grid.Column="0" ItemsSource="{Binding DishesWayNameTree}">
+            <TreeView Grid.Column="0"  ItemTemplate="{StaticResource TreeNodeTemplate}" ItemContainerStyle="{StaticResource TreeNodeStyle}" ItemsSource="{Binding DishesWayNameTree}" SelectedItemChanged="TreeView_SelectedItemChanged" >
             </TreeView>
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DishesItems}" HorizontalAlignment="Left" Margin="2,2,0,0" Grid.Column="1" VerticalAlignment="Top" Height="503" Width="auto">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DishesWayTableItems}" HorizontalAlignment="Left" Margin="2,2,0,0" Grid.Column="1" VerticalAlignment="Top" Height="310" Width="auto" CanUserAddRows="False" SelectedItem="{Binding DishesWaySelectedItem}">
                 <DataGrid.Columns> 
                     <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" Header="行号" />
-                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto"  ClipboardContentBinding="{x:Null}" Header="编码"/>
-                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="做法说明"/>
-                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="类型"/>
-                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="拼音简码"/>
-                    <DataGridTextColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="加价"/>
-                    <DataGridCheckBoxColumn Binding="{Binding Path=Index}" Width="auto" ClipboardContentBinding="{x:Null}" Header="按数量加价" />
+                    <DataGridTextColumn Binding="{Binding  Path=Code}" Width="auto"   Header="编码"/>
+                    <DataGridTextColumn Binding="{Binding  Path=Name}" Width="auto"  Header="做法说明"/>
+                    <DataGridTextColumn Binding="{Binding  Path=DischesWayName}" Width="auto"  Header="类型"/>
+                    <DataGridTextColumn Binding="{Binding  Path=PingYing}" Width="auto"  Header="拼音简码"/>
+                    <DataGridTextColumn Binding="{Binding  Path=AddPrice}" Width="auto"  Header="加价"/>
+                    <DataGridCheckBoxColumn Binding="{Binding  Path=AddPriceByNum}"  Width="auto" Header="按数量加价" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

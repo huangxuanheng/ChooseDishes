@@ -1,13 +1,13 @@
-﻿<Window x:Class="IShow.ChooseDishes.View.DischesWayView.DishesWaySettingWindow"
+﻿<Window x:Class="IShow.ChooseDishes.View.Dishes.DishesWaySettingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding DishesWay, Source={StaticResource ViewModelLocator}}"
         ResizeMode="NoResize"
-        Title="厨打做法设置" Height="200" Width="500">
+        Title="厨打做法设置" Height="300" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -32,10 +32,10 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Width="100" Grid.Column="0" Text="{Binding DishesWayCode, Mode=TwoWay}" />
+                <TextBox Width="100" IsReadOnly="{Binding CodeTextReadonly}" Grid.Column="0" Text="{Binding DishesWayCode, Mode=TwoWay}" />
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="80,0">
                     <TextBlock Text="类型:" VerticalAlignment="Center"/>
-                    <TextBox Width="150"  HorizontalAlignment="Left" Text="{Binding DischesWayType, Mode=TwoWay}"/>
+                    <TextBox Width="150"  HorizontalAlignment="Left" Text="{Binding DischesWayType, Mode=TwoWay}" IsReadOnly="True"/>
                 </StackPanel>
             </Grid>
             <TextBlock Text="做法说明：" Margin="10,0,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -58,11 +58,41 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="编号以9开头的做法可在点菜宝“整单备注”中直接下拉选择" Grid.Column="0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            
+            <Grid Grid.RowSpan="3">
+                <TextBlock  Text="编号以9开头的做法可在点菜宝“整单备注”中直接下拉选择" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DishesWayDescriptionVisibility}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Visibility="{Binding DishesWayRecord}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding DischesWayCurrentItem, Mode=TwoWay}" Grid.Column="1"/>
+                        <Button Content="上一条记录(G)" Grid.Column="3" Margin="3" Command="{Binding PreviousRecord}"/>
+                        <Button Content="下一条记录(S)" Grid.Column="5" Margin="3" Command="{Binding NextRecord}"/>
+                    </Grid>
+                </Grid>      
+            </Grid>
+           
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -73,7 +103,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="继续(G)" Grid.Column="1" Margin="3" Command="{Binding Continue}"/>
+                <Button Content="继续(G)" Grid.Column="1" Margin="3" Command="{Binding Continue}" Visibility="{Binding DishesWayContinueButtonVisibility}"/>
                 <Button Content="保存(S)" Grid.Column="3" Margin="3" Command="{Binding Save}"/>
                 <Button Content="退出(Esc)" Grid.Column="5" Margin="3" Command="{Binding Exited}" Click="Button_Click"/>
             </Grid>

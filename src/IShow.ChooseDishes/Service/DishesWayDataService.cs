@@ -93,7 +93,37 @@ namespace IShow.ChooseDishes
                 }
                 return false;
             }
+        }
+        /**根据做法id更新做法删除的状态*/
+        public bool UpdateDishesWayDeletedTypeByCode(int Code)
+        {
+            if (Code <0)
+            {
+                return false;
+            }
+            //修改  直接修改
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entities.DischesWay.SingleOrDefault(bt => bt.Code == Code);
+                    if (type != null)
+                    {
+                        type.UpdateBy = 1;   //需要从数据库中读取操作人id
+                        type.UpdateDatetime =DateTime.Now;
+                        type.Deleted = 1;
+                        entities.SaveChanges();
+                        return true;
+                    }
 
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return false;
+                }
+                return false;
+            }
         }
         /**根据指定编码删除对应做法*/
         public bool DeleteDishesWay(int id)
@@ -124,8 +154,23 @@ namespace IShow.ChooseDishes
             }
         }
         /**根据做法类型编号查询做法*/
-        public List<DischesWay> FindAllDishesWayByType(int wayId)
+        public List<DischesWay> FindAllDishesWayByTypeCode(string Code)
         {
+            int wayId = -1;
+            using (ChooseDishesEntities entity = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entity.DischesWayName.SingleOrDefault(bt => bt.Code == Code);
+                    wayId = type.DischesWayNameId;
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return null;
+                }
+            }
+
             if (wayId < 0)
             {
                 return null;
@@ -135,7 +180,7 @@ namespace IShow.ChooseDishes
                 List<DischesWay> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.DischesWay.Where(dw => dw.DischesWayId == wayId).ToList();
+                    odws = entities.DischesWay.Where(dw => dw.DischesWayNameId == wayId).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -249,16 +294,47 @@ namespace IShow.ChooseDishes
             }
             return false;
         }
-        //根据做法类型编码删除菜品做法类型,如果删除失败返回false，如果删除成功，则返回true
-        public bool DeleteDishesWayName(int id)
+        //根据做法类型id修改删除状态
+        public bool UpdateDishesWayNameDeletedTypeByCode(string Code)
         {
-            if (id < 0)
+            if (Code==null)
+            {
+                return false;
+            }
+            //修改  直接修改
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entities.DischesWayName.SingleOrDefault(bt => bt.Code == Code);
+                    if (type != null)
+                    {
+                        type.UpdateBy = 1;     //操作人员id
+                        type.UpdateDatetime =DateTime.Now;
+                        type.Deleted = 1;
+                        entities.SaveChanges();
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        //根据做法类型编码删除菜品做法类型,如果删除失败返回false，如果删除成功，则返回true
+        public bool DeleteDishesWayNameByCode(string Code)
+        {
+            if (Code ==null)
             {
                 return false;
             }
             //先判断是否存在有做法，如果有做法，则不能返回false
             DishesWayDataService odws = new DishesWayDataService();
-            List<DischesWay> orgDischesWay = odws.FindAllDishesWayByType(id);
+            List<DischesWay> orgDischesWay = odws.FindAllDishesWayByTypeCode(Code);
             if (orgDischesWay != null && orgDischesWay.Count > 0)
             {
                 return false;
@@ -270,7 +346,7 @@ namespace IShow.ChooseDishes
                 {
                     DischesWayName booktype = new DischesWayName()
                     {
-                        DischesWayNameId = id,
+                        Code = Code,
                     };
                     DbEntityEntry<DischesWayName> entry = entities.Entry<DischesWayName>(booktype);
                     entry.State = System.Data.Entity.EntityState.Deleted;
@@ -321,6 +397,27 @@ namespace IShow.ChooseDishes
                 try
                 {
                     var type = entities.DischesWayName.SingleOrDefault(bt => bt.DischesWayNameId == id);
+                    return type;
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return null;
+                }
+            }
+        }
+        /**根据做法类型编码查找做法类型*/
+        public DischesWayName FindDishesWayNameByCode(string code)
+        {
+            if (code==null)
+            {
+                return null;
+            }
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                try
+                {
+                    var type = entities.DischesWayName.SingleOrDefault(bt => bt.Code == code);
                     return type;
                 }
                 catch (Exception e)

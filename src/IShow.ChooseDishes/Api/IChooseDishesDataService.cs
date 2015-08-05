@@ -41,7 +41,7 @@ namespace IShow.ChooseDishes.Api
 
         //查询公司
         [OperationContract]
-        List<Company> queryByCompany(Company company);
+        Company queryByCompany(Company company);
         //添加公司
         [OperationContract]
         int addCompany(Company company);
@@ -74,7 +74,11 @@ namespace IShow.ChooseDishes.Api
         //删除员工
         [OperationContract]
         int delByEmployee(Employee employee);
-
+        //修改员工状态
+        [OperationContract]
+        int editEmployeeFlag(Employee employee);
+        
+        #region Observable 收银方式 滕海东
         //加载所有的收银方式  传入收银类型编号
         [OperationContract]
         List<CashType> findCashType(int CashBaseTypeId);
@@ -87,5 +91,26 @@ namespace IShow.ChooseDishes.Api
         //删除收银方式 返回true 为修改成功
         [OperationContract]
         bool deleteCashType(int Id);
+        #endregion Observable 收银方式 滕海东
+        #region Observable 菜品管理 滕海东
+        //查询菜品
+        //[OperationContract]
+        List<Dish> FindDishs(int  dishId);
+        //新增菜品
+        [OperationContract]
+        Dish AddDish(Dish dish);
+        //修改收银方式  返回修改成功后的方式
+        [OperationContract]
+        bool updateDish(Dish dish);
+        //删除收银方式 返回true 为修改成功
+        [OperationContract]
+        bool deleteDish(int Id, int UpdateBy);
+        #endregion Observable 菜品管理 滕海东
+
+        //根据菜品查询菜品
+        List<Dish> findAllDishByDishMenusId(int p);
+
+        //加载菜品大类小类
+        List<DishType> FindDishTypeByType(int dishTypeId);
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IShow.ChooseDishes.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IShow.ChooseDishes.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AreaPrintPlan">
           <Key>
             <PropertyRef Name="AreaPlanId" />
@@ -89,7 +89,7 @@
             <PropertyRef Name="BearingId" />
           </Key>
           <Property Name="BearingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="int" Nullable="false" />
@@ -169,8 +169,8 @@
           <Property Name="ItemId" Type="int" Nullable="false" />
           <Property Name="Rule" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.CheckoutIinfoItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.CheckoutIinfoItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CheckoutIinfoItem">
           <Key>
             <PropertyRef Name="Id" />
@@ -200,8 +200,8 @@
           <Property Name="TotalMoney" Type="float" Nullable="false" />
           <Property Name="TotalRmbMoney" Type="float" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.CheckoutSet”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.CheckoutSet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CheckoutSet">
           <Key>
             <PropertyRef Name="CalculationMode" />
@@ -228,8 +228,8 @@
           <Property Name="PrintWholeBill" Type="int" Nullable="false" />
           <Property Name="ChoiseTable" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.ClearEstimate”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.ClearEstimate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ClearEstimate">
           <Key>
             <PropertyRef Name="Id" />
@@ -304,8 +304,8 @@
           <Property Name="TotalNum" Type="int" Nullable="false" />
           <Property Name="TotalMoney" Type="float" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.ConsumeItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ConsumeItem">
           <Key>
             <PropertyRef Name="id" />
@@ -495,8 +495,8 @@
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.DischesWayRef”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.DischesWayRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DischesWayRef">
           <Key>
             <PropertyRef Name="DishId" />
@@ -585,8 +585,8 @@
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.dish_cents”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.dish_cents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="dish_cents">
           <Key>
             <PropertyRef Name="CreateDatetime" />
@@ -659,8 +659,8 @@
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.DishesMenuRef”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.DishesMenuRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DishesMenuRef">
           <Key>
             <PropertyRef Name="DishId" />
@@ -766,6 +766,12 @@
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
           <Property Name="Deleted" Type="int" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="20" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Code" Type="nchar" MaxLength="10" />
+          <Property Name="ResidentialAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="GiveInvoice">
           <Key>
@@ -838,8 +844,8 @@
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="20" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.KitchenBillItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.KitchenBillItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="KitchenBillItem">
           <Key>
             <PropertyRef Name="Id" />
@@ -977,8 +983,8 @@
           <Property Name="Rebate" Type="int" Nullable="false" />
           <Property Name="Discount" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.OrderMateria”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.OrderMateria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderMateria">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -1005,8 +1011,8 @@
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.OrderPractice”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderPractice">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -1292,8 +1298,8 @@
           <Property Name="RefundDishNum" Type="int" Nullable="false" />
           <Property Name="RefundMoney" Type="float" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.RefundInfoItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.RefundInfoItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RefundInfoItem">
           <Key>
             <PropertyRef Name="RefundId" />
@@ -1325,8 +1331,8 @@
           <Property Name="EditTime" Type="datetime" />
           <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.RoleRefPrivilege”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.RoleRefPrivilege' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RoleRefPrivilege">
           <Key>
             <PropertyRef Name="PrivilegeId" />
@@ -1373,8 +1379,8 @@
           <Property Name="Deposit" Type="float" Nullable="false" />
           <Property Name="ReturnDeposit" Type="float" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.ShiftItem”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ShiftItem">
           <Key>
             <PropertyRef Name="ShiftId" />
@@ -1536,8 +1542,8 @@
           <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
           <Property Name="Deleted" Type="int" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“IChooseDishes.dbo.UserRoleRef”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserRoleRef">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -2703,8 +2709,7 @@
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IShow.ChooseDishes.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2796,20 +2801,6 @@
           <NavigationProperty Name="PrintSet" Relationship="Self.FK_BASICPRI_REFERENCE_PRINTSET" FromRole="BasicPrintPlan" ToRole="PrintSet" />
           <NavigationProperty Name="DishPrint" Relationship="Self.FK_DISHPRIN_REFERENCE_BASICPRI" FromRole="BasicPrintPlan" ToRole="DishPrint" />
           <NavigationProperty Name="MaterialPrint" Relationship="Self.FK_MATERIAL_REFERENCE_BASICPRI" FromRole="BasicPrintPlan" ToRole="MaterialPrint" />
-        </EntityType>
-        <EntityType Name="Bearing">
-          <Key>
-            <PropertyRef Name="BearingId" />
-          </Key>
-          <Property Name="BearingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreateBy" Type="Int32" Nullable="false" />
-          <Property Name="Deleted" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="Int32" />
         </EntityType>
         <EntityType Name="CashBaseType">
           <Key>
@@ -2973,30 +2964,6 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DbBackup">
-          <Key>
-            <PropertyRef Name="BackupsId" />
-          </Key>
-          <Property Name="BackupsId" Type="Int32" Nullable="false" />
-          <Property Name="BackUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BackDate" Type="DateTime" Precision="3" />
-          <Property Name="BackName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BackPlanDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="DepartmentInfo">
-          <Key>
-            <PropertyRef Name="DepartmentId" />
-          </Key>
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="DepartmentName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreateBy" Type="Int32" />
-          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="Int32" />
-          <Property Name="Deleted" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_USERINFO_REFERENCE_DEPARTME" FromRole="DepartmentInfo" ToRole="Employee" />
         </EntityType>
         <EntityType Name="DeskDishes">
           <Key>
@@ -3242,21 +3209,6 @@
           <Property Name="UpdateBy" Type="Int32" />
           <NavigationProperty Name="DishDao" Relationship="Self.FK_DISHDETA_REFERENCE_DISHDAO" FromRole="DishDetail" ToRole="DishDao" />
         </EntityType>
-        <EntityType Name="DishesMenu">
-          <Key>
-            <PropertyRef Name="MenusId" />
-          </Key>
-          <Property Name="MenusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreateBy" Type="Int32" Nullable="false" />
-          <Property Name="Deleted" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="Int32" />
-          <NavigationProperty Name="DishesMenuRef" Relationship="Self.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenu" ToRole="DishesMenuRef" />
-        </EntityType>
         <EntityType Name="DishFinance">
           <Key>
             <PropertyRef Name="DishFinanceId" />
@@ -3336,27 +3288,6 @@
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
           <NavigationProperty Name="Dish" Relationship="Self.FK_DISH_REFERENCE_DISHUNIT" FromRole="DishUnit" ToRole="Dish" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="JobNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sex" Type="Int32" Nullable="false" />
-          <Property Name="Birthday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Flag" Type="Int32" />
-          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreateBy" Type="Int32" />
-          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="Int32" />
-          <Property Name="Deleted" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DepartmentInfo" Relationship="Self.FK_USERINFO_REFERENCE_DEPARTME" FromRole="Employee" ToRole="DepartmentInfo" />
-          <NavigationProperty Name="UserInfo" Relationship="Self.FK_OPERATOR_REFERENCE_USERINFO" FromRole="Employee" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="GiveInvoice">
           <Key>
@@ -3685,22 +3616,6 @@
           <NavigationProperty Name="BasicPrintPlan" Relationship="Self.FK_BASICPRI_REFERENCE_PRINTSET" FromRole="PrintSet" ToRole="BasicPrintPlan" />
           <NavigationProperty Name="KitchenBillFormat" Relationship="Self.FK_PRINTSET_REFERENCE_KITCHENB" FromRole="PrintSet" ToRole="KitchenBillFormat" />
         </EntityType>
-        <EntityType Name="Privilege">
-          <Key>
-            <PropertyRef Name="PrivilegeId" />
-          </Key>
-          <Property Name="PrivilegeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PrivilegeType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Deleted" Type="Int32" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EditTime" Type="DateTime" Precision="3" />
-          <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PrivilegeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.RoleRefPrivilege" FromRole="Privilege" ToRole="Role" />
-        </EntityType>
         <EntityType Name="PromotionsDish">
           <Key>
             <PropertyRef Name="PromotionsDishId" />
@@ -3837,23 +3752,6 @@
           <Property Name="RefundMoney" Type="Double" Nullable="false" />
           <NavigationProperty Name="RefundInfoItem" Relationship="Self.FK_REFUNDIN_REFERENCE_REFUNDIN" FromRole="RefundInfo" ToRole="RefundInfoItem" />
           <NavigationProperty Name="ShiftBill" Relationship="Self.FK_REFUNDIN_REFERENCE_SHIFTBIL" FromRole="RefundInfo" ToRole="ShiftBill" />
-        </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <Property Name="OrgId" Type="Int32" Nullable="false" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Deleted" Type="Int32" Nullable="false" />
-          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RoleType" Type="Int32" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EditTime" Type="DateTime" Precision="3" />
-          <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Privilege" Relationship="Self.RoleRefPrivilege" FromRole="Role" ToRole="Privilege" />
-          <NavigationProperty Name="UserInfo" Relationship="Self.UserRoleRef" FromRole="Role" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="ShiftBill">
           <Key>
@@ -4039,22 +3937,6 @@
           <Property Name="UpdateBy" Type="Int32" />
           <NavigationProperty Name="DeskDishes" Relationship="Self.FK_TIMERPRO_REFERENCE_DESKDISH" FromRole="TimerProject" ToRole="DeskDishes" />
         </EntityType>
-        <EntityType Name="UserInfo">
-          <Key>
-            <PropertyRef Name="OperatorId" />
-          </Key>
-          <Property Name="OperatorId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="OperatorName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OperatorPwd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EditTime" Type="DateTime" Precision="3" />
-          <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Deleted" Type="Int32" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_OPERATOR_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Employee" />
-          <NavigationProperty Name="Role" Relationship="Self.UserRoleRef" FromRole="UserInfo" ToRole="Role" />
-        </EntityType>
         <EntityType Name="CheckoutIinfoItem">
           <Key>
             <PropertyRef Name="Id" />
@@ -4212,7 +4094,7 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Deleted" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dish" Relationship="Self.FK_MENUSDIS_REFERENCE_DISH" FromRole="DishesMenuRef" ToRole="Dish" />
-          <NavigationProperty Name="DishesMenu" Relationship="Self.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenuRef" ToRole="DishesMenu" />
+          <NavigationProperty Name="DishesMenu" Relationship="IShow.ChooseDishes.Data.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenuRef" ToRole="DishesMenu" />
         </EntityType>
         <EntityType Name="KitchenBillItem">
           <Key>
@@ -4507,18 +4389,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USERINFO_REFERENCE_DEPARTME">
-          <End Role="DepartmentInfo" Type="Self.DepartmentInfo" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DepartmentInfo">
-              <PropertyRef Name="DepartmentId" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DESKORDE_REFERENCE_DESKDISH">
           <End Role="DeskDishes" Type="Self.DeskDishes" Multiplicity="0..1" />
           <End Role="DeskOrder" Type="Self.DeskOrder" Multiplicity="*" />
@@ -4708,30 +4578,6 @@
             </Principal>
             <Dependent Role="DishDetail">
               <PropertyRef Name="DishDaoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MENUSDIS_REFERENCE_MENUS">
-          <End Role="DishesMenu" Type="Self.DishesMenu" Multiplicity="1" />
-          <End Role="DishesMenuRef" Type="Self.DishesMenuRef" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DishesMenu">
-              <PropertyRef Name="MenusId" />
-            </Principal>
-            <Dependent Role="DishesMenuRef">
-              <PropertyRef Name="MenusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OPERATOR_REFERENCE_USERINFO">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserInfo">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4951,21 +4797,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="RoleRefPrivilege">
-          <End Role="Role" Type="Self.Role" Multiplicity="*" />
-          <End Role="Privilege" Type="Self.Privilege" Multiplicity="*" />
-        </Association>
-        <Association Name="UserRoleRef">
-          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-          <End Role="Role" Type="Self.Role" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="ChooseDishesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AreaPrintPlan" EntityType="Self.AreaPrintPlan" />
           <EntitySet Name="BackupMoney" EntityType="Self.BackupMoney" />
           <EntitySet Name="BargainDish" EntityType="Self.BargainDish" />
           <EntitySet Name="BargainDishPrice" EntityType="Self.BargainDishPrice" />
           <EntitySet Name="BasicPrintPlan" EntityType="Self.BasicPrintPlan" />
-          <EntitySet Name="Bearing" EntityType="Self.Bearing" />
           <EntitySet Name="CashBaseType" EntityType="Self.CashBaseType" />
           <EntitySet Name="CashType" EntityType="Self.CashType" />
           <EntitySet Name="ChargeItem" EntityType="Self.ChargeItem" />
@@ -4976,8 +4813,6 @@
           <EntitySet Name="ConsumeInfo" EntityType="Self.ConsumeInfo" />
           <EntitySet Name="CreateDesk" EntityType="Self.CreateDesk" />
           <EntitySet Name="DaySettlement" EntityType="Self.DaySettlement" />
-          <EntitySet Name="DbBackup" EntityType="Self.DbBackup" />
-          <EntitySet Name="DepartmentInfo" EntityType="Self.DepartmentInfo" />
           <EntitySet Name="DeskDishes" EntityType="Self.DeskDishes" />
           <EntitySet Name="DeskOrder" EntityType="Self.DeskOrder" />
           <EntitySet Name="DeskOrderMateria" EntityType="Self.DeskOrderMateria" />
@@ -4989,13 +4824,11 @@
           <EntitySet Name="Dish" EntityType="Self.Dish" />
           <EntitySet Name="DishDao" EntityType="Self.DishDao" />
           <EntitySet Name="DishDetail" EntityType="Self.DishDetail" />
-          <EntitySet Name="DishesMenu" EntityType="Self.DishesMenu" />
           <EntitySet Name="DishFinance" EntityType="Self.DishFinance" />
           <EntitySet Name="DishPrice" EntityType="Self.DishPrice" />
           <EntitySet Name="DishPrint" EntityType="Self.DishPrint" />
           <EntitySet Name="DishType" EntityType="Self.DishType" />
           <EntitySet Name="DishUnit" EntityType="Self.DishUnit" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="GiveInvoice" EntityType="Self.GiveInvoice" />
           <EntitySet Name="KitchenBill" EntityType="Self.KitchenBill" />
           <EntitySet Name="KitchenBillFormat" EntityType="Self.KitchenBillFormat" />
@@ -5012,7 +4845,6 @@
           <EntitySet Name="PayRecord" EntityType="Self.PayRecord" />
           <EntitySet Name="Printer" EntityType="Self.Printer" />
           <EntitySet Name="PrintSet" EntityType="Self.PrintSet" />
-          <EntitySet Name="Privilege" EntityType="Self.Privilege" />
           <EntitySet Name="PromotionsDish" EntityType="Self.PromotionsDish" />
           <EntitySet Name="PromotionsDishDetail" EntityType="Self.PromotionsDishDetail" />
           <EntitySet Name="Raw" EntityType="Self.Raw" />
@@ -5020,7 +4852,6 @@
           <EntitySet Name="RawUnit" EntityType="Self.RawUnit" />
           <EntitySet Name="RechargeItem" EntityType="Self.RechargeItem" />
           <EntitySet Name="RefundInfo" EntityType="Self.RefundInfo" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="ShiftBill" EntityType="Self.ShiftBill" />
           <EntitySet Name="SystemLog" EntityType="Self.SystemLog" />
           <EntitySet Name="Table" EntityType="Self.Table" />
@@ -5029,7 +4860,6 @@
           <EntitySet Name="TakeoutClientInfo" EntityType="Self.TakeoutClientInfo" />
           <EntitySet Name="TakeoutOrder" EntityType="Self.TakeoutOrder" />
           <EntitySet Name="TimerProject" EntityType="Self.TimerProject" />
-          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
           <EntitySet Name="CheckoutIinfoItem" EntityType="Self.CheckoutIinfoItem" />
           <EntitySet Name="CheckoutSet" EntityType="Self.CheckoutSet" />
           <EntitySet Name="ClearEstimate" EntityType="Self.ClearEstimate" />
@@ -5106,10 +4936,6 @@
             <End Role="CreateDesk" EntitySet="CreateDesk" />
             <End Role="DeskDishes" EntitySet="DeskDishes" />
           </AssociationSet>
-          <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="Self.FK_USERINFO_REFERENCE_DEPARTME">
-            <End Role="DepartmentInfo" EntitySet="DepartmentInfo" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
           <AssociationSet Name="FK_DESKORDE_REFERENCE_DESKDISH" Association="Self.FK_DESKORDE_REFERENCE_DESKDISH">
             <End Role="DeskDishes" EntitySet="DeskDishes" />
             <End Role="DeskOrder" EntitySet="DeskOrder" />
@@ -5173,14 +4999,6 @@
           <AssociationSet Name="FK_DISHDETA_REFERENCE_DISHDAO" Association="Self.FK_DISHDETA_REFERENCE_DISHDAO">
             <End Role="DishDao" EntitySet="DishDao" />
             <End Role="DishDetail" EntitySet="DishDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MENUSDIS_REFERENCE_MENUS" Association="Self.FK_MENUSDIS_REFERENCE_MENUS">
-            <End Role="DishesMenu" EntitySet="DishesMenu" />
-            <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OPERATOR_REFERENCE_USERINFO" Association="Self.FK_OPERATOR_REFERENCE_USERINFO">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_KITCHENB_REFERENCE_KITCHENB" Association="Self.FK_KITCHENB_REFERENCE_KITCHENB">
             <End Role="KitchenBill" EntitySet="KitchenBill" />
@@ -5254,15 +5072,208 @@
             <End Role="TakeoutClientInfo" EntitySet="TakeoutClientInfo" />
             <End Role="TakeoutOrder" EntitySet="TakeoutOrder" />
           </AssociationSet>
-          <AssociationSet Name="RoleRefPrivilege" Association="Self.RoleRefPrivilege">
+          <EntitySet Name="Bearing" EntityType="IShow.ChooseDishes.Data.Bearing" />
+          <EntitySet Name="DepartmentInfo" EntityType="IShow.ChooseDishes.Data.DepartmentInfo" />
+          <EntitySet Name="DbBackup" EntityType="IShow.ChooseDishes.Data.DbBackup" />
+          <EntitySet Name="Privilege" EntityType="IShow.ChooseDishes.Data.Privilege" />
+          <EntitySet Name="Role" EntityType="IShow.ChooseDishes.Data.Role" />
+          <EntitySet Name="UserInfo" EntityType="IShow.ChooseDishes.Data.UserInfo" />
+          <AssociationSet Name="RoleRefPrivilege" Association="IShow.ChooseDishes.Data.RoleRefPrivilege">
             <End Role="Role" EntitySet="Role" />
             <End Role="Privilege" EntitySet="Privilege" />
           </AssociationSet>
-          <AssociationSet Name="UserRoleRef" Association="Self.UserRoleRef">
+          <AssociationSet Name="UserRoleRef" Association="IShow.ChooseDishes.Data.UserRoleRef">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="Role" EntitySet="Role" />
           </AssociationSet>
+          <EntitySet Name="DishesMenu" EntityType="IShow.ChooseDishes.Data.DishesMenu" />
+          <AssociationSet Name="FK_MENUSDIS_REFERENCE_MENUS" Association="IShow.ChooseDishes.Data.FK_MENUSDIS_REFERENCE_MENUS">
+            <End Role="DishesMenu" EntitySet="DishesMenu" />
+            <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
+          </AssociationSet>
+          <EntitySet Name="Employee" EntityType="IShow.ChooseDishes.Data.Employee" />
+          <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME">
+            <End Role="DepartmentInfo" EntitySet="DepartmentInfo" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATOR_REFERENCE_USERINFO" Association="IShow.ChooseDishes.Data.FK_OPERATOR_REFERENCE_USERINFO">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Bearing">
+          <Key>
+            <PropertyRef Name="BearingId" />
+          </Key>
+          <Property Name="BearingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DepartmentInfo">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="Int32" />
+          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME" FromRole="DepartmentInfo" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="DbBackup">
+          <Key>
+            <PropertyRef Name="BackupsId" />
+          </Key>
+          <Property Name="BackupsId" Type="Int32" Nullable="false" />
+          <Property Name="BackUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BackDate" Type="DateTime" Precision="3" />
+          <Property Name="BackName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BackPlanDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Privilege">
+          <Key>
+            <PropertyRef Name="PrivilegeId" />
+          </Key>
+          <Property Name="PrivilegeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PrivilegeType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EditTime" Type="DateTime" Precision="3" />
+          <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PrivilegeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="IShow.ChooseDishes.Data.RoleRefPrivilege" FromRole="Privilege" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="OrgId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleType" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EditTime" Type="DateTime" Precision="3" />
+          <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Privilege" Relationship="IShow.ChooseDishes.Data.RoleRefPrivilege" FromRole="Role" ToRole="Privilege" />
+          <NavigationProperty Name="UserInfo" Relationship="IShow.ChooseDishes.Data.UserRoleRef" FromRole="Role" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="OperatorId" />
+          </Key>
+          <Property Name="OperatorId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="OperatorName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorPwd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatePerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EditTime" Type="DateTime" Precision="3" />
+          <Property Name="EditPerson" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="IShow.ChooseDishes.Data.UserRoleRef" FromRole="UserInfo" ToRole="Role" />
+          <NavigationProperty Name="Employee" Relationship="IShow.ChooseDishes.Data.FK_OPERATOR_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Employee" />
+        </EntityType>
+        <Association Name="RoleRefPrivilege">
+          <End Type="IShow.ChooseDishes.Data.Role" Role="Role" Multiplicity="*" />
+          <End Type="IShow.ChooseDishes.Data.Privilege" Role="Privilege" Multiplicity="*" />
+        </Association>
+        <Association Name="UserRoleRef">
+          <End Type="IShow.ChooseDishes.Data.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <End Type="IShow.ChooseDishes.Data.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <EntityType Name="DishesMenu">
+          <Key>
+            <PropertyRef Name="MenusId" />
+          </Key>
+          <Property Name="MenusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <NavigationProperty Name="DishesMenuRef" Relationship="IShow.ChooseDishes.Data.FK_MENUSDIS_REFERENCE_MENUS" FromRole="DishesMenu" ToRole="DishesMenuRef" />
+        </EntityType>
+        <Association Name="FK_MENUSDIS_REFERENCE_MENUS">
+          <End Type="IShow.ChooseDishes.Data.DishesMenu" Role="DishesMenu" Multiplicity="1" />
+          <End Type="IShow.ChooseDishes.Data.DishesMenuRef" Role="DishesMenuRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DishesMenu">
+              <PropertyRef Name="MenusId" />
+            </Principal>
+            <Dependent Role="DishesMenuRef">
+              <PropertyRef Name="MenusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="JobNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Flag" Type="Int32" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="Int32" />
+          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ResidentialAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepartmentInfo" Relationship="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME" FromRole="Employee" ToRole="DepartmentInfo" />
+          <NavigationProperty Name="UserInfo" Relationship="IShow.ChooseDishes.Data.FK_OPERATOR_REFERENCE_USERINFO" FromRole="Employee" ToRole="UserInfo" />
+        </EntityType>
+        <Association Name="FK_USERINFO_REFERENCE_DEPARTME">
+          <End Type="IShow.ChooseDishes.Data.DepartmentInfo" Role="DepartmentInfo" Multiplicity="1" />
+          <End Type="IShow.ChooseDishes.Data.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentInfo">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATOR_REFERENCE_USERINFO">
+          <End Type="IShow.ChooseDishes.Data.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="IShow.ChooseDishes.Data.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5350,21 +5361,6 @@
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bearing">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Bearing">
-              <MappingFragment StoreEntitySet="Bearing">
-                <ScalarProperty Name="BearingId" ColumnName="BearingId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5527,31 +5523,6 @@
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DaySettlement">
               <MappingFragment StoreEntitySet="DaySettlement">
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DbBackup">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DbBackup">
-              <MappingFragment StoreEntitySet="DbBackup">
-                <ScalarProperty Name="BackupsId" ColumnName="BackupsId" />
-                <ScalarProperty Name="BackUrl" ColumnName="BackUrl" />
-                <ScalarProperty Name="BackDate" ColumnName="BackDate" />
-                <ScalarProperty Name="BackName" ColumnName="BackName" />
-                <ScalarProperty Name="BackPlanDate" ColumnName="BackPlanDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DepartmentInfo">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DepartmentInfo">
-              <MappingFragment StoreEntitySet="DepartmentInfo">
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5786,21 +5757,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DishesMenu">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DishesMenu">
-              <MappingFragment StoreEntitySet="DishesMenu">
-                <ScalarProperty Name="MenusId" ColumnName="MenusId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DishFinance">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DishFinance">
               <MappingFragment StoreEntitySet="DishFinance">
@@ -5878,26 +5834,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Flag" ColumnName="Flag" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6226,22 +6162,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Privilege">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Privilege">
-              <MappingFragment StoreEntitySet="Privilege">
-                <ScalarProperty Name="PrivilegeName" ColumnName="PrivilegeName" />
-                <ScalarProperty Name="PrivilegeType" ColumnName="PrivilegeType" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
-                <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
-                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PromotionsDish">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.PromotionsDish">
               <MappingFragment StoreEntitySet="PromotionsDish">
@@ -6375,22 +6295,6 @@
                 <ScalarProperty Name="RefundNum" ColumnName="RefundNum" />
                 <ScalarProperty Name="RefundDishNum" ColumnName="RefundDishNum" />
                 <ScalarProperty Name="RefundMoney" ColumnName="RefundMoney" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="Detail" ColumnName="Detail" />
-                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
-                <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6570,21 +6474,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInfo">
-            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfo">
-                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
-                <ScalarProperty Name="OperatorPwd" ColumnName="OperatorPwd" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
-                <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6773,22 +6662,150 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Bearing">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Bearing">
+              <MappingFragment StoreEntitySet="Bearing">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BearingId" ColumnName="BearingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentInfo">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DepartmentInfo">
+              <MappingFragment StoreEntitySet="DepartmentInfo">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DbBackup">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DbBackup">
+              <MappingFragment StoreEntitySet="DbBackup">
+                <ScalarProperty Name="BackPlanDate" ColumnName="BackPlanDate" />
+                <ScalarProperty Name="BackName" ColumnName="BackName" />
+                <ScalarProperty Name="BackDate" ColumnName="BackDate" />
+                <ScalarProperty Name="BackUrl" ColumnName="BackUrl" />
+                <ScalarProperty Name="BackupsId" ColumnName="BackupsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Privilege">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Privilege">
+              <MappingFragment StoreEntitySet="Privilege">
+                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
+                <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
+                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="PrivilegeType" ColumnName="PrivilegeType" />
+                <ScalarProperty Name="PrivilegeName" ColumnName="PrivilegeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
+                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="EditPerson" ColumnName="EditPerson" />
+                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="OperatorPwd" ColumnName="OperatorPwd" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="RoleRefPrivilege" TypeName="IShow.ChooseDishes.Data.RoleRefPrivilege" StoreEntitySet="RoleRefPrivilege">
-            <EndProperty Name="Role">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-            </EndProperty>
             <EndProperty Name="Privilege">
               <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
             </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserRoleRef" TypeName="IShow.ChooseDishes.Data.UserRoleRef" StoreEntitySet="UserRoleRef">
-            <EndProperty Name="UserInfo">
-              <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
-            </EndProperty>
             <EndProperty Name="Role">
               <ScalarProperty Name="RoleId" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="UserRoleRef" TypeName="IShow.ChooseDishes.Data.UserRoleRef" StoreEntitySet="UserRoleRef">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserInfo">
+              <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="DishesMenu">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DishesMenu">
+              <MappingFragment StoreEntitySet="DishesMenu">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="MenusId" ColumnName="MenusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IDAddress" ColumnName="IDAddress" />
+                <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
