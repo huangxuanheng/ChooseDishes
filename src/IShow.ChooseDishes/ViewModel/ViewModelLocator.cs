@@ -46,7 +46,11 @@ namespace IShow.ChooseDishes.ViewModel
 
 
             SimpleIoc.Default.Register<ChooseForDishesMenuViewModel>();
+
+            SimpleIoc.Default.Register<IMaterialDataService>(() => new MaterialDataService());
+            SimpleIoc.Default.Register<IRawUnitDataService>(() => new RawUnitDataService());
             SimpleIoc.Default.Register<MaterialViewModel>();
+
         }
         
          public LoginViewModel Login
@@ -64,7 +68,8 @@ namespace IShow.ChooseDishes.ViewModel
             }
         }
         
-        //区域管理
+       
+         //区域管理
         public OrgLocatinModel OrgLocatin
         {
             get

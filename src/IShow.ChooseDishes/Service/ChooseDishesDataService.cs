@@ -984,8 +984,6 @@ namespace IShow.ChooseDishes.Service
                  //   ex.ToString();
                 //}
             }
-
-            return false;
         }
         //删除收银方式 返回true 为修改成功
         public bool deleteDish(int Id, int UpdateBy)
