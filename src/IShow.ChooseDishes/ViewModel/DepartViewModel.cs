@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Messaging;
 using IShow.ChooseDishes.Api;
 using IShow.ChooseDishes.Data;
 using IShow.ChooseDishes.Model;
+using IShow.ChooseDishes.Security;
 using IShow.ChooseDishes.ViewModel.Common;
 using System;
 using System.Collections.Generic;
@@ -19,18 +20,14 @@ namespace IShow.ChooseDishes.ViewModel
 
     public class DepartViewModel : ViewModelBase
     {
-        IChooseDishesDataService _DataService;
+        IEmployeeService _DataService;
         //主窗体初始化
-        public DepartViewModel(IChooseDishesDataService dataService) {
+        public DepartViewModel(IEmployeeService dataService)
+        {
             _DataService = dataService;
-            
-
             //查询部门绑定grid
 
          }
-
-
-       
         //主窗口绑定数据
         public ObservableCollection<DepartmentInfo> department { get; set; }
 
@@ -74,11 +71,11 @@ namespace IShow.ChooseDishes.ViewModel
                     {
                         DepartmentInfo departmentInfo = new DepartmentInfo();
                         departmentInfo.DepartmentId = SelectedDepartment.DepartmentId;
-                        departmentInfo.UpdateBy = 8;
+                        departmentInfo.UpdateBy = SubjectUtils.GetAuthenticationId();
                         departmentInfo.Deleted = 1;
                         departmentInfo.UpdateDatetime = DateTime.Now;
 
-                        int b = _DataService.delByDepartment(departmentInfo);
+                        int b = _DataService.DelByDepartment(departmentInfo);
                         if (b.Equals(1))
                         {
                             department.Remove(SelectedDepartment);

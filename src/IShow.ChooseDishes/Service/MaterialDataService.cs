@@ -154,7 +154,7 @@ namespace IShow.ChooseDishes.Service
                 List<RawMaterial> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.RawMaterial.Where(dw => dw.RawId == RawId).ToList();
+                    odws = entities.RawMaterial.Where(dw => dw.RawId == RawId).OrderBy(dw=>dw.Id).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -180,7 +180,7 @@ namespace IShow.ChooseDishes.Service
                 List<RawMaterial> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.RawMaterial.Where(dw => dw.RawId == RawId&&dw.Deleted==0).ToList();
+                    odws = entities.RawMaterial.Where(dw => dw.RawId == RawId && dw.Deleted == 0).OrderBy(dw => dw.Id).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -206,7 +206,7 @@ namespace IShow.ChooseDishes.Service
                 List<RawMaterial> odws = null;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.RawMaterial.Where(dw => dw.StockUnit == RawUnitId&&dw.Deleted==0).ToList();
+                    odws = entities.RawMaterial.Where(dw => dw.StockUnit == RawUnitId && dw.Deleted == 0).OrderBy(dw => dw.Id).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -254,7 +254,7 @@ namespace IShow.ChooseDishes.Service
                 List<RawMaterial> odws = null;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.RawMaterial.Where(dw => dw.Id >0).ToList();
+                    odws = entities.RawMaterial.Where(dw => dw.Id >0).OrderBy(dw=>dw.Id).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -282,7 +282,7 @@ namespace IShow.ChooseDishes.Service
             List<RawMaterial> odws = null;
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                odws = entities.RawMaterial.Where(dw => dw.MaterialName == name&&dw.Deleted==0).ToList();
+                odws = entities.RawMaterial.Where(dw => dw.MaterialName == name && dw.Deleted == 0).OrderBy(dw => dw.Id).ToList();
             }
             if (odws != null && odws.Count > 0)
             {
@@ -299,7 +299,7 @@ namespace IShow.ChooseDishes.Service
             List<RawMaterial> odws = null;
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                odws = entities.RawMaterial.Where(dw => dw.Deleted == 0).ToList();
+                odws = entities.RawMaterial.Where(dw => dw.Deleted == 0).OrderBy(dw => dw.Id).ToList();
             }
             if (odws != null && odws.Count > 0)
             {
@@ -431,7 +431,7 @@ namespace IShow.ChooseDishes.Service
                 List<Raw> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.Raw.Where(dw => dw.ParentRawId == BigRawId).ToList();
+                    odws = entities.Raw.Where(dw => dw.ParentRawId == BigRawId).OrderBy(dw => dw.RawId).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -457,7 +457,7 @@ namespace IShow.ChooseDishes.Service
                 List<Raw> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.Raw.Where(dw => dw.ParentRawId == BigRawId && dw.Deleted==0).ToList();
+                    odws = entities.Raw.Where(dw => dw.ParentRawId == BigRawId && dw.Deleted == 0).OrderBy(dw => dw.RawId).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -500,7 +500,7 @@ namespace IShow.ChooseDishes.Service
                 List<Raw> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.Raw.Where(dw => dw.ParentRawId==0||dw.ParentRawId==null).ToList();
+                    odws = entities.Raw.Where(dw => dw.ParentRawId == 0 || dw.ParentRawId == null).OrderBy(dw => dw.RawId).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {
@@ -525,7 +525,7 @@ namespace IShow.ChooseDishes.Service
                 List<Raw> odws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    odws = entities.Raw.Where(dw => (dw.ParentRawId == 0 || dw.ParentRawId == null )&&dw.Deleted == 0).ToList();
+                    odws = entities.Raw.Where(dw => (dw.ParentRawId == 0 || dw.ParentRawId == null) && dw.Deleted == 0).OrderBy(dw => dw.RawId).ToList();
                 }
                 if (odws != null && odws.Count > 0)
                 {

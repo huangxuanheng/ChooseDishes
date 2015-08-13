@@ -14,13 +14,13 @@ namespace IShow.ChooseDishes.Data
     
     public partial class SystemLog
     {
-        public int id { get; set; }
-        public Nullable<int> LogType { get; set; }
-        public string OperFun { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> BillType { get; set; }
-        public string BillNo { get; set; }
-        public Nullable<int> OperId { get; set; }
-        public Nullable<System.DateTime> OperTime { get; set; }
+        public int Id { get; set; }
+        public string Module { get; set; }
+        public string Function { get; set; }
+        public string OpType { get; set; }
+        public string Actor { get; set; }
+        public System.DateTime CreateDatetime { get; set; }
+        public string Body { get; set; }
+        public string ItemId { get; set; }
     }
 }

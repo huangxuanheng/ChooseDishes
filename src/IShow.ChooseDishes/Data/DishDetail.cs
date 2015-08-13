@@ -27,6 +27,7 @@ namespace IShow.ChooseDishes.Data
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
     
+        public virtual Dish Dish { get; set; }
         public virtual DishDao DishDao { get; set; }
     }
 }

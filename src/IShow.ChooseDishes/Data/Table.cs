@@ -14,7 +14,7 @@ namespace IShow.ChooseDishes.Data
     
     public partial class Table
     {
-        public Nullable<int> TableTypeId { get; set; }
+        public int TableTypeId { get; set; }
         public int TableId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }

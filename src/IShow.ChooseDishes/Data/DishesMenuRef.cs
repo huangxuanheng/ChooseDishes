@@ -18,6 +18,7 @@ namespace IShow.ChooseDishes.Data
         public int MenusId { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int Deleted { get; set; }
+        public int Id { get; set; }
     
         public virtual Dish Dish { get; set; }
         public virtual DishesMenu DishesMenu { get; set; }

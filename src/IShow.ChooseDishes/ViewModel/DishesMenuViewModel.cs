@@ -16,6 +16,7 @@ using IShow.ChooseDishes.ViewModel.Common;
 using IShow.ChooseDishes.Data;
 using System.Diagnostics;
 using IShow.ChooseDishes.View.Dishes;
+using IShow.ChooseDishes.Model.bean;
 
 namespace IShow.ChooseDishes.ViewModel
 {
@@ -115,9 +116,9 @@ namespace IShow.ChooseDishes.ViewModel
             }
         }
 
-        //选择菜品时候显示的菜品
-        ObservableCollection<Dish> _DishesMenusSelected = new ObservableCollection<Dish>();
-        public ObservableCollection<Dish> DishesMenusSelected
+        //选择菜牌时候显示的菜品
+        ObservableCollection<DishBean> _DishesMenusSelected = new ObservableCollection<DishBean>();
+        public ObservableCollection<DishBean> DishesMenusSelected
         {
             get
             {
@@ -169,22 +170,10 @@ namespace IShow.ChooseDishes.ViewModel
                         MessageBox.Show("请选择相应的菜牌!");
                         return;
                     }
-                    //加载所有的菜品
-                    List<Dish> list = _IChooseDishesDataService.FindDishs(0);
-                    _DishesMenusSelected.Clear();
-
-                    foreach (var element in list)
-                    {
-                        DishesMenusSelected.Add(element);
-                    }
+                    //加载所有的 菜品 大类 小类 
                     //加载所有大类
                     _DishTypeBig = _IChooseDishesDataService.FindDishTypeByType(0);
-                    //加载所有小类
-                    _DishTypeSmail = new ObservableCollection<DishType>();
-                    List<DishType> listsmail = _IChooseDishesDataService.FindDishTypeByType(-1);
-                    foreach (var element in listsmail) {
-                        _DishTypeSmail.Add(element);
-                    }
+                    LoadDishObject();
                     _AddDishMenusRef = new AddDishMenusRef();
                     _AddDishMenusRef.ShowDialog();
 
@@ -192,6 +181,46 @@ namespace IShow.ChooseDishes.ViewModel
 
                 }));
             }
+        }
+        //加载所有的 菜品 大类 小类 
+        public void LoadDishObject() {
+            //加载所有小类
+            _DishTypeSmail = new ObservableCollection<DishType>();
+            List<DishType> listsmail = _IChooseDishesDataService.FindDishTypeByType(-1);
+            _DishTypeSmail.Clear();
+            foreach (var element in listsmail)
+            {
+                _DishTypeSmail.Add(element);
+            }
+
+            //加载所有的菜品
+            List<Dish> list = _IChooseDishesDataService.FindDishs(0);
+            _DishesMenusSelected.Clear();
+
+            foreach (var element in list)
+            {
+                DishBean dishBean = new DishBean().CreateDishBean(element);
+                //注入大类,小类
+                for (int i = 0; i < _DishTypeSmail.Count; i++)
+                {
+                    if (element.DishTypeId == _DishTypeSmail[i].DishTypeId) {
+                        dishBean.DishTypeName = _DishTypeSmail[i].Name;
+                        bool flag = false ;
+                        for (int j = 0; j < _DishTypeBig.Count; j++) {
+                            if (_DishTypeSmail[i].ParentId == _DishTypeBig[j].DishTypeId)
+                            {
+                                dishBean.DishTypeBigName = _DishTypeBig[j].Name;
+                                flag = true;
+                                break ;
+                            }
+                        }
+                        if (flag) break;
+                    }
+                }
+                DishesMenusSelected.Add(dishBean);
+            }
+            
+            
         }
 
         //点击菜品大类 SelectedItemBig
@@ -202,6 +231,11 @@ namespace IShow.ChooseDishes.ViewModel
                 return _SelectedItemBig;
             }
             set {
+                if (value == null) {
+                    LoadDishObject();
+                    return;
+                }
+                
                 List<DishType> listsmail = _IChooseDishesDataService.FindDishTypeByType(value.DishTypeId);
                 DishTypeSmail.Clear();
                 foreach (var element in listsmail)
@@ -214,7 +248,7 @@ namespace IShow.ChooseDishes.ViewModel
 
                 foreach (var element in list)
                 {
-                    DishesMenusSelected.Add(element);
+                    DishesMenusSelected.Add(new DishBean().CreateDishBean(element));
                 }
 
                 Set("SelectedItemBig", ref _SelectedItemBig, value);
@@ -230,17 +264,157 @@ namespace IShow.ChooseDishes.ViewModel
             }
             set
             {
-               
+                if (value == null)
+                {
+                    return;
+                }
                 //更新菜品
                 List<Dish> list = _IChooseDishesDataService.FindDishs(value.DishTypeId);
                 _DishesMenusSelected.Clear();
 
                 foreach (var element in list)
                 {
-                    DishesMenusSelected.Add(element);
+                    DishesMenusSelected.Add(new DishBean().CreateDishBean(element));
                 }
 
                 Set("SelectedItemSmail", ref _SelectedItemSmail, value);
+            }
+        }
+        //选择的菜品 
+        DishBean _SelectedDishes ;
+        public DishBean SelectedDishes
+        {
+            get {
+
+                return _SelectedDishes;
+            }
+            set {
+                Set("SelectedDishes", ref _SelectedDishes, value);
+            }
+        }
+        
+        //需要新增的菜牌集合 
+        //新增菜牌 菜品关联  OkSelect
+        RelayCommand _OkSelect;
+        public RelayCommand OkSelect
+        {
+            get
+            {
+                return _OkSelect ?? (_OkSelect = new RelayCommand(() =>
+                {
+                    //保存需要添加的菜品
+                    List<int> list = new List<int>();
+                    foreach (var element in _DishesMenusSelected)
+                    {
+                        if (element.IsSelectedMenus) {
+                            //查看数据是否已经加入到菜牌中
+                            bool flag = true ;
+                            foreach (var elem in _DishItems) {
+                                if (elem.DishId == element.DishId) {
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                            if (flag) { 
+                                list.Add(element.DishId);
+                            }
+                        }
+                    }
+                    if(list.Count>0){
+                        //保存数据
+                        _DishesMenuService.BatchAddDishes(int.Parse(SelectedDishesMenu.Id), list.ToArray());
+                        //刷新数据
+                        TreeNodeModelFunBase(SelectedDishesMenu);
+                    }
+                    //关闭窗口
+                    _AddDishMenusRef.Close();
+                }));
+
+            }
+        }
+        //删除菜牌中的菜品
+        RelayCommand _DeleteCommand;
+        public RelayCommand DeleteCommand {
+            get {
+                return _DeleteCommand ?? (_DeleteCommand = new RelayCommand(() => { 
+                    //删除数据库中的关系数据
+                    List<int> list = new List<int>();
+                    //foreach (var element in _DishItems)
+                    //{
+                    //    if (element.IsSelectedMenus) {
+                    //        list.Add(element.DishId);
+                    //    } 
+                    //}
+                    if (_SelectedDishes != null) { 
+                        list.Add(_SelectedDishes.DishId);
+                    }
+                    //删除数据
+                    if (list.Count > 0) { 
+                        _DishesMenuService.BatchRemoveDishes(int.Parse(SelectedDishesMenu.Id), list.ToArray());
+                        //刷新数据
+                        //foreach (var element in DishItems)
+                        //{
+                        //    if (element.IsSelectedMenus)
+                        //    {
+                        //        DishItems.Remove(element);
+                        //    }
+                        //}
+                        DishItems.Remove(_SelectedDishes);
+                        if (DishItems.Count>0)
+                            SelectedDishes = DishItems.Last();
+
+                    }
+                }));
+            }
+        }
+
+        //模糊搜索
+        string _MoFuSouSuo;
+        public string MoFuSouSuo
+        {
+
+            get
+            {
+                return _MoFuSouSuo;
+            }
+            set
+            {
+                Set("MoFuSouSuo", ref _MoFuSouSuo, value);
+            }
+        }
+
+        //条件重置  ResetSelectValue
+        RelayCommand _ResetSelectValue;
+        public RelayCommand ResetSelectValue {
+            get {
+                return _ResetSelectValue ?? (_ResetSelectValue = new RelayCommand(() => {
+                    MoFuSouSuo = null;
+                    _AddDishMenusRef.DishTypeBigComBoBox.SelectedValue = null;
+                    _AddDishMenusRef.DishTypeSmailComBoBox.SelectedValue = null;
+                
+                }));
+            
+            }
+        }
+        //运用  进行模糊搜索  YunYongSelectValue
+        RelayCommand _YunYongSelectValue;
+        public RelayCommand YunYongSelectValue
+        {
+            get
+            {
+                return _YunYongSelectValue ?? (_YunYongSelectValue = new RelayCommand(() =>
+                {
+                    //搜索更新菜品
+                    List<Dish> list = _IChooseDishesDataService.FindDishsByDishName(_MoFuSouSuo);
+                    _DishesMenusSelected.Clear();
+
+                    foreach (var element in list)
+                    {
+                        DishesMenusSelected.Add(new DishBean().CreateDishBean(element));
+                    }
+
+                }));
+
             }
         }
         #endregion
@@ -270,8 +444,9 @@ namespace IShow.ChooseDishes.ViewModel
         }
 
         //菜品集合
-        ObservableCollection<Dish> _DishItems = new ObservableCollection<Dish>();
-        public ObservableCollection<Dish> DishItems {
+        ObservableCollection<DishBean> _DishItems = new ObservableCollection<DishBean>();
+        public ObservableCollection<DishBean> DishItems
+        {
             get {
                 return _DishItems ;
             }
@@ -288,7 +463,12 @@ namespace IShow.ChooseDishes.ViewModel
                 List<Dish>  dishes = _IChooseDishesDataService.findAllDishByDishMenusId(int.Parse(tree.Id));
                 _DishItems.Clear();
                 foreach (var element in dishes) {
-                    _DishItems.Add(element);
+                    DishBean dishBean   = new DishBean().CreateDishBean(element) ;
+                    //注入菜牌名字
+                    dishBean.DishMenusName = tree.Text;
+                    //注入菜品单位
+                    dishBean.DishUnitName = element.DishUnit.Name;
+                    _DishItems.Add(dishBean);
                 }
             }
         }

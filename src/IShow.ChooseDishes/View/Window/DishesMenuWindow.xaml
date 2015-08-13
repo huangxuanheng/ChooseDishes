@@ -52,14 +52,14 @@
             <Button Content="退出" Click="EXIT_WIN" Height="58" VerticalAlignment="Top" Width="75"/>
         </ToolBar>
         <TreeView HorizontalAlignment="Left" Height="500" Margin="0,68,0,0"  VerticalAlignment="Top" Width="222" ItemTemplate="{StaticResource TreeNodeTemplate}" ItemContainerStyle="{StaticResource TreeNodeStyle}" ItemsSource="{Binding DishesMenus}" SelectedItemChanged="TreeView_SelectedItemChanged"/>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True"  ItemsSource="{Binding DishItems}"   SelectedItem="{Binding SelectedDishesMenus }"  HorizontalAlignment="Left" Margin="227,68,0,0" VerticalAlignment="Top" Height="503" Width="672" Grid.ColumnSpan="2">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="False"  CanUserAddRows="False"    ItemsSource="{Binding DishItems}"  SelectedItem="{Binding SelectedDishes}"   HorizontalAlignment="Left" Margin="227,68,0,0" VerticalAlignment="Top" Height="503" Width="672" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Index}" Width="40" ClipboardContentBinding="{x:Null}" Header="行号"/>
-                <DataGridTextColumn Binding="{Binding Path=Index}" Width="160"  ClipboardContentBinding="{x:Null}" Header="菜谱类型"/>
-                <DataGridTextColumn Binding="{Binding DishId}" Width="100" ClipboardContentBinding="{x:Null}" Header="菜品编号"/>
-                <DataGridTextColumn Binding="{Binding DishName}" Width="80" ClipboardContentBinding="{x:Null}" Header="品名"/>
-                <DataGridTextColumn Binding="{Binding DishFormat}" Width="100" ClipboardContentBinding="{x:Null}" Header="规格"/>
-                <DataGridTextColumn Binding="{Binding DishUnitId}" Width="80" ClipboardContentBinding="{x:Null}" Header="单位"/>
+                <DataGridCheckBoxColumn IsReadOnly="True" Width="*" Binding="{Binding IsSelectedMenus}"  Header="选项" />
+                <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishMenusName}" Width="160"   Header="菜谱类型"/>
+                <DataGridTextColumn IsReadOnly="True"   Binding="{Binding DishId}" Width="100"  Header="菜品编号"/>
+                <DataGridTextColumn IsReadOnly="True"   Binding="{Binding DishName}" Width="80"  Header="品名"/>
+                <DataGridTextColumn IsReadOnly="True"   Binding="{Binding DishFormat}" Width="100"  Header="规格"/>
+                <DataGridTextColumn IsReadOnly="True"   Binding="{Binding DishUnitName}" Width="80"  Header="单位"/>
             </DataGrid.Columns>
         </DataGrid>
 

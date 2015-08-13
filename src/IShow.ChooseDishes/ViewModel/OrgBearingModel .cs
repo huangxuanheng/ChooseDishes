@@ -12,6 +12,7 @@ using IShow.ChooseDishes.View.Table;
 using IShow.ChooseDishes.Api;
 using System.Windows.Documents;
 using IShow.Service.Data;
+using IShow.ChooseDishes.Security;
 
 namespace IShow.ChooseDishes.ViewModel
 {
@@ -62,7 +63,7 @@ namespace IShow.ChooseDishes.ViewModel
                     Bearing.Name = _Bearingxaml.Name;
                     Bearing.Code = _Bearingxaml.Code;
                     Bearing.Deleted = 0;
-                    Bearing.CreateBy = 1;
+                    Bearing.CreateBy = SubjectUtils.GetAuthenticationId(); 
                     Bearing.CreateDatetime = DateTime.Now;
                     int flag=_DataService.addBearing(Bearing);
                     if (flag > 0) {
@@ -120,7 +121,7 @@ namespace IShow.ChooseDishes.ViewModel
                     Bearing.Name = _Bearingxaml.Name;
                     Bearing.Code = _Bearingxaml.Code;
                     Bearing.BearingId = _Bearingxaml.BearingId;
-                    Bearing.UpdateBy = 1;
+                    Bearing.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                     Bearing.UpdateDatetime = DateTime.Now;
                     int flag = _DataService.editByBearing(Bearing);
                     if (flag > 0)
@@ -157,7 +158,7 @@ namespace IShow.ChooseDishes.ViewModel
                     {
                         Bearing Bearing = new Bearing();
                         Bearing.BearingId = SelectedBearings.BearingId;
-                        Bearing.UpdateBy = 8;
+                        Bearing.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                         Bearing.Deleted = 1;
                         Bearing.UpdateDatetime = DateTime.Now;
 

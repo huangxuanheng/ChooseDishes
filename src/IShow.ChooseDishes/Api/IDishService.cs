@@ -12,22 +12,34 @@ namespace IShow.ChooseDishes
    
     public interface IDishService
     {
-        #region
-        
-        List<DishType> LoadType(DishType type);
+        #region 菜品类别
 
-        List<DishType> LoadSubType(DishType type);
+        /**查询所有类型*/
+        List<DishType> LoadType();
 
+        /**查询所有子类*/
+        List<DishType> LoadSubType();
+
+        /**查询所有大类*/
+        List<DishType> LoadFatherType();
+
+        /**根据ID查询其下子类**/
+        List<DishType> LoadSubTypeById(int Id);
+
+        /**根据ID查询其父类*/
+        DishType LoadFatherTypeById(int Id);
+
+        /**根据ID查询类型*/
+        DishType LoadTypeById(int id);
+
+        /**新增类型*/
         Hashtable SaveType(DishType type);
 
-        
+        /**修改类型*/
         bool UpdateType(DishType type);
 
-        
-        bool DeleteType(DishType type);
-
-        
-        List<DishType> LoadTypeById(int id);
+        /*删除类型*/
+        bool DeleteType(int typeId);
         #endregion
 
 

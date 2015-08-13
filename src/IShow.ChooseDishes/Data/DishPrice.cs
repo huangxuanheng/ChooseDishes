@@ -23,5 +23,13 @@ namespace IShow.ChooseDishes.Data
         public double MemberPrice3 { get; set; }
         public double MemberPrice2 { get; set; }
         public double MemberPrice1 { get; set; }
+        public int IsMainPrice { get; set; }
+        public Nullable<int> CreateBy { get; set; }
+        public System.DateTime CreateTime { get; set; }
+        public int Deleted { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string Update_by { get; set; }
+    
+        public virtual Dish Dish { get; set; }
     }
 }

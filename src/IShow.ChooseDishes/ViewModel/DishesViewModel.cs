@@ -64,7 +64,7 @@ namespace IShow.ChooseDishes.ViewModel
             for (int i = 0; i < list.Count; i++)
             {
                 var dishB = (new DishBean()).CreateDishBean(list[i]);
-
+                dishB.InjectBeanPrice();
                 TreeNode ttd = GetDishTypeBigName(list[i].DishTypeId, Root);
                 if(ttd!=null){
                     dishB.DishTypeName = ttd.Name;
@@ -114,16 +114,12 @@ namespace IShow.ChooseDishes.ViewModel
         {
             DishTypeMenu = new ObservableCollection<TreeNode>();
             DishService service = new DishService();
-            var dishesMenus = service.LoadType(new DishType());
+            var dishesMenus = service.LoadFatherType();
             Root = TreeNode.createRoot(0, "全部类型");
-            Root.Action = new Action<object>(LoadDishBase);
-            Root.LoadChildreAction = new Action<TreeNode>(LoadTreeNodeChildren);
             DishTypeMenu.Add(Root);
             foreach (var menu in dishesMenus)
             {
                 var child = Root.createChild(menu.DishTypeId, menu.Name);
-                child.Action = new Action<object>(LoadDishBase);
-                child.LoadChildreAction = new Action<TreeNode>(LoadTreeNodeChildren);
                 Root.Children.Add(child);
             }
             RaisePropertyChanged("DishWin");
@@ -140,17 +136,11 @@ namespace IShow.ChooseDishes.ViewModel
                 _DishTypeIdLast = selected.Id;
             }
             DishService service = new DishService();
-            var dishesMenus = service.LoadType(new DishType()
-            {
-                ParentId = selected.Id
-            });
+            var dishesMenus = service.LoadSubTypeById(selected.Id);
             selected.Children.Clear();
             foreach (var menu in dishesMenus)
             {
                 var child = selected.createChild(menu.DishTypeId, menu.Name);
-                child.Action = new Action<object>(LoadDishBase);
-                child.LoadChildreAction = new Action<TreeNode>(LoadTreeNodeChildren);
-                child.LoadChildreAction = LoadTreeNodeChildren;
                 selected.Children.Add(child);
             }
             //SelectedTreeNodeFalse(Root);
@@ -321,12 +311,7 @@ namespace IShow.ChooseDishes.ViewModel
                         //加载选择框 菜品的单位 
                         _DishUnitItems = _IDishService.QueryAllDishesUnits(); ;
                         //加载菜品价格
-                        _DishePriceList = new ObservableCollection<DishPrice>();
-                        DishPrice dp = new DishPrice() { Price1 = 10, Price2 = 20, Price3 = 30 };
-
-                        _DishePriceList.Add(dp);
-                        //注入菜品主价格
-                        _DishBean.InjectionPrice(dp);
+                        _DishePriceList.Clear();
                         IsEditDishPrice = true;
                         AddDishWin = new AddDish();
                         AddDishWin.ShangXiaGrid.Visibility = System.Windows.Visibility.Hidden;
@@ -359,7 +344,7 @@ namespace IShow.ChooseDishes.ViewModel
                         MessageBox.Show("请选择菜品单位!");
                         return;
                     }
-                    //检验数据
+                    //检验数据长度
 
                     DishPrice dp = _DishBean.CreateDishPrice(_DishBean);
                     _DishePriceList.Add(dp);
@@ -387,6 +372,14 @@ namespace IShow.ChooseDishes.ViewModel
                     if (dishNew!=null)
                     {
                         //将菜品主 价格  存入数据库
+                        if (!IsEditDishPrice) { 
+                            foreach (var element in _DishePriceList) {
+                                element.DishId = dishNew.DishId;
+                                element.CreateBy = 1;
+                                element.CreateTime = DateTime.Now;
+                            }
+                            bool  flag = _DataService.SaveDishPrice(dishNew.DishId, _DishePriceList.ToArray());
+                        }
                         // 刷新数据
                         LoadDishBase(_DishTypeIdLast);
                         _DishBean = new DishBean();
@@ -414,12 +407,19 @@ namespace IShow.ChooseDishes.ViewModel
                  //修改菜品价格
                  DishPrice dp = _DishBean.CreateDishPrice(_DishBean);
                  //修改菜品主价格
-
+                 _DataService.UpdateDishPriceMain(dp);
                  //批量修改菜品价格 
-                 if (IsEditDishPrice)
+                 if (!IsEditDishPrice)
                  {
-
+                     foreach (var element in _DishePriceList) {
+                         element.CreateBy = 1;
+                         element.DishId = _DishBean.DishId;
+                         element.CreateTime = DateTime.Now;
+                     }
+                     _DataService.UpdateDishPrice(_DishBean.DishId, _DishePriceList.ToArray());
                  }
+                 //重新加载所有数据
+                 LoadDishBase(_DishTypeIdLast);
                  //关闭窗口
                  AddDishWin.Close();
              }
@@ -434,9 +434,9 @@ namespace IShow.ChooseDishes.ViewModel
         public bool CheckDishPrice() {
             if (_DishePriceList.Count > 0)
             {
-                if (_DishePriceList.Count == 1) {
-                    return true;
-                }
+                //if (_DishePriceList.Count == 1) {
+                //    return true;
+                //}
                 if (_DishBean.DishFormat == null || "".Equals(_DishBean.DishFormat))
                 {
                     return false;
@@ -531,7 +531,7 @@ namespace IShow.ChooseDishes.ViewModel
             }
         }
         //菜品价格 集合
-         ObservableCollection<DishPrice> _DishePriceList;
+        ObservableCollection<DishPrice> _DishePriceList = new ObservableCollection<DishPrice>();
          public ObservableCollection<DishPrice> DishePriceList
         {
             get
@@ -569,19 +569,28 @@ namespace IShow.ChooseDishes.ViewModel
                         MessageBox.Show("请选择菜品规格!");
                         return;
                     }
+                    _SelectedDishPrice.Update_by = 1+"";
+                    _SelectedDishPrice.UpdateTime = DateTime.Now;
                     //删除数据库菜品规格
-                    DishePriceList.Remove(SelectedDishPrice);
-                    if (DishePriceList.Count > 1)
+                    bool flag = _DataService.DeleteDishPrice(_SelectedDishPrice);
+                    if (flag)
                     {
-                        _SelectedDishPrice = DishePriceList[_DishePriceList.Count - 1];
+                        DishePriceList.Remove(SelectedDishPrice);
+                        if (DishePriceList.Count > 1)
+                        {
+                            _SelectedDishPrice = DishePriceList[_DishePriceList.Count - 1];
+                        }
+                        else if (DishePriceList.Count == 1)
+                        {
+                            _SelectedDishPrice = DishePriceList[0];
+                        }
+                        else
+                        {
+                            _SelectedDishPrice = null;
+                        }
                     }
-                    else if (DishePriceList.Count == 1)
-                    {
-                        _SelectedDishPrice = DishePriceList[0];
-                    }
-                    else
-                    {
-                        _SelectedDishPrice = null;
+                    else {
+                        MessageBox.Show("删除菜品规格失败 , 请重新尝试 或联系管理员! ");
                     }
                 }));
             }
@@ -642,7 +651,13 @@ namespace IShow.ChooseDishes.ViewModel
             AddDishWin.UpdateDishComboBox.SelectedItem = _DishUnitItems[0];
             _DishePriceList.Clear();
             //注入菜品主价格
-            //_DishBean.InjectionPrice(dp);
+            foreach (var element in _SelectedDishes.DishPrice)
+            {
+                if (element.IsMainPrice != 1)
+                {
+                    _DishePriceList.Add(element);
+                }
+            }
         }
         #endregion 新增菜品
         #region 修改菜品
@@ -685,9 +700,6 @@ namespace IShow.ChooseDishes.ViewModel
                     _DishUnitItems.Add(new DishUnit() { DishUnitId = 1, Name = "ppppp" });
                     _DishUnitItems.Add(DU);
                     //加载菜品价格
-                    _DishePriceList = new ObservableCollection<DishPrice>();
-
-
                     IsEditDishPrice = true;
                     AddDishWin = new AddDish();
 
@@ -722,6 +734,24 @@ namespace IShow.ChooseDishes.ViewModel
                 }));
             }
         }
+
+        //点击树 SelectedTreeFun
+        RelayCommand<TreeNode> _SelectedTreeFun;
+        public RelayCommand<TreeNode> SelectedTreeFun
+        {
+            get
+            {
+                return _SelectedTreeFun ?? (_SelectedTreeFun = new RelayCommand<TreeNode>(node =>
+                {
+                    node.Selected = true;
+                    //加载子节点
+                    LoadTreeNodeChildren(node);
+                    //加载菜品
+                    LoadDishBase(node.Id);
+                }));
+            }
+        }
+
         #endregion 修改菜品
 
         public ObservableCollection<TreeNode> DishTypeMenu { get; set; }
@@ -770,9 +800,9 @@ namespace IShow.ChooseDishes.ViewModel
             {
                 try
                 {
-                    this._Selected = value;
-                    LoadChildreAction(this);
-                    Action(this.Id);
+                    //this._Selected = value;
+                    //LoadChildreAction(this);
+                    //Action(this.Id);
                     Set("Selected", ref _Selected, value);
                 }
                 catch (Exception E)

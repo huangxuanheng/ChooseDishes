@@ -28,6 +28,7 @@ namespace IShow.ChooseDishes.Data
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
+        public Nullable<int> OptionalNumber { get; set; }
     
         public virtual Dish Dish { get; set; }
         public virtual ICollection<DishDetail> DishDetail { get; set; }

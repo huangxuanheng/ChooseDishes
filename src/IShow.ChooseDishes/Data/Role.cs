@@ -16,22 +16,18 @@ namespace IShow.ChooseDishes.Data
     {
         public Role()
         {
-            this.Privilege = new HashSet<Privilege>();
-            this.UserInfo = new HashSet<UserInfo>();
+            this.UserRoleRef = new HashSet<UserRoleRef>();
         }
     
         public int RoleId { get; set; }
-        public int OrgId { get; set; }
-        public string RoleName { get; set; }
+        public string Name { get; set; }
         public int Deleted { get; set; }
-        public string Detail { get; set; }
-        public int RoleType { get; set; }
-        public System.DateTime CreateTime { get; set; }
-        public string CreatePerson { get; set; }
-        public Nullable<System.DateTime> EditTime { get; set; }
-        public string EditPerson { get; set; }
+        public string Description { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
+        public Nullable<int> CreateBy { get; set; }
+        public Nullable<System.DateTime> UpdateDatetime { get; set; }
+        public Nullable<int> UpdateBy { get; set; }
     
-        public virtual ICollection<Privilege> Privilege { get; set; }
-        public virtual ICollection<UserInfo> UserInfo { get; set; }
+        public virtual ICollection<UserRoleRef> UserRoleRef { get; set; }
     }
 }

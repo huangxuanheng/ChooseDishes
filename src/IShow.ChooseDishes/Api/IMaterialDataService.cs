@@ -58,7 +58,7 @@ namespace IShow.ChooseDishes.Api
         /// <summary>
         /// 查找所有未被进行物理删除的原料
         /// </summary>
-        /// <returns> List<RawMaterial> </returns>
+        /// <returns> </returns>
         [OperationContract]
         List<RawMaterial> FindAllRawMaterialByDeleted();
         //添加类别

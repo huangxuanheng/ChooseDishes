@@ -51,7 +51,6 @@ namespace IShow.ChooseDishes.ViewModel.Common
                        MessageBoxImage.Information
                        );
 
-
                     }
 
                 }));
@@ -158,7 +157,6 @@ namespace IShow.ChooseDishes.ViewModel.Common
                     _SearchText=value;
                     _MatchingEnumerator = null;
             }
-        
         }
 
         #endregion

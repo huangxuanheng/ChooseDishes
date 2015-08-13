@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using IShow.ChooseDishes.Api;
 using IShow.ChooseDishes.Data;
 using IShow.ChooseDishes.Model;
+using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace IShow.ChooseDishes.Service
 {
@@ -42,7 +44,7 @@ namespace IShow.ChooseDishes.Service
           {
               var delObj=entities.DishesMenu.Find(dishesMenuId);
               if (null == delObj) {
-                  throw new ServiceException();
+                  throw new NotFoundException();
               }
               entities.DishesMenu.Remove(delObj);
               entities.SaveChanges();
@@ -58,24 +60,40 @@ namespace IShow.ChooseDishes.Service
 
           using (ChooseDishesEntities entities = new ChooseDishesEntities())
           {
-              List<DishesMenuRef> list = new List<DishesMenuRef>();
               for (int i = 0; i < dishesIds.Length; i++)
               {
-                  list.Add(new DishesMenuRef()
-                  {
-                      MenusId=menuId,
-                      DishId=dishesIds[i],
-                      CreateTime=DateTime.Now
-                  });
+                  int Id = dishesIds[i];
+                  var date = DateTime.Now;
 
-                  entities.DishesMenuRef.AddRange(list);
-                  entities.SaveChanges();
+                  string sql = " insert into DishesMenuRef (MenusId,DishId,CreateTime,Deleted ) values(" + menuId + "," + Id + ",'" + date + "',0)";
+                  entities.Database.ExecuteSqlCommand(sql);
+                  //DishesMenuRef dmref = new DishesMenuRef()
+                  //{
+                  //    MenusId = menuId,
+                  //    DishId = dishesIds[i],
+                  //    CreateTime = DateTime.Now,
+                  //    Deleted = 0
+
+                  //};
+                  //entities.DishesMenuRef.Add(dmref);
+                  //entities.SaveChanges();
               }
           }
       }
 
       public void BatchRemoveDishes(int menuId, int[] dishesIds) { 
-      
+          using (ChooseDishesEntities entities = new ChooseDishesEntities())
+          {
+              for (int i = 0; i < dishesIds.Length; i++)
+              {
+                  var id = dishesIds[i];
+                  var type = entities.DishesMenuRef.SingleOrDefault(bt => bt.Deleted == 0 && bt.DishId == id && bt.MenusId == menuId);
+                  if (type != null) {
+                      string sql = " update DishesMenuRef set Deleted = 1 where DishId = " + id + "  and  MenusId =  " +menuId;
+                      entities.Database.ExecuteSqlCommand(sql);
+                  }
+              }
+          }
       }
 
       public List<DishesMenuItemModel> FindItemsById(int menuId) {

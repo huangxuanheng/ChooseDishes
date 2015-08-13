@@ -30,6 +30,7 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<BargainDish> BargainDish { get; set; }
         public virtual DbSet<BargainDishPrice> BargainDishPrice { get; set; }
         public virtual DbSet<BasicPrintPlan> BasicPrintPlan { get; set; }
+        public virtual DbSet<Bearing> Bearing { get; set; }
         public virtual DbSet<CashBaseType> CashBaseType { get; set; }
         public virtual DbSet<CashType> CashType { get; set; }
         public virtual DbSet<ChargeItem> ChargeItem { get; set; }
@@ -37,9 +38,12 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<ChargeRule> ChargeRule { get; set; }
         public virtual DbSet<CheckoutInfo> CheckoutInfo { get; set; }
         public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<Config> Config { get; set; }
         public virtual DbSet<ConsumeInfo> ConsumeInfo { get; set; }
         public virtual DbSet<CreateDesk> CreateDesk { get; set; }
         public virtual DbSet<DaySettlement> DaySettlement { get; set; }
+        public virtual DbSet<DbBackup> DbBackup { get; set; }
+        public virtual DbSet<DepartmentInfo> DepartmentInfo { get; set; }
         public virtual DbSet<DeskDishes> DeskDishes { get; set; }
         public virtual DbSet<DeskOrder> DeskOrder { get; set; }
         public virtual DbSet<DeskOrderMateria> DeskOrderMateria { get; set; }
@@ -51,11 +55,15 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<Dish> Dish { get; set; }
         public virtual DbSet<DishDao> DishDao { get; set; }
         public virtual DbSet<DishDetail> DishDetail { get; set; }
+        public virtual DbSet<DishesMenu> DishesMenu { get; set; }
+        public virtual DbSet<DishesMenuRef> DishesMenuRef { get; set; }
         public virtual DbSet<DishFinance> DishFinance { get; set; }
         public virtual DbSet<DishPrice> DishPrice { get; set; }
         public virtual DbSet<DishPrint> DishPrint { get; set; }
         public virtual DbSet<DishType> DishType { get; set; }
         public virtual DbSet<DishUnit> DishUnit { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<Function> Function { get; set; }
         public virtual DbSet<GiveInvoice> GiveInvoice { get; set; }
         public virtual DbSet<KitchenBill> KitchenBill { get; set; }
         public virtual DbSet<KitchenBillFormat> KitchenBillFormat { get; set; }
@@ -64,9 +72,9 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<MarketType> MarketType { get; set; }
         public virtual DbSet<MaterialPrint> MaterialPrint { get; set; }
         public virtual DbSet<MemberRecharge> MemberRecharge { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
-        public virtual DbSet<ParamSet> ParamSet { get; set; }
         public virtual DbSet<PayBill> PayBill { get; set; }
         public virtual DbSet<PayInfo> PayInfo { get; set; }
         public virtual DbSet<PayRecord> PayRecord { get; set; }
@@ -79,6 +87,8 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<RawUnit> RawUnit { get; set; }
         public virtual DbSet<RechargeItem> RechargeItem { get; set; }
         public virtual DbSet<RefundInfo> RefundInfo { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<RoleRefFunction> RoleRefFunction { get; set; }
         public virtual DbSet<ShiftBill> ShiftBill { get; set; }
         public virtual DbSet<SystemLog> SystemLog { get; set; }
         public virtual DbSet<Table> Table { get; set; }
@@ -87,25 +97,19 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<TakeoutClientInfo> TakeoutClientInfo { get; set; }
         public virtual DbSet<TakeoutOrder> TakeoutOrder { get; set; }
         public virtual DbSet<TimerProject> TimerProject { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<UserRoleRef> UserRoleRef { get; set; }
+        public virtual DbSet<UserSaleRule> UserSaleRule { get; set; }
         public virtual DbSet<CheckoutIinfoItem> CheckoutIinfoItem { get; set; }
         public virtual DbSet<CheckoutSet> CheckoutSet { get; set; }
         public virtual DbSet<ClearEstimate> ClearEstimate { get; set; }
         public virtual DbSet<ConsumeItem> ConsumeItem { get; set; }
         public virtual DbSet<DischesWayRef> DischesWayRef { get; set; }
-        public virtual DbSet<dish_cents> dish_cents { get; set; }
-        public virtual DbSet<DishesMenuRef> DishesMenuRef { get; set; }
+        public virtual DbSet<DishCent> DishCent { get; set; }
         public virtual DbSet<KitchenBillItem> KitchenBillItem { get; set; }
         public virtual DbSet<OrderMateria> OrderMateria { get; set; }
         public virtual DbSet<OrderPractice> OrderPractice { get; set; }
         public virtual DbSet<RefundInfoItem> RefundInfoItem { get; set; }
         public virtual DbSet<ShiftItem> ShiftItem { get; set; }
-        public virtual DbSet<Bearing> Bearing { get; set; }
-        public virtual DbSet<DepartmentInfo> DepartmentInfo { get; set; }
-        public virtual DbSet<DbBackup> DbBackup { get; set; }
-        public virtual DbSet<Privilege> Privilege { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<UserInfo> UserInfo { get; set; }
-        public virtual DbSet<DishesMenu> DishesMenu { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
     }
 }

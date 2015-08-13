@@ -40,6 +40,11 @@ namespace IShow.ChooseDishes.Data
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
+        public int ServerFeeCalcType { get; set; }
+        public int LowConsCalcType { get; set; }
+        public int ConsumerMoney { get; set; }
+        public int CanDiscount { get; set; }
+        public int InLowConsume { get; set; }
     
         public virtual ICollection<Table> Table { get; set; }
         public virtual ICollection<TableTypeDetail> TableTypeDetail { get; set; }

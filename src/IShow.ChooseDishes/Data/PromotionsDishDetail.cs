@@ -14,9 +14,11 @@ namespace IShow.ChooseDishes.Data
     
     public partial class PromotionsDishDetail
     {
+        public decimal Id { get; set; }
         public int PromotionsDishId { get; set; }
         public int DishId { get; set; }
         public int DishNumber { get; set; }
+        public string DishFormat { get; set; }
         public System.DateTime CreateDatetime { get; set; }
         public int CreateBy { get; set; }
         public int Deleted { get; set; }

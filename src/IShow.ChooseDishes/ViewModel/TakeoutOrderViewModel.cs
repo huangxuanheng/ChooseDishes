@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using IShow.ChooseDishes.Data;
+using IShow.ChooseDishes.Security;
 using IShow.ChooseDishes.View.TakeOut;
 using IShow.Common.Log;
 using IShow.Service.Services;
@@ -540,7 +541,7 @@ namespace IShow.ChooseDishes.ViewModel
                     Order_people = OrderPeople,
                     Telephone = ContactNumber,
                     Address = Address,
-                    Create_by = 0,     //操作人id
+                    Create_by = SubjectUtils.GetAuthenticationId(),     //操作人id
                     Create_datetime = DateTime.Now,
                     Status = 0,
                     Deleted = 0
@@ -571,7 +572,7 @@ namespace IShow.ChooseDishes.ViewModel
                 to.SendTime = DateTime.Now;
                 to.Status = 0;     //0表示未送出状态，1表示在送出状态，2表示送达未签收状态，3.送达已签收状态
                 to.Deleted = 0;
-                to.CreateBy = 0;     //操作人id
+                to.CreateBy = SubjectUtils.GetAuthenticationId();     //操作人id
                 to.CreateDatetime = DateTime.Now;
                 //2.将订单信息插入到订单表中
                 flag = _DataService.AddTakeoutOrder(to);

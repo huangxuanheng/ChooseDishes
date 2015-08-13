@@ -33,42 +33,6 @@ namespace IShow.ChooseDishes.Data
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public int Deleted { get; set; }
-        private string _FlagVal;
-        public string FlagVal{
-            get
-            {
-                if (Flag == 1)
-                {
-                    return "离职";
-                }
-                else
-                {
-                    return "在职";
-                }
-            }
-            set
-            {
-                _FlagVal = value;
-            }
-        }
-        private string _SexVal;
-        public string SexVal
-        {
-            get
-            {
-                if (Sex == 1)
-                {
-                    return "男";
-                }
-                else {
-                    return "女";
-                }
-            }
-            set
-            {
-                _SexVal = value;
-            }
-        }
         public string Position { get; set; }
         public string Phone { get; set; }
         public string Code { get; set; }

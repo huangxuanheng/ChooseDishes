@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using IShow.ChooseDishes.Data;
+using IShow.ChooseDishes.Security;
 using IShow.ChooseDishes.View.Dishes;
 using IShow.ChooseDishes.ViewModel.Common;
 using IShow.Common.Log;
@@ -692,14 +693,6 @@ namespace IShow.ChooseDishes.ViewModel
                 {
                     continue;
                 }
-                //DischesWayName dwn = new DischesWayName()
-                //{
-                //    Code = d.Code,
-                //    Name = d.DishesWayTypeName,
-                //    CreateBy = 0,     //登录的用户id 
-                //    CreateDatetime = DateTime.Now,
-                //    Deleted = 0
-                //};
                 if(type==null){
                     type=new DischesWayName();
                 }
@@ -720,7 +713,7 @@ namespace IShow.ChooseDishes.ViewModel
                 }
                 else
                 {
-                    type.CreateBy = 0;    //登录的用户id 
+                    type.CreateBy = SubjectUtils.GetAuthenticationId();     //登录的用户id 
                     type.CreateDatetime = DateTime.Now;
                     type.Deleted = 0;
                     flag = _DataService.AddDishesWayName(type);
@@ -851,7 +844,7 @@ namespace IShow.ChooseDishes.ViewModel
                 }
                 if (type != 2)
                 {
-                    dw.CreateBy = 1;     //需要读取数据库中操作人员的id
+                    dw.CreateBy = SubjectUtils.GetAuthenticationId();     //需要读取数据库中操作人员的id
                     dw.CreateDatetime = DateTime.Now;
                 }
                 else
@@ -897,7 +890,7 @@ namespace IShow.ChooseDishes.ViewModel
                 return;
             }
         }
-
+        private bool SelectedFirstItem=true;
         //初始化
         private void init()
         {
@@ -924,61 +917,7 @@ namespace IShow.ChooseDishes.ViewModel
                 }
                 RaisePropertyChanged("DishesWayNameTree");
             } 
-        }
-        /// <summary>
-        /// 回调函数
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void LoadDishesWayTableItemsAction(object parameter)
-        {
-            DishesWayTreeNode dwt = (DishesWayTreeNode)parameter;
-            if (string.IsNullOrEmpty(dwt.Code))
-            {
-                return;
-            }
-            DishesWayTableItems.Clear();
-            List<DischesWay> dws = _DataService.FindAllDishesWayByTypeCode(dwt.Code);
-            DischesWayName dwn = _DataService.FindDishesWayNameById(int.Parse(dwt.Code));
-            if (dws != null)
-            {
-                int index = 0;
-                foreach (var dw in dws)
-                {
-                    DishesWayItem d = new DishesWayItem();
-                    d.Index = index;
-                    d.Code = dw.Code.ToString();
-                    d.DischesWayName = dwn.Name;
-                    d.Name = dw.Name;
-                    d.PingYing = dw.PingYing;
-                    d.AddPrice = dw.PingYing;
-                    if (dw.AddPriceByNum == 0)
-                    {
-                        d.AddPriceByNum = false;
-                    }
-                    else
-                    {
-                        d.AddPriceByNum = true;
-                    }
-
-                    DishesWayTableItems.Add(d);
-                }
-            }
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    DishesWayItem d = new DishesWayItem()
-            //    {
-            //         Index = (i+1).ToString(),
-            //    Code = i.ToString(),
-            //    DischesWayName = "huangxuanheng"+i,
-            //    Name = "xuanhu"+i,
-            //    PingYing = "hsh",
-            //    AddPrice = ""+i,
-            //    AddPriceByNum = i==0?true:false,
-            //    };
-            //    DishesWayTableItems.Add(d);
-            //}
-        }
+        }  
         public DishesWayTreeNode GetDishesWayTreeNode
         {
             set;
@@ -1009,8 +948,19 @@ namespace IShow.ChooseDishes.ViewModel
                         continue;
                     }
                     DishesWayItem d = new DishesWayItem();
-                    d.Index = i+1;
-                    d.Code = dw.Code.ToString();
+                    d.Index = DishesWayTableItems.Count + 1;
+                    if (dw.Code < 10)
+                    {
+                        d.Code ="00"+ dw.Code;
+                    }
+                    else if (dw.Code < 100)
+                    {
+                        d.Code = "0" + dw.Code;
+                    }
+                    else
+                    {
+                        d.Code =  dw.Code.ToString();
+                    }
                     d.DischesWayName = node.Name;
                     d.Name = dw.Name;
                     d.PingYing = dw.PingYing;
@@ -1023,12 +973,12 @@ namespace IShow.ChooseDishes.ViewModel
                     {
                         d.AddPriceByNum = true;
                     }
-                   // if(dw.Deleted!=1)   //如果没有被物理删除，则显示出来
-                    DishesWayTableItems.Add(d);
                     if (i == 0)   //默认选择第一行
                     {
                         DishesWaySelectedItem = d;
                     }
+                   // if(dw.Deleted!=1)   //如果没有被物理删除，则显示出来
+                    DishesWayTableItems.Add(d);
                 }
             }
         }

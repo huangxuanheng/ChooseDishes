@@ -12,6 +12,7 @@ using IShow.ChooseDishes.View.Table;
 using IShow.ChooseDishes.Api;
 using System.Windows.Documents;
 using IShow.Service.Data;
+using IShow.ChooseDishes.Security;
 
 
 namespace IShow.ChooseDishes.ViewModel
@@ -63,7 +64,7 @@ namespace IShow.ChooseDishes.ViewModel
                     location.Name = _Locationxaml.Name;
                     location.Code = _Locationxaml.Code;
                     location.Deleted = 0;
-                    location.CreateBy = 1;
+                    location.CreateBy = SubjectUtils.GetAuthenticationId(); 
                     location.CreateDatetime = DateTime.Now;
                     int flag=_DataService.addLocation(location);
                     if (flag > 0) {
@@ -121,7 +122,7 @@ namespace IShow.ChooseDishes.ViewModel
                     location.Name = _Locationxaml.Name;
                     location.Code = _Locationxaml.Code;
                     location.LocationId = _Locationxaml.LocationId;
-                    location.UpdateBy = 1;
+                    location.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                     location.UpdateDatetime = DateTime.Now;
                     int flag = _DataService.editByLocation(location);
                     if (flag > 0)
@@ -158,7 +159,7 @@ namespace IShow.ChooseDishes.ViewModel
                     {
                         Location location = new Location();
                         location.LocationId = SelectedLocations.LocationId;
-                        location.UpdateBy = 8;
+                        location.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                         location.Deleted = 1;
                         location.UpdateDatetime = DateTime.Now;
 

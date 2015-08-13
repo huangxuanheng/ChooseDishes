@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:IShow.ChooseDishes.ViewModel"
-             StartupUri="View/Dishes/MaterialView.xaml">
+             StartupUri="View/Home/HomeWindow.xaml" 
+             >
+    <!--StartupUri="View/Dishes/MaterialView.xaml"  View/Home/HomeWindow.xaml    StartupUri="View/OrgInfo/SystemLog.xaml" OrgInfo\SystemLog.xaml   View/OrgInfo/EmployeeView.xaml-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

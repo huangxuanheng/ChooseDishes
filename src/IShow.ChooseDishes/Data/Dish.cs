@@ -16,10 +16,13 @@ namespace IShow.ChooseDishes.Data
     {
         public Dish()
         {
+            this.BargainDish = new HashSet<BargainDish>();
             this.DischesWayRef = new HashSet<DischesWayRef>();
-            this.dish_cents = new HashSet<dish_cents>();
+            this.DishCent = new HashSet<DishCent>();
             this.DishDao = new HashSet<DishDao>();
+            this.DishDetail = new HashSet<DishDetail>();
             this.DishesMenuRef = new HashSet<DishesMenuRef>();
+            this.DishPrice = new HashSet<DishPrice>();
             this.PromotionsDish = new HashSet<PromotionsDish>();
         }
     
@@ -56,13 +59,16 @@ namespace IShow.ChooseDishes.Data
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
     
+        public virtual ICollection<BargainDish> BargainDish { get; set; }
         public virtual ICollection<DischesWayRef> DischesWayRef { get; set; }
-        public virtual ICollection<dish_cents> dish_cents { get; set; }
+        public virtual ICollection<DishCent> DishCent { get; set; }
         public virtual DishFinance DishFinance { get; set; }
         public virtual DishType DishType { get; set; }
         public virtual DishUnit DishUnit { get; set; }
         public virtual ICollection<DishDao> DishDao { get; set; }
+        public virtual ICollection<DishDetail> DishDetail { get; set; }
         public virtual ICollection<DishesMenuRef> DishesMenuRef { get; set; }
+        public virtual ICollection<DishPrice> DishPrice { get; set; }
         public virtual ICollection<PromotionsDish> PromotionsDish { get; set; }
     }
 }

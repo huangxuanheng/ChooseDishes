@@ -34,12 +34,13 @@ namespace IShow.ChooseDishes.Data
         public int Week0 { get; set; }
         public int MarketTypeId { get; set; }
         public int Enable { get; set; }
-        public string CreateBy { get; set; }
+        public int CreateBy { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int Deleted { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string Update_by { get; set; }
+        public Nullable<int> Update_by { get; set; }
     
+        public virtual Dish Dish { get; set; }
         public virtual ICollection<BargainDishPrice> BargainDishPrice { get; set; }
     }
 }

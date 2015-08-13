@@ -17,131 +17,265 @@ namespace IShow.ChooseDishes
     {
         //菜品类型
         #region
-        public List<DishType> LoadType(DishType type){
-            //MessageBox.Show("进入查询");
-            List<DishType> types;
-            
-            using (ChooseDishesEntities entities = new ChooseDishesEntities()) {
-                types=entities.DishType.Where(info=>info.Deleted==0&&(type.ParentId!=null?true:(info.ParentId==type.ParentId))).ToList();
-                if (types == null || types.Count == 0) {
-                     types =new List<DishType>();
-                }
-                //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
-                return types;
-            };  
+        public List<DishType> LoadType()
+        {
+            try
+            {
+                //MessageBox.Show("进入查询");
+                List<DishType> types;
+
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    types = entities.DishType.Where(info => info.Deleted == 0).ToList();
+                    if (types == null || types.Count == 0)
+                    {
+                        types = new List<DishType>();
+                    }
+                    //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                    return types;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
 
-        public List<DishType> LoadSubType(DishType type)
+        public List<DishType> LoadSubType()
         {
-            //MessageBox.Show("进入查询");
-            List<DishType> types;
-
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            try
             {
-                types = entities.DishType.Where(info => info.Deleted == 0 && info.ParentId !=null).ToList();
-                if (types == null || types.Count == 0)
+                //MessageBox.Show("进入查询");
+                List<DishType> types;
+
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    types = new List<DishType>();
+                    types = entities.DishType.Where(info => info.Deleted == 0 && info.ParentId != null).ToList();
+                    if (types == null || types.Count == 0)
+                    {
+                        types = new List<DishType>();
+                    }
+                    //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                    return types;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public List<DishType> LoadFatherType()
+        {
+            try
+            {
+                List<DishType> types;
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    types = entities.DishType.Where(info => info.Deleted == 0 && info.ParentId == null).ToList();
+                    if (types == null || types.Count == 0)
+                    {
+                        types = new List<DishType>();
+                    }
+                    //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                    return types;
                 }
-                //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
-                return types;
-            };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<DishType> LoadSubTypeById(int Id)
+        {
+            try
+            {
+                List<DishType> types;
+                if (Id == 0) {
+                    types = LoadFatherType();
+                    return types;
+                }
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    types = entities.DishType.Where(info => info.Deleted == 0 && info.ParentId == Id).ToList();
+                    if (types == null || types.Count == 0)
+                    {
+                        types = new List<DishType>();
+                    }
+                    //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                    return types;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public DishType LoadFatherTypeById(int Id)
+        {
+            try
+            {
+
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    DishType fatherType;
+                    DishType type;
+                    type = (DishType)entities.DishType.Include("Dish").Where(info => info.DishTypeId == Id);
+                    if (type == null)
+                    {
+                        fatherType = new DishType();
+                        return fatherType;
+                    }
+                    fatherType = (DishType)entities.DishType.Include("Dish").Where(info => info.DishTypeId == type.ParentId);
+                    if (fatherType == null)
+                    {
+                        fatherType = new DishType();
+                    }
+                    return fatherType;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public DishType LoadTypeById(int id)
+        {
+            try
+            {
+                DishType type;
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    type = (DishType)entities.DishType.Include("Dish").Where(info => info.DishTypeId == id);
+                    if (type == null)
+                    {
+                        type = new DishType();
+                    }
+                    return type;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public Hashtable SaveType(DishType type)
         {
-            
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            try
             {
-                try
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    Hashtable hash = new Hashtable();//返回结果
-
-
-                    List<DishType> types;
-                    //检查类型编号或者类型名称是否重复
-                    types = entities.DishType.Where(info => info.Name == type.Name || info.Code == type.Code).ToList();
-                    if (types != null && types.Count > 0)
+                    try
                     {
-                        hash.Add("code", 1);
-                        if (types[0].Name == type.Name)
+                        Hashtable hash = new Hashtable();//返回结果
+
+                        List<DishType> types;
+                        //检查类型编号或者类型名称是否重复
+                        types = entities.DishType.Where(info => info.Deleted == 0 && (info.Name == type.Name || info.Code == type.Code)).ToList();
+                        if (types != null && types.Count > 0)
                         {
-                            hash.Add("message", "类型名称已经存在，请重新命名！");
+                            hash.Add("code", 1);
+                            if (types[0].Name == type.Name)
+                            {
+                                hash.Add("message", "类型名称已经存在，请重新命名！");
+                            }
+                            else if (types[0].Code == type.Code)
+                            {
+                                hash.Add("message", "类型编号已经存在！");
+                            }
+                            return hash;
                         }
-                        else if (types[0].Code == type.Code)
+                        entities.DishType.Add(type);
+                        int result = entities.SaveChanges();
+                        if (result == 1)
                         {
-                            hash.Add("message", "类型编号已经存在！");
+                            hash.Add("code", 0);
+                            hash.Add("message", "新增成功！");
+
+                        }
+                        else
+                        {
+                            hash.Add("code", 2);
+                            hash.Add("message", "新增失败，请稍后再试！");
+
                         }
                         return hash;
                     }
-                    entities.DishType.Add(type);
-                    int result = entities.SaveChanges();
-                    if (result == 1)
+                    catch (Exception e)
                     {
-                        hash.Add("code", 0);
-                        hash.Add("message", "新增成功！");
-                       
+                        throw e;
                     }
-                    else
-                    {
-                        hash.Add("code", 2);
-                        hash.Add("message", "新增失败，请稍后再试！");
-                        
-                    }
-                    return hash;
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
 
-            };
-                
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
 
         public bool UpdateType(DishType type)
         {
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            try
             {
-                DbEntityEntry<DishType> entry = entities.Entry<DishType>(type);
-
-
-                entry.State = System.Data.Entity.EntityState.Unchanged;//Modified
-                entry.Property("Name").IsModified = true;
-                entry.Property("DishTypeId").IsModified = false;
-                //TODO 如果更新状态为“删除”则要检查是否关联了菜品
-                try
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    entities.Configuration.ValidateOnSaveEnabled = false;
-                    int result = entities.SaveChanges();
-                    entities.Configuration.ValidateOnSaveEnabled = true;
+                    DbEntityEntry<DishType> entry = entities.Entry<DishType>(type);
 
-                    if (result == 1)
+                    entry.State = System.Data.Entity.EntityState.Unchanged;//Modified
+                    entry.Property("Name").IsModified = true;
+                    entry.Property("DishTypeId").IsModified = false;
+                    //TODO 如果更新状态为“删除”则要检查是否关联了菜品
+                    try
                     {
-                        return true;
+                        entities.Configuration.ValidateOnSaveEnabled = false;
+                        int result = entities.SaveChanges();
+                        entities.Configuration.ValidateOnSaveEnabled = true;
+
+                        if (result == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
+                        Console.WriteLine(e.ToString());
                         return false;
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    return false;
-                }   
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
 
-        public bool DeleteType(DishType type)
+        public bool DeleteType(int typeId)
         {
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
+                DishType type = new DishType();
+                type.DishTypeId = typeId;
+                type.Deleted = 1;
                 DbEntityEntry<DishType> entry = entities.Entry<DishType>(type);
-                entry.State = System.Data.Entity.EntityState.Deleted;
-                var result=entities.SaveChanges();
+                entry.State = System.Data.Entity.EntityState.Unchanged;//Modified
+                entry.Property("Deleted").IsModified = true;
+                entry.Property("DishTypeId").IsModified = false;
+                entities.Configuration.ValidateOnSaveEnabled = false;
+                var result = entities.SaveChanges();
+                entities.Configuration.ValidateOnSaveEnabled = true;
                 if (result == 1)
                 {
                     return true;
@@ -150,23 +284,9 @@ namespace IShow.ChooseDishes
                 {
                     return false;
                 }
-                
             }
         }
 
-        public List<DishType> LoadTypeById(int id)
-        {
-            List<DishType> types;
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
-            {
-                types = entities.DishType.Include("Dish").Where(info => info.DishTypeId == id).ToList();
-                if (types == null || types.Count == 0)
-                {
-                    types = new List<DishType>();
-                }
-                return types;
-            };  
-        }
         #endregion
 
 

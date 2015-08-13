@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Messaging;
 using IShow.ChooseDishes.Api;
 using IShow.ChooseDishes.Data;
 using IShow.ChooseDishes.Model;
+using IShow.ChooseDishes.Security;
 using IShow.ChooseDishes.View.OrgInfo;
 using IShow.ChooseDishes.ViewModel.Common;
 using System;
@@ -20,11 +21,11 @@ namespace IShow.ChooseDishes.ViewModel
 
     public class EmployeeViewModel : ViewModelBase
     {
-        IChooseDishesDataService _DataService;
+        IEmployeeService _DataService;
         readonly TreeNodeModel _RootTreeNode;
         ObservableCollection<TreeNodeModel> _FirstGeneration;
         //主窗体初始化
-        public EmployeeViewModel(IChooseDishesDataService dataService)
+        public EmployeeViewModel(IEmployeeService dataService)
         {
             _DataService = dataService;
             //查询部门，生成树
@@ -32,7 +33,7 @@ namespace IShow.ChooseDishes.ViewModel
 
             DepartmentInfo dep = new DepartmentInfo();
             dep.CompanyId = 1;
-             List<DepartmentInfo> queryByDepartment=_DataService.queryByDepartment(dep);
+             List<DepartmentInfo> queryByDepartment=_DataService.QueryByDepartment(dep);
 
              foreach (var depar in queryByDepartment)
              {
@@ -52,17 +53,19 @@ namespace IShow.ChooseDishes.ViewModel
             });
 
             //查询员工绑定grid
-            EmployeeV = new ObservableCollection<Employee>();
+            EmployeeV = new ObservableCollection<EmployeeBean>();
             Employee employee = new Employee();
            
-            List<Employee> loooo = _DataService.queryByEmployee(employee);
+            List<Employee> loooo = _DataService.QueryByEmployee(employee);
 
             bool a = loooo != null;
             if (a)
             {
                 foreach (var loca in loooo)
                 {
-                    EmployeeV.Add(new Employee { UserId = loca.UserId,
+                    EmployeeV.Add(new EmployeeBean
+                    {
+                        UserId = loca.UserId,
                                                  DepartmentId = loca.DepartmentId,JobNo = loca.JobNo,Name = loca.Name, 
                                                  Sex = loca.Sex, SexVal = (loca.Sex == 1) ? "男" : "女", Birthday = loca.Birthday,
                                                  Flag = loca.Flag, FlagVal = (loca.Flag == 1) ? "离职" : "在职", Mobile = loca.Mobile,
@@ -78,17 +81,19 @@ namespace IShow.ChooseDishes.ViewModel
             get { return _FirstGeneration; }
          }
 
-        ObservableCollection<Employee> _EmployeeV;
+        ObservableCollection<EmployeeBean> _EmployeeV;
         //主窗口绑定数据
-        public ObservableCollection<Employee> EmployeeV { get{
-            return _EmployeeV ?? (_EmployeeV = new ObservableCollection<Employee>());
+        public ObservableCollection<EmployeeBean> EmployeeV
+        {
+            get {
+                return _EmployeeV ?? (_EmployeeV = new ObservableCollection<EmployeeBean>());
         } set {
             Set("EmployeeV", ref _EmployeeV, value);
         } }
 
         //grid选中事件
-        Employee _SelectedEmployee;
-        public Employee SelectedEmployee
+        EmployeeBean _SelectedEmployee;
+        public EmployeeBean SelectedEmployee
         {
             get
             {
@@ -114,7 +119,7 @@ namespace IShow.ChooseDishes.ViewModel
                 return _SelectedTree ?? (_SelectedTree = new RelayCommand<TreeNodeModel>(node =>
                     {
 
-                        EmployeeV = new ObservableCollection<Employee>();
+                        EmployeeV = new ObservableCollection<EmployeeBean>();
                         Employee employee = new Employee();
 
 
@@ -127,13 +132,13 @@ namespace IShow.ChooseDishes.ViewModel
                             _departmentBean._DepartmentName = node.Text;
 
                             employee.DepartmentId = int.Parse(id);
-                            List<Employee> loooo = _DataService.queryByEmployee(employee);
+                            List<Employee> loooo = _DataService.QueryByEmployee(employee);
                             bool a = loooo != null;
                             if (a)
                             {
                                 foreach (var loca in loooo)
                                 {
-                                    EmployeeV.Add(new Employee
+                                    EmployeeV.Add(new EmployeeBean
                                     {
                                         UserId = loca.UserId,
                                         DepartmentId = loca.DepartmentId,
@@ -157,13 +162,13 @@ namespace IShow.ChooseDishes.ViewModel
                             }
                         }
                         else {
-                            List<Employee> loooo = _DataService.queryByEmployee(employee);
+                            List<Employee> loooo = _DataService.QueryByEmployee(employee);
                             bool a = loooo != null;
                             if (a)
                             {
                                 foreach (var loca in loooo)
                                 {
-                                    EmployeeV.Add(new Employee
+                                    EmployeeV.Add(new EmployeeBean
                                     {
                                         UserId = loca.UserId,
                                         DepartmentId = loca.DepartmentId,
@@ -207,7 +212,7 @@ namespace IShow.ChooseDishes.ViewModel
                         employee.Deleted = 1;
                         employee.UpdateDatetime = DateTime.Now;
 
-                        int b = _DataService.delByEmployee(employee);
+                        int b = _DataService.DelByEmployee(employee);
                         if (b.Equals(1))
                         {
                             EmployeeV.Remove(SelectedEmployee);
@@ -233,11 +238,11 @@ namespace IShow.ChooseDishes.ViewModel
                     {
                         if (SelectedEmployee.Flag == 0)
                         {
-                            SelectedEmployee.UpdateBy = 8;
+                            SelectedEmployee.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                             SelectedEmployee.Flag = 1;
                             SelectedEmployee.FlagVal = "离职";
                             SelectedEmployee.UpdateDatetime = DateTime.Now;
-                            int b = _DataService.editEmployeeFlag(SelectedEmployee);
+                            int b = _DataService.EditEmployeeFlag(SelectedEmployee.CreateEmployee(SelectedEmployee));
                             if (b.Equals(1))
                             {
                                  // EmployeeV[EmployeeV.IndexOf(SelectedEmployee)] = SelectedEmployee;
@@ -269,11 +274,11 @@ namespace IShow.ChooseDishes.ViewModel
                     {
                         if (SelectedEmployee.Flag == 1)
                         {
-                            SelectedEmployee.UpdateBy = 8;
+                            SelectedEmployee.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                             SelectedEmployee.Flag = 0;
                             SelectedEmployee.FlagVal = "在职";
                             SelectedEmployee.UpdateDatetime = DateTime.Now;
-                            int b = _DataService.editEmployeeFlag(SelectedEmployee);
+                            int b = _DataService.EditEmployeeFlag(SelectedEmployee.CreateEmployee(SelectedEmployee));
                             if (b.Equals(1))
                             {
                                 EmployeeV[EmployeeV.IndexOf(SelectedEmployee)].Flag = 0;
@@ -370,13 +375,13 @@ namespace IShow.ChooseDishes.ViewModel
                     //保存数据
                     employee = Employeexaml.CreateEmployee(Employeexaml);
                     employee.Deleted = 0;
-                    employee.CreateBy = 1;
+                    employee.CreateBy = SubjectUtils.GetAuthenticationId(); 
                     employee.CreateTime = DateTime.Now;
 
-                    int flag = _DataService.addEmployee(employee);
+                    int flag = _DataService.AddEmployee(employee);
                     if (flag > 0)
                     {
-                        EmployeeV.Add(employee);
+                        EmployeeV.Add(Employeexaml);
                         aw.Close();
                     }
                     else if (flag == 0)
@@ -492,11 +497,11 @@ namespace IShow.ChooseDishes.ViewModel
                         _Employeexaml = new EmployeeBean();
                         
                         //设置数据
-                         Employee emp= EmployeeV[EmployeeV.IndexOf(SelectedEmployee)];
+                        Employee emp = SelectedEmployee.CreateEmployee(EmployeeV[EmployeeV.IndexOf(SelectedEmployee)]);
                          _Employeexaml = _Employeexaml.CreateEmployeeBean(emp);
                          DepartmentInfo dep = new DepartmentInfo();
                          dep.DepartmentId = _Employeexaml.DepartmentId;
-                         List<DepartmentInfo> list=_DataService.queryByDepartment(dep);
+                         List<DepartmentInfo> list=_DataService.QueryByDepartment(dep);
                          _Employeexaml.DepartmentName = list[0].DepartmentName;
                          ew = new EditEmployee();
                          if (_Employeexaml.Flag == 1)
@@ -540,17 +545,17 @@ namespace IShow.ChooseDishes.ViewModel
                    //设置数据
                     employee = Employeexaml.CreateEmployee(Employeexaml);
                     employee.Deleted = 0;
-                    employee.UpdateBy = 1;
+                    employee.UpdateBy = SubjectUtils.GetAuthenticationId();
                     employee.UpdateDatetime = DateTime.Now;
 
-                    int flag = _DataService.editByEmployee(employee);
+                    int flag = _DataService.EditByEmployee(employee);
                     if (flag > 0)
                     {
                         EmployeeV.Clear();
-                        List<Employee> loooo = _DataService.queryByEmployee(employee);
+                        List<Employee> loooo = _DataService.QueryByEmployee(employee);
                         foreach (var loca in loooo)
                         {
-                            EmployeeV.Add(new Employee
+                            EmployeeV.Add(new EmployeeBean
                             {
                                 UserId = loca.UserId,
                                 DepartmentId = loca.DepartmentId,
@@ -597,7 +602,7 @@ namespace IShow.ChooseDishes.ViewModel
                 {
                     DepartmentInfo dep = new DepartmentInfo();
                     dep.CompanyId = 1;
-                    List<DepartmentInfo> queryByDepartment = _DataService.queryByDepartment(dep);
+                    List<DepartmentInfo> queryByDepartment = _DataService.QueryByDepartment(dep);
                     DepartmentV.Clear();
                     foreach (var depar in queryByDepartment)
                     {
@@ -652,13 +657,16 @@ namespace IShow.ChooseDishes.ViewModel
                         //是否存在部门ID，存在删除表数据
                         if (SelectedDepart.DepartmentId > 0)
                         {
-                            SelectedDepart.UpdateBy = 1;
+                            SelectedDepart.UpdateBy = SubjectUtils.GetAuthenticationId();
                             SelectedDepart.UpdateDatetime = DateTime.Now;
                             SelectedDepart.Deleted = 1;
-                            int i = _DataService.delByDepartment(SelectedDepart);
+                            int i = _DataService.DelByDepartment(SelectedDepart);
                             if (i > 0)
                             {
                                 DepartmentV.RemoveAt(DepartmentV.IndexOf(SelectedDepart));
+                            }
+                            else {
+                                MessageBox.Show("删除失败，请联系管理员!");
                             }
                         }
                         else {
@@ -683,13 +691,13 @@ namespace IShow.ChooseDishes.ViewModel
                 {
                    foreach (var depar in DepartmentV)
                     {
-                        depar.UpdateBy = 1;
+                        depar.UpdateBy = SubjectUtils.GetAuthenticationId();
                         depar.UpdateDatetime = DateTime.Now;
-                        depar.CreateBy = 1;
+                        depar.CreateBy = SubjectUtils.GetAuthenticationId();
                         depar.CreateTime = DateTime.Now;
                         depar.Deleted =0;
                         depar.CompanyId = 1;
-                        _DataService.editByDepartment(depar);
+                        _DataService.EditByDepartment(depar);
                      }
                 }));
             }

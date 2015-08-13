@@ -18,7 +18,8 @@ namespace IShow.ChooseDishes.Api
             : base(string.Format(format, args)) { }
 
         public ServiceException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException) { 
+        }
 
         public ServiceException(string format, Exception innerException, params object[] args)
             : base(string.Format(format, args), innerException)

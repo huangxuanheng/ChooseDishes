@@ -16,6 +16,7 @@ using GalaSoft.MvvmLight.Messaging;
 using IShow.ChooseDishes.Api;
 using IShow.ChooseDishes.Model;
 using GalaSoft.MvvmLight.Threading;
+using IShow.ChooseDishes.Security;
 
 namespace IShow.ChooseDishes.ViewModel.Dishes
 {
@@ -98,6 +99,11 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
             set
             {
                 Set("RawMaterialBean", ref _RawMaterialBean, value);
+                DispatcherHelper.CheckBeginInvokeOnUI(
+               () =>
+               {
+                   base.RaisePropertyChanged("RawMaterialBean");
+               });
             }
         }
 
@@ -246,7 +252,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 return _SelectedTree ?? (_SelectedTree = new RelayCommand<TreeNodeModel>(node =>
                 {
                     node.Selected = true;
-                    
+                    SelectedFlag = false;
                     RefreshRawMaterialData(node);
                 }));
             }
@@ -257,10 +263,11 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
         /// <param name="node"></param>
         private void RefreshRawMaterialData(TreeNodeModel node)
         {
-            if (!node.Text.Equals("全部类型"))
+            if (node!=null&&!node.Text.Equals("全部类型"))
             {
-                //如果是小类，则显示该小类下的所有的原料资料，如果是大类，则显示所有小类下的所有的原料资料
                 SelectedRawNode = node;
+                //如果是小类，则显示该小类下的所有的原料资料，如果是大类，则显示所有小类下的所有的原料资料
+                
                 if (node.Parent.Equals(RootTreeNode))      //是大类
                 {
                     MaterialItems.Clear();
@@ -277,10 +284,16 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                                 foreach (var rm in rms)   //遍历该小类下的对应的原料资料
                                 {
                                     _RawMaterialBean = new Model.RawMaterialBean();
-                                    _RawMaterialBean.LineNumber = MaterialItems.Count + 1;
+                                    LoadRawMaterialLineAndCode(rm,node.Id);
                                     _RawMaterialBean.CreateRawMaterialBean(rm);
                                     _RawMaterialBean.BigType = node.Text;
                                     _RawMaterialBean.LittleType = child.Text;
+                                    if (!SelectedFlag)
+                                    {
+                                        SelectedMaterialItem = RawMaterialBean;
+                                        SelectedFlag = true;
+                                    }
+                                    InitComboxData();
                                     MaterialItems.Add(RawMaterialBean);
                                 }
 
@@ -297,10 +310,15 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                         foreach (var rm in rms)   //遍历该小类下的对应的原料资料
                         {
                             _RawMaterialBean = new Model.RawMaterialBean();
+                            LoadRawMaterialLineAndCode(rm,node.Parent.Id);
                             _RawMaterialBean.CreateRawMaterialBean(rm);
-                            _RawMaterialBean.LineNumber = MaterialItems.Count + 1;
                             _RawMaterialBean.BigType = node.Text;
                             _RawMaterialBean.LittleType = node.Text;
+                            InitComboxData();
+                            if (rm.Equals(rms.ElementAt(0)))
+                            {
+                                SelectedMaterialItem = _RawMaterialBean;
+                            }
                             MaterialItems.Add(RawMaterialBean);
                         }
 
@@ -309,8 +327,10 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
             }
             else
             {
+                SelectedRawNode = null;
                 //显示全部的原料资料
-                LoadTreeAndDataMaterial();
+                //LoadTreeAndDataMaterial();
+                LoadAllMaterialData();
             }
         }
 
@@ -323,7 +343,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 return _LittleSelectedTree ?? (_LittleSelectedTree = new RelayCommand<TreeNodeModel>(node =>
                 {
                     node.Selected = true;
-                    if (!node.Text.Equals("全部大类"))
+                    if (node!=null&&!node.Text.Equals("全部大类"))
                     {
                         LittleRawViewXaml.Add.IsEnabled = true;
                         SelectedLittleRawNode = node;
@@ -403,61 +423,45 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 {
 
                     Logger.LogMethodEntry();
-                    if (SelectedMaterialItem == null)
-                    {
-                        //弹框
-                        MessageBox.Show("请选择需要修改的原料!");
-                        return;
-                    }
-                    RawMaterialBean = SelectedMaterialItem;
-                   
-
-                    List<RawUnit> rus = _RawUnitDataService.FindRawUnitByDeletedStatus();
-                    RawMaterialBean.InGoodsUnitItems = rus;
-
-                    RawMaterialBean.StockUnitItems = rus;
-                    RawMaterialBean.FormulaUnitItems = rus;
-                    RawMaterialBean.SaleUnitItems = rus;
-                    foreach (var ru in RawMaterialBean.FormulaUnitItems)
-                    {
-                        if (RawMaterialBean.FormulaUnit == ru.UnitId)
-                        {
-                            RawMaterialBean.SelectedFormulaUnitItem = ru;
-                        }
-                    }
-                    foreach (var ru in RawMaterialBean.InGoodsUnitItems)
-                    {
-                        if (RawMaterialBean.InGoodsUnit == ru.UnitId)
-                        {
-                            RawMaterialBean.SelectedInGoodsUnitItem = ru;
-                        }
-                    }
-                    foreach (var ru in RawMaterialBean.SaleUnitItems)
-                    {
-                        if (RawMaterialBean.SaleUnit == ru.UnitId)
-                        {
-                            RawMaterialBean.SelectedSaleUnitItem = ru;
-                        }
-                    }
-                    foreach (var ru in RawMaterialBean.StockUnitItems)
-                    {
-                        if (RawMaterialBean.StockUnit == ru.UnitId)
-                        {
-                            RawMaterialBean.SelectedStockUnitItem = ru;
-                        }
-                    }
-                    RawMaterialBean.Code = RawMaterialBean.RawId + "" + RawMaterialBean.Id;
-                    RawMaterialBean.UpdateDatetime = DateTime.Now;
-                    RawMaterialBean.CurrentScale = (MaterialItems.IndexOf(SelectedMaterialItem) +1)+ "/" + MaterialItems.Count;
-                    RawMaterialXaml = new RawMaterialView();
-                    //隐藏继续按钮
-                    RawMaterialXaml.Continue.Visibility = Visibility.Hidden;
-                    RawMaterialXaml.RecordControll.Visibility = Visibility.Visible;
-                    
-                    RawMaterialXaml.ShowDialog();
+                    ShowUpdateDetail();
                     Logger.LogMethodExit();
+                    return;
                 }));
             }
+        }
+        /// <summary>
+        /// 显示修改详情页面
+        /// </summary>
+        public  void ShowUpdateDetail()
+        {
+            if (SelectedMaterialItem == null)
+            {
+                //弹框
+                MessageBox.Show("请选择需要修改的原料!");
+                return;
+            }
+            
+
+            InitComboBoxBaseData();
+            
+            RawMaterialXaml = new RawMaterialView();
+            //隐藏继续按钮
+            RawMaterialXaml.Continue.Visibility = Visibility.Hidden;
+            RawMaterialXaml.RecordControll.Visibility = Visibility.Visible;
+
+            RawMaterialXaml.ShowDialog();
+        }
+        private List<RawUnit> rawUtils=null;
+        /// <summary>
+        /// 初始化详情页的下拉选择框的基本数据
+        /// </summary>
+        private void InitComboBoxBaseData()
+        {
+            RawMaterialBean = SelectedMaterialItem;
+            rawUtils = _RawUnitDataService.FindRawUnitByDeletedStatus();
+            InitComboxData();
+            RawMaterialBean.UpdateDatetime = DateTime.Now;
+            RawMaterialBean.CurrentScale = (MaterialItems.IndexOf(SelectedMaterialItem) + 1) + "/" + MaterialItems.Count;
         }
         RelayCommand _Deleted;
         public RelayCommand Deleted   //删除
@@ -545,9 +549,6 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                             return;
                         }
                     }).Start();
-
-                    
-
                     break;
                 case 2:  //小类
                     if (_SelectedLittleMaterialItem == null)
@@ -555,47 +556,46 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                         MessageBox.Show("请选择需要删除的小类！");
                         return;
                     }
-                    else
+                   
+                    if (_SelectedLittleMaterialItem.RawId == 0)
                     {
-                        if (_SelectedLittleMaterialItem.RawId == 0)
+                        _LittleMaterialItems.Remove(SelectedLittleMaterialItem);
+                        return;
+                    }
+                    new Task(() =>
+                    {
+                        //先查询在该小类下是否有原料资料记录，如果有，则不能删除
+                        List<RawMaterial>rms= _MaterialDataService.FindAllRawMaterialByRawIdAndDeletedStatus(_SelectedLittleMaterialItem.RawId);
+                        if (rms == null)
                         {
-                            _LittleMaterialItems.Remove(SelectedLittleMaterialItem);
+                            bool flag = _MaterialDataService.UpdateRawDeletedStatusById(_SelectedLittleMaterialItem.RawId, 1);
+                            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                            {
+                                if (flag)
+                                {
+                                    if (SelectedLittleRawNode != null)
+                                        LoadLittleRawMaterial(SelectedLittleRawNode);
+                                    else
+                                    {
+                                        InitLittleRawMaterial();
+                                    }
+                                    //主界面数据从新加载
+                                    LoadTreeAndDataMaterial();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("对不起，删除失败！");
+                                    return;
+                                }
+                            });
+                        }
+                        else
+                        {
+                            MessageBox.Show("该小类下有原料记录，不能删除!");
                             return;
                         }
-                        new Task(() =>
-                        {
-                            //先查询在该小类下是否有原料资料记录，如果有，则不能删除
-                           List<RawMaterial>rms= _MaterialDataService.FindAllRawMaterialByRawId(_SelectedLittleMaterialItem.RawId);
-                           if (rms == null)
-                           {
-                               bool flag = _MaterialDataService.UpdateRawDeletedStatusById(_SelectedLittleMaterialItem.RawId, 1);
-                               DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                               {
-                                   if (flag)
-                                   {
-                                       if (SelectedLittleRawNode != null)
-                                           LoadLittleRawMaterial(SelectedLittleRawNode);
-                                       else
-                                       {
-                                           InitLittleRawMaterial();
-                                       }
-                                   }
-                                   else
-                                   {
-                                       MessageBox.Show("对不起，删除失败！");
-                                       return;
-                                   }
-                               });
-                           }
-                           else
-                           {
-                               MessageBox.Show("该小类下有原料记录，不能删除!");
-                               return;
-                           }
                            
-                        }).Start();
-
-                    }
+                    }).Start();
                     break;
                 case 3:  //单位
                     if (_BaseSelectedItem == null)
@@ -629,7 +629,6 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                                 {
                                     //从新加载界面
                                     LoadRawUnit();
-                                    LoadTreeAndDataMaterial();
                                 }
                                 else
                                 {
@@ -652,13 +651,6 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 return _BigType ?? (_BigType = new RelayCommand(() =>
                 {
                     Logger.LogMethodEntry();
-                    //Raw r = new Raw();
-                    //r.CreateBy = 0;
-                    //r.CreateDatetime = DateTime.Now;
-                    //r.Deleted = 0;
-                    //r.Name = "味精";
-                    //r.Status = 0;
-                    //_MaterialDataService.AddRaw(r);
                     LoadBigRaw();
                     BaseMaterialXaml = new BaseMaterialView();
                     BaseMaterialXaml.WindowTitle.Title = "原料大类设置";
@@ -677,39 +669,24 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
             new Task(() =>
             {
                 List<Raw> raws = _MaterialDataService.FindAllBigRawByDeletedStatus();
-
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     if (raws != null)
                     {
-                        if (BaseRawMaterialTempItems != null)
-                            BaseRawMaterialTempItems.Clear();
-                        else
-                        {
-                            BaseRawMaterialTempItems = new ObservableCollection<BaseMaterialBean>();
-                        }
+                       
                         BaseRawMaterialItems.Clear();
                         foreach (var raw in raws)
                         {
-                            if (raw.Deleted != 1)   //表示没有被物理删除
-                            {
-                                _BaseMaterialBean = new BaseMaterialBean();
-                                //_BaseMaterialBean.Id = raw.RawId;
-                                //_BaseMaterialBean.Name = raw.Name;
-                                _BaseMaterialBean.CreateBaseMaterialBean(raw);
-                                _BaseMaterialBean.Code = (BaseRawMaterialItems.Count + 1).ToString();
-                                BaseRawMaterialItems.Add(BaseMaterialBean);
-                                BaseRawMaterialTempItems.Add(BaseMaterialBean);
-                            }
+                            _BaseMaterialBean = new BaseMaterialBean();
+                            _BaseMaterialBean.CreateBaseMaterialBean(raw);
+                            _BaseMaterialBean.Code = (BaseRawMaterialItems.Count + 1).ToString();
+                            BaseRawMaterialItems.Add(BaseMaterialBean);
                         }
-                        
-                        
                     }
                 });
             }).Start();
 
         }
-        ObservableCollection<BaseMaterialBean> BaseRawMaterialTempItems;
         RelayCommand _LittleType;
         public RelayCommand LittleType   //小类
         {
@@ -720,9 +697,6 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     Logger.LogMethodEntry();
 
                     InitLittleRawMaterial();
-
-                    ObservableCollection<TreeNodeModel> chs = _LittleRootTreeNode.Children;
-
                     LittleRawViewXaml = new LittleRawView();
                     if (_LittleRootTreeNode != null && !_LittleRootTreeNode.Selected)
                     {
@@ -829,7 +803,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     Logger.LogMethodEntry();
 
                     Logger.Log("刷新页面", LOGSEVERITY.Debug);
-
+                    RefreshRawMaterialData(SelectedRawNode);
                     Logger.LogMethodExit();
                 }));
             }
@@ -909,17 +883,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 return _PreviousRecord ?? (_PreviousRecord = new RelayCommand(() =>
                 {
                     Logger.LogMethodEntry();
-                    //MessageBox.Show("上一条记录");
-                    current=MaterialItems.IndexOf(SelectedMaterialItem)-1;
-                    if (current <0)
-                    {
-                        MessageBox.Show("已经是第一条记录了!");
-                        current = 0;
-                        return;
-                    }
-                    SelectedMaterialItem = MaterialItems.ElementAt(current % MaterialItems.Count);
-                    RawMaterialBean = SelectedMaterialItem;
-                    RawMaterialBean.CurrentScale = (MaterialItems.IndexOf(SelectedMaterialItem) + 1) + "/" + MaterialItems.Count;
+                    SwitchSelectedItem(0); 
                     Logger.LogMethodExit();
                 }));
             }
@@ -932,23 +896,45 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 return _NextRecord ?? (_NextRecord = new RelayCommand(() =>
                 {
                     Logger.LogMethodEntry();
-                    //MessageBox.Show("下一条记录");
-                    current = MaterialItems.IndexOf(SelectedMaterialItem) + 1;
-                    int count = MaterialItems.Count;
-                    if (current > count-1)
-                    {
-                        MessageBox.Show("已经是第一条记录了!");
-                        current = count-1;
-                        return;
-                    }
-                    SelectedMaterialItem = MaterialItems.ElementAt(current % MaterialItems.Count);
-                    RawMaterialBean = SelectedMaterialItem;
-                    RawMaterialBean.CurrentScale = (MaterialItems.IndexOf(SelectedMaterialItem)+1) + "/" + count;
+                    SwitchSelectedItem(1);
                     Logger.LogMethodExit();
                 }));
             }
         }
+        private int currentItem;
+        /// <summary>
+        /// 切换选择的条目，主要用于查看上一条和下一条记录
+        /// 0是上一条记录，1是下一条记录
+        /// </summary>
+        /// <param name="type"></param>
+        private void SwitchSelectedItem(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    currentItem = MaterialItems.IndexOf(SelectedMaterialItem) - 1;
+                    break;
+                case 1:
+                    currentItem = MaterialItems.IndexOf(SelectedMaterialItem) + 1;
+                    break;
+            }
+            if (currentItem < 0)
+            {
+                MessageBox.Show("已经是第一条记录了！");
+                currentItem = 0;
+                return;
+            }
+            if (currentItem > MaterialItems.Count - 1)
+            {
+                MessageBox.Show("已经是最后一条记录了！");
+                currentItem = MaterialItems.Count - 1;
+                return;
+            }
+            SelectedMaterialItem = MaterialItems.ElementAt(currentItem);
 
+            InitComboBoxBaseData();
+
+        }
         #endregion Command
 
         LittleRawView LittleRawViewXaml { set; get; }
@@ -999,16 +985,19 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
           
             switch (type)
             {
-                case 0:   //新增
+                case 0:   //修改
+                    _RawMaterialBean.UpdateBy = SubjectUtils.GetAuthenticationId();
+                    _RawMaterialBean.UpdateDatetime = DateTime.Now;
                     rm = RawMaterialBean.CreateRawMaterial(_RawMaterialBean);
                     flag = _MaterialDataService.UpdateRawMaterial(rm);
                     break;
-                default:   //修改
+                default:   //新增
                     //先判断名称是否为空，如果为空，则弹框提示不能保存
                     if (string.IsNullOrEmpty(RawMaterialBean.MaterialName))
                     {
                         if (type == 2)
                         {
+                            //AddRawMaterialBaseData();
                             return;
                         }
                         MessageBox.Show("原料资料不能为空!");
@@ -1017,7 +1006,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     //先查找数据表中是否存在此原料
                     List<RawMaterial> rms = _MaterialDataService.FindRawMaterialByName(RawMaterialBean.MaterialName);
                     _RawMaterialBean.CreateDatetime = DateTime.Now;
-
+                    _RawMaterialBean.CreateBy = SubjectUtils.GetAuthenticationId(); 
                     rm = RawMaterialBean.CreateRawMaterial(_RawMaterialBean);
                     if (rms == null)
                     {
@@ -1042,14 +1031,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
             }
             if (type == 2 && flag)
             {
-                //1.名称置空
-                _RawMaterialBean.MaterialName = null;
-                //2.规格置空
-                _RawMaterialBean.Format = null;
-                //3.拼音置空
-                _RawMaterialBean.Pinying = null;
-                //4.备注置空
-                _RawMaterialBean.Detail = null;
+                AddRawMaterialBaseData();
                 return;
             }
             
@@ -1110,6 +1092,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
             if (flag)
             {
                 MessageBox.Show("保存成功");
+                LoadTreeAndDataMaterial();
             }
             else
             {
@@ -1141,24 +1124,25 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     }
                     if (bean.Id == 0)
                     {
-                        bean.CreateDatetime = DateTime.Now;
                         bean.ParentRawId = 0;
                         raw=bean.CreateRaw(bean);
                         flag = _MaterialDataService.AddRaw(raw);
                         continue;
                     }
+                    bean.CreateBy = SubjectUtils.GetAuthenticationId(); 
                     bean.UpdateDatetime = DateTime.Now;
                     raw = bean.CreateRaw(bean);
                     flag=_MaterialDataService.UpdateRaw(raw);
                     
                 }
-                //从新读书数据，加载数据
+                //从新读取数据，加载数据
                 LoadBigRaw();
             }
             if (flag)
             {
-                
+
                 MessageBox.Show("保存成功");
+                LoadTreeAndDataMaterial();
             }
             else
             {
@@ -1187,11 +1171,11 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     }
                     if (bean.RawId == 0)
                     {
-                        bean.CreateDatetime = DateTime.Now;
                         raw=bean.CreateRaw(bean);
                         flag=_MaterialDataService.AddRaw(raw);
                         continue;
                     }
+                    bean.UpdateBy = SubjectUtils.GetAuthenticationId(); 
                     bean.UpdateDatetime = DateTime.Now;
                     raw = bean.CreateRaw(bean);
                     flag=_MaterialDataService.UpdateRaw(raw);
@@ -1200,6 +1184,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
             if (flag)
             {
                 MessageBox.Show("保存成功");
+                LoadTreeAndDataMaterial();
             }
         }
         //type=0表示新增原料资料，type=1表示新增大类，type=2表示新增小类，type=3表示新增单位
@@ -1211,6 +1196,8 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     
                     _BaseMaterialBean = new BaseMaterialBean();
                     _BaseMaterialBean.Name = "";
+                    _RawMaterialBean.CreateBy = SubjectUtils.GetAuthenticationId();
+                    _RawMaterialBean.CreateDatetime = DateTime.Now;
                     _BaseMaterialBean.Code = (BaseRawMaterialItems.Count + 1).ToString();
                     BaseRawMaterialItems.Add(BaseMaterialBean);
                     break;
@@ -1222,6 +1209,8 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                         _LittleRawMaterialBean.Code = (LittleMaterialItems.Count + 1).ToString();
                         _LittleRawMaterialBean.ParentRawId = int.Parse(SelectedLittleRawNode.Id);
                         _LittleRawMaterialBean.ParentRaw = SelectedLittleRawNode.Text;
+                        _LittleRawMaterialBean.CreateBy = SubjectUtils.GetAuthenticationId();
+                        _LittleRawMaterialBean.CreateDatetime = DateTime.Now;
                         LittleMaterialItems.Add(LittleRawMaterialBean);
                     }
                     break;
@@ -1229,13 +1218,13 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     _BaseMaterialBean = new BaseMaterialBean();
                     _BaseMaterialBean.Name = "";
                     _BaseMaterialBean.Code = (BaseRawMaterialItems.Count + 1).ToString();
+                    _RawMaterialBean.CreateBy = SubjectUtils.GetAuthenticationId();
+                    _RawMaterialBean.CreateDatetime = DateTime.Now;
                     BaseRawMaterialItems.Add(BaseMaterialBean);
                     break;
                 default:  //原料资料
                     //把界面上的一下东东隐藏和显示
-                    
-
-                    if (SelectedRawNode == null||SelectedRawNode.Parent.Equals(RootTreeNode))
+                    if (SelectedRawNode == null || SelectedRawNode.Parent.Equals(RootTreeNode))
                     {
                         MessageBox.Show("请选择原料小类");
                         return;
@@ -1243,41 +1232,67 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                     else
                     {
                         //是小类，弹出新增原料页面
-                        RawMaterialBean = new Model.RawMaterialBean();
-                        //弹出页面
-                        List<RawUnit> rus = _RawUnitDataService.FindRawUnitByDeletedStatus();
-                        RawMaterialBean.InGoodsUnitItems = rus;
-                        RawMaterialBean.StockUnitItems = rus;
-                        RawMaterialBean.FormulaUnitItems = rus;
-                        RawMaterialBean.SaleUnitItems = rus;
-
-                        RawUnit r = rus.ElementAt(0);
-                        RawMaterialBean.SelectedFormulaUnitItem = r;
-                        RawMaterialBean.SelectedInGoodsUnitItem = r;
-                        RawMaterialBean.SelectedSaleUnitItem = r;
-                        RawMaterialBean.SelectedStockUnitItem = r;
-
-                        List<RawMaterial>rms=_MaterialDataService.FindAllRawMaterial();
-                        if (rms != null)
-                        {
-                            //编码等于小类id+原表中所有记录+1拼接成的字符串
-                            RawMaterialBean.Code =SelectedRawNode.Id +""+(rms.Count+1);
-                        }
-                        RawMaterialBean.RawId = int.Parse(SelectedRawNode.Id);
-                        RawMaterialBean.BigType = SelectedRawNode.Parent.Text;
-                        RawMaterialBean.LittleType = SelectedRawNode.Text;  //小类
+                        AddRawMaterialBaseData();
                         RawMaterialXaml = new RawMaterialView();
                         RawMaterialXaml.RecordControll.Visibility = Visibility.Hidden;
                         RawMaterialXaml.Continue.Visibility = Visibility.Visible;
                         RawMaterialXaml.ShowDialog();
-                        
                     }
                     break;
             }
         }
-        public void SelectedItemChanged(TreeNodeModel node)
+        /// <summary>
+        /// 加载新增原料基本数据
+        /// </summary>
+        private void AddRawMaterialBaseData()
         {
-            MessageBox.Show("hello " + node.Text);
+            RawMaterialBean = new Model.RawMaterialBean();
+            //弹出页面
+            List<RawUnit> rus = _RawUnitDataService.FindRawUnitByDeletedStatus();
+            InitComboxData();
+
+            RawMaterialBean.RawId = int.Parse(SelectedRawNode.Id);
+            RawMaterialBean.BigType = SelectedRawNode.Parent.Text;
+            RawMaterialBean.LittleType = SelectedRawNode.Text;  //小类
+            //查找全部的原料资料，包括物理删除的
+            List<RawMaterial> rms = _MaterialDataService.FindAllRawMaterial();
+            if (rms != null)
+            {
+                //编码等于小类id+原表中所有记录+1拼接成的字符串
+                StringBuilder sb = new StringBuilder();
+                int bigId = int.Parse(SelectedRawNode.Parent.Id);
+                int little = int.Parse(SelectedRawNode.Id);
+                if (bigId < 10)
+                {
+                    sb.Append("0").Append(bigId);
+                }
+                else
+                {
+                    sb.Append(bigId);
+                }
+                if (little <= 9)
+                {
+                    sb.Append("0").Append(little);
+                }
+                else 
+                {
+                    sb.Append(little);
+                }
+
+                int count = rms.ElementAt(rms.Count-1).Id+1;
+                if (count <= 9)
+                {
+                    sb.Append("0").Append(count);
+                }
+                else
+                {
+                    sb.Append(count);
+                }
+               _RawMaterialBean.Code = sb.ToString();
+
+            }
+            _RawMaterialBean.CreateBy = SubjectUtils.GetAuthenticationId();
+            _RawMaterialBean.CreateDatetime = DateTime.Now;
         }
         private void InitView()
         {
@@ -1297,11 +1312,10 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
         /**加载主界面树*/
         private void LoadTreeAndDataMaterial()
         {
-            
-            _RootTreeNode = null;
             _RootTreeNode = new TreeNodeModel("全部类型");
             _RootTreeNode.Expanded = true;
-            
+            FirstGeneration.Clear();
+            FirstGeneration.Add(_RootTreeNode);
             new Task(() =>
             {
                 List<Raw> raws = _MaterialDataService.FindAllBigRawByDeletedStatus();
@@ -1324,12 +1338,9 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                                     if (childrens != null)
                                         foreach (var children in childrens)
                                         {
-                                            if (children.Deleted != 1)
-                                            {
-                                                TreeNodeModel n = new TreeNodeModel(children.Name, node);
-                                                n.Id = children.RawId.ToString();
-                                                node.Children.Add(n);
-                                            }
+                                            TreeNodeModel n = new TreeNodeModel(children.Name, node);
+                                            n.Id = children.RawId.ToString();
+                                            node.Children.Add(n);
                                         }
                                 });
                             }
@@ -1344,17 +1355,16 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                 });
 
             }).Start();
-            if (_FirstGeneration != null)
-            {
-                _FirstGeneration.Clear();
-                _FirstGeneration.Add(_RootTreeNode);
-            }
-            if (_FirstGeneration==null)
-            _FirstGeneration = new ObservableCollection<TreeNodeModel>(new TreeNodeModel[] { _RootTreeNode });     
+            
         }
+        /// <summary>
+        /// 选择第一个记录的标志
+        /// </summary>
+        private bool SelectedFlag = false;
         //加载所有的原料数据
         private void LoadAllMaterialData()
         {
+                rawUtils = _RawUnitDataService.FindRawUnitByDeletedStatus();
             
                 if (_RootTreeNode != null)
                 {
@@ -1370,7 +1380,7 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                                 var child = childrens.ElementAt(x);   //小类的树对象
                                 new Task(() =>
                                 {
-                                    List<RawMaterial> rms = _MaterialDataService.FindAllRawMaterialByRawId(int.Parse(child.Id));
+                                    List<RawMaterial> rms = _MaterialDataService.FindAllRawMaterialByRawIdAndDeletedStatus(int.Parse(child.Id));
                                     DispatcherHelper.CheckBeginInvokeOnUI(() =>
                                     {
                                         if (rms != null)
@@ -1378,20 +1388,20 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                                             for (int y = 0; y < rms.Count; y++)   //遍历该小类下的对应的原料资料
                                             {
                                                 var rm = rms.ElementAt(y);
-                                               
-                                                if (rm.Deleted != 1)
+                                                _RawMaterialBean = new Model.RawMaterialBean();
+
+                                                LoadRawMaterialLineAndCode(rm,fc.Id);
+                                                _RawMaterialBean.CreateRawMaterialBean(rm);
+                                                _RawMaterialBean.BigType = fc.Text;
+                                                _RawMaterialBean.LittleType = child.Text;
+
+                                                InitComboxData();
+                                                if (!SelectedFlag)
                                                 {
-                                                    _RawMaterialBean = new Model.RawMaterialBean();
-                                                    _RawMaterialBean.LineNumber = MaterialItems.Count + 1;
-                                                    _RawMaterialBean.CreateRawMaterialBean(rm);
-                                                    _RawMaterialBean.BigType = fc.Text;
-                                                    _RawMaterialBean.LittleType = child.Text;
-                                                    if (y == 0)
-                                                    {
-                                                        SelectedMaterialItem = RawMaterialBean;
-                                                    }
-                                                    MaterialItems.Add(RawMaterialBean);
+                                                    SelectedMaterialItem = RawMaterialBean;
+                                                    SelectedFlag = true;
                                                 }
+                                                MaterialItems.Add(RawMaterialBean);
                                             }
 
                                         }
@@ -1402,6 +1412,73 @@ namespace IShow.ChooseDishes.ViewModel.Dishes
                       }
                 }
            
+        }
+        /// <summary>
+        /// 加载行号和编码
+        /// </summary>
+        /// <param name="rm"></param>
+        private void LoadRawMaterialLineAndCode(RawMaterial rm,string bigId)
+        {
+            _RawMaterialBean.LineNumber = MaterialItems.Count + 1;
+            StringBuilder sb = new StringBuilder();
+            if (int.Parse(bigId) < 10)
+            {
+                sb.Append("0").Append(int.Parse(bigId));
+            }
+            else
+            {
+                sb.Append(int.Parse(bigId));
+            }
+            if (rm.RawId <= 9)
+            {
+               // code = "0" + rm.RawId;
+                sb.Append("0").Append(rm.RawId);
+            }
+            else
+            {
+                sb.Append(rm.RawId);
+            }
+
+            if (rm.Id <= 9)
+            {
+                sb.Append("0").Append(rm.Id);
+            }
+            else
+            {
+                sb.Append(rm.Id);
+            }
+            _RawMaterialBean.Code = sb.ToString();
+        }
+        /// <summary>
+        /// 初始化下拉控件的基本数据
+        /// </summary>
+        private void InitComboxData()
+        {
+            _RawMaterialBean.InGoodsUnitItems = rawUtils;
+
+            _RawMaterialBean.StockUnitItems = rawUtils;
+            _RawMaterialBean.FormulaUnitItems = rawUtils;
+            _RawMaterialBean.SaleUnitItems = rawUtils;
+
+            foreach (var ru in rawUtils)
+            {
+                if (_RawMaterialBean.FormulaUnit == ru.UnitId)
+                {
+                    _RawMaterialBean.SelectedFormulaUnitItem = ru;
+                }
+                if (_RawMaterialBean.InGoodsUnit == ru.UnitId)
+                {
+                    _RawMaterialBean.SelectedInGoodsUnitItem = ru;
+                }
+                if (_RawMaterialBean.SaleUnit == ru.UnitId)
+                {
+                    _RawMaterialBean.SelectedSaleUnitItem = ru;
+                }
+                if (_RawMaterialBean.StockUnit == ru.UnitId)
+                {
+                    _RawMaterialBean.SelectedStockUnitItem = ru;
+                }
+            }
         }
     }
 

@@ -14,9 +14,16 @@ namespace IShow.ChooseDishes.Data
     
     public partial class PromotionsDish
     {
+        public PromotionsDish()
+        {
+            this.PromotionsDishDetail = new HashSet<PromotionsDishDetail>();
+        }
+    
         public int PromotionsDishId { get; set; }
+        public string TradeNo { get; set; }
         public Nullable<int> DishId { get; set; }
         public int MarketTypeId { get; set; }
+        public string DishFormat { get; set; }
         public double Price { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
@@ -38,6 +45,6 @@ namespace IShow.ChooseDishes.Data
         public Nullable<int> UpdateBy { get; set; }
     
         public virtual Dish Dish { get; set; }
-        public virtual PromotionsDishDetail PromotionsDishDetail { get; set; }
+        public virtual ICollection<PromotionsDishDetail> PromotionsDishDetail { get; set; }
     }
 }
