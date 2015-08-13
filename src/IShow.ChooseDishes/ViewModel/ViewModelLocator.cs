@@ -29,29 +29,24 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<IChooseDishesDataService>(() => new ChooseDishesDataService());
             SimpleIoc.Default.Register<IDishService>(() => new DishService());
             SimpleIoc.Default.Register<IDishesMenuService>(() => new DishesMenuService());
-            
 
+            SimpleIoc.Default.Register<IConfigurationService>(() => new ConfigurationService());
+            SimpleIoc.Default.Register<IMarketTypeDataService>(() => new MarketTypeDataService());
 
             SimpleIoc.Default.Register<IDiscountDataService>(() => new DiscountDataService());
-
             SimpleIoc.Default.Register<IEmployeeService>(() => new EmployeeService());
             SimpleIoc.Default.Register<IUserService>(() => new UserService());
-
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<OrgLocatinModel>();
-
             SimpleIoc.Default.Register<OrgBearingModel>();
             SimpleIoc.Default.Register<CompanyModel>();
             SimpleIoc.Default.Register<CashViewModel>();
             SimpleIoc.Default.Register<TreeViewModel>();
             SimpleIoc.Default.Register<DepartViewModel>();
             SimpleIoc.Default.Register<EmployeeViewModel>();
-
             SimpleIoc.Default.Register<CashViewModel>();
             SimpleIoc.Default.Register<DishesViewModel>();
-
             SimpleIoc.Default.Register<TreeViewModel>();
-
             SimpleIoc.Default.Register<DishesUnitViewModel>();
             SimpleIoc.Default.Register<DishesMenuViewModel>();
             SimpleIoc.Default.Register<DishDetailViewModel>();
@@ -65,10 +60,10 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<TableViewModel>();
 
 
-
             #region 绑定用户
             SimpleIoc.Default.Register<UserMgtViewModel>();
             SimpleIoc.Default.Register<SelectEmpForUserViewModel>();
+            SimpleIoc.Default.Register<AddUserViewModel>();
             SimpleIoc.Default.Register<EditUserViewModel>();
             SimpleIoc.Default.Register<AuthzMgtViewModel>();
             #endregion
@@ -81,8 +76,6 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<BaoBiaoZhongXinViewModel>();
             SimpleIoc.Default.Register<XiTongSheZhiViewModel>();
             SimpleIoc.Default.Register<ZhuoTaiViewModel>();
-
-
             SimpleIoc.Default.Register<BargainDishViewModel>();
             SimpleIoc.Default.Register<PromotionsDishWiewModel>();
 
@@ -334,6 +327,10 @@ namespace IShow.ChooseDishes.ViewModel
             get { return ServiceLocator.Current.GetInstance<UserMgtViewModel>(); }
         }
 
+        public AddUserViewModel AddUser
+        {
+            get { return ServiceLocator.Current.GetInstance<AddUserViewModel>(); }
+        }
         public EditUserViewModel EditUser
         {
             get { return ServiceLocator.Current.GetInstance<EditUserViewModel>(); }
@@ -357,6 +354,8 @@ namespace IShow.ChooseDishes.ViewModel
             }
         }
 
+
+
         //选择菜牌基础 窗口
         public DishesSelectBeanViewModel DishesSelectBean
         {
@@ -374,13 +373,13 @@ namespace IShow.ChooseDishes.ViewModel
             }
         }
         //菜品促销 PromotionsDishWiewModel
-        public PromotionsDishWiewModel PromotionsDishRegist
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<PromotionsDishWiewModel>();
-            }
-        }
+        //public PromotionsDishWiewModel PromotionsDishRegist
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.Current.GetInstance<PromotionsDishWiewModel>();
+        //    }
+        //}
         public SystemLogViewModel SysLog
         {
             get

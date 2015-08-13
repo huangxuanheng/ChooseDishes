@@ -21,7 +21,7 @@ namespace IShow.ChooseDishes.Data
     
         public int DischesWayId { get; set; }
         public int DischesWayNameId { get; set; }
-        public int Code { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
         public string WayDetail { get; set; }
         public string PingYing { get; set; }

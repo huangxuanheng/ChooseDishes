@@ -1,4 +1,5 @@
-﻿using IShow.ChooseDishes.Data;
+﻿using IShow.ChooseDishes.Api;
+using IShow.ChooseDishes.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -24,7 +25,7 @@ namespace IShow.ChooseDishes
                PingYing="sfsjl",     //做法拼音
                WayDetail="要三分熟就可以了"    //做法说明（非必填）
          */
-        public bool AddDishesWay(DischesWay odw)
+        public bool Add(DischesWay odw)
         {
             if (odw == null)
             {
@@ -58,7 +59,7 @@ namespace IShow.ChooseDishes
                     type.Deleted = odw.Deleted;
                     type.PingYing = odw.PingYing;
          */
-        public bool UpdateDishesWay(DischesWay odw)
+        public bool Modify(DischesWay odw)
         {
             if (odw == null)
             {
@@ -95,23 +96,17 @@ namespace IShow.ChooseDishes
             }
         }
         /**根据做法id更新做法删除的状态*/
-        public bool UpdateDishesWayDeletedTypeByCode(int Code)
+        public bool UpdateDeletedById(int id,int deletedStatus)
         {
-            if (Code <0)
-            {
-                return false;
-            }
             //修改  直接修改
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
                 try
                 {
-                    var type = entities.DischesWay.SingleOrDefault(bt => bt.Code == Code);
+                    var type = entities.DischesWay.SingleOrDefault(bt => bt.DischesWayId==id);
                     if (type != null)
                     {
-                        type.UpdateBy = 1;   //需要从数据库中读取操作人id
-                        type.UpdateDatetime =DateTime.Now;
-                        type.Deleted = 1;
+                        type.Deleted = deletedStatus;
                         entities.SaveChanges();
                         return true;
                     }
@@ -126,7 +121,7 @@ namespace IShow.ChooseDishes
             }
         }
         /**根据指定编码删除对应做法*/
-        public bool DeleteDishesWay(int id)
+        public bool Deleted(int id)
         {
             if (id < 0)
             {
@@ -154,45 +149,17 @@ namespace IShow.ChooseDishes
             }
         }
         /**根据做法类型编号查询做法*/
-        public List<DischesWay> FindAllDishesWayByTypeCode(string Code)
+        public List<DischesWay> FindAllDishesWayByTypeId(int wayId)
         {
-            int wayId = -1;
-            using (ChooseDishesEntities entity = new ChooseDishesEntities())
-            {
-                try
-                {
-                    var type = entity.DischesWayName.SingleOrDefault(bt => bt.Code == Code);
-                    wayId = type.DischesWayNameId;
-                }
-                catch (Exception e)
-                {
-                    e.ToString();
-                    return null;
-                }
-            }
-
             if (wayId < 0)
             {
-                return null;
+                new ServiceException("做法类型id小于零");
             }
-            try
+            using (ChooseDishesEntities entity = new ChooseDishesEntities())
             {
-                List<DischesWay> odws;
-                using (ChooseDishesEntities entities = new ChooseDishesEntities())
-                {
-                    odws = entities.DischesWay.Where(dw => dw.DischesWayNameId == wayId).ToList();
-                }
-                if (odws != null && odws.Count > 0)
-                {
-                    return odws;
-                }
+                var type = entity.DischesWay.Where(d => d.DischesWayNameId == wayId&&d.Deleted==0).ToList();
+                return type;
             }
-            catch (Exception e)
-            {
-                e.ToString();
-                return null;
-            }
-            return null;
         }
         /**根据做法id查找做法*/
         public DischesWay FindDishesWayById(int id)
@@ -216,11 +183,11 @@ namespace IShow.ChooseDishes
 
             }
         }
-        public DischesWay FindDishesWayByCode(int code)
+        public DischesWay FindDishesWayByCode(string code)
         {
-            if (code < 0)
+            if (code ==null)
             {
-                return null;
+                new ServiceException("编码不能为空");
             }
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
@@ -237,6 +204,21 @@ namespace IShow.ChooseDishes
 
             }
         }
+        /// <summary>
+        /// 查询所有的做法，包括状态为删除的
+        /// query all of DishesWay 
+        /// </summary>
+        /// <returns>reutrn list of DishesWay</returns>
+        public List<DischesWay> FindAll()
+        {
+            using (ChooseDishesEntities entity = new ChooseDishesEntities())
+            {
+                var type = entity.DischesWay.OrderBy(d=>d.DischesWayId).ToList();
+                return type;
+            }
+        }
+
+
 
 
         //添加做法类型，传入的做法类型参数需要包含：DischesWayNameId, Code,Name, CreateBy,CreateDatetime,Status,Deleted字段
@@ -328,39 +310,39 @@ namespace IShow.ChooseDishes
         //根据做法类型编码删除菜品做法类型,如果删除失败返回false，如果删除成功，则返回true
         public bool DeleteDishesWayNameByCode(string Code)
         {
-            if (Code ==null)
-            {
-                return false;
-            }
-            //先判断是否存在有做法，如果有做法，则不能返回false
-            DishesWayDataService odws = new DishesWayDataService();
-            List<DischesWay> orgDischesWay = odws.FindAllDishesWayByTypeCode(Code);
-            if (orgDischesWay != null && orgDischesWay.Count > 0)
-            {
-                return false;
-            }
-            //删除
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
-            {
-                try
-                {
-                    DischesWayName booktype = new DischesWayName()
-                    {
-                        Code = Code,
-                    };
-                    DbEntityEntry<DischesWayName> entry = entities.Entry<DischesWayName>(booktype);
-                    entry.State = System.Data.Entity.EntityState.Deleted;
+            //if (Code ==null)
+            //{
+            return false;
+            //}
+            ////先判断是否存在有做法，如果有做法，则不能返回false
+            //DishesWayDataService odws = new DishesWayDataService();
+            //List<DischesWay> orgDischesWay = odws.FindAllDishesWayByTypeId(Code);
+            //if (orgDischesWay != null && orgDischesWay.Count > 0)
+            //{
+            //    return false;
+            //}
+            ////删除
+            //using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            //{
+            //    try
+            //    {
+            //        DischesWayName booktype = new DischesWayName()
+            //        {
+            //            Code = Code,
+            //        };
+            //        DbEntityEntry<DischesWayName> entry = entities.Entry<DischesWayName>(booktype);
+            //        entry.State = System.Data.Entity.EntityState.Deleted;
 
-                    entities.SaveChanges();
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    e.ToString();
-                    return false;
-                }
+            //        entities.SaveChanges();
+            //        return true;
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        e.ToString();
+            //        return false;
+            //    }
 
-            }
+            //}
 
         }
         //查询菜品做法类型
@@ -371,7 +353,7 @@ namespace IShow.ChooseDishes
                 List<DischesWayName> dws;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    dws = entities.DischesWayName.Where(dw => dw.DischesWayNameId > 0).ToList();
+                    dws = entities.DischesWayName.Where(dw => dw.Deleted==0).ToList();
                 }
                 if (dws != null && dws.Count > 0)
                 {
@@ -396,7 +378,7 @@ namespace IShow.ChooseDishes
             {
                 try
                 {
-                    var type = entities.DischesWayName.SingleOrDefault(bt => bt.DischesWayNameId == id);
+                    var type = entities.DischesWayName.SingleOrDefault(bt => bt.DischesWayNameId == id&&bt.Deleted==0);
                     return type;
                 }
                 catch (Exception e)

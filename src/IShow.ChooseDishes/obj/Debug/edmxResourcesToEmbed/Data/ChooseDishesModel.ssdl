@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="IShow.ChooseDishes.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="IShow.ChooseDishes.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AreaPrintPlan">
     <Key>
       <PropertyRef Name="AreaPlanId" />
@@ -44,17 +44,17 @@
     <Property Name="Week0" Type="int" Nullable="false" />
     <Property Name="MarketTypeId" Type="int" Nullable="false" />
     <Property Name="Enable" Type="int" Nullable="false" />
-    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateBy" Type="int" Nullable="false" />
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
     <Property Name="Deleted" Type="int" Nullable="false" />
     <Property Name="UpdateTime" Type="datetime" />
-    <Property Name="Update_by" Type="nvarchar" MaxLength="20" />
+    <Property Name="Update_by" Type="int" />
   </EntityType>
   <EntityType Name="BargainDishPrice">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BargainDishId" Type="int" Nullable="false" />
     <Property Name="DishSpecification" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Price1" Type="float" Nullable="false" />
@@ -63,6 +63,11 @@
     <Property Name="MemberPrice3" Type="float" Nullable="false" />
     <Property Name="MemberPrice2" Type="float" Nullable="false" />
     <Property Name="MemberPrice1" Type="float" Nullable="false" />
+    <Property Name="CreateBy" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="Update_by" Type="int" />
   </EntityType>
   <EntityType Name="BasicPrintPlan">
     <Key>
@@ -286,6 +291,19 @@ warning 6002: The table/view 'IChooseDishes.dbo.ClearEstimate' does not have a p
     <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
     <Property Name="Deleted" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Config">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="200" />
+    <Property Name="FormatType" Type="nvarchar" MaxLength="500" />
+    <Property Name="Domain" Type="nvarchar" MaxLength="500" />
+    <Property Name="Disabled" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="ConsumeInfo">
     <Key>
       <PropertyRef Name="Id" />
@@ -463,7 +481,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
     </Key>
     <Property Name="DischesWayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DischesWayNameId" Type="int" Nullable="false" />
-    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="WayDetail" Type="nvarchar" MaxLength="200" />
     <Property Name="PingYing" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -516,7 +534,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.DischesWayRef' does not have a p
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DishId" Type="int" Nullable="false" />
     <Property Name="DiscountId" Type="int" Nullable="false" />
     <Property Name="DiscountValue" Type="float" Nullable="false" />
@@ -531,7 +549,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.DischesWayRef' does not have a p
     <Key>
       <PropertyRef Name="DiscountId" />
     </Key>
-    <Property Name="DiscountId" Type="int" Nullable="false" />
+    <Property Name="DiscountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ByDish" Type="int" Nullable="false" />
@@ -581,8 +599,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.DischesWayRef' does not have a p
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'IChooseDishes.dbo.dish_cents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="dish_cents">
+warning 6002: The table/view 'IChooseDishes.dbo.DishCent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DishCent">
     <Key>
       <PropertyRef Name="CreateDatetime" />
       <PropertyRef Name="CreateBy" />
@@ -622,6 +640,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.dish_cents' does not have a prim
     <Property Name="Status" Type="int" Nullable="false" />
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
+    <Property Name="OptionalNumber" Type="int" />
   </EntityType>
   <EntityType Name="DishDetail">
     <Key>
@@ -654,19 +673,15 @@ warning 6002: The table/view 'IChooseDishes.dbo.dish_cents' does not have a prim
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IChooseDishes.dbo.DishesMenuRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="DishesMenuRef">
     <Key>
-      <PropertyRef Name="DishId" />
-      <PropertyRef Name="MenusId" />
-      <PropertyRef Name="CreateTime" />
-      <PropertyRef Name="Deleted" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="DishId" Type="int" Nullable="false" />
     <Property Name="MenusId" Type="int" Nullable="false" />
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
     <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="DishFinance">
     <Key>
@@ -686,7 +701,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.DishesMenuRef' does not have a p
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DishId" Type="int" Nullable="false" />
     <Property Name="DishSpecification" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Price1" Type="float" Nullable="false" />
@@ -695,6 +710,12 @@ warning 6002: The table/view 'IChooseDishes.dbo.DishesMenuRef' does not have a p
     <Property Name="MemberPrice3" Type="float" Nullable="false" />
     <Property Name="MemberPrice2" Type="float" Nullable="false" />
     <Property Name="MemberPrice1" Type="float" Nullable="false" />
+    <Property Name="IsMainPrice" Type="int" Nullable="false" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="Update_by" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="DishPrint">
     <Key>
@@ -767,6 +788,17 @@ warning 6002: The table/view 'IChooseDishes.dbo.DishesMenuRef' does not have a p
     <Property Name="ResidentialAddress" Type="nvarchar" MaxLength="100" />
     <Property Name="IDAddress" Type="nvarchar" MaxLength="100" />
     <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Function">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModuleId" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Disabled" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="GiveInvoice">
     <Key>
@@ -927,6 +959,17 @@ warning 6002: The table/view 'IChooseDishes.dbo.KitchenBillItem' does not have a
     <Property Name="RechargeMoney" Type="float" Nullable="false" />
     <Property Name="PayMoney" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Disabled" Type="int" />
+    <Property Name="Deleted" Type="int" />
+    <Property Name="ParentId" Type="nchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="Id" />
@@ -1034,16 +1077,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a p
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <EntityType Name="ParamSet">
-    <Key>
-      <PropertyRef Name="ParamId" />
-    </Key>
-    <Property Name="ParamId" Type="int" Nullable="false" />
-    <Property Name="ParamName" Type="nvarchar" MaxLength="100" />
-    <Property Name="ParamValue" Type="nvarchar" MaxLength="200" />
-    <Property Name="ParamFlag" Type="int" />
-    <Property Name="ParamNote" Type="nvarchar" MaxLength="500" />
-  </EntityType>
   <EntityType Name="PayBill">
     <Key>
       <PropertyRef Name="Id" />
@@ -1149,28 +1182,15 @@ warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a p
     <Property Name="UpdateBy" Type="nvarchar" MaxLength="20" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Privilege">
-    <Key>
-      <PropertyRef Name="PrivilegeId" />
-    </Key>
-    <Property Name="PrivilegeName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="PrivilegeType" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="URL" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="Deleted" Type="int" Nullable="false" />
-    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-    <Property Name="CreateTime" Type="datetime" Nullable="false" />
-    <Property Name="CreatePerson" Type="nvarchar" MaxLength="20" />
-    <Property Name="EditTime" Type="datetime" />
-    <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
-    <Property Name="PrivilegeId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="PromotionsDish">
     <Key>
       <PropertyRef Name="PromotionsDishId" />
     </Key>
     <Property Name="PromotionsDishId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TradeNo" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="DishId" Type="int" />
     <Property Name="MarketTypeId" Type="int" Nullable="false" />
+    <Property Name="DishFormat" Type="varchar" MaxLength="50" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="StartTime" Type="datetime" Nullable="false" />
     <Property Name="EndTime" Type="datetime" Nullable="false" />
@@ -1193,11 +1213,13 @@ warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a p
   </EntityType>
   <EntityType Name="PromotionsDishDetail">
     <Key>
-      <PropertyRef Name="PromotionsDishId" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PromotionsDishId" Type="int" Nullable="false" />
     <Property Name="DishId" Type="int" Nullable="false" />
     <Property Name="DishNumber" Type="int" Nullable="false" />
+    <Property Name="DishFormat" Type="nvarchar" MaxLength="50" />
     <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
     <Property Name="CreateBy" Type="int" Nullable="false" />
     <Property Name="Deleted" Type="int" Nullable="false" />
@@ -1315,26 +1337,27 @@ warning 6002: The table/view 'IChooseDishes.dbo.RefundInfoItem' does not have a 
     <Key>
       <PropertyRef Name="RoleId" />
     </Key>
-    <Property Name="RoleId" Type="int" Nullable="false" />
-    <Property Name="OrgId" Type="int" Nullable="false" />
-    <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Deleted" Type="int" Nullable="false" />
-    <Property Name="Detail" Type="nvarchar" MaxLength="50" />
-    <Property Name="RoleType" Type="int" Nullable="false" />
-    <Property Name="CreateTime" Type="datetime" Nullable="false" />
-    <Property Name="CreatePerson" Type="nvarchar" MaxLength="20" />
-    <Property Name="EditTime" Type="datetime" />
-    <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="UpdateDatetime" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IChooseDishes.dbo.RoleRefPrivilege' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="RoleRefPrivilege">
+  <EntityType Name="RoleRefFunction">
     <Key>
-      <PropertyRef Name="PrivilegeId" />
-      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="PrivilegeId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FunctionId" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="int" Nullable="false" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDateTime" Type="datetime" />
   </EntityType>
   <EntityType Name="ShiftBill">
     <Key>
@@ -1392,22 +1415,22 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
   </EntityType>
   <EntityType Name="SystemLog">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="LogType" Type="int" />
-    <Property Name="OperFun" Type="varchar" MaxLength="50" />
-    <Property Name="Description" Type="varchar" MaxLength="500" />
-    <Property Name="BillType" Type="int" />
-    <Property Name="BillNo" Type="varchar" MaxLength="20" />
-    <Property Name="OperId" Type="int" />
-    <Property Name="OperTime" Type="datetime" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Module" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Function" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OpType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Actor" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
+    <Property Name="Body" Type="varchar" MaxLength="1024" Nullable="false" />
+    <Property Name="ItemId" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Table">
     <Key>
       <PropertyRef Name="TableId" />
     </Key>
-    <Property Name="TableTypeId" Type="int" />
+    <Property Name="TableTypeId" Type="int" Nullable="false" />
     <Property Name="TableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -1431,37 +1454,34 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
     <Property Name="PeopleMax" Type="int" Nullable="false" />
     <Property Name="Prefix" Type="nvarchar" MaxLength="10" />
     <Property Name="PriceType" Type="int" Nullable="false" />
-    <Property Name="ServerfreeNax" Type="int" Nullable="false" />
     <Property Name="ServerfreeModel" Type="int" Nullable="false" />
-    <Property Name="ConsumerMode" Type="int" Nullable="false" />
     <Property Name="ColorType" Type="nvarchar" MaxLength="10" />
-    <Property Name="ServerfreeAccountType" Type="int" Nullable="false" />
-    <Property Name="Rate" Type="int" Nullable="false" />
-    <Property Name="ServerfreeNum" Type="int" Nullable="false" />
     <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
     <Property Name="CreateBy" Type="int" Nullable="false" />
     <Property Name="Deleted" Type="int" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
+    <Property Name="ServerFeeCalcType" Type="int" />
+    <Property Name="LowConsCalcType" Type="int" />
+    <Property Name="CanDiscount" Type="int" Nullable="false" />
+    <Property Name="InLowConsume" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TableTypeDetail">
     <Key>
       <PropertyRef Name="TableTypeDetailId" />
     </Key>
     <Property Name="TableTypeDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TableTypeId" Type="int" />
-    <Property Name="DataType" Type="int" />
-    <Property Name="AccountType" Type="int" />
+    <Property Name="TableTypeId" Type="int" Nullable="false" />
+    <Property Name="DataType" Type="int" Nullable="false" />
     <Property Name="ConsumerMode" Type="int" Nullable="false" />
     <Property Name="StartUnit" Type="int" />
-    <Property Name="StartEnd" Type="datetime" />
+    <Property Name="StartDateTime" Type="datetime" />
     <Property Name="OutMoney" Type="float" />
     <Property Name="OutTime" Type="int" />
     <Property Name="StartMoney" Type="int" />
-    <Property Name="ConsumerMoney" Type="int" Nullable="false" />
+    <Property Name="ConsumerMoney" Type="int" />
     <Property Name="StartGetMoneyTime" Type="int" />
-    <Property Name="ServerfreeNax" Type="int" Nullable="false" />
     <Property Name="OutTimeFree" Type="int" />
     <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
     <Property Name="CreateBy" Type="int" Nullable="false" />
@@ -1469,6 +1489,11 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
     <Property Name="Status" Type="int" Nullable="false" />
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="UpdateBy" Type="int" />
+    <Property Name="EndDateTime" Type="datetime" />
+    <Property Name="Rate" Type="int" />
+    <Property Name="ServerfreeNum" Type="int" />
+    <Property Name="ServerfreeAccountType" Type="int" />
+    <Property Name="ServerfreeNax" Type="int" />
   </EntityType>
   <EntityType Name="TakeoutClientInfo">
     <Key>
@@ -1525,37 +1550,60 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
   </EntityType>
   <EntityType Name="UserInfo">
     <Key>
-      <PropertyRef Name="OperatorId" />
+      <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="OperatorId" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="OperatorName" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="OperatorPwd" Type="nvarchar" MaxLength="20" />
-    <Property Name="CreateTime" Type="datetime" Nullable="false" />
-    <Property Name="CreatePerson" Type="nvarchar" MaxLength="20" />
-    <Property Name="EditTime" Type="datetime" />
-    <Property Name="EditPerson" Type="nvarchar" MaxLength="20" />
-    <Property Name="Deleted" Type="int" />
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="20" />
+    <Property Name="Password" Type="nvarchar" MaxLength="64" />
+    <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="int" Nullable="false" />
+    <Property Name="UpdateDateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="Salt" Type="varchar" MaxLength="50" />
+    <Property Name="Disabled" Type="int" Nullable="false" />
+    <Property Name="Expired" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UserRoleRef">
     <Key>
-      <PropertyRef Name="RoleId" />
-      <PropertyRef Name="OperatorId" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoleId" Type="int" Nullable="false" />
-    <Property Name="OperatorId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
+    <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="int" Nullable="false" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserSaleRule">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DiscountAllowanceLimit" Type="float" />
+    <Property Name="DiscountLimit" Type="float" />
+    <Property Name="AlowanceType" Type="nchar" MaxLength="10" />
+    <Property Name="AllowanceLimit" Type="float" />
+    <Property Name="PresentType" Type="nchar" MaxLength="10" />
+    <Property Name="PresentLimit" Type="float" />
+    <Property Name="CreateDatetime" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDatetime" Type="datetime" />
+    <Property Name="Deleted" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ADMINREF_REFERENCE_OPERATOR">
     <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
     <End Role="UserRoleRef" Type="Self.UserRoleRef" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserInfo">
-        <PropertyRef Name="OperatorId" />
+        <PropertyRef Name="UserId" />
       </Principal>
       <Dependent Role="UserRoleRef">
-        <PropertyRef Name="OperatorId" />
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1580,6 +1628,18 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       </Principal>
       <Dependent Role="AreaPrintPlan">
         <PropertyRef Name="BasicPlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BARGAIND_REFERENCE_BAR_Dish">
+    <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
+    <End Role="BargainDish" Type="Self.BargainDish" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dish">
+        <PropertyRef Name="DishId" />
+      </Principal>
+      <Dependent Role="BargainDish">
+        <PropertyRef Name="DishId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1801,12 +1861,12 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
   </Association>
   <Association Name="FK_DISH_CEN_REFERENCE_DISH">
     <End Role="Dish" Type="Self.Dish" Multiplicity="0..1" />
-    <End Role="dish_cents" Type="Self.dish_cents" Multiplicity="*" />
+    <End Role="DishCent" Type="Self.DishCent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Dish">
         <PropertyRef Name="DishId" />
       </Principal>
-      <Dependent Role="dish_cents">
+      <Dependent Role="DishCent">
         <PropertyRef Name="DishId" />
       </Dependent>
     </ReferentialConstraint>
@@ -1871,6 +1931,54 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DishDetail_Dish">
+    <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
+    <End Role="DishDetail" Type="Self.DishDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dish">
+        <PropertyRef Name="DishId" />
+      </Principal>
+      <Dependent Role="DishDetail">
+        <PropertyRef Name="DishId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DishesMenuRef_Dish">
+    <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
+    <End Role="DishesMenuRef" Type="Self.DishesMenuRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dish">
+        <PropertyRef Name="DishId" />
+      </Principal>
+      <Dependent Role="DishesMenuRef">
+        <PropertyRef Name="DishId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DishesMenuRef_DishesMenu">
+    <End Role="DishesMenu" Type="Self.DishesMenu" Multiplicity="1" />
+    <End Role="DishesMenuRef" Type="Self.DishesMenuRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DishesMenu">
+        <PropertyRef Name="MenusId" />
+      </Principal>
+      <Dependent Role="DishesMenuRef">
+        <PropertyRef Name="MenusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DishPrice_REFERENCE_Dish">
+    <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
+    <End Role="DishPrice" Type="Self.DishPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dish">
+        <PropertyRef Name="DishId" />
+      </Principal>
+      <Dependent Role="DishPrice">
+        <PropertyRef Name="DishId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DISHPRIN_REFERENCE_AREAPRIN">
     <End Role="AreaPrintPlan" Type="Self.AreaPrintPlan" Multiplicity="0..1" />
     <End Role="DishPrint" Type="Self.DishPrint" Multiplicity="*" />
@@ -1892,6 +2000,18 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       </Principal>
       <Dependent Role="DishPrint">
         <PropertyRef Name="PlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Function_Module">
+    <End Role="Module" Type="Self.Module" Multiplicity="1" />
+    <End Role="Function" Type="Self.Function" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Function">
+        <PropertyRef Name="ModuleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1943,30 +2063,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MENUSDIS_REFERENCE_DISH">
-    <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
-    <End Role="DishesMenuRef" Type="Self.DishesMenuRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dish">
-        <PropertyRef Name="DishId" />
-      </Principal>
-      <Dependent Role="DishesMenuRef">
-        <PropertyRef Name="DishId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MENUSDIS_REFERENCE_MENUS">
-    <End Role="DishesMenu" Type="Self.DishesMenu" Multiplicity="1" />
-    <End Role="DishesMenuRef" Type="Self.DishesMenuRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DishesMenu">
-        <PropertyRef Name="MenusId" />
-      </Principal>
-      <Dependent Role="DishesMenuRef">
-        <PropertyRef Name="MenusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OPERATOR_REFERENCE_USERINFO">
     <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
     <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
@@ -1975,7 +2071,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
         <PropertyRef Name="UserId" />
       </Principal>
       <Dependent Role="UserInfo">
-        <PropertyRef Name="UserId" />
+        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2065,7 +2161,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
   </Association>
   <Association Name="FK_PROMOTIO_REFERENCE_PROMOTIO">
     <End Role="PromotionsDish" Type="Self.PromotionsDish" Multiplicity="1" />
-    <End Role="PromotionsDishDetail" Type="Self.PromotionsDishDetail" Multiplicity="0..1" />
+    <End Role="PromotionsDishDetail" Type="Self.PromotionsDishDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PromotionsDish">
         <PropertyRef Name="PromotionsDishId" />
@@ -2123,27 +2219,15 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ROLEREFP_REFERENCE_ORGROLE">
-    <End Role="Role" Type="Self.Role" Multiplicity="1" />
-    <End Role="RoleRefPrivilege" Type="Self.RoleRefPrivilege" Multiplicity="*" />
+  <Association Name="FK_RoleRefFunction_Function">
+    <End Role="Function" Type="Self.Function" Multiplicity="1" />
+    <End Role="RoleRefFunction" Type="Self.RoleRefFunction" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Role">
-        <PropertyRef Name="RoleId" />
+      <Principal Role="Function">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RoleRefPrivilege">
-        <PropertyRef Name="RoleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ROLEREFP_REFERENCE_PRIVILEG">
-    <End Role="Privilege" Type="Self.Privilege" Multiplicity="1" />
-    <End Role="RoleRefPrivilege" Type="Self.RoleRefPrivilege" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Privilege">
-        <PropertyRef Name="PrivilegeId" />
-      </Principal>
-      <Dependent Role="RoleRefPrivilege">
-        <PropertyRef Name="PrivilegeId" />
+      <Dependent Role="RoleRefFunction">
+        <PropertyRef Name="FunctionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2172,7 +2256,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TABLE_REFERENCE_TABLETYP">
-    <End Role="TableType" Type="Self.TableType" Multiplicity="0..1" />
+    <End Role="TableType" Type="Self.TableType" Multiplicity="1" />
     <End Role="Table" Type="Self.Table" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TableType">
@@ -2184,7 +2268,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TABLETYP_REFERENCE_TABLETYP">
-    <End Role="TableType" Type="Self.TableType" Multiplicity="0..1" />
+    <End Role="TableType" Type="Self.TableType" Multiplicity="1" />
     <End Role="TableTypeDetail" Type="Self.TableTypeDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TableType">
@@ -2231,6 +2315,18 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserSaleRule_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="UserSaleRule" Type="Self.UserSaleRule" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserSaleRule">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="IShowChooseDishesDataStoreContainer">
     <EntitySet Name="AreaPrintPlan" EntityType="Self.AreaPrintPlan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BackupMoney" EntityType="Self.BackupMoney" Schema="dbo" store:Type="Tables" />
@@ -2245,6 +2341,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <EntitySet Name="ChargeRule" EntityType="Self.ChargeRule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CheckoutInfo" EntityType="Self.CheckoutInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ConsumeInfo" EntityType="Self.ConsumeInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CreateDesk" EntityType="Self.CreateDesk" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DaySettlement" EntityType="Self.DaySettlement" Schema="dbo" store:Type="Tables" />
@@ -2262,12 +2359,14 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <EntitySet Name="DishDao" EntityType="Self.DishDao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishDetail" EntityType="Self.DishDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishesMenu" EntityType="Self.DishesMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DishesMenuRef" EntityType="Self.DishesMenuRef" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishFinance" EntityType="Self.DishFinance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishPrice" EntityType="Self.DishPrice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishPrint" EntityType="Self.DishPrint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishType" EntityType="Self.DishType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DishUnit" EntityType="Self.DishUnit" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Function" EntityType="Self.Function" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GiveInvoice" EntityType="Self.GiveInvoice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KitchenBill" EntityType="Self.KitchenBill" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KitchenBillFormat" EntityType="Self.KitchenBillFormat" Schema="dbo" store:Type="Tables" />
@@ -2276,15 +2375,14 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <EntitySet Name="MarketType" EntityType="Self.MarketType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MaterialPrint" EntityType="Self.MaterialPrint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MemberRecharge" EntityType="Self.MemberRecharge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ParamSet" EntityType="Self.ParamSet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PayBill" EntityType="Self.PayBill" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PayInfo" EntityType="Self.PayInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PayRecord" EntityType="Self.PayRecord" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Printer" EntityType="Self.Printer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PrintSet" EntityType="Self.PrintSet" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Privilege" EntityType="Self.Privilege" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PromotionsDish" EntityType="Self.PromotionsDish" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PromotionsDishDetail" EntityType="Self.PromotionsDishDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Raw" EntityType="Self.Raw" Schema="dbo" store:Type="Tables" />
@@ -2293,6 +2391,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <EntitySet Name="RechargeItem" EntityType="Self.RechargeItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RefundInfo" EntityType="Self.RefundInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleRefFunction" EntityType="Self.RoleRefFunction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShiftBill" EntityType="Self.ShiftBill" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
@@ -2302,6 +2401,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <EntitySet Name="TakeoutOrder" EntityType="Self.TakeoutOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TimerProject" EntityType="Self.TimerProject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoleRef" EntityType="Self.UserRoleRef" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserSaleRule" EntityType="Self.UserSaleRule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CheckoutIinfoItem" EntityType="Self.CheckoutIinfoItem" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [CheckoutIinfoItem].[Id] AS [Id], 
@@ -2372,36 +2473,28 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     [DischesWayRef].[UpdateBy] AS [UpdateBy]
     FROM [dbo].[DischesWayRef] AS [DischesWayRef]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="dish_cents" EntityType="Self.dish_cents" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="DishCent" EntityType="Self.DishCent" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [dish_cents].[DishId] AS [DishId], 
-    [dish_cents].[DiancaiCents] AS [DiancaiCents], 
-    [dish_cents].[DiancaiType] AS [DiancaiType], 
-    [dish_cents].[DiancaiCentsScale] AS [DiancaiCentsScale], 
-    [dish_cents].[DiancaiCentsFix] AS [DiancaiCentsFix], 
-    [dish_cents].[ServerCents] AS [ServerCents], 
-    [dish_cents].[ServerType] AS [ServerType], 
-    [dish_cents].[ServerCentsScale] AS [ServerCentsScale], 
-    [dish_cents].[ServerCentsFix] AS [ServerCentsFix], 
-    [dish_cents].[SaleCents] AS [SaleCents], 
-    [dish_cents].[SaleType] AS [SaleType], 
-    [dish_cents].[SaleCentsScale] AS [SaleCentsScale], 
-    [dish_cents].[SaleCentsFix] AS [SaleCentsFix], 
-    [dish_cents].[CreateDatetime] AS [CreateDatetime], 
-    [dish_cents].[CreateBy] AS [CreateBy], 
-    [dish_cents].[Deleted] AS [Deleted], 
-    [dish_cents].[Status] AS [Status], 
-    [dish_cents].[UpdateDatetime] AS [UpdateDatetime], 
-    [dish_cents].[UpdateBy] AS [UpdateBy]
-    FROM [dbo].[dish_cents] AS [dish_cents]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="DishesMenuRef" EntityType="Self.DishesMenuRef" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [DishesMenuRef].[DishId] AS [DishId], 
-    [DishesMenuRef].[MenusId] AS [MenusId], 
-    [DishesMenuRef].[CreateTime] AS [CreateTime], 
-    [DishesMenuRef].[Deleted] AS [Deleted]
-    FROM [dbo].[DishesMenuRef] AS [DishesMenuRef]</DefiningQuery>
+    [DishCent].[DishId] AS [DishId], 
+    [DishCent].[DiancaiCents] AS [DiancaiCents], 
+    [DishCent].[DiancaiType] AS [DiancaiType], 
+    [DishCent].[DiancaiCentsScale] AS [DiancaiCentsScale], 
+    [DishCent].[DiancaiCentsFix] AS [DiancaiCentsFix], 
+    [DishCent].[ServerCents] AS [ServerCents], 
+    [DishCent].[ServerType] AS [ServerType], 
+    [DishCent].[ServerCentsScale] AS [ServerCentsScale], 
+    [DishCent].[ServerCentsFix] AS [ServerCentsFix], 
+    [DishCent].[SaleCents] AS [SaleCents], 
+    [DishCent].[SaleType] AS [SaleType], 
+    [DishCent].[SaleCentsScale] AS [SaleCentsScale], 
+    [DishCent].[SaleCentsFix] AS [SaleCentsFix], 
+    [DishCent].[CreateDatetime] AS [CreateDatetime], 
+    [DishCent].[CreateBy] AS [CreateBy], 
+    [DishCent].[Deleted] AS [Deleted], 
+    [DishCent].[Status] AS [Status], 
+    [DishCent].[UpdateDatetime] AS [UpdateDatetime], 
+    [DishCent].[UpdateBy] AS [UpdateBy]
+    FROM [dbo].[DishCent] AS [DishCent]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="KitchenBillItem" EntityType="Self.KitchenBillItem" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -2454,12 +2547,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     [RefundInfoItem].[CreateTime] AS [CreateTime]
     FROM [dbo].[RefundInfoItem] AS [RefundInfoItem]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="RoleRefPrivilege" EntityType="Self.RoleRefPrivilege" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [RoleRefPrivilege].[PrivilegeId] AS [PrivilegeId], 
-    [RoleRefPrivilege].[RoleId] AS [RoleId]
-    FROM [dbo].[RoleRefPrivilege] AS [RoleRefPrivilege]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="ShiftItem" EntityType="Self.ShiftItem" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [ShiftItem].[ShiftId] AS [ShiftId], 
@@ -2468,12 +2555,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     [ShiftItem].[Money] AS [Money], 
     [ShiftItem].[RmbMoney] AS [RmbMoney]
     FROM [dbo].[ShiftItem] AS [ShiftItem]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="UserRoleRef" EntityType="Self.UserRoleRef" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UserRoleRef].[RoleId] AS [RoleId], 
-    [UserRoleRef].[OperatorId] AS [OperatorId]
-    FROM [dbo].[UserRoleRef] AS [UserRoleRef]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_ADMINREF_REFERENCE_OPERATOR" Association="Self.FK_ADMINREF_REFERENCE_OPERATOR">
       <End Role="UserInfo" EntitySet="UserInfo" />
@@ -2486,6 +2567,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <AssociationSet Name="FK_AREAPRIN_REFERENCE_BASICPRI" Association="Self.FK_AREAPRIN_REFERENCE_BASICPRI">
       <End Role="BasicPrintPlan" EntitySet="BasicPrintPlan" />
       <End Role="AreaPrintPlan" EntitySet="AreaPrintPlan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BARGAIND_REFERENCE_BAR_Dish" Association="Self.FK_BARGAIND_REFERENCE_BAR_Dish">
+      <End Role="Dish" EntitySet="Dish" />
+      <End Role="BargainDish" EntitySet="BargainDish" />
     </AssociationSet>
     <AssociationSet Name="FK_BARGAIND_REFERENCE_BARGAIND" Association="Self.FK_BARGAIND_REFERENCE_BARGAIND">
       <End Role="BargainDish" EntitySet="BargainDish" />
@@ -2561,7 +2646,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     </AssociationSet>
     <AssociationSet Name="FK_DISH_CEN_REFERENCE_DISH" Association="Self.FK_DISH_CEN_REFERENCE_DISH">
       <End Role="Dish" EntitySet="Dish" />
-      <End Role="dish_cents" EntitySet="dish_cents" />
+      <End Role="DishCent" EntitySet="DishCent" />
     </AssociationSet>
     <AssociationSet Name="FK_DISH_REFERENCE_DISHFINA" Association="Self.FK_DISH_REFERENCE_DISHFINA">
       <End Role="DishFinance" EntitySet="DishFinance" />
@@ -2583,6 +2668,22 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       <End Role="DishDao" EntitySet="DishDao" />
       <End Role="DishDetail" EntitySet="DishDetail" />
     </AssociationSet>
+    <AssociationSet Name="FK_DishDetail_Dish" Association="Self.FK_DishDetail_Dish">
+      <End Role="Dish" EntitySet="Dish" />
+      <End Role="DishDetail" EntitySet="DishDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DishesMenuRef_Dish" Association="Self.FK_DishesMenuRef_Dish">
+      <End Role="Dish" EntitySet="Dish" />
+      <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DishesMenuRef_DishesMenu" Association="Self.FK_DishesMenuRef_DishesMenu">
+      <End Role="DishesMenu" EntitySet="DishesMenu" />
+      <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DishPrice_REFERENCE_Dish" Association="Self.FK_DishPrice_REFERENCE_Dish">
+      <End Role="Dish" EntitySet="Dish" />
+      <End Role="DishPrice" EntitySet="DishPrice" />
+    </AssociationSet>
     <AssociationSet Name="FK_DISHPRIN_REFERENCE_AREAPRIN" Association="Self.FK_DISHPRIN_REFERENCE_AREAPRIN">
       <End Role="AreaPrintPlan" EntitySet="AreaPrintPlan" />
       <End Role="DishPrint" EntitySet="DishPrint" />
@@ -2590,6 +2691,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <AssociationSet Name="FK_DISHPRIN_REFERENCE_BASICPRI" Association="Self.FK_DISHPRIN_REFERENCE_BASICPRI">
       <End Role="BasicPrintPlan" EntitySet="BasicPrintPlan" />
       <End Role="DishPrint" EntitySet="DishPrint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Function_Module" Association="Self.FK_Function_Module">
+      <End Role="Module" EntitySet="Module" />
+      <End Role="Function" EntitySet="Function" />
     </AssociationSet>
     <AssociationSet Name="FK_KITCHENB_REFERENCE_KITCHENB" Association="Self.FK_KITCHENB_REFERENCE_KITCHENB">
       <End Role="KitchenBill" EntitySet="KitchenBill" />
@@ -2606,14 +2711,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <AssociationSet Name="FK_MEMBERRE_REFERENCE_SHIFTBIL" Association="Self.FK_MEMBERRE_REFERENCE_SHIFTBIL">
       <End Role="ShiftBill" EntitySet="ShiftBill" />
       <End Role="MemberRecharge" EntitySet="MemberRecharge" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MENUSDIS_REFERENCE_DISH" Association="Self.FK_MENUSDIS_REFERENCE_DISH">
-      <End Role="Dish" EntitySet="Dish" />
-      <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MENUSDIS_REFERENCE_MENUS" Association="Self.FK_MENUSDIS_REFERENCE_MENUS">
-      <End Role="DishesMenu" EntitySet="DishesMenu" />
-      <End Role="DishesMenuRef" EntitySet="DishesMenuRef" />
     </AssociationSet>
     <AssociationSet Name="FK_OPERATOR_REFERENCE_USERINFO" Association="Self.FK_OPERATOR_REFERENCE_USERINFO">
       <End Role="Employee" EntitySet="Employee" />
@@ -2667,13 +2764,9 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
       <End Role="ShiftBill" EntitySet="ShiftBill" />
       <End Role="RefundInfo" EntitySet="RefundInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK_ROLEREFP_REFERENCE_ORGROLE" Association="Self.FK_ROLEREFP_REFERENCE_ORGROLE">
-      <End Role="Role" EntitySet="Role" />
-      <End Role="RoleRefPrivilege" EntitySet="RoleRefPrivilege" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ROLEREFP_REFERENCE_PRIVILEG" Association="Self.FK_ROLEREFP_REFERENCE_PRIVILEG">
-      <End Role="Privilege" EntitySet="Privilege" />
-      <End Role="RoleRefPrivilege" EntitySet="RoleRefPrivilege" />
+    <AssociationSet Name="FK_RoleRefFunction_Function" Association="Self.FK_RoleRefFunction_Function">
+      <End Role="Function" EntitySet="Function" />
+      <End Role="RoleRefFunction" EntitySet="RoleRefFunction" />
     </AssociationSet>
     <AssociationSet Name="FK_SHIFTITE_REFERENCE_SHIFTBIL" Association="Self.FK_SHIFTITE_REFERENCE_SHIFTBIL">
       <End Role="ShiftBill" EntitySet="ShiftBill" />
@@ -2702,6 +2795,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.UserRoleRef' does not have a pri
     <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="Self.FK_USERINFO_REFERENCE_DEPARTME">
       <End Role="DepartmentInfo" EntitySet="DepartmentInfo" />
       <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSaleRule_UserInfo" Association="Self.FK_UserSaleRule_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="UserSaleRule" EntitySet="UserSaleRule" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -18,9 +18,9 @@ namespace IShow.ChooseDishes.View.Dishes
     /// <summary>
     /// Interaction logic for DischesWayWindow.xaml
     /// </summary>
-    public partial class DischesWayWindow : Window
+    public partial class DishesWayWindow : Window
     {
-        public DischesWayWindow()
+        public DishesWayWindow()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace IShow.ChooseDishes.View.Dishes
         {
             DishesWayViewModel model = this.DataContext as DishesWayViewModel;
             //TreeNodeModel node = sender as TreeNodeModel;
-            model.SelectedItemChanged(e.NewValue as DishesWayTreeNode);
+            //model.SelectedItemChanged(e.NewValue as DishesWayTreeNode);
             
         }
 

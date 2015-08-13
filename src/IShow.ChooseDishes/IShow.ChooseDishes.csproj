@@ -82,12 +82,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Exception\NotFoundException.cs" />
     <Compile Include="Api\Exception\ServiceException.cs" />
     <Compile Include="Api\IChooseDishesDataService.cs" />
     <Compile Include="Api\IChooseDishesDataServiceCallback.cs" />
+    <Compile Include="Api\IConfigurationService.cs" />
+    <Compile Include="Api\IDiscountDataService.cs" />
     <Compile Include="Api\IDishesMenuService.cs" />
     <Compile Include="Api\IDishesWayDataService.cs" />
     <Compile Include="Api\IDishService.cs" />
+    <Compile Include="Api\IEmployeeService.cs" />
+    <Compile Include="Api\ILoggerService.cs" />
+    <Compile Include="Api\IMarketTypeDataService.cs" />
+    <Compile Include="Api\IMaterialDataService.cs" />
+    <Compile Include="Api\IRawUnitDataService.cs" />
+    <Compile Include="Api\ITableService.cs" />
     <Compile Include="Api\ITakeoutOrderDataService.cs" />
     <Compile Include="Api\IUserService.cs" />
     <Compile Include="Data\AreaPrintPlan.cs">
@@ -153,6 +162,9 @@
     <Compile Include="Data\Company.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Config.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ConsumeInfo.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -165,7 +177,9 @@
     <Compile Include="Data\DaySettlement.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DbBackup.cs" />
+    <Compile Include="Data\DbBackup.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\DepartmentInfo.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -199,13 +213,18 @@
     <Compile Include="Data\Dish.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\DishCent.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\DishDao.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DishDetail.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DishesMenu.cs" />
+    <Compile Include="Data\DishesMenu.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\DishesMenuRef.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -224,10 +243,12 @@
     <Compile Include="Data\DishUnit.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\dish_cents.cs">
+    <Compile Include="Data\Employee.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Employee.cs" />
+    <Compile Include="Data\Function.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\GiveInvoice.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -255,6 +276,9 @@
     <Compile Include="Data\MemberRecharge.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Module.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Order.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -265,9 +289,6 @@
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\OrderPractice.cs">
-      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ParamSet.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\PayBill.cs">
@@ -285,7 +306,6 @@
     <Compile Include="Data\PrintSet.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Privilege.cs" />
     <Compile Include="Data\PromotionsDish.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -310,7 +330,12 @@
     <Compile Include="Data\RefundInfoItem.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Role.cs" />
+    <Compile Include="Data\Role.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RoleRefFunction.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ShiftBill.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
@@ -338,48 +363,151 @@
     <Compile Include="Data\TimerProject.cs">
       <DependentUpon>ChooseDishesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\UserInfo.cs" />
+    <Compile Include="Data\UserInfo.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserRoleRef.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserSaleRule.cs">
+      <DependentUpon>ChooseDishesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Converters\IdToVisibilityConverter.cs" />
+    <Compile Include="Helper\Converters\MultipleBindingConverter.cs" />
+    <Compile Include="Model\BaseMaterialBean.cs" />
+    <Compile Include="Model\bean\BargainDishBean  .cs" />
+    <Compile Include="Model\bean\BargainDishPriceBean.cs" />
     <Compile Include="Model\bean\BeanBasis.cs" />
     <Compile Include="Model\bean\CashTypeBean.cs" />
     <Compile Include="Model\bean\DishBean.cs" />
+    <Compile Include="Model\bean\DishBeanUtil.cs" />
+    <Compile Include="Model\bean\DishDaoBean.cs" />
+    <Compile Include="Model\bean\DishDetailBean.cs" />
     <Compile Include="Model\bean\DishPriceBean.cs" />
+    <Compile Include="Model\bean\PromotionsDishBean.cs" />
+    <Compile Include="Model\bean\PromotionsDishDetailBean.cs" />
     <Compile Include="Model\BearingBean.cs" />
     <Compile Include="Model\CompanyBean.cs" />
     <Compile Include="Model\DepartmentBean.cs" />
+    <Compile Include="Model\Discount\DiscountDetailBean.cs" />
+    <Compile Include="Model\Discount\DiscountProgramBean.cs" />
     <Compile Include="Model\DishesMenuItemModel.cs" />
     <Compile Include="Model\DishesMenuModel.cs" />
     <Compile Include="Model\DishesUnitModel.cs" />
+    <Compile Include="Model\DishesWayBean.cs" />
+    <Compile Include="Model\DishesWayNameBean.cs" />
     <Compile Include="Model\EmployeeBean.cs" />
     <Compile Include="Model\Enum\EnumSet.cs" />
+    <Compile Include="Model\FunctionModel.cs" />
+    <Compile Include="Model\HistoryRecord.cs" />
+    <Compile Include="Model\IShowModelBase.cs" />
+    <Compile Include="Model\LittleRawMaterialBean.cs" />
     <Compile Include="Model\LocationBean.cs" />
+    <Compile Include="Model\MarketTypeBean.cs" />
+    <Compile Include="Model\ModuleModel.cs" />
+    <Compile Include="Model\RawMaterialBean.cs" />
+    <Compile Include="Model\RoleModel.cs" />
+    <Compile Include="Model\SystemLogBean.cs" />
+    <Compile Include="Model\TableRecord.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\User\RoleBean.cs" />
     <Compile Include="Model\Util\CommonUtil.cs" />
+    <Compile Include="Security\AuthenticationException.cs" />
+    <Compile Include="Security\AuthenticationToken.cs" />
+    <Compile Include="Security\CryptoUtils.cs" />
+    <Compile Include="Security\Subject.cs" />
+    <Compile Include="Security\SubjectManager.cs" />
+    <Compile Include="Security\SubjectUtils.cs" />
     <Compile Include="Service\ChooseDishesDataService.cs" />
     <Compile Include="Service\ChooseDishesDataServiceCallback.cs" />
+    <Compile Include="Service\ConfigurationService.cs" />
+    <Compile Include="Service\DiscountDataService .cs" />
     <Compile Include="Service\DishesMenuService.cs" />
     <Compile Include="Service\DishesWayDataService.cs" />
     <Compile Include="Service\DishService.cs" />
+    <Compile Include="Service\EmployeeService.cs" />
+    <Compile Include="Service\LoggerService.cs" />
+    <Compile Include="Service\MarketTypeDataService.cs" />
+    <Compile Include="Service\MaterialDataService.cs" />
+    <Compile Include="Service\RawUnitDataService.cs" />
+    <Compile Include="Service\TableService.cs" />
     <Compile Include="Service\TakeoutOrderDataService.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="Utils\Internal\Function.cs" />
+    <Compile Include="Utils\Internal\Functions.cs" />
+    <Compile Include="Utils\Internal\Module.cs" />
+    <Compile Include="Utils\Logger\Format.cs" />
+    <Compile Include="Utils\Logger\Log.cs" />
+    <Compile Include="Utils\Logger\Loggers.cs" />
+    <Compile Include="Utils\Logger\LoggerUtils.cs" />
+    <Compile Include="Utils\Logger\LogType.cs" />
+    <Compile Include="Utils\Logger\Resource.Designer.cs" />
+    <Compile Include="Utils\Register.cs" />
+    <Compile Include="Utils\SettingKeys.cs" />
+    <Compile Include="Utils\UI\Convert\TableStatusIconConvert.cs" />
+    <Compile Include="Utils\UI\ListViewSelectionHelper.cs" />
+    <Compile Include="ViewModel\BargainDishViewModel.cs" />
     <Compile Include="ViewModel\CashViewModel.cs" />
     <Compile Include="ViewModel\Common\IPagingControlContract.cs" />
+    <Compile Include="ViewModel\Common\NameMapping.cs" />
     <Compile Include="ViewModel\Common\PagingControl.cs" />
     <Compile Include="ViewModel\Common\TreeNodeModel.cs" />
     <Compile Include="ViewModel\Common\TreeViewModel.cs" />
     <Compile Include="ViewModel\DepartViewModel.cs" />
+    <Compile Include="ViewModel\DisCount\DisCountViewModel.cs" />
+    <Compile Include="ViewModel\DishDetailViewModel.cs" />
     <Compile Include="ViewModel\DishesMenuViewModel.cs" />
+    <Compile Include="ViewModel\DishesSelectBeanViewModel.cs" />
     <Compile Include="ViewModel\DishesViewModel.cs" />
     <Compile Include="ViewModel\DishesWayViewModel.cs" />
     <Compile Include="ViewModel\Dishes\ChooseForDishesMenuViewModel.cs" />
     <Compile Include="ViewModel\Dishes\DishesUnitViewModel.cs" />
     <Compile Include="ViewModel\Dishes\MaterialViewModel.cs" />
+    <Compile Include="ViewModel\DishPackagesViewModel.cs" />
     <Compile Include="ViewModel\DishTypeViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\FatherDishTypeViewModel.cs" />
+    <Compile Include="ViewModel\Home\BaoBiaoZhongXinViewModel.cs" />
+    <Compile Include="ViewModel\Home\BaseContentViewModel.cs" />
+    <Compile Include="ViewModel\Home\BusinessHomeViewModel.cs" />
+    <Compile Include="ViewModel\Home\HomeWindowViewModel.cs" />
+    <Compile Include="ViewModel\Home\ListWindowViewModel.cs" />
+    <Compile Include="ViewModel\Home\QianTaiGuanLiViewModel.cs" />
+    <Compile Include="ViewModel\Home\TableIndexMgtViewModel.cs" />
+    <Compile Include="ViewModel\Home\XiTongSheZhiViewModel.cs" />
+    <Compile Include="ViewModel\Home\ZhuoTaiViewModel.cs" />
+    <Compile Include="ViewModel\Lifecycle.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MarketTypeViewModel.cs" />
     <Compile Include="ViewModel\OrgBearingModel .cs" />
     <Compile Include="ViewModel\CompanyModel.cs" />
     <Compile Include="ViewModel\OrgLocatinModel.cs" />
+    <Compile Include="ViewModel\PromotionsDishWiewModel.cs" />
+    <Compile Include="ViewModel\SystemLogViewModel.cs" />
+    <Compile Include="ViewModel\TableTypeViewModel.cs" />
+    <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="ViewModel\TakeoutOrderViewModel.cs" />
+    <Compile Include="ViewModel\User\AddUserViewModel.cs" />
+    <Compile Include="ViewModel\User\AuthzMgtViewModel.cs" />
+    <Compile Include="ViewModel\User\EditRoleViewModel.cs" />
+    <Compile Include="ViewModel\User\EditUserViewModel.cs" />
+    <Compile Include="ViewModel\User\SelectEmpForUserViewModel.cs" />
+    <Compile Include="ViewModel\User\UserMgtViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelDeliver.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\BargainDish\AddBargainDish.xaml.cs">
+      <DependentUpon>AddBargainDish.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BargainDish\BargainDishWin.xaml.cs">
+      <DependentUpon>BargainDishWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BargainDish\BatchMathPrice.xaml.cs">
+      <DependentUpon>BatchMathPrice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BargainDish\UpdateBarGainDish.xaml.cs">
+      <DependentUpon>UpdateBarGainDish.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CashWindow\AddCashType.xaml.cs">
       <DependentUpon>AddCashType.xaml</DependentUpon>
     </Compile>
@@ -389,8 +517,56 @@
     <Compile Include="View\CashWindow\UpdateCashType.xaml.cs">
       <DependentUpon>UpdateCashType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Common\ConfigSettingWindow.xaml.cs">
+      <DependentUpon>ConfigSettingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Common\TreeViewWindow.xaml.cs">
       <DependentUpon>TreeViewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\NavigationBar1.xaml.cs">
+      <DependentUpon>NavigationBar1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\PageHeader.xaml.cs">
+      <DependentUpon>PageHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\RecordListItem.xaml.cs">
+      <DependentUpon>RecordListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\TableListItem.xaml.cs">
+      <DependentUpon>TableListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Discount\AddDiscountView.xaml.cs">
+      <DependentUpon>AddDiscountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Discount\DiscountView.xaml.cs">
+      <DependentUpon>DiscountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Discount\EditDiscountView.xaml.cs">
+      <DependentUpon>EditDiscountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\AddFatherDishType.xaml.cs">
+      <DependentUpon>AddFatherDishType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\DishDetailView.xaml.cs">
+      <DependentUpon>DishDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\DishesSelectBeanSeginWin.xaml.cs">
+      <DependentUpon>DishesSelectBeanSeginWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\DishesSelectBeanWin.xaml.cs">
+      <DependentUpon>DishesSelectBeanWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\DishPackages.xaml.cs">
+      <DependentUpon>DishPackages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\FatherDishTypeWindow.xaml.cs">
+      <DependentUpon>FatherDishTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\LittleRawView.xaml.cs">
+      <DependentUpon>LittleRawView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\BaseMaterialView.xaml.cs">
+      <DependentUpon>BaseMaterialView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dishes\AddDish.xaml.cs">
       <DependentUpon>AddDish.xaml</DependentUpon>
@@ -422,11 +598,44 @@
     <Compile Include="View\Dishes\DishTypeWindow.xaml.cs">
       <DependentUpon>DishTypeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dishes\MarketTypeSetView.xaml.cs">
+      <DependentUpon>MarketTypeSetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\MarketTypeView.xaml.cs">
+      <DependentUpon>MarketTypeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dishes\MaterialView.xaml.cs">
       <DependentUpon>MaterialView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dishes\UpdateDish.xaml.cs">
       <DependentUpon>UpdateDish.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\UpdateDishType.xaml.cs">
+      <DependentUpon>UpdateDishType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\UpdateFatherDishType.xaml.cs">
+      <DependentUpon>UpdateFatherDishType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\CustomPopupWindow.xaml.cs">
+      <DependentUpon>CustomPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\HomeWindow.xaml.cs">
+      <DependentUpon>HomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Pages\BaoBiaoZhongXinPage.xaml.cs">
+      <DependentUpon>BaoBiaoZhongXinPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Pages\BaseContentPage.xaml.cs">
+      <DependentUpon>BaseContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Pages\QianTaiGuanLiPage.xaml.cs">
+      <DependentUpon>QianTaiGuanLiPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Pages\XiTongSheZhiPage.xaml.cs">
+      <DependentUpon>XiTongSheZhiPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Pages\ZhuoTaiPage.xaml.cs">
+      <DependentUpon>ZhuoTaiPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OrgInfo\AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
@@ -443,11 +652,35 @@
     <Compile Include="View\OrgInfo\EmployeeView.xaml.cs">
       <DependentUpon>EmployeeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OrgInfo\SystemLogClear.xaml.cs">
+      <DependentUpon>SystemLogClear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrgInfo\SystemLogView.xaml.cs">
+      <DependentUpon>SystemLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrgInfo\SystemLogDetail.xaml.cs">
+      <DependentUpon>SystemLogDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PromotionsDish\AddPromotionsDishWin.xaml.cs">
+      <DependentUpon>AddPromotionsDishWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PromotionsDish\PromotionsDishWin.xaml.cs">
+      <DependentUpon>PromotionsDishWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Table\AddBearing.xaml.cs">
       <DependentUpon>AddBearing.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Table\AddLocation.xaml.cs">
       <DependentUpon>AddLocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Table\AddTableBatchWindow.xaml.cs">
+      <DependentUpon>AddTableBatchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Table\AddTableType.xaml.cs">
+      <DependentUpon>AddTableType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Table\AddTableWindow.xaml.cs">
+      <DependentUpon>AddTableWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Table\EditBearing.xaml.cs">
       <DependentUpon>EditBearing.xaml</DependentUpon>
@@ -461,6 +694,15 @@
     <Compile Include="View\Table\OrgLocation.xaml.cs">
       <DependentUpon>OrgLocation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Table\TableMainWindow.xaml.cs">
+      <DependentUpon>TableMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Table\UpdateTableType.xaml.cs">
+      <DependentUpon>UpdateTableType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Table\UpdateTableWindow.xaml.cs">
+      <DependentUpon>UpdateTableWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TakeOut\TakeOutClientInfoWindow.xaml.cs">
       <DependentUpon>TakeOutClientInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -469,6 +711,30 @@
     </Compile>
     <Compile Include="View\TakeOut\TakeoutSelectDeliveryman.xaml.cs">
       <DependentUpon>TakeoutSelectDeliveryman.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dishes\RawMaterialView.xaml.cs">
+      <DependentUpon>RawMaterialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\AuthzMgtWindow.xaml.cs">
+      <DependentUpon>AuthzMgtWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\EditRoleWindow.xaml.cs">
+      <DependentUpon>EditRoleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\EditUserPwdWindow.xaml.cs">
+      <DependentUpon>EditUserPwdWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\EditUserWindow.xaml.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\SelectEmpForUserWindow.xaml.cs">
+      <DependentUpon>SelectEmpForUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\UserMgtWindow.xaml.cs">
+      <DependentUpon>UserMgtWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Window\AddDishesMenuWindow.xaml.cs">
       <DependentUpon>AddDishesMenuWindow.xaml</DependentUpon>
@@ -490,13 +756,41 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Skins\AppStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Skins\CommonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Skins\JichuziliaoStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Skins\LoginStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Skins\MainPageStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BargainDish\AddBargainDish.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BargainDish\BargainDishWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BargainDish\BatchMathPrice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BargainDish\UpdateBarGainDish.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\CashWindow\AddCashType.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -510,7 +804,71 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Common\ConfigSettingWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Common\TreeViewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\NavigationBar1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\PageHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\RecordListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\TableListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Discount\AddDiscountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Discount\DiscountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Discount\EditDiscountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\AddFatherDishType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\DishDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\DishesSelectBeanSeginWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\DishesSelectBeanWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\DishPackages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\FatherDishTypeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\LittleRawView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dishes\BaseMaterialView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -554,11 +912,55 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Dishes\MarketTypeSetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dishes\MarketTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dishes\MaterialView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Dishes\UpdateDish.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\UpdateDishType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\UpdateFatherDishType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\CustomPopupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\HomeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Pages\BaoBiaoZhongXinPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Pages\BaseContentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Pages\QianTaiGuanLiPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Pages\XiTongSheZhiPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Pages\ZhuoTaiPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -582,11 +984,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\OrgInfo\SystemLogClear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrgInfo\SystemLogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrgInfo\SystemLogDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PromotionsDish\AddPromotionsDishWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PromotionsDish\PromotionsDishWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Table\AddBearing.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Table\AddLocation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Table\AddTableBatchWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Table\AddTableType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Table\AddTableWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -606,6 +1040,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Table\TableMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Table\UpdateTableType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Table\UpdateTableWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\TakeOut\TakeOutClientInfoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -615,6 +1061,38 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\TakeOut\TakeoutSelectDeliveryman.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dishes\RawMaterialView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\AddUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\AuthzMgtWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\EditRoleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\EditUserPwdWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\EditUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\SelectEmpForUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\User\UserMgtWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -654,6 +1132,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Utils\Logger\Resource.resx" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -661,6 +1140,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ChooseDishesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Data\ChooseDishesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ChooseDishesModel.edmx</DependentUpon>
@@ -707,6 +1187,75 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Cash\edit_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Login\americal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\MainPage\baoBiaoZhongXin.png" />
+    <Resource Include="Image\MainPage\caiPinZiLiao_disable.png" />
+    <Resource Include="Image\MainPage\caiPinZiLiao_move.png" />
+    <Resource Include="Image\MainPage\caiPinZiLiao_normal.png" />
+    <Resource Include="Image\MainPage\caiPinZiLiao_pressed.png" />
+    <Resource Include="Image\MainPage\chawei.png" />
+    <Resource Include="Image\MainPage\jiChuZiLiao.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipaiguanli_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipaiguanli_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipaiguanli_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipaiguanli_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinmaizeng_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinmaizeng_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinmaizeng_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinmaizeng_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipintiaojiadan_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipintiaojiadan_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipintiaojiadan_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipintiaojiadan_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinzuofa_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinzuofa_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinzuofa_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\caipinzuofa_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\canzhuoziliao_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\canzhuoziliao_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\canzhuoziliao_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\canzhuoziliao_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shibieshezhi_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shibieshezhi_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shibieshezhi_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shibieshezhi_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shouyinfangshi_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shouyinfangshi_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shouyinfangshi_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shouyinfangshi_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\shouyingfangshi_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\taocaiziliao_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\taocaiziliao_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\taocaiziliao_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\taocaiziliao_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\tejiacaiping_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\tejiacaiping_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\tejiacaiping_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\tejiacaiping_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\yuanliaoziliao_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\yuanliaoziliao_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\yuanliaoziliao_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\yuanliaoziliao_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zhekoufangan_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zhekoufangan_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zhekoufangan_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zhekoufangan_3.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zuofaguanlian_0.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zuofaguanlian_1.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zuofaguanlian_2.png" />
+    <Resource Include="Image\MainPage\JiChuZiLiao\zuofaguanlian_3.png" />
+    <Resource Include="Image\MainPage\qianTaiGuanLi.png" />
+    <Resource Include="Image\MainPage\xiTongSheZhi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -27,22 +27,16 @@ namespace IShow.ChooseDishes.Data
         public int PeopleMax { get; set; }
         public string Prefix { get; set; }
         public int PriceType { get; set; }
-        public int ServerfreeNax { get; set; }
         public int ServerfreeModel { get; set; }
-        public int ConsumerMode { get; set; }
         public string ColorType { get; set; }
-        public int ServerfreeAccountType { get; set; }
-        public int Rate { get; set; }
-        public int ServerfreeNum { get; set; }
         public System.DateTime CreateDatetime { get; set; }
         public int CreateBy { get; set; }
         public int Deleted { get; set; }
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
-        public int ServerFeeCalcType { get; set; }
-        public int LowConsCalcType { get; set; }
-        public int ConsumerMoney { get; set; }
+        public Nullable<int> ServerFeeCalcType { get; set; }
+        public Nullable<int> LowConsCalcType { get; set; }
         public int CanDiscount { get; set; }
         public int InLowConsume { get; set; }
     

@@ -12,22 +12,35 @@ namespace IShow.ChooseDishes
     {
         /**添加做法*/
         [OperationContract]
-        bool AddDishesWay(DischesWay odw);
+        bool Add(DischesWay odw);
         /**根据做法对象作为参数修改做法*/
         [OperationContract]
-        bool UpdateDishesWay(DischesWay odw);
+        bool Modify(DischesWay odw);
         /**根据指定编码删除对应做法*/
         [OperationContract]
-        bool DeleteDishesWay(int code);
+        bool Deleted(int code);
         /**根据做法类型编号查询做法*/
         [OperationContract]
-        List<DischesWay> FindAllDishesWayByTypeCode(string Code);
+        List<DischesWay> FindAllDishesWayByTypeId(int Code);
         /**根据做法编码查找做法*/
         [OperationContract]
-        DischesWay FindDishesWayByCode(int code);
-        //根据id更新做法删除的状态
+        DischesWay FindDishesWayByCode(string code);
+        
+        /// <summary>
+        /// 根据id更新做法删除的状态
+        /// </summary>
+        /// <param name="id">做法id</param>
+        /// <param name="deletedStatus">删除状态</param>
+        /// <returns>删除成功返回true，否则false</returns>
         [OperationContract]
-        bool UpdateDishesWayDeletedTypeByCode(int Code);
+        bool UpdateDeletedById(int id,int deletedStatus);
+        /// <summary>
+        /// 查询所有的做法，包括状态为删除的
+        /// query all of DishesWay 
+        /// </summary>
+        /// <returns>reutrn list of DishesWay</returns>
+        [OperationContract]
+        List<DischesWay> FindAll();
 
         [OperationContract]
         //添加菜品做法类型

@@ -32,17 +32,17 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Width="100" IsReadOnly="{Binding CodeTextReadonly}" Grid.Column="0" Text="{Binding DishesWayCode, Mode=TwoWay}" />
+                <TextBox Width="100" IsReadOnly="True" Grid.Column="0" Text="{Binding DishesWayBean.Code, Mode=TwoWay}" Margin="0,5" Background="#5fcccccc"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="80,0">
                     <TextBlock Text="类型:" VerticalAlignment="Center"/>
-                    <TextBox Width="150"  HorizontalAlignment="Left" Text="{Binding DischesWayType, Mode=TwoWay}" IsReadOnly="True"/>
+                    <TextBox Width="90" Margin="0,5" HorizontalAlignment="Left" Text="{Binding DishesWayBean.DischesWayName, Mode=TwoWay}" IsReadOnly="True" Background="#5fcccccc"/>
                 </StackPanel>
             </Grid>
-            <TextBlock Text="做法说明：" Margin="10,0,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <TextBox Width="290" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="3" Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBlock Text="做法名称：" Margin="10,0,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox Width="290" Margin="0,5" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="3" Text="{Binding DishesWayBean.Name, Mode=TwoWay}"/>
             
             <TextBlock Text="拼音简码：" Margin="10,0,0,0" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <TextBox Width="150" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="5" Text="{Binding PingYing, Mode=TwoWay}"/>
+            <TextBox Width="150" Margin="0,5" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="5" Text="{Binding DishesWayBean.PingYing, Mode=TwoWay}"/>
 
             <TextBlock Text="加价：" Margin="10,0,0,0" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <Grid Grid.Column="2" Grid.Row="7">
@@ -50,9 +50,9 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Width="100" Grid.Column="0" Text="{Binding AddPrice, Mode=TwoWay}"/>
+                <TextBox Width="100" Margin="0,5" Grid.Column="0" Text="{Binding DishesWayBean.AddPrice, Mode=TwoWay}"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="80,0">
-                    <CheckBox  Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding AddPriceByNum, Mode=TwoWay}"/>
+                    <CheckBox  Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding DishesWayBean.addPriceByNum, Mode=TwoWay}"/>
                     <TextBlock Text="按数量加价" VerticalAlignment="Center"/>
                 </StackPanel>
             </Grid>
@@ -69,14 +69,14 @@
             </Grid.ColumnDefinitions>
             
             <Grid Grid.RowSpan="3">
-                <TextBlock  Text="编号以9开头的做法可在点菜宝“整单备注”中直接下拉选择" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DishesWayDescriptionVisibility}"/>
+                <TextBlock  Text="编号以9开头的做法可在点菜宝整单备注中直接下拉选择" Foreground="#FF0000" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AddDescription"/>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Visibility="{Binding DishesWayRecord}">
+                    <Grid Grid.Row="0" x:Name="UpdateRecord">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="*"/>
@@ -86,7 +86,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="5"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding DischesWayCurrentItem, Mode=TwoWay}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding DishesWayBean.CurrentScaleText, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
                         <Button Content="上一条记录(G)" Grid.Column="3" Margin="3" Command="{Binding PreviousRecord}"/>
                         <Button Content="下一条记录(S)" Grid.Column="5" Margin="3" Command="{Binding NextRecord}"/>
                     </Grid>
@@ -103,7 +103,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="继续(G)" Grid.Column="1" Margin="3" Command="{Binding Continue}" Visibility="{Binding DishesWayContinueButtonVisibility}"/>
+                <Button Content="继续(G)" Grid.Column="1" Margin="3" Command="{Binding Continue}" x:Name="Continue"/>
                 <Button Content="保存(S)" Grid.Column="3" Margin="3" Command="{Binding Save}"/>
                 <Button Content="退出(Esc)" Grid.Column="5" Margin="3" Command="{Binding Exited}" Click="Button_Click"/>
             </Grid>

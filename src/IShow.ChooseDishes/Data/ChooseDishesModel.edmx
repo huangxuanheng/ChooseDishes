@@ -486,7 +486,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           </Key>
           <Property Name="DischesWayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DischesWayNameId" Type="int" Nullable="false" />
-          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="WayDetail" Type="nvarchar" MaxLength="200" />
           <Property Name="PingYing" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -1459,22 +1459,16 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="PeopleMax" Type="int" Nullable="false" />
           <Property Name="Prefix" Type="nvarchar" MaxLength="10" />
           <Property Name="PriceType" Type="int" Nullable="false" />
-          <Property Name="ServerfreeNax" Type="int" Nullable="false" />
           <Property Name="ServerfreeModel" Type="int" Nullable="false" />
-          <Property Name="ConsumerMode" Type="int" Nullable="false" />
           <Property Name="ColorType" Type="nvarchar" MaxLength="10" />
-          <Property Name="ServerfreeAccountType" Type="int" Nullable="false" />
-          <Property Name="Rate" Type="int" Nullable="false" />
-          <Property Name="ServerfreeNum" Type="int" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="int" Nullable="false" />
           <Property Name="Deleted" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
-          <Property Name="ServerFeeCalcType" Type="int" Nullable="false" />
-          <Property Name="LowConsCalcType" Type="int" Nullable="false" />
-          <Property Name="ConsumerMoney" Type="int" Nullable="false" />
+          <Property Name="ServerFeeCalcType" Type="int" />
+          <Property Name="LowConsCalcType" Type="int" />
           <Property Name="CanDiscount" Type="int" Nullable="false" />
           <Property Name="InLowConsume" Type="int" Nullable="false" />
         </EntityType>
@@ -1483,18 +1477,16 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="TableTypeDetailId" />
           </Key>
           <Property Name="TableTypeDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TableTypeId" Type="int" />
-          <Property Name="DataType" Type="int" />
-          <Property Name="AccountType" Type="int" />
+          <Property Name="TableTypeId" Type="int" Nullable="false" />
+          <Property Name="DataType" Type="int" Nullable="false" />
           <Property Name="ConsumerMode" Type="int" Nullable="false" />
           <Property Name="StartUnit" Type="int" />
-          <Property Name="StartEnd" Type="datetime" />
+          <Property Name="StartDateTime" Type="datetime" />
           <Property Name="OutMoney" Type="float" />
           <Property Name="OutTime" Type="int" />
           <Property Name="StartMoney" Type="int" />
-          <Property Name="ConsumerMoney" Type="int" Nullable="false" />
+          <Property Name="ConsumerMoney" Type="int" />
           <Property Name="StartGetMoneyTime" Type="int" />
-          <Property Name="ServerfreeNax" Type="int" Nullable="false" />
           <Property Name="OutTimeFree" Type="int" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="int" Nullable="false" />
@@ -1502,6 +1494,11 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
+          <Property Name="EndDateTime" Type="datetime" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="ServerfreeNum" Type="int" />
+          <Property Name="ServerfreeAccountType" Type="int" />
+          <Property Name="ServerfreeNax" Type="int" />
         </EntityType>
         <EntityType Name="TakeoutClientInfo">
           <Key>
@@ -1591,7 +1588,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="DiscountType" Type="nchar" MaxLength="10" />
+          <Property Name="DiscountAllowanceLimit" Type="float" />
           <Property Name="DiscountLimit" Type="float" />
           <Property Name="AlowanceType" Type="nchar" MaxLength="10" />
           <Property Name="AllowanceLimit" Type="float" />
@@ -2276,7 +2273,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TABLETYP_REFERENCE_TABLETYP">
-          <End Role="TableType" Type="Self.TableType" Multiplicity="0..1" />
+          <End Role="TableType" Type="Self.TableType" Multiplicity="1" />
           <End Role="TableTypeDetail" Type="Self.TableTypeDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TableType">
@@ -3556,7 +3553,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </Key>
           <Property Name="DischesWayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DischesWayNameId" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WayDetail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PingYing" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -4441,22 +4438,16 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="PeopleMax" Type="Int32" Nullable="false" />
           <Property Name="Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PriceType" Type="Int32" Nullable="false" />
-          <Property Name="ServerfreeNax" Type="Int32" Nullable="false" />
           <Property Name="ServerfreeModel" Type="Int32" Nullable="false" />
-          <Property Name="ConsumerMode" Type="Int32" Nullable="false" />
           <Property Name="ColorType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ServerfreeAccountType" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
-          <Property Name="ServerfreeNum" Type="Int32" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateBy" Type="Int32" Nullable="false" />
           <Property Name="Deleted" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
-          <Property Name="ServerFeeCalcType" Type="Int32" Nullable="false" />
-          <Property Name="LowConsCalcType" Type="Int32" Nullable="false" />
-          <Property Name="ConsumerMoney" Type="Int32" Nullable="false" />
+          <Property Name="ServerFeeCalcType" Type="Int32" />
+          <Property Name="LowConsCalcType" Type="Int32" />
           <Property Name="CanDiscount" Type="Int32" Nullable="false" />
           <Property Name="InLowConsume" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Table" Relationship="IShow.ChooseDishes.Data.FK_TABLE_REFERENCE_TABLETYP" FromRole="TableType" ToRole="Table" />
@@ -4467,18 +4458,16 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="TableTypeDetailId" />
           </Key>
           <Property Name="TableTypeDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TableTypeId" Type="Int32" />
-          <Property Name="DataType" Type="Int32" />
-          <Property Name="AccountType" Type="Int32" />
+          <Property Name="TableTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DataType" Type="Int32" Nullable="false" />
           <Property Name="ConsumerMode" Type="Int32" Nullable="false" />
           <Property Name="StartUnit" Type="Int32" />
-          <Property Name="StartEnd" Type="DateTime" Precision="3" />
+          <Property Name="StartDateTime" Type="DateTime" Precision="3" />
           <Property Name="OutMoney" Type="Double" />
           <Property Name="OutTime" Type="Int32" />
           <Property Name="StartMoney" Type="Int32" />
-          <Property Name="ConsumerMoney" Type="Int32" Nullable="false" />
+          <Property Name="ConsumerMoney" Type="Int32" />
           <Property Name="StartGetMoneyTime" Type="Int32" />
-          <Property Name="ServerfreeNax" Type="Int32" Nullable="false" />
           <Property Name="OutTimeFree" Type="Int32" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateBy" Type="Int32" Nullable="false" />
@@ -4486,6 +4475,11 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="ServerfreeNum" Type="Int32" />
+          <Property Name="ServerfreeAccountType" Type="Int32" />
+          <Property Name="ServerfreeNax" Type="Int32" />
           <NavigationProperty Name="TableType" Relationship="IShow.ChooseDishes.Data.FK_TABLETYP_REFERENCE_TABLETYP" FromRole="TableTypeDetail" ToRole="TableType" />
         </EntityType>
         <EntityType Name="TakeoutClientInfo">
@@ -4584,7 +4578,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="DiscountType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DiscountAllowanceLimit" Type="Double" />
           <Property Name="DiscountLimit" Type="Double" />
           <Property Name="AlowanceType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AllowanceLimit" Type="Double" />
@@ -5528,7 +5522,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TABLETYP_REFERENCE_TABLETYP">
-          <End Type="IShow.ChooseDishes.Data.TableType" Role="TableType" Multiplicity="0..1" />
+          <End Type="IShow.ChooseDishes.Data.TableType" Role="TableType" Multiplicity="1" />
           <End Type="IShow.ChooseDishes.Data.TableTypeDetail" Role="TableTypeDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TableType">
@@ -6838,7 +6832,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
               <MappingFragment StoreEntitySet="TableType">
                 <ScalarProperty Name="InLowConsume" ColumnName="InLowConsume" />
                 <ScalarProperty Name="CanDiscount" ColumnName="CanDiscount" />
-                <ScalarProperty Name="ConsumerMoney" ColumnName="ConsumerMoney" />
                 <ScalarProperty Name="LowConsCalcType" ColumnName="LowConsCalcType" />
                 <ScalarProperty Name="ServerFeeCalcType" ColumnName="ServerFeeCalcType" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
@@ -6847,13 +6840,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
-                <ScalarProperty Name="ServerfreeNum" ColumnName="ServerfreeNum" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="ServerfreeAccountType" ColumnName="ServerfreeAccountType" />
                 <ScalarProperty Name="ColorType" ColumnName="ColorType" />
-                <ScalarProperty Name="ConsumerMode" ColumnName="ConsumerMode" />
                 <ScalarProperty Name="ServerfreeModel" ColumnName="ServerfreeModel" />
-                <ScalarProperty Name="ServerfreeNax" ColumnName="ServerfreeNax" />
                 <ScalarProperty Name="PriceType" ColumnName="PriceType" />
                 <ScalarProperty Name="Prefix" ColumnName="Prefix" />
                 <ScalarProperty Name="PeopleMax" ColumnName="PeopleMax" />
@@ -6867,6 +6855,11 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySetMapping Name="TableTypeDetail">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.TableTypeDetail">
               <MappingFragment StoreEntitySet="TableTypeDetail">
+                <ScalarProperty Name="ServerfreeNax" ColumnName="ServerfreeNax" />
+                <ScalarProperty Name="ServerfreeAccountType" ColumnName="ServerfreeAccountType" />
+                <ScalarProperty Name="ServerfreeNum" ColumnName="ServerfreeNum" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -6874,16 +6867,14 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
                 <ScalarProperty Name="OutTimeFree" ColumnName="OutTimeFree" />
-                <ScalarProperty Name="ServerfreeNax" ColumnName="ServerfreeNax" />
                 <ScalarProperty Name="StartGetMoneyTime" ColumnName="StartGetMoneyTime" />
                 <ScalarProperty Name="ConsumerMoney" ColumnName="ConsumerMoney" />
                 <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
                 <ScalarProperty Name="OutTime" ColumnName="OutTime" />
                 <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
-                <ScalarProperty Name="StartEnd" ColumnName="StartEnd" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
                 <ScalarProperty Name="StartUnit" ColumnName="StartUnit" />
                 <ScalarProperty Name="ConsumerMode" ColumnName="ConsumerMode" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
                 <ScalarProperty Name="DataType" ColumnName="DataType" />
                 <ScalarProperty Name="TableTypeId" ColumnName="TableTypeId" />
                 <ScalarProperty Name="TableTypeDetailId" ColumnName="TableTypeDetailId" />
@@ -6991,7 +6982,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="AllowanceLimit" ColumnName="AllowanceLimit" />
                 <ScalarProperty Name="AlowanceType" ColumnName="AlowanceType" />
                 <ScalarProperty Name="DiscountLimit" ColumnName="DiscountLimit" />
-                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="DiscountAllowanceLimit" ColumnName="DiscountAllowanceLimit" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>

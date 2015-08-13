@@ -15,18 +15,16 @@ namespace IShow.ChooseDishes.Data
     public partial class TableTypeDetail
     {
         public int TableTypeDetailId { get; set; }
-        public Nullable<int> TableTypeId { get; set; }
-        public Nullable<int> DataType { get; set; }
-        public Nullable<int> AccountType { get; set; }
+        public int TableTypeId { get; set; }
+        public int DataType { get; set; }
         public int ConsumerMode { get; set; }
         public Nullable<int> StartUnit { get; set; }
-        public Nullable<System.DateTime> StartEnd { get; set; }
+        public Nullable<System.DateTime> StartDateTime { get; set; }
         public Nullable<double> OutMoney { get; set; }
         public Nullable<int> OutTime { get; set; }
         public Nullable<int> StartMoney { get; set; }
-        public int ConsumerMoney { get; set; }
+        public Nullable<int> ConsumerMoney { get; set; }
         public Nullable<int> StartGetMoneyTime { get; set; }
-        public int ServerfreeNax { get; set; }
         public Nullable<int> OutTimeFree { get; set; }
         public System.DateTime CreateDatetime { get; set; }
         public int CreateBy { get; set; }
@@ -34,6 +32,11 @@ namespace IShow.ChooseDishes.Data
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
+        public Nullable<System.DateTime> EndDateTime { get; set; }
+        public Nullable<int> Rate { get; set; }
+        public Nullable<int> ServerfreeNum { get; set; }
+        public Nullable<int> ServerfreeAccountType { get; set; }
+        public Nullable<int> ServerfreeNax { get; set; }
     
         public virtual TableType TableType { get; set; }
     }
