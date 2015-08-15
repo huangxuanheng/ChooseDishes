@@ -100,7 +100,15 @@ namespace IShow.ChooseDishes.Api
         bool updateDish(Dish dish);
         //删除收银方式 返回true 为修改成功
         [OperationContract]
-        bool deleteDish(int Id, int UpdateBy);
+        bool deleteDish(int Id);
+        /// <summary>
+        /// 查询不是套餐的菜品 如果出错抛出异常
+        /// </summary>
+        /// <param name="ObjectName">可以是 菜品名称 菜品拼音 菜品编码</param>
+        /// <returns></returns>
+        List<Dish> FindDishNotTaoCanList(string ObjectName);
+
+
         #endregion Observable 菜品管理 滕海东
 
         

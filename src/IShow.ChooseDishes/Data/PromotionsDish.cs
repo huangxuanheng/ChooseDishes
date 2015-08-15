@@ -25,8 +25,8 @@ namespace IShow.ChooseDishes.Data
         public int MarketTypeId { get; set; }
         public string DishFormat { get; set; }
         public double Price { get; set; }
-        public System.DateTime StartTime { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public int Week_1 { get; set; }

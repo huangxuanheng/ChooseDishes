@@ -1,4 +1,5 @@
 ﻿using IShow.ChooseDishes.ViewModel;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace IShow.ChooseDishes.View.Dishes
     /// <summary>
     /// Interaction logic for DischesWayWindow.xaml
     /// </summary>
-    public partial class DishesWayWindow : Window
+    public partial class DishesWayWindow : MetroWindow
     {
         public DishesWayWindow()
         {

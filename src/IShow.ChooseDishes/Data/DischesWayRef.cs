@@ -14,6 +14,7 @@ namespace IShow.ChooseDishes.Data
     
     public partial class DischesWayRef
     {
+        public int Id { get; set; }
         public int DishId { get; set; }
         public int DischesWayId { get; set; }
         public double Price { get; set; }

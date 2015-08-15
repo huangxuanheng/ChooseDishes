@@ -166,19 +166,11 @@ namespace IShow.ChooseDishes.ViewModel
                     Logger.LogMethodEntry();
                     if (typeXaml != null && typeXaml.IsActive)
                     {
-                        List<DischesWayName>dwns=_DataService.FindAllDishesWayName();
                         DishesWayNameBean = new Model.DishesWayNameBean();
                         int count=DishesWayTypeItems.Count + 1;
-                        if (count < 10)
-                        {
-                            DishesWayNameBean.Code = "0" + count;
-                        }
-                        else
-                        {
-                            DishesWayNameBean.Code = count.ToString();
-                        } 
-
-                        DishesWayNameBean.LineNumber = count;
+                        DishesWayNameBean.LineNumber = count+1;
+                        DishesWayNameBean.CreateBy = SubjectUtils.GetAuthenticationId();
+                        DishesWayNameBean.CreateDatetime = DateTime.Now;
                         DishesWayTypeItems.Add(DishesWayNameBean);
                     }
                     else
@@ -233,7 +225,11 @@ namespace IShow.ChooseDishes.ViewModel
                         MessageBox.Show("请选择要修改的做法!");
                         return;
                     }
-                    DishesWayBean = DishesWaySelectedItem;
+
+                    DishesWayBean = new DishesWayBean();
+                    DishesWaySelectedItem.UpdateBy = SubjectUtils.GetAuthenticationId();
+                    DishesWaySelectedItem.UpdateDatetime = DateTime.Now;
+                    DishesWayBean.CreateDishesWayBean(DishesWaySelectedItem);
                     DishesWayBean.CurrentScaleText = (DishesWayTableItems.IndexOf(DishesWaySelectedItem) + 1) + "/" + DishesWayTableItems.Count;
                     DishesWaySettingXaml.AddDescription.Visibility = Visibility.Hidden;
                     DishesWaySettingXaml.Continue.Visibility = Visibility.Hidden;
@@ -266,34 +262,69 @@ namespace IShow.ChooseDishes.ViewModel
             
         }
         
-        RelayCommand _DeleteDishesWayMenu;
-        public RelayCommand DeleteDishesWayMenu   //删除做法
+        RelayCommand _Deleted;
+        public RelayCommand Deleted   //删除做法
         {
             get
             {
-                return _DeleteDishesWayMenu ?? (_DeleteDishesWayMenu = new RelayCommand(() =>
+                return _Deleted ?? (_Deleted = new RelayCommand(() =>
                 {
                     Logger.LogMethodEntry();
-                    if (SelectedTreeNode == null)
+                    if (typeXaml != null && typeXaml.IsActive)
                     {
-                        MessageBox.Show("请选择做法类型!");
-                        return;
+                        //删除做法类型
+                        if (DishesWayTypeSelectedItem == null)
+                        {
+                            MessageBox.Show("请选择要删除的做法类型!");
+                            return;
+                        }
+                        if (DishesWayTypeSelectedItem.DischesWayNameId == 0)
+                        {
+                            DishesWayTypeItems.Remove(DishesWayTypeSelectedItem);
+                        }
+                        else
+                        {
+                            //_DataService.UpdateDishesWayNameDeletedTypeById();
+                            //先查询该做法类型下是否存在有做法
+                            List<DischesWay>dws=_DataService.FindAllDishesWayByTypeId(DishesWayTypeSelectedItem.DischesWayNameId);
+                            if (dws != null&&dws.Count>0)
+                            {
+                                MessageBox.Show("对不起，该做法类型下存在有做法，不能删除!","提示",MessageBoxButton.OK,MessageBoxImage.Warning);
+                                return;
+                            }
+                            bool IsUpdateSuccess=_DataService.UpdateDishesWayNameDeletedTypeById(DishesWayTypeSelectedItem.DischesWayNameId);
+                            if (IsUpdateSuccess)
+                            {
+                                InitDishesWayTypeBaseData();
+                                LoadTreeData(null);
+                            }
+                        }
+                        
                     }
-                    //删除做法 
-                    if (DishesWaySelectedItem == null)
+                    else
                     {
-                        MessageBox.Show("请选择要删除的做法!");
-                        return;
+                        if (SelectedTreeNode == null)
+                        {
+                            MessageBox.Show("请选择做法类型!");
+                            return;
+                        }
+                        //删除做法 
+                        if (DishesWaySelectedItem == null)
+                        {
+                            MessageBox.Show("请选择要删除的做法!");
+                            return;
+                        }
+                        MessageBoxResult result = MessageBox.Show("您确定要删除该做法吗？!", "提示", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            bool IsUpdateSuccess = _DataService.UpdateDeletedById(DishesWaySelectedItem.DischesWayId, 1);
+                            if (IsUpdateSuccess)
+                            {
+                                LoadTreeData(SelectedTreeNode);
+                            }
+                        }
                     }
-                   MessageBoxResult result= MessageBox.Show("您确定要删除该做法吗？!","提示",MessageBoxButton.YesNo,MessageBoxImage.Question);
-                   if (result == MessageBoxResult.Yes)
-                   {
-                       bool IsUpdateSuccess=_DataService.UpdateDeletedById(DishesWaySelectedItem.DischesWayId,1);
-                       if (IsUpdateSuccess)
-                       {
-                           LoadTreeData(SelectedTreeNode);
-                       }
-                   }
+                    
                     Logger.Log("删除做法", LOGSEVERITY.Debug);
 
                     Logger.LogMethodExit();
@@ -309,17 +340,7 @@ namespace IShow.ChooseDishes.ViewModel
                 return _DishesWayTypeMenu ?? (_DishesWayTypeMenu = new RelayCommand(() =>
                 {
                     Logger.LogMethodEntry();
-                    List<DischesWayName>dwns=_DataService.FindAllDishesWayName();
-                    DishesWayTypeItems.Clear();
-                    if (dwns != null)
-                    {
-                        foreach (var dwn in dwns)
-                        {
-                            _DishesWayNameBean = new DishesWayNameBean();
-                            _DishesWayNameBean.CreateDishesWayNameBean(dwn);
-                            DishesWayTypeItems.Add(DishesWayNameBean);
-                        }
-                    }
+                    InitDishesWayTypeBaseData();
                     //做法类型
                     typeXaml = new DishesWayTypeWindow();
                     typeXaml.ShowDialog();
@@ -327,6 +348,26 @@ namespace IShow.ChooseDishes.ViewModel
 
                     Logger.LogMethodExit();
                 }));
+            }
+        }
+        /// <summary>
+        /// 加载做法基本数据
+        /// </summary>
+        private void InitDishesWayTypeBaseData()
+        {
+            List<DischesWayName> dwns = _DataService.FindAllDishesWayName();
+            DishesWayTypeItems.Clear();
+            if (dwns != null)
+            {
+                foreach (var dwn in dwns)
+                {
+                    _DishesWayNameBean = new DishesWayNameBean();
+                    _DishesWayNameBean.LineNumber = DishesWayTypeItems.Count + 1;
+                    _DishesWayNameBean.CreateDishesWayNameBean(dwn);
+                    _DishesWayNameBean.UpdateBy = SubjectUtils.GetAuthenticationId();
+                    _DishesWayNameBean.UpdateDatetime = DateTime.Now;
+                    DishesWayTypeItems.Add(DishesWayNameBean);
+                }
             }
         }
 
@@ -348,17 +389,25 @@ namespace IShow.ChooseDishes.ViewModel
                 }));
             }
         }
-        RelayCommand _RefreshMenu;
-        public RelayCommand RefreshMenu   //刷新界面
+        RelayCommand _Refresh;
+        public RelayCommand Refresh   //刷新界面
         {
             get
             {
-                return _RefreshMenu ?? (_RefreshMenu = new RelayCommand(() =>
+                return _Refresh ?? (_Refresh = new RelayCommand(() =>
                 {
                     Logger.LogMethodEntry();
                     //刷新做法页面
-                    MessageBox.Show("刷新做法页面");
-                   
+                   // MessageBox.Show("刷新做法页面");
+                    if (typeXaml != null && typeXaml.IsActive)
+                    {
+                        InitDishesWayTypeBaseData();
+                    }
+                    else
+                    {
+                        LoadTreeData(null);
+                    }
+                    
                     Logger.Log("刷新做法页面", LOGSEVERITY.Debug);
 
                     Logger.LogMethodExit();
@@ -448,6 +497,7 @@ namespace IShow.ChooseDishes.ViewModel
             switch (index)
             {
                 case SaveType.BIGTYPE:   //做法类型
+                    List<DischesWayName>dwns=_DataService.FindAllDishesWayName();
                     foreach (var item in DishesWayTypeItems)
                     {
                         if (item.DischesWayNameId == 0 && string.IsNullOrEmpty(item.Name))   //空名
@@ -457,10 +507,31 @@ namespace IShow.ChooseDishes.ViewModel
                         DischesWayName dwn=item.CreateDishesWayName(item);
                         if (item.DischesWayNameId == 0)
                         {
+                            //先根据编号查询数据库中是否已存在
+                            DischesWayName dd=_DataService.FindDishesWayNameByCode(item.Code);
+                            
+                            if (dd != null)
+                            {
+                                //表示数据库中已然存在
+                                MessageBox.Show("对不起，编码重复，不能保存","警告",MessageBoxButton.OK,MessageBoxImage.Warning);
+                                return;
+                            }
                             _DataService.AddDishesWayName(dwn);
                         }
-
+                        if (dwns != null)
+                        {
+                            //数据库中如果已经存在的，并且名称是不相同的，则修改该条目，否则什么事也不做
+                            foreach (var d in dwns)
+                            {
+                                if (item.DischesWayNameId == d.DischesWayNameId && !item.Name.Equals(d.Name))
+                                {
+                                    _DataService.UpdateDishesWayName(dwn);
+                                }
+                            }
+                        }
                     }
+                    InitDishesWayTypeBaseData();
+                    LoadTreeData(null);
                     break;
                 case SaveType.ITEM:    //做法
                     SaveDishesWay();
@@ -502,6 +573,7 @@ namespace IShow.ChooseDishes.ViewModel
             {
                 MessageBox.Show("保存失败");
             }
+            MarketTypeSetView.IsTextBoxTextChanged = false;
         }
         RelayCommand _Continue;
         public RelayCommand Continue    //继续编辑做法
@@ -627,10 +699,12 @@ namespace IShow.ChooseDishes.ViewModel
                 DishesWayTableItems.Clear();
             }
             //加载数据
-            List<DischesWay> dws = _DataService.FindAllDishesWayByTypeId(wayTypeId);
+            ICollection<DischesWay> dws = dwn.DischesWay;
             if (dws != null)
                 foreach (var d in dws)
                 {
+                    if (d.Deleted == 1)
+                        continue;
                     _DishesWayBean = new DishesWayBean();
                     _DishesWayBean.CreateDishesWayBean(d);
                     _DishesWayBean.DischesWayName = dwn.Name;
@@ -659,6 +733,21 @@ namespace IShow.ChooseDishes.ViewModel
                     }
                     DishesWayTableItems.Add(_DishesWayBean);
                 }
+        }
+        /// <summary>
+        /// 检查文本框文字是否发生改变，如果发生改变则提示
+        /// </summary>
+        public void CheckedTextChanged()
+        {
+            if (DishesWaySettingWindow.IsTextBoxTextChanged)
+            {
+                //文本框中有数据有变动，弹出提示
+                MessageBoxResult result = MessageBox.Show("数据有变动，是否保存？", "提示", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveDishesWay();
+                }
+            }
         }
     }
 }

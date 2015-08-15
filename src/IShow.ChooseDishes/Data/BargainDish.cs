@@ -21,8 +21,8 @@ namespace IShow.ChooseDishes.Data
     
         public int Id { get; set; }
         public int DishId { get; set; }
-        public System.DateTime StartTime { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public int Week1 { get; set; }

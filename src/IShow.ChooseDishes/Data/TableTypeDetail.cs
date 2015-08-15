@@ -17,7 +17,7 @@ namespace IShow.ChooseDishes.Data
         public int TableTypeDetailId { get; set; }
         public int TableTypeId { get; set; }
         public int DataType { get; set; }
-        public int ConsumerMode { get; set; }
+        public Nullable<int> ConsumerMode { get; set; }
         public Nullable<int> StartUnit { get; set; }
         public Nullable<System.DateTime> StartDateTime { get; set; }
         public Nullable<double> OutMoney { get; set; }

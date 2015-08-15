@@ -50,10 +50,10 @@ namespace IShow.ChooseDishes
         bool UpdateDishesWayName(DischesWayName dwn);
         //根据做法类型id修改删除状态
         [OperationContract]
-        bool UpdateDishesWayNameDeletedTypeByCode(string Code);
+        bool UpdateDishesWayNameDeletedTypeById(int id);
         //根据做法类型编码删除菜品做法类型
         [OperationContract]
-        bool DeleteDishesWayNameByCode(string Code);
+        bool DeleteDishesWayNameByCode(int id);
         //查询菜品做法类型
         [OperationContract]
         List<DischesWayName> FindAllDishesWayName();

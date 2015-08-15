@@ -24,7 +24,7 @@ namespace IShow.ChooseDishes.Data
         public System.DateTime CreateTime { get; set; }
         public int Deleted { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string UpdateBy { get; set; }
+        public Nullable<int> UpdateBy { get; set; }
         public int Status { get; set; }
     
         public virtual AreaPrintPlan AreaPrintPlan { get; set; }

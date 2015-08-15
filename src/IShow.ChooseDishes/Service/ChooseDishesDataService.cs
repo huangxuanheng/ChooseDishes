@@ -262,7 +262,7 @@ namespace IShow.ChooseDishes.Service
             {
                 //查询条件
                 Expression<Func<Dish, bool>> checkCourse = Dish => Dish.PackagesConfirm == 1 && Dish.Deleted==0;
-                result = entities.Dish.Include(t => t.DishPrice).Where(checkCourse).ToList();
+                result = entities.Dish.Include(t => t.DishPrice).Include(t => t.DishUnit).Where(checkCourse).ToList();
              }
             return result;
         }
@@ -542,8 +542,8 @@ namespace IShow.ChooseDishes.Service
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
                     //快捷键不能相同 编号不能相同
-                    var type = entities.CashType.SingleOrDefault(bt => (bt.Code == cashType.Code) || (bt.Keys == cashType.Keys));
-                    if (type != null)
+                        var list = entities.CashType.Where(bt =>bt.Deleted==0 && (bt.Code == cashType.Code) || (bt.Keys == cashType.Keys)).ToList() ;
+                    if (list != null&&list.Count>0)
                     {
                         return null;
                     }
@@ -758,10 +758,9 @@ namespace IShow.ChooseDishes.Service
                 {
                     return null;
                 }
-                Dish newDish = null;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
-                    var type = entities.Dish.SingleOrDefault(bt => bt.Code == dish.Code);
+                    var type = entities.Dish.SingleOrDefault(bt =>bt.Deleted == 0 && bt.Code == dish.Code);
                     if (type != null)
                     {
                         return null;
@@ -770,13 +769,8 @@ namespace IShow.ChooseDishes.Service
                     //关闭实体验证，不关闭验证需要整个对象全部传值
                     entities.Configuration.ValidateOnSaveEnabled = false;
                     entities.SaveChanges();
-                    var typenew = entities.Dish.SingleOrDefault(bt => bt.Code == dish.Code);
-                    if (typenew != null)
-                    {
-                        newDish = typenew;
-                    }
                 }
-                return newDish;
+                return dish;
             //}
             //catch (Exception e)
             //{
@@ -793,96 +787,44 @@ namespace IShow.ChooseDishes.Service
             }
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                //dish.UpdateDatetime = DateTime.Now;
-                //var type = entities.Dish.SingleOrDefault(bt => bt.DishId == dish.DishId);
-                //if (type != null)
-                //{
-                //    type.AidNumber = dish.AidNumber;
-                //    type.DischesType = dish.DischesType;
-                //    type.DiscountConfirm = dish.DiscountConfirm;
-                //    type.DishFormat = dish.DishFormat;
-                //    type.DishName = dish.DishName;
-                //    type.DishUnitId = dish.DishUnitId;
-                //    type.EnglishName = dish.EnglishName;
-                //    type.FoodFight = dish.FoodFight;
-                //    type.IsStop = dish.IsStop;
-                //    type.KitchenType = dish.KitchenType;
-                //    type.LineConfirm = dish.LineConfirm;
-                //    type.LowConsumerConfirm = dish.LowConsumerConfirm;
-                //    type.PackagesConfirm = dish.PackagesConfirm;
-                //    type.PingYing = dish.PingYing;
-                //    type.PosConfirm = dish.PosConfirm;
-                //    type.PriceTimeConfirm = dish.PriceTimeConfirm;
-                //    type.PublisherType = dish.PublisherType;
-                //    type.SanpConfirm = dish.SanpConfirm;
-                //    type.Status = dish.Status;
-                //    type.ServerfreeConsumer = dish.ServerfreeConsumer;
-                //    type.UpdateBy = dish.UpdateBy;
-                //    type.UpdateDatetime = dish.UpdateDatetime;
-                //    type.WeightConfirm = dish.WeightConfirm;
-
-                //    int num = entities.SaveChanges();
-                //    return num == 0 ? false : true;
-                //}
-
                 dish.UpdateDatetime = DateTime.Now;
-                DbEntityEntry<Dish> entry = entities.Entry<Dish>(dish);
-                entry.State = System.Data.Entity.EntityState.Unchanged;
-                //设置修改状态为ture 否则数据库不会更新
-                if (dish.DishName != null)
+                var type = entities.Dish.SingleOrDefault(bt => bt.DishId == dish.DishId);
+                if (type != null)
                 {
-                    entry.Property("DishName").IsModified = true;
-                }
-                if (dish.PingYing != null)
-                {
-                    entry.Property("PingYing").IsModified = true;
-                }
-                if (dish.AidNumber != null)
-                {
-                    entry.Property("AidNumber").IsModified = true;
-                }
-                if (dish.EnglishName != null)
-                {
-                    entry.Property("EnglishName").IsModified = true;
-                }
-                if (dish.DishUnitId != null)
-                {
-                    entry.Property("DishUnitId").IsModified = true;
-                }
-                if (dish.DishFormat != null)
-                {
-                    entry.Property("DishFormat").IsModified = true;
-                }
-                entry.Property("WeightConfirm").IsModified = true;
-                entry.Property("LowConsumerConfirm").IsModified = true;
-                entry.Property("ServerfreeConsumer").IsModified = true;
-                entry.Property("SanpConfirm").IsModified = true;
-                entry.Property("IsStop").IsModified = true;
-                entry.Property("DiscountConfirm").IsModified = true;
-                entry.Property("PriceTimeConfirm").IsModified = true;
-                entry.Property("PackagesConfirm").IsModified = true;
-                entry.Property("PosConfirm").IsModified = true;
-                entry.Property("FoodFight").IsModified = true;
-                entry.Property("LineConfirm").IsModified = true;
-                entry.Property("DischesType").IsModified = true;
-                entry.Property("UpdateDatetime").IsModified = true;
-                entry.Property("UpdateBy").IsModified = true;
-                //try
-                //{
-                    //关闭实体验证，不关闭验证需要整个对象全部传值
-                    entities.Configuration.ValidateOnSaveEnabled = false;
+                    type.AidNumber = dish.AidNumber;
+                    type.DischesType = dish.DischesType;
+                    type.DiscountConfirm = dish.DiscountConfirm;
+                    type.DishFormat = dish.DishFormat;
+                    type.DishName = dish.DishName;
+                    type.DishUnitId = dish.DishUnitId;
+                    type.EnglishName = dish.EnglishName;
+                    type.FoodFight = dish.FoodFight;
+                    type.IsStop = dish.IsStop;
+                    type.KitchenType = dish.KitchenType;
+                    type.LineConfirm = dish.LineConfirm;
+                    type.LowConsumerConfirm = dish.LowConsumerConfirm;
+                    type.PackagesConfirm = dish.PackagesConfirm;
+                    type.PingYing = dish.PingYing;
+                    type.PosConfirm = dish.PosConfirm;
+                    type.PriceTimeConfirm = dish.PriceTimeConfirm;
+                    type.PublisherType = dish.PublisherType;
+                    type.SanpConfirm = dish.SanpConfirm;
+                    type.Status = dish.Status;
+                    type.ServerfreeConsumer = dish.ServerfreeConsumer;
+                    type.UpdateBy = SubjectUtils.GetAuthenticationId();
+                    type.UpdateDatetime = dish.UpdateDatetime;
+                    type.WeightConfirm = dish.WeightConfirm;
+
                     int num = entities.SaveChanges();
-                    entities.Configuration.ValidateOnSaveEnabled = true;
                     return num == 0 ? false : true;
-                //}
-                //catch (Exception ex)
-                //{
-                 //   ex.ToString();
-                //}
+                }
+
+                return false;
+               
             }
         }
         //删除收银方式 返回true 为修改成功
-        public bool deleteDish(int Id, int UpdateBy)
+        public bool deleteDish(int Id)
         {
             try
             {
@@ -893,7 +835,7 @@ namespace IShow.ChooseDishes.Service
                     {
                         type.Deleted = 1;
                         type.UpdateDatetime = DateTime.Now;
-                        type.UpdateBy = UpdateBy;
+                        type.UpdateBy = SubjectUtils.GetAuthenticationId();
                         entities.SaveChanges();
                     }
                     else
@@ -920,7 +862,7 @@ namespace IShow.ChooseDishes.Service
                     foreach (var element in listref) {
                         listint.Add(element.DishId);
                     }
-                    list = entities.Dish.Include(bt => bt.DishUnit ).Where(bt => listint.Contains(bt.DishId)).ToList();
+                    list = entities.Dish.Include(bt => bt.DishUnit ).Include(bt=>bt.DishPrice).Where(bt => listint.Contains(bt.DishId)).ToList();
                 }
             
             }
@@ -955,6 +897,37 @@ namespace IShow.ChooseDishes.Service
             }
             return list;
         }
+
+        /// <summary>
+        /// 查询不是套餐的菜品
+        /// </summary>
+        /// <param name="ObjectName">可以是 菜品名称 菜品拼音 菜品编码</param>
+        /// <returns></returns>
+        public List<Dish> FindDishNotTaoCanList(string ObjectName) {
+            try 
+            {
+                List<Dish> list;
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    if (ObjectName == null || "".Equals(ObjectName))
+                    {
+                        list = entities.Dish.Where(bt => bt.Deleted == 0 && bt.PackagesConfirm == 1).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt => bt.DishType).ToList();
+                    }
+                    else 
+                    {
+                        list = entities.Dish.Where(bt => bt.Deleted == 0 && bt.PackagesConfirm == 1 && (bt.DishName.IndexOf(ObjectName) >= 0 || bt.Code == ObjectName || bt.PingYing.IndexOf(ObjectName)>=0)).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt => bt.DishType).ToList();
+                    }
+                }
+                return list;
+
+            }
+            catch (Exception e) {
+
+                throw new ServiceException("查询非套菜报错!",e);
+            
+            }
+        }
+
         
         #endregion Observable 菜品管理 滕海东
         #region  菜品价格修改 滕海东
@@ -978,10 +951,10 @@ namespace IShow.ChooseDishes.Service
                 {
                     for (int i = 0; i < dishPrices.Length; i++)
                     {
-                        if (dishPrices[i].IsMainPrice != 1) { 
+
                             entities.DishPrice.Add(dishPrices[i]);
                             entities.SaveChanges();
-                        }
+                        
                     }
                 }
                
@@ -998,7 +971,7 @@ namespace IShow.ChooseDishes.Service
                 if (type != null)
                 {
                     type.Deleted = 1;
-                    type.Update_by = dishPrice.Update_by;
+                    type.Update_by = SubjectUtils.GetAuthenticationId();
                     type.UpdateTime = DateTime.Now;
                     entities.SaveChanges();
                 }
@@ -1023,7 +996,7 @@ namespace IShow.ChooseDishes.Service
                             type.MemberPrice1 = dishPrice.MemberPrice1;
                             type.MemberPrice2 = dishPrice.MemberPrice2;
                             type.MemberPrice3 = dishPrice.MemberPrice3;
-                            type.Update_by = dishPrice.Update_by;
+                            type.Update_by = SubjectUtils.GetAuthenticationId();
                             type.UpdateTime = DateTime.Now;
                             entities.SaveChanges();
                         }
@@ -1043,17 +1016,23 @@ namespace IShow.ChooseDishes.Service
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
                 var type = entities.DishPrice.SingleOrDefault(bt => bt.DishId == dishPrice.DishId && bt.IsMainPrice == 1);
-                if (type != null) {
+                if (type != null)
+                {
                     type.Price1 = dishPrice.Price1;
                     type.Price2 = dishPrice.Price2;
                     type.Price3 = dishPrice.Price3;
                     type.MemberPrice1 = dishPrice.MemberPrice1;
                     type.MemberPrice2 = dishPrice.MemberPrice2;
                     type.MemberPrice3 = dishPrice.MemberPrice3;
-                    type.Update_by = dishPrice.Update_by;
+                    type.Update_by = SubjectUtils.GetAuthenticationId();
                     type.UpdateTime = DateTime.Now;
                     entities.SaveChanges();
-                } 
+                }
+                else 
+                {
+                    entities.DishPrice.Add(dishPrice);
+                    entities.SaveChanges();
+                }
             }
             return true;
         
@@ -1077,10 +1056,10 @@ namespace IShow.ChooseDishes.Service
         }
         public List<BargainDish> findBargainDishAll() {
             List<BargainDish> list;
+            string nowstr = DateTime.Now.ToShortTimeString().ToString();
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                //&& ((DateTime.Compare(DateTime.Now, bt.StartDate)) >= 0) && ((DateTime.Compare(DateTime.Now, bt.EndDate)) <= 0) && ((DateTime.Compare(DateTime.Now, bt.StartTime)) >= 0) && ((DateTime.Compare(DateTime.Now, bt.EndTime)) <= 0)
-                list = entities.BargainDish.Where(bt => bt.Deleted == 0 && ((DateTime.Compare(DateTime.Now, bt.StartDate)) >= 0) && ((DateTime.Compare(DateTime.Now, bt.EndDate)) <= 0) && ((DateTime.Compare(DateTime.Now, bt.StartTime)) >= 0) && ((DateTime.Compare(DateTime.Now, bt.EndTime)) <= 0)).Include(bt => bt.BargainDishPrice).Include(bt => bt.Dish).Include(bt => bt.Dish.DishUnit).ToList();
+                list = entities.BargainDish.Where(bt => bt.Deleted == 0 && ((DateTime.Compare(DateTime.Now, bt.StartDate)) >= 0) && ((DateTime.Compare(DateTime.Now, bt.EndDate)) <= 0) && ((nowstr.CompareTo(bt.StartTime)) >= 0) && ((nowstr.CompareTo(bt.EndTime)) <= 0)).Include(bt => bt.BargainDishPrice).Include(bt => bt.Dish).Include(bt => bt.Dish.DishUnit).ToList();
             }
             return list;
         }
@@ -1337,17 +1316,19 @@ namespace IShow.ChooseDishes.Service
                     //促销菜品组装
                     for (int i = 0; i < list.Count;i++ )
                     {
-                        PromotionsDishDetail beanBackDetail = new PromotionsDishDetail();
-                        beanBackDetail.PromotionsDishId = copyPD.PromotionsDishId;
-                        beanBackDetail.DishId =  list[i].DishId;
-                        beanBackDetail.DishNumber =  list[i].DishNumber;
-                        beanBackDetail.DishFormat =  list[i].DishFormat;
-                        beanBackDetail.CreateDatetime = copyPD.CreateDatetime;
-                        beanBackDetail.CreateBy = copyPD.CreateBy;
-                        beanBackDetail.Deleted = 0;
-                        beanBackDetail.Status = 1;
-                        entities.PromotionsDishDetail.Add(beanBackDetail);
-                        entities.SaveChanges();
+                        if (list[i].Deleted == 0) { 
+                            PromotionsDishDetail beanBackDetail = new PromotionsDishDetail();
+                            beanBackDetail.PromotionsDishId = copyPD.PromotionsDishId;
+                            beanBackDetail.DishId =  list[i].DishId;
+                            beanBackDetail.DishNumber =  list[i].DishNumber;
+                            beanBackDetail.DishFormat =  list[i].DishFormat;
+                            beanBackDetail.CreateDatetime = copyPD.CreateDatetime;
+                            beanBackDetail.CreateBy = copyPD.CreateBy;
+                            beanBackDetail.Deleted = 0;
+                            beanBackDetail.Status = 1;
+                            entities.PromotionsDishDetail.Add(beanBackDetail);
+                            entities.SaveChanges();
+                        }
                     }
                 }
 

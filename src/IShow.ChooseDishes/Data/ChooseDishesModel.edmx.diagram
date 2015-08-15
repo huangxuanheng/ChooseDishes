@@ -7,90 +7,90 @@
       <Diagram DiagramId="d4aa1d52cc8f42068618c020c68cb6bf" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.AreaPrintPlan" Width="1.5" PointX="24.5" PointY="5.5" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.BackupMoney" Width="1.5" PointX="0.75" PointY="2.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.BargainDish" Width="1.5" PointX="5.25" PointY="12.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.BargainDishPrice" Width="1.5" PointX="7.5" PointY="13.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.BargainDish" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.BargainDishPrice" Width="1.5" PointX="7.5" PointY="8.875" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.BasicPrintPlan" Width="1.5" PointX="22.25" PointY="5.25" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Bearing" Width="1.5" PointX="2.75" PointY="2.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Bearing" Width="1.5" PointX="0.75" PointY="5.625" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CashBaseType" Width="1.5" PointX="31.75" PointY="32.5" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CashType" Width="1.5" PointX="34" PointY="31" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ChargeItem" Width="1.5" PointX="31.75" PointY="3.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ChargeItemDetail" Width="1.5" PointX="36.25" PointY="2.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ChargeRule" Width="1.5" PointX="34" PointY="3.5" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CheckoutInfo" Width="1.5" PointX="13" PointY="14.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Company" Width="1.5" PointX="0.75" PointY="6.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Config" Width="1.5" PointX="7.75" PointY="7.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ConsumeInfo" Width="1.5" PointX="13" PointY="3.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ChargeItem" Width="1.5" PointX="29.75" PointY="21.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ChargeItemDetail" Width="1.5" PointX="34.25" PointY="20.875" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ChargeRule" Width="1.5" PointX="32" PointY="21.5" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CheckoutInfo" Width="1.5" PointX="13" PointY="6.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Company" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Config" Width="1.5" PointX="8.75" PointY="2.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ConsumeInfo" Width="1.5" PointX="13" PointY="10.625" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CreateDesk" Width="1.5" PointX="22.75" PointY="28.125" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DaySettlement" Width="1.5" PointX="8.75" PointY="2.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DbBackup" Width="1.5" PointX="8.75" PointY="4.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DaySettlement" Width="1.5" PointX="8.75" PointY="6.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DbBackup" Width="1.5" PointX="7.75" PointY="13.625" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DepartmentInfo" Width="1.5" PointX="17.75" PointY="15.375" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DeskDishes" Width="1.5" PointX="25" PointY="28.125" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DeskOrder" Width="1.5" PointX="27.25" PointY="29.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DeskOrderMateria" Width="1.5" PointX="29.5" PointY="33.25" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DeskOrderPractice" Width="1.5" PointX="29.5" PointY="28.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DischesWay" Width="1.5" PointX="3" PointY="28.25" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DischesWayName" Width="1.5" PointX="0.75" PointY="28.875" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DeskOrderMateria" Width="1.5" PointX="29.5" PointY="28.75" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DeskOrderPractice" Width="1.5" PointX="29.5" PointY="33.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DischesWay" Width="1.5" PointX="6" PointY="3.375" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DischesWayName" Width="1.5" PointX="3.75" PointY="4" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DischesWayRef" Width="1.5" PointX="8.25" PointY="22.75" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DiscountDetail" Width="1.5" PointX="34" PointY="26" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DiscountProgram" Width="1.5" PointX="31.75" PointY="25.875" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Dish" Width="1.5" PointX="3" PointY="16.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishDao" Width="1.5" PointX="5.25" PointY="32.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishDetail" Width="1.5" PointX="10.5" PointY="25.5" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishesMenu" Width="1.5" PointX="6" PointY="3.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishesMenuRef" Width="1.5" PointX="8.25" PointY="20.125" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishFinance" Width="1.5" PointX="0.75" PointY="23.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishPrice" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishDao" Width="1.5" PointX="5.25" PointY="14.125" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishDetail" Width="1.5" PointX="7.5" PointY="18.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishesMenu" Width="1.5" PointX="3" PointY="27" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishesMenuRef" Width="1.5" PointX="5.25" PointY="23.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishFinance" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishPrice" Width="1.5" PointX="5.25" PointY="18.25" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishPrint" Width="1.5" PointX="26.75" PointY="5.375" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishType" Width="1.5" PointX="0.75" PointY="14.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishUnit" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishType" Width="1.5" PointX="0.75" PointY="19.875" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishUnit" Width="1.5" PointX="0.75" PointY="24.75" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Employee" Width="1.5" PointX="20" PointY="14.125" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Function" Width="1.5" PointX="17" PointY="32" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.GiveInvoice" Width="1.5" PointX="12.75" PointY="23.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenBill" Width="1.5" PointX="31.75" PointY="7.875" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.GiveInvoice" Width="1.5" PointX="9.75" PointY="18.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenBill" Width="1.5" PointX="31.75" PointY="2.875" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenBillFormat" Width="1.5" PointX="17.75" PointY="3.5" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenPrintSet" Width="1.5" PointX="7.75" PointY="23.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Location" Width="1.5" PointX="26.75" PointY="19.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.MarketType" Width="1.5" PointX="22.75" PointY="23.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenPrintSet" Width="1.5" PointX="10.75" PointY="23.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Location" Width="1.5" PointX="9.75" PointY="36.75" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.MarketType" Width="1.5" PointX="12.75" PointY="23.625" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.MaterialPrint" Width="1.5" PointX="29.75" PointY="5.375" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.MemberRecharge" Width="1.5" PointX="13" PointY="18.875" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Module" Width="1.5" PointX="14.75" PointY="32.125" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Order" Width="1.5" PointX="15.75" PointY="24.25" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.OrderItem" Width="1.5" PointX="18" PointY="24.375" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PayBill" Width="1.5" PointX="9.75" PointY="31.375" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PayInfo" Width="1.5" PointX="12" PointY="31.125" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PayRecord" Width="1.5" PointX="12" PointY="35.375" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PayBill" Width="1.5" PointX="26.75" PointY="11.375" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PayInfo" Width="1.5" PointX="29" PointY="11.125" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PayRecord" Width="1.5" PointX="29" PointY="15.375" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Printer" Width="1.5" PointX="20" PointY="0.75" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PrintSet" Width="1.5" PointX="20" PointY="5.125" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PromotionsDish" Width="1.5" PointX="5.25" PointY="25.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PromotionsDishDetail" Width="1.5" PointX="7.5" PointY="27.25" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Raw" Width="1.5" PointX="31.75" PointY="19.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RawMaterial" Width="1.5" PointX="34" PointY="18" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RawUnit" Width="1.5" PointX="0.75" PointY="33.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PromotionsDish" Width="1.5" PointX="5.25" PointY="30.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.PromotionsDishDetail" Width="1.5" PointX="7.5" PointY="31.5" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Raw" Width="1.5" PointX="31.75" PointY="14.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RawMaterial" Width="1.5" PointX="34" PointY="13" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RawUnit" Width="1.5" PointX="22.75" PointY="23.625" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RechargeItem" Width="1.5" PointX="15.25" PointY="19.25" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RefundInfo" Width="1.5" PointX="13" PointY="10.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RefundInfo" Width="1.5" PointX="13" PointY="14.25" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Role" Width="1.5" PointX="22.25" PointY="10.375" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RoleRefFunction" Width="1.5" PointX="19.25" PointY="31.875" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ShiftBill" Width="1.5" PointX="10.75" PointY="8.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.SystemLog" Width="1.5" PointX="21.75" PointY="34.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Table" Width="1.5" PointX="29" PointY="13.375" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TableType" Width="1.5" PointX="26.75" PointY="13.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TableTypeDetail" Width="1.5" PointX="29" PointY="17.875" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TakeoutClientInfo" Width="1.5" PointX="31.75" PointY="13.25" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TakeoutOrder" Width="1.5" PointX="34" PointY="12.875" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.SystemLog" Width="1.5" PointX="26.75" PointY="20.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.Table" Width="1.5" PointX="12" PointY="30.375" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TableType" Width="1.5" PointX="9.75" PointY="30.75" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TableTypeDetail" Width="1.5" PointX="12" PointY="34.875" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TakeoutClientInfo" Width="1.5" PointX="31.75" PointY="8.25" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TakeoutOrder" Width="1.5" PointX="34" PointY="7.875" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.TimerProject" Width="1.5" PointX="27.25" PointY="24.375" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.UserInfo" Width="1.5" PointX="22.25" PointY="14.75" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.UserRoleRef" Width="1.5" PointX="24.5" PointY="14.25" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.UserSaleRule" Width="1.5" PointX="24.5" PointY="18.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CheckoutIinfoItem" Width="1.5" PointX="15.25" PointY="15.5" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CheckoutSet" Width="1.5" PointX="23.75" PointY="34.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ClearEstimate" Width="1.5" PointX="14.75" PointY="35.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ConsumeItem" Width="1.5" PointX="15.25" PointY="4" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DischesWayRef" Width="1.5" PointX="5.25" PointY="19.75" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishCent" Width="1.5" PointX="5.25" PointY="36.625" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenBillItem" Width="1.5" PointX="34" PointY="8.5" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CheckoutIinfoItem" Width="1.5" PointX="15.25" PointY="7.125" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.CheckoutSet" Width="1.5" PointX="0.75" PointY="30.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ClearEstimate" Width="1.5" PointX="0.75" PointY="34.625" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ConsumeItem" Width="1.5" PointX="15.25" PointY="11" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.DishCent" Width="1.5" PointX="5.25" PointY="37" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.KitchenBillItem" Width="1.5" PointX="34" PointY="3.5" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.OrderMateria" Width="1.5" PointX="20.25" PointY="23.125" />
         <EntityTypeShape EntityType="IShow.ChooseDishes.Data.OrderPractice" Width="1.5" PointX="20.25" PointY="27.375" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RefundInfoItem" Width="1.5" PointX="15.25" PointY="11" />
-        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ShiftItem" Width="1.5" PointX="13" PointY="7.375" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.RefundInfoItem" Width="1.5" PointX="15.25" PointY="15.125" />
+        <EntityTypeShape EntityType="IShow.ChooseDishes.Data.ShiftItem" Width="1.5" PointX="13" PointY="3.625" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_AREAPRIN_REFERENCE_BASICPRI" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISHPRIN_REFERENCE_AREAPRIN" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_MATERIAL_REFERENCE_AREAPRIN" />
@@ -115,8 +115,8 @@
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DESKORDE_REFERENCE_DESKORDE2" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISCHESW_REFERENCE_DISCHESW" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISCHESW_REFERENCE_DISCHESW2" />
-        <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISCOUNT_REFERENCE_DISCOUNT" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISCHESW_REFERENCE_DISH" />
+        <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISCOUNT_REFERENCE_DISCOUNT" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISH_CEN_REFERENCE_DISH" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISH_REFERENCE_DISHFINA" />
         <AssociationConnector Association="IShow.ChooseDishes.Data.FK_DISH_REFERENCE_DISHTYPE" />

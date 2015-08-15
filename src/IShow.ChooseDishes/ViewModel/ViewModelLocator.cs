@@ -31,7 +31,7 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<IDishesMenuService>(() => new DishesMenuService());
 
             SimpleIoc.Default.Register<IConfigurationService>(() => new ConfigurationService());
-            SimpleIoc.Default.Register<IMarketTypeDataService>(() => new MarketTypeDataService());
+
 
             SimpleIoc.Default.Register<IDiscountDataService>(() => new DiscountDataService());
             SimpleIoc.Default.Register<IEmployeeService>(() => new EmployeeService());
@@ -93,6 +93,10 @@ namespace IShow.ChooseDishes.ViewModel
 
             SimpleIoc.Default.Register<IDishesWayDataService>(() => new DishesWayDataService());
             SimpleIoc.Default.Register<DishesWayViewModel>();
+
+
+            SimpleIoc.Default.Register<IDischesWayRefService>(() => new DischesWayRefService());
+            SimpleIoc.Default.Register<DishesWayRefViewModel>();
         }
 
         public DishesWayViewModel DishesWay
@@ -385,6 +389,13 @@ namespace IShow.ChooseDishes.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<SystemLogViewModel>();
+            }
+        }
+        public DishesWayRefViewModel DishesWayRef
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DishesWayRefViewModel>();
             }
         }
         

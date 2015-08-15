@@ -50,6 +50,7 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<DeskOrderPractice> DeskOrderPractice { get; set; }
         public virtual DbSet<DischesWay> DischesWay { get; set; }
         public virtual DbSet<DischesWayName> DischesWayName { get; set; }
+        public virtual DbSet<DischesWayRef> DischesWayRef { get; set; }
         public virtual DbSet<DiscountDetail> DiscountDetail { get; set; }
         public virtual DbSet<DiscountProgram> DiscountProgram { get; set; }
         public virtual DbSet<Dish> Dish { get; set; }
@@ -104,7 +105,6 @@ namespace IShow.ChooseDishes.Data
         public virtual DbSet<CheckoutSet> CheckoutSet { get; set; }
         public virtual DbSet<ClearEstimate> ClearEstimate { get; set; }
         public virtual DbSet<ConsumeItem> ConsumeItem { get; set; }
-        public virtual DbSet<DischesWayRef> DischesWayRef { get; set; }
         public virtual DbSet<DishCent> DishCent { get; set; }
         public virtual DbSet<KitchenBillItem> KitchenBillItem { get; set; }
         public virtual DbSet<OrderMateria> OrderMateria { get; set; }
