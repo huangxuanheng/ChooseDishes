@@ -66,6 +66,25 @@ namespace IShow.ChooseDishes
             }
         }
 
+        public List<DishType> LoadSubTypeAndDishs()
+        {
+            try
+            {
+                //MessageBox.Show("进入查询");
+                List<DishType> types;
+
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    types = entities.DishType.Include(typeof(Dish).Name).Where(info => info.Deleted == 0 && info.ParentId != null).ToList();
+                    //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                    return types;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
         public List<DishType> LoadFatherType()
         {
@@ -114,7 +133,28 @@ namespace IShow.ChooseDishes
                 throw e;
             }
         }
-
+        public List<DishType> LoadSubTypeByFatherId(int Id)
+        {
+            try
+            {
+                List<DishType> types;
+                if (Id == 0)
+                {
+                    types = LoadFatherType();
+                    return types;
+                }
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    types = entities.DishType.Include(typeof(Dish).Name).Where(info => info.Deleted == 0 && info.ParentId == Id).ToList();
+                    //MessageBox.Show("Service查询结果："+types.Count + "====" + types[0].Name);
+                    return types;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public DishType LoadFatherTypeById(int Id)
         {
             try
@@ -143,7 +183,6 @@ namespace IShow.ChooseDishes
                 throw e;
             }
         }
-
         public DishType LoadTypeById(int id)
         {
             try
@@ -156,6 +195,21 @@ namespace IShow.ChooseDishes
                     {
                         type = new DishType();
                     }
+                    return type;
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public DishType LoadSubTypeBySubId(int id)
+        {
+            try
+            {
+                using (ChooseDishesEntities entities = new ChooseDishesEntities())
+                {
+                    var type = entities.DishType.Include("Dish").SingleOrDefault(info =>info.ParentId!=null&&info.Deleted==0&& info.DishTypeId == id);
                     return type;
                 };
             }

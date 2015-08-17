@@ -19,7 +19,11 @@ namespace IShow.ChooseDishes
 
         /**查询所有子类*/
         List<DishType> LoadSubType();
-
+        /// <summary>
+        /// 查找所有的子类及其对应的菜品
+        /// </summary>
+        /// <returns></returns>
+        List<DishType> LoadSubTypeAndDishs();
         /**查询所有大类*/
         List<DishType> LoadFatherType();
 
@@ -31,6 +35,18 @@ namespace IShow.ChooseDishes
 
         /**根据ID查询类型*/
         DishType LoadTypeById(int id);
+        /// <summary>
+        /// 根据小类id查找小类对象
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        DishType LoadSubTypeBySubId(int id);
+        /// <summary>
+        /// 根据大类id查找所有子类及其下所有菜品集合
+        /// </summary>
+        /// <param name="Id">大类id</param>
+        /// <returns></returns>
+        List<DishType> LoadSubTypeByFatherId(int Id);
 
         /**新增类型*/
         Hashtable SaveType(DishType type);
@@ -46,10 +62,12 @@ namespace IShow.ChooseDishes
         #region 菜品單位
          List<DishUnit> QueryAllDishesUnits();
 
-         int[] BatchAddDishesUnit(DishUnit[] dishesUnits);
+         bool BatchAddDishesUnit(DishUnit[] dishesUnits);
         
 
          int AddDishesUnit(DishUnit dishesUnit);
+
+         bool UpdateDishUnit(int DishUnitId, string name, int SaleType, int OrderNum);
 
         bool RemoveDishesUnitById(int dishUnitId);
         #endregion 菜品單位

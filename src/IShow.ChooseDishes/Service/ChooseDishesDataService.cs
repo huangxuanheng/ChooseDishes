@@ -911,11 +911,11 @@ namespace IShow.ChooseDishes.Service
                 {
                     if (ObjectName == null || "".Equals(ObjectName))
                     {
-                        list = entities.Dish.Where(bt => bt.Deleted == 0 && bt.PackagesConfirm == 1).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt => bt.DishType).ToList();
+                        list = entities.Dish.Where(bt => bt.Deleted == 0 && bt.PackagesConfirm != 1).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt => bt.DishType).ToList();
                     }
                     else 
                     {
-                        list = entities.Dish.Where(bt => bt.Deleted == 0 && bt.PackagesConfirm == 1 && (bt.DishName.IndexOf(ObjectName) >= 0 || bt.Code == ObjectName || bt.PingYing.IndexOf(ObjectName)>=0)).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt => bt.DishType).ToList();
+                        list = entities.Dish.Where(bt => bt.Deleted == 0 && bt.PackagesConfirm != 1 && (bt.DishName.IndexOf(ObjectName) >= 0 || bt.Code.IndexOf(ObjectName)>=0 || bt.PingYing.IndexOf(ObjectName) >= 0)).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt => bt.DishType).ToList();
                     }
                 }
                 return list;

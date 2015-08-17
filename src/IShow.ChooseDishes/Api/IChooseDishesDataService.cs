@@ -84,8 +84,14 @@ namespace IShow.ChooseDishes.Api
 
         #endregion Observable 收银方式 滕海东
         #region Observable 菜品管理 滕海东
-        //查询菜品
-        //[OperationContract]
+        
+        /// <summary>
+        ///  传入参数为 菜品类型id ,如果菜品类型id 为null 那么查询全部
+        ///如果传入菜品类型id不为空,则先查找菜品小类 ,如果有菜品小类,者根据菜品小类集合匹配
+         /// 如果没有菜品小类,则直接将菜品类型id作为菜品小类id 查询 .
+        /// </summary>
+        /// <param name="dishId"></param>
+        /// <returns></returns>
         List<Dish> FindDishs(int  dishId);
         //查询可作为道菜的菜品
         List<Dish> FindDishPackages(int dishId);
