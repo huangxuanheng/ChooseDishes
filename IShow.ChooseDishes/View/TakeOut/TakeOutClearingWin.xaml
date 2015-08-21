@@ -1,0 +1,92 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.TakeOut.TakeOutClearingWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:ms="clr-namespace:System;assembly=mscorlib" 
+        xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
+        Title="外卖送餐：" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowMaxRestoreButton="False" ShowMinButton="False" Height="555" Width="662">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Skins/ButtonStyle.xaml" />
+                <ResourceDictionary Source="../../Skins/Styles/DataGridHeaderStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="254"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Items,Mode=TwoWay}" Grid.Row="0" CanUserAddRows="False" 
+                      IsReadOnly="True" ColumnHeaderStyle="{StaticResource HeaderStyle}" RowHeight="30">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Binding="{Binding }"  Header="行号"/>
+                    <DataGridTextColumn Binding="{Binding }"  Header="单号"/>
+                    <DataGridTextColumn Binding="{Binding }"  Header="订餐人"/>
+                    <DataGridTextColumn Binding="{Binding }"  Header="送餐人" />
+                    <DataGridTextColumn Binding="{Binding }"  Header="应收" />
+                    <DataGridTextColumn Binding="{Binding }"  Header="预支" />
+                    <DataGridCheckBoxColumn Binding="{Binding }"  Header="合计应收" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button Content="上一行" Style="{StaticResource OrangeButtonStyleTakeOut}"/>
+                    <Button Content="下一行" Style="{StaticResource OrangeButtonStyleTakeOut}" />
+                </StackPanel>
+                <Grid Grid.Column="1" Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="退单" Style="{StaticResource OrangeButtonStyleTakeOut}"/>
+                    <Button Content="付款" Grid.Column="1" Style="{StaticResource OrangeButtonStyleTakeOut}" />
+                    <Button Content="退出" Grid.Column="2" Style="{StaticResource OrangeButtonStyleTakeOut}" />
+                </Grid>
+               
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="185"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Items,Mode=TwoWay}" CanUserAddRows="False" IsReadOnly="True"
+                      ColumnHeaderStyle="{StaticResource HeaderStyle}" RowHeight="30">
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding }"  Header="行号"/>
+                    <DataGridTextColumn Binding="{Binding }"  Header="菜品名称"/>
+                    <DataGridTextColumn Binding="{Binding }"  Header="数量"/>
+                    <DataGridTextColumn Binding="{Binding }"  Header="价格" />
+                    <DataGridTextColumn Binding="{Binding }"  Header="套菜" />
+                    <DataGridCheckBoxColumn Binding="{Binding }"  Header="赠送" />
+                    <DataGridCheckBoxColumn Binding="{Binding }"  Header="折扣" />
+                    <DataGridTextColumn Binding="{Binding }"  Header="点菜人" />
+                    <DataGridTextColumn Binding="{Binding }"  Header="点菜时间" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Content="合计:" VerticalAlignment="Center"/>
+                <Label Content="36.00" VerticalAlignment="Center" Margin="5,0,10,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button Content="上一页" Style="{StaticResource OrangeButtonStyleTakeOut}"/>
+                <Button Content="下一页" Style="{StaticResource OrangeButtonStyleTakeOut}" Margin="20,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Metro:MetroWindow>

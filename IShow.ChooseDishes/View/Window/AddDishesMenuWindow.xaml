@@ -1,0 +1,16 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.AddDishesMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="添加菜牌" Height="300" Width="500"  ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="True">
+    <Grid Background="#CCC">
+        <Grid Margin="5" Background="#FFF">
+            <TextBox HorizontalAlignment="Left" x:Name="text_id" Height="46" Margin="217,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213"/>
+            <Label Content="菜牌编码" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="142" Height="46" FontSize="16" FlowDirection="RightToLeft"/>
+            <Label Content="菜牌名称" HorizontalAlignment="Left" Margin="0,108,0,0" VerticalAlignment="Top" Width="142" Height="46" FontSize="16" FlowDirection="RightToLeft"/>
+            <TextBox HorizontalAlignment="Left" x:Name="text_name" Height="46" Margin="217,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213"/>
+            <Button Content="保存" HorizontalAlignment="Left" x:Name="btn_Ok" Click="btn_Ok_Click" Margin="78,186,0,0" VerticalAlignment="Top" Width="133" Height="46" RenderTransformOrigin="1.897,0.544"/>
+            <Button Content="取消" HorizontalAlignment="Left" x:Name="btn_Cancel" Click="btn_Cancel_Click" Margin="297,186,0,0" VerticalAlignment="Top" Width="133" Height="46" RenderTransformOrigin="1.897,0.544"/>
+        </Grid>
+    </Grid>
+</Metro:MetroWindow>

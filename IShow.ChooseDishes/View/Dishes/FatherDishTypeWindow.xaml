@@ -1,0 +1,30 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.Dishes.FatherDishTypeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding FatherDishType, Source={StaticResource ViewModelLocator}}"
+        Title="菜品大类" Height="300" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding DishTypes,Mode=TwoWay}" SelectedItem="{Binding SelectedType}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="220" IsReadOnly="True" Header="编码" Binding="{Binding Code}"/>
+                <DataGridTextColumn Width="220" IsReadOnly="True" Header="区域名字" Binding="{Binding Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="10">
+                <Button Width="100" Margin="0,0,10,0" Command="{Binding AddType}" Content="新增"/>
+                <Button Width="100" Margin="0,0,10,0" Command="{Binding ModifyType}" Content="修改"/>
+                <Button Width="100" Margin="0,0,10,0" Command="{Binding DeleteType}" Content="删除"/>
+                <Button Width="100" Margin="0,0,10,0"  Content="退出" Click="Button_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

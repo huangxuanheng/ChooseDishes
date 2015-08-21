@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="IShow.ChooseDishes.View.Controls.DishItemBox"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:IShow.ChooseDishes.Helper.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Width="100" MinHeight="75" Background="{DynamicResource AccentColorBrush5}" BorderThickness="1">
+    <UserControl.Resources>
+        <converter:TableStatusConverter x:Key="TableStatusConverter" />
+    </UserControl.Resources>
+    <Grid Background="{Binding Status, Converter={StaticResource TableStatusConverter}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="245"/>
+        <StackPanel  Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <TextBlock  FontSize="16">（</TextBlock><TextBlock FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="青椒炒肉"/>
+            <TextBlock  FontSize="16">）</TextBlock>
+        </StackPanel>
+        <StackPanel  Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <TextBlock>$</TextBlock><TextBlock VerticalAlignment="Bottom" Text="22.87"/>
+        </StackPanel>
+    </Grid>    
+</UserControl>

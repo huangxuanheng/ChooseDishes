@@ -1,0 +1,91 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.Dishes.DishesWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vn="clr-namespace:IShow.ChooseDishes.ViewModel"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        DataContext="{Binding DishWin, Source={StaticResource ViewModelLocator}}"
+        Title="菜品资料" WindowState="Maximized" ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="False"  Loaded="Window_Loaded">
+    <Window.Resources>
+        <HierarchicalDataTemplate x:Key="TreeNodeTemplate" DataType="{x:Type vn:TreeNode}" ItemsSource="{Binding Children}">
+            <StackPanel x:Name="TreeNodeStackPanel"  Orientation="Horizontal" Margin="2">
+                <ContentPresenter  Content="{Binding Path=Name,Mode=OneTime}" Margin="2,0"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <Style x:Key="TreeNodeStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="True"  />
+            <Setter Property="IsSelected" Value="{Binding Selected}"  />
+        </Style>
+
+        <HierarchicalDataTemplate x:Key="TreeNodeTemplate1" DataType="{x:Type vn:TreeNode}" ItemsSource="{Binding Children}">
+            <Border x:Name="TreeNodeStackPanel" Margin="2">
+                <Button Command="{Binding DishWin.SelectedTreeFun, Source={StaticResource ViewModelLocator}}"
+                        CommandParameter="{Binding}"
+                        Content="{Binding Path=Name,Mode=OneTime}" Margin="2,0">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border>
+                                            <ContentPresenter x:Name="contentPresenter"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            Margin="{TemplateBinding Padding}" 
+                            RecognizesAccessKey="True" 
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Border>
+        </HierarchicalDataTemplate>
+        <Style x:Key="TreeNodeStyle1" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding Expanded}" />
+            <Setter Property="IsSelected" Value="{Binding Selected}" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7.6*"/>
+        </Grid.RowDefinitions>
+        <ToolBar  Grid.ColumnSpan="2" >
+            <Button Command="{Binding OpenAddWin}" Content="新增菜品" Height="58" VerticalAlignment="Top" Width="75" />
+            <Button Command="{Binding UpdateDishes}"  Content="修改菜品" Height="58" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding DeleteDishes}"  Content="删除菜品" Height="58" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding OpenFatherDishTypeWindow}" Content="菜品大类" Height="58" VerticalAlignment="Top" Width="75" />
+            <Button Command="{Binding OpenDishTypeWindow}"  Content="菜品小类" Height="58" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding OpenDishUnit}"  Content="菜品单位" Height="58" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding RefershDish}"  Content="刷新" Height="58" VerticalAlignment="Top" Width="75"/>
+            <Button Content="退出" Height="58" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        </ToolBar>
+        <TreeView Grid.Row="1"  ItemTemplate="{StaticResource TreeNodeTemplate1}" ItemContainerStyle="{StaticResource TreeNodeStyle}" ItemsSource="{Binding DishTypeMenu}"/>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="{Binding IsNotEdit}"  ItemsSource="{Binding DishesList}"  SelectedItem="{Binding SelectedDishes}" Grid.Row="1"  Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Width="*"  Header="行号"/>
+                <DataGridTextColumn Binding="{Binding Code}" Width="*"   Header="品码"/>
+                <DataGridTextColumn Binding="{Binding DishName}" Width="*"  Header="品名"/>
+                <DataGridTextColumn Binding="{Binding AidNumber}" Width="1.2*"  Header="辅助编码"/>
+                <DataGridTextColumn Binding="{Binding DishFormat}" Width="*"  Header="规格"/>
+                <DataGridTextColumn Binding="{Binding PingYing}" Width="1.2*" Header="拼音简码"/>
+                <DataGridTextColumn Binding="{Binding DishTypeBigName}" Width="1.2*"  Header="所属大类"/>
+                <DataGridTextColumn Binding="{Binding DishTypeName}" Width="1.2*"  Header="所属小类"/>
+                <DataGridTextColumn Binding="{Binding DishUnitName}" Width="*"  Header="单位"/>
+                <DataGridTextColumn Binding="{Binding Price1}" Width="*"  Header="售价1"/>
+                <DataGridTextColumn Binding="{Binding Price2}" Width="*"  Header="售价2"/>
+                <DataGridTextColumn Binding="{Binding Price3}" Width="*"  Header="售价3"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Metro:MetroWindow>

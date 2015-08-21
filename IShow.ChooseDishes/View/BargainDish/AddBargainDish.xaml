@@ -1,0 +1,74 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.BargainDish.AddBargainDish"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
+        DataContext="{Binding BargainDishViewFun, Source={StaticResource ViewModelLocator}}"
+        Title="新增特价菜品选择" Height="600" Width="900"  ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="True" >
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid  Background="#ccc" >
+        <Grid  Margin="5" Background="#fff" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid Background="#ddd" Margin="5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Content="保存"  Grid.Column="4" Margin="5" Command="{Binding SaveBargainDish}"/>
+                <Button  Content="退出"  Grid.Column="5" Margin="5" Click="EXIT_WIN" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Label Content="开始日期:" HorizontalAlignment="Left" Margin="33,10,0,0"  VerticalAlignment="Top"/>
+                <DatePicker  SelectedDate="{Binding BargainDishBean.StartDate,Mode=TwoWay}"  HorizontalAlignment="Left" Margin="125,12,0,0" VerticalAlignment="Top"/>
+                <Label Content="结束日期:" HorizontalAlignment="Left" Margin="291,10,0,0"  VerticalAlignment="Top" RenderTransformOrigin="4.538,0.766"/>
+                <DatePicker  SelectedDate="{Binding BargainDishBean.EndDate,Mode=TwoWay}"   HorizontalAlignment="Left" Margin="389,12,0,0" VerticalAlignment="Top"/>
+                <Button Content="批量计算特价" Command="{Binding BatchPriceWin}" HorizontalAlignment="Left" Margin="556,14,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.416,0.199"/>
+                <Label Content="开始时间:" HorizontalAlignment="Left" Margin="33,54,0,0"  VerticalAlignment="Top" RenderTransformOrigin="0.453,2.32"/>
+                <controls:TimeBox    Value="{Binding BargainDishBean.StartTime,Mode=TwoWay}"  HorizontalAlignment="Left" Margin="125,56,0,0" VerticalAlignment="Top" Width="100" />
+                <Label Content="结束时间:" HorizontalAlignment="Left" Margin="291,54,0,0"  VerticalAlignment="Top" RenderTransformOrigin="4.538,0.766"/>
+                <controls:TimeBox      Value="{Binding BargainDishBean.EndTime,Mode=TwoWay }"  HorizontalAlignment="Left" Margin="389,57,0,0" VerticalAlignment="Top" Width="100" />
+                <Label Content="会员类型:" HorizontalAlignment="Left" Margin="556,54,0,0"  VerticalAlignment="Top" RenderTransformOrigin="4.538,0.766" Width="99"/>
+                <ComboBox HorizontalAlignment="Left" Margin="655,58,0,0" VerticalAlignment="Top" Width="120"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week1, Mode=TwoWay}"  Content="星期一" HorizontalAlignment="Left" Margin="43,107,0,0" VerticalAlignment="Top"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week2, Mode=TwoWay}"   Content="星期二" HorizontalAlignment="Left" Margin="125,107,0,0" VerticalAlignment="Top"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week3, Mode=TwoWay}"   Content="星期三" HorizontalAlignment="Left" Margin="215,107,0,0" VerticalAlignment="Top"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week4, Mode=TwoWay}"   Content="星期四" HorizontalAlignment="Left" Margin="299,107,0,0" VerticalAlignment="Top"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week5, Mode=TwoWay}"   Content="星期五" HorizontalAlignment="Left" Margin="402,107,0,0" VerticalAlignment="Top"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week6, Mode=TwoWay}"   Content="星期六" HorizontalAlignment="Left" Margin="506,107,0,0" VerticalAlignment="Top"/>
+                <CheckBox IsChecked="{Binding BargainDishBean.Week0, Mode=TwoWay}"   Content="星期日" HorizontalAlignment="Left" Margin="621,107,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Grid.Column="0" IsReadOnly="False" CanUserAddRows="False"   AutoGenerateColumns="False"   ItemsSource="{Binding BargainDiahSelectList}"  SelectedItem="{Binding SelectedDish}"  Margin="10,5,0,0"  >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Width="*"  Header="行号"/>
+                        <DataGridTextColumn IsReadOnly="True"  Binding="{Binding Code}"  Width="2*"  Header="品码"/>
+                        <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishName}"  Width="3*"  Header="品名"/>
+                        <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishFormat}" Width="2*"  Header="规格"/>
+                        <DataGridTextColumn IsReadOnly="True"  Binding="{Binding MemberName}" Width="2*"  Header="会员类型"/>
+                        <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishUnitName}" Width="2*"  Header="单位"/>
+                        <DataGridTextColumn Binding="{Binding Price1}" Width="2*"  Header="特价1"/>
+                        <DataGridTextColumn Binding="{Binding Price2}" Width="2*"  Header="特价2"/>
+                        <DataGridTextColumn Binding="{Binding Price3}" Width="2*"  Header="特价3"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Command="{Binding ImportDishes}" Content="增加菜品" Grid.Column="1" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Width="85" Height="30"/>
+                <Button Command="{Binding DeleteDishes}" Content="删除菜品" Grid.Column="1" HorizontalAlignment="Left" Margin="30,97,0,0" VerticalAlignment="Top" Width="85" Height="32"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Metro:MetroWindow>

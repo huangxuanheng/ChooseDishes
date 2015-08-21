@@ -1,0 +1,11 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.AlertWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="确认窗口" Height="300" Width="400"  ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="False" >
+    <Grid Background="#ccc">
+        <Label x:Name="AlertMsgLabel" Content="" HorizontalAlignment="Left" Margin="60,51,0,0" VerticalAlignment="Top" Width="264" Height="62"/>
+        <Button Content="是" Click="Button_Click_Ok" HorizontalAlignment="Left" Margin="60,164,0,0" VerticalAlignment="Top" Width="105" Height="47"/>
+        <Button Content="否"  Click="Button_Click_Not"  HorizontalAlignment="Left" Margin="219,164,0,0" VerticalAlignment="Top" Width="105" Height="47"/>
+    </Grid>
+</Metro:MetroWindow>

@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="IShow.ChooseDishes.View.Controls.RecordListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:IShow.ChooseDishes.Helper.Converters"
+             mc:Ignorable="d"  
+             x:Name="record" 
+            Width="125" MinHeight="100" Background="Transparent">
+
+    <UserControl.Resources>
+        <converter:IdToVisibilityConverter x:Key="IdToVisibilityConverter"/>
+        <converter:MultipleBindingConverter x:Key="MultipleBindingConverter"/>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource HistoryItemGridStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock  Grid.Column="0" 
+                                   Text="{Binding Path=Id}" MaxWidth="120"  TextWrapping="Wrap"
+                                   Style="{StaticResource HistoryItemNameTextBlockStyle}"
+                    Visibility="{Binding Path=Id, Converter={StaticResource IdToVisibilityConverter}}"/>
+
+        <TextBlock  Grid.Column="1" Margin="10,0,0,0"
+                                   Text="{Binding Path=ItemName}" MaxWidth="120"  TextWrapping="Wrap"
+                                   Style="{StaticResource HistoryItemNameTextBlockStyle}">
+            <TextBlock.Visibility>
+                <MultiBinding Converter="{StaticResource MultipleBindingConverter}">
+                    <Binding Path="Id"/>
+                    <Binding Path="Count"/>
+                </MultiBinding>
+            </TextBlock.Visibility>
+        </TextBlock>
+
+        <Button x:Name="receiveItemOperateButton" Grid.Column="2"  MaxHeight="30" MaxWidth="30"
+                                ContextMenuOpening="_OnContextMenuOpening"
+                                Click="_OnItemOperateButtonClick">
+
+            <Image Style="{StaticResource HistroyRecordItemMenuImageStyle}"/>
+
+            <Button.ContextMenu>
+                <ContextMenu Placement="RelativePoint">
+                    <MenuItem Header="Open" 
+                                              Click="_OnOpenMenuItemClick"/>
+                    <MenuItem Header="OpenLocation" 
+                                              Click="_OnOpenLocationMenuItemClick" />
+                    <MenuItem Header="DeleteRecord"
+                                              Click="_OnDeleteRecordMenuItemClick" />
+                </ContextMenu>
+            </Button.ContextMenu>
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Tag" Value="{DynamicResource {x:Static SystemParameters.HighContrastKey}}"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true" />
+                                <Condition  Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource {x:Static  SystemColors.HighlightBrushKey}}"/>
+                        </MultiDataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</UserControl>

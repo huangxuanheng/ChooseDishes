@@ -1,0 +1,16 @@
+﻿<controls:MetroWindow x:Class="IShow.ChooseDishes.View.User.EditUserPwdWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        DataContext="{Binding UserMgt, Source={StaticResource ViewModelLocator}}"
+        Title="编辑角色" Height="400" Width="500">
+    <Grid>
+        <Label Content="新密码" HorizontalAlignment="Left" Margin="48,82,0,0" VerticalAlignment="Top" Width="78"/>
+        <TextBox HorizontalAlignment="Left" Height="42" Margin="195,82,0,0" TextWrapping="Wrap" Text="{Binding NewPassWord}" VerticalAlignment="Top" Width="248"/>
+        <Label Content="新密码" HorizontalAlignment="Left" Margin="48,166,0,0" VerticalAlignment="Top" Width="78"/>
+        <TextBox HorizontalAlignment="Left" Height="42" Margin="195,168,0,0" TextWrapping="Wrap" Text="{Binding PassWord}" VerticalAlignment="Top" Width="248"/>
+        <Button Name="Ok" Content="保存" Command="{Binding EditPwdWin}" HorizontalAlignment="Left" Margin="155,271,0,0" VerticalAlignment="Top" Width="121" Height="41"/>
+        <Button Name="Cancel" Content="退出" Click="Cancel_Click" HorizontalAlignment="Left" Margin="322,271,0,0" VerticalAlignment="Top" Width="121" Height="41"/>
+
+    </Grid>
+</controls:MetroWindow>

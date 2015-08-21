@@ -1,0 +1,54 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.Dishes.MarketTypeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        DataContext="{Binding Market, Source={StaticResource ViewModelLocator}}"
+        Title="市别设置" WindowState="Maximized">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Skins/ButtonStyle.xaml" />
+                <ResourceDictionary Source="../../Skins/Styles/DataGridHeaderStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" >
+            <MenuItem  Height="60" Width="60" Command="{Binding Add}" Margin="10,0">
+                <MenuItem.Header>
+                    <TextBlock Text="新增(A)" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem  Command="{Binding Update}">
+                <MenuItem.Header>
+                    <TextBlock Text="修改(U)"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem  Command="{Binding Deleted}">
+                <MenuItem.Header>
+                    <TextBlock Text="删除(D)" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Click="MenuItem_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="退出(X)" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" MouseDoubleClick="DataGrid_MouseDoubleClick" IsReadOnly="True" 
+                  ItemsSource="{Binding MarketTypeItems}"  SelectedItem="{Binding SelectedItem}" 
+                  ColumnHeaderStyle="{StaticResource HeaderStyle}" CellStyle="{StaticResource CellStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding Path=LineNumber}"   Header="行号"/>
+                <DataGridTextColumn Binding="{Binding Path=Code}"  Header="市别编码"/>
+                <DataGridTextColumn Binding="{Binding Path=Name}" Header="市别名称"/>
+                <DataGridTextColumn Binding="{Binding Path=ShowStartTime}"  Header="开始时间"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Metro:MetroWindow>

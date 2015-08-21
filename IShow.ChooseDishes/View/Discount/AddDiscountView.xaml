@@ -1,0 +1,60 @@
+﻿<controls:MetroWindow x:Class="IShow.ChooseDishes.View.Discount.AddDiscountView" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:IShow.ChooseDishes.ViewModel.Common"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d" 
+        DataContext="{Binding DisCountViewBean, Source={StaticResource ViewModelLocator}}"
+       
+        Title="折扣方案设置" Height="380" Width="600" >
+
+
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="False" ItemsSource="{Binding AddDisCountV}"  Margin="10,10,15,119" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn  IsReadOnly="True" Binding="{Binding LineNumber}" Width="1*"   Header="行号"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Code}" Width="2.5*"  Header="小类编码"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding SmallType}" Width="2*"  Header="菜品小类"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding BigType}" Width="2*"  Header="所属大类"/>
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding DiscountValue}" Width="1.5*"  Header="折扣值"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Margin="10,10,0,119">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="42*"/>
+                <ColumnDefinition Width="58*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="代码" Margin="0,28,10,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Label Content="方案名称" Margin="0,78,10,0" VerticalAlignment="Top" RenderTransformOrigin="1.048,-0.522" HorizontalAlignment="Center"/>
+            <Label Content="按菜品属性折扣" HorizontalAlignment="Center" Margin="0,128,113,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="114"/>
+            <Label Content="服务费折扣率" HorizontalAlignment="Center" Margin="10,178,0,0" VerticalAlignment="Top" Width="83"/>
+
+            <TextBox Grid.Column="1" Text="{Binding Programxaml.Code, Mode=TwoWay}"   HorizontalAlignment="Left" Height="23" Margin="3,31,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100"/>
+            <TextBox Grid.Column="1" Text="{Binding Programxaml.Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="3,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+            <CheckBox Content=""  IsChecked ="{Binding Programxaml.ByDish, Mode=TwoWay}"   Grid.Column="1" HorizontalAlignment="Left" Margin="23,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.862,0.866"/>
+            <TextBox Grid.Column="1"  Text="{Binding Programxaml.Rate, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="3,181,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100"/>
+
+            <Label Content="%" Grid.Column="1" HorizontalAlignment="Left" Margin="106,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.138,2.341"/>
+        </Grid>
+        <Grid  HorizontalAlignment="Left" Height="80"  Margin="10,242,0,0" VerticalAlignment="Top" Width="572" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="保存" Grid.Column="2" Command="{Binding AddWin}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="退出" Grid.Column="3" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.576,0.449" Click="Button_Click"/>
+
+        </Grid>
+
+
+    </Grid>
+</controls:MetroWindow>

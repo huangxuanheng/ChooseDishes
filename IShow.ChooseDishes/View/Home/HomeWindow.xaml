@@ -1,0 +1,8 @@
+﻿<NavigationWindow x:Class="IShow.ChooseDishes.View.Home.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
+        WindowState="Maximized"
+        Style="{StaticResource IShowWindowStyle}"  
+        Source="Pages/BaseContentPage.xaml"
+        Title="MainFrameWindow"/>

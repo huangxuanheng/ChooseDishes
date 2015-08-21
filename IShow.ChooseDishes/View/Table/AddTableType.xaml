@@ -1,0 +1,244 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.Table.AddTableType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:IShow.ChooseDishes.ViewModel.Common"
+        DataContext="{Binding TableType, Source={StaticResource ViewModelLocator}}"
+        Title="新增餐桌类型" Height="580" Width="780">
+    <Window.Resources>
+        <ObjectDataProvider ObjectType="{x:Type local:NameMapping}" x:Key="Mapping"></ObjectDataProvider>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="135"></RowDefinition>
+            <RowDefinition Height="125"></RowDefinition>
+            <RowDefinition Height="205"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border  BorderBrush="Gray" BorderThickness="1">
+            <Grid Grid.Row="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">编码</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Width="80" Height="25" Text="{Binding Code}" HorizontalAlignment="Left"></TextBox>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">桌类名称</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Width="150" Height="25" Text="{Binding Name}"></TextBox>
+                <Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right">菜品售价类</Label>
+                <ComboBox Grid.Row="1" Grid.Column="5" Width="150" Height="25" ItemsSource="{Binding Source={StaticResource Mapping},Path=PriceItems}" SelectedValue="{Binding PriceType,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" >
+                </ComboBox>
+
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">人数范围</Label>
+                <StackPanel Grid.Row="3" Grid.Column="1" FlowDirection="LeftToRight" Width="150" Orientation="Horizontal">
+                    <TextBox  Width="50" Height="25" Text="{Binding PeopleMin}"></TextBox>
+                    <Label Content="到"/>
+                    <TextBox  Width="50" Height="25" Text="{Binding PeopleMax}"></TextBox>
+                </StackPanel>
+                <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right">类型颜色</Label>
+                <TextBox Grid.Row="3" Grid.Column="3" Width="80" Height="25" Text="{Binding ColorType}" HorizontalAlignment="Left"></TextBox>
+                <Label Grid.Row="3" Grid.Column="4" HorizontalAlignment="Right" >服务费模式</Label>
+                <ComboBox x:Name="ServerFeeMode" Grid.Row="3" Grid.Column="5" Width="150" Height="25" ItemsSource="{Binding Source={StaticResource Mapping},Path=ServerfreeModeItems}"  SelectedValue="{Binding ServerfreeModel,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" SelectionChanged="ServerFeeModeChanged">
+                </ComboBox>
+
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right">最高服务费</Label>
+                <TextBox Grid.Row="5" Grid.Column="1" Width="80" Height="25" HorizontalAlignment="Left" Text="{Binding ServerFeeDetail.ServerfreeNax}"></TextBox>
+                <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right">低消方式</Label>
+                <ComboBox Grid.Row="5" Grid.Column="3" Width="150"  Height="25" ItemsSource="{Binding Source={StaticResource Mapping},Path=ConsumerModeItems}"  SelectedValue="{Binding ConsumerMode,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value">
+                </ComboBox>
+                <Label Grid.Row="5" Grid.Column="4" HorizontalAlignment="Right">低消金额</Label>
+                <TextBox Grid.Row="5" Grid.Column="5" Width="80" HorizontalAlignment="Left" Text="{Binding LowConsumerDetail.ConsumerMoney}"></TextBox>
+                <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left">服务费计入低消</Label>
+                <CheckBox Grid.Row="7" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding InLowConsume}">
+                </CheckBox>
+                <StackPanel Grid.Row="9"  Grid.ColumnSpan="6" FlowDirection="LeftToRight" HorizontalAlignment="Center">
+                    <Label Foreground="Red" Content="说明：当低消或者最高服务费为0时，不限制低消或最高服务费"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
+                   
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">起始收费单位</Label>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox  Width="80" Height="25" Text="{Binding ServerFeeDetail.StartUnit}" HorizontalAlignment="Left" x:Name="StartUnit"></TextBox>
+                    <Label>分钟</Label>
+                </StackPanel>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">起始收费额</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Width="80" Height="25" Text="{Binding ServerFeeDetail.StartMoney}" HorizontalAlignment="Left" x:Name="StartMoney"></TextBox>
+                <Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right">开始计费时长</Label>
+                <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal">
+                    <TextBox Width="80" Height="25" HorizontalAlignment="Left" Text="{Binding ServerFeeDetail.StartGetMoneyTime}" x:Name="StartGetMoneyTime"></TextBox>
+                    <Label>分钟</Label>
+                </StackPanel>
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">超钟收费单位</Label>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox  Width="80" Height="25" Text="{Binding ServerFeeDetail.OutTime}" HorizontalAlignment="Left"  x:Name="OutTime"></TextBox>
+                    <Label>分钟</Label>
+                </StackPanel>
+                <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right">超钟收费额</Label>
+                <TextBox Grid.Row="3" Grid.Column="3" Width="80" Height="25" HorizontalAlignment="Left" Text="{Binding ServerFeeDetail.OutMoney}" x:Name="OutMoney"></TextBox>
+
+                <Label Grid.Row="3" Grid.Column="4" HorizontalAlignment="Right">超钟不计费时长</Label>
+                <StackPanel Grid.Row="3" Grid.Column="5" Orientation="Horizontal">
+                    <TextBox  Width="80" Height="25" Text="{Binding ServerFeeDetail.OutTimeFree}" HorizontalAlignment="Left"  x:Name="OutTimeFree"></TextBox>
+                    <Label>分钟</Label>
+                </StackPanel>
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right">服务费计算方式</Label>
+                <ComboBox Grid.Row="5" Grid.Column="1" Width="150" Height="25"  ItemsSource="{Binding Source={StaticResource Mapping},Path=ServerfreeAccountTypeItems}" SelectedValue="{Binding ServerfreeAccountType,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" x:Name="ServerfreeAccountType">
+                </ComboBox>
+                <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right">服务费率</Label>
+                <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal">
+                    <TextBox Width="80" Height="25" Text="{Binding ServerFeeDetail.Rate}" HorizontalAlignment="Left" x:Name="Rate"></TextBox>
+                    <Label>%</Label>
+                </StackPanel>
+                <Label Grid.Row="5" Grid.Column="4" HorizontalAlignment="Right">定额服务费</Label>
+                <TextBox Grid.Row="5" Grid.Column="5" Width="80" Height="25" Text="{Binding ServerFeeDetail.ServerfreeNum}" HorizontalAlignment="Left" x:Name="ServerfreeNum"></TextBox>
+
+                <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left">服务费折扣</Label>
+                <CheckBox Grid.Row="7" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding CanDiscount}">
+                </CheckBox>
+            </Grid>
+        </Border>
+        <TabControl Width="772" Grid.Row="2">
+            <TabItem Header="服务费特殊时段" Background="LightGray" FontSize="12">
+                <Grid  Width="760">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="140*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Label VerticalAlignment="Center">时段服务费的计算方式</Label>
+                        <ComboBox Width="150" Height="25" ItemsSource="{Binding  Source={StaticResource Mapping},Path=AccountTypes}" SelectedValue="{Binding ServerFeeCalcType,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value"></ComboBox>
+                        <Button Width="50" Height="25" HorizontalAlignment="Right" Margin="315,0,0,0" Command="{Binding AddServerFeePeriod}">新增</Button>
+                        <Button Width="50" Height="25" HorizontalAlignment="Right" Margin="5,0,0,0" Command="{Binding ModifyServerFeePeriod}">修改</Button>
+                        <Button Width="50" Height="25" HorizontalAlignment="Right" Margin="5,0,0,0" Command="{Binding DeleteServerFeePeriod}">删除</Button>
+                    </StackPanel>
+                    <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Width="752" Margin="0">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Width="750" Padding="0" >
+                            <DataGrid BorderThickness="0" ItemsSource="{Binding ServerFeeSpecailPeriods}" SelectedItem="{Binding SelectedServerFeePeriod}" AutoGenerateColumns="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="35" Header="序号" />
+                                    <DataGridTextColumn Width="120" Header="开始时间" Binding="{Binding Path=StartDateTime}"/>
+                                    <DataGridTextColumn Width="120" Header="结束时间" Binding="{Binding Path=EndDateTime}"/>
+                                    <DataGridTextColumn Width="85" Header="起始收费单位" Binding="{Binding Path=StartUnit}"/>
+                                    <DataGridTextColumn Width="80" Header="起始收费额" Binding="{Binding Path=StartMoney}"/>
+                                    <DataGridTextColumn Width="85" Header="超钟收费单位" Binding="{Binding Path=OutTime}"/>
+                                    <DataGridTextColumn Width="80" Header="超钟单位额" Binding="{Binding Path=OutMoney}"/>
+                                    <DataGridTextColumn Width="110" Header="每单位可超钟时长" Binding="{Binding Path=OutTimeFree}"/>
+                                    <DataGridTextColumn Width="80" Header="定额服务费" Binding="{Binding Path=ServerfreeNum}"/>
+                                    <DataGridTextColumn Width="80" Header="服务费率" Binding="{Binding Path=Rate}"/>
+                                    <DataGridTextColumn Width="80" Header="最高服务费" Binding="{Binding Path=ServerfreeNax}"/>
+                                    <DataGridTextColumn Width="85" Header="开始计费时长" Binding="{Binding Path=StartGetMoneyTime}"/>
+                                </DataGrid.Columns>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="BorderThickness" Value="0.1"/>
+                                        <Setter Property="Height" Value="22"/>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="BorderThickness" Value="0.1"/>
+                                        <Setter Property="Height" Value="22"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="低消特殊时段" Background="LightGray" FontSize="12" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="140*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Label VerticalAlignment="Center">时段低消的计算方式</Label>
+                        <ComboBox Width="150" Height="25" ItemsSource="{Binding  Source={StaticResource Mapping},Path=AccountTypes}" SelectedValue="{Binding LowConsCalcType,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value"></ComboBox>
+                        <Button Width="50" Height="25" HorizontalAlignment="Right" Margin="328,0,0,0" Command="{Binding AddLowConsumePeriod}">新增</Button>
+                        <Button Width="50" Height="25" HorizontalAlignment="Right" Margin="5,0,0,0" Command="{Binding ModifyLowConsumePeriod}">修改</Button>
+                        <Button Width="50" Height="25" HorizontalAlignment="Right" Margin="5,0,0,0" Command="{Binding DeleteLowConsumePeriod}">删除</Button>
+                    </StackPanel>
+                    <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Width="752" Margin="0" Height="140">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="1" Width="750" Height="140">
+                            <DataGrid Height="140" ItemsSource="{Binding LowConsSpecailPeriods}" SelectedItem="{Binding SelectedLowConsPeriod}" AutoGenerateColumns="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="35" Header="序号"/>
+                                    <DataGridTextColumn Width="120" Header="开始时间" Binding="{Binding Path=StartDateTime}"/>
+                                    <DataGridTextColumn Width="120" Header="结束时间" Binding="{Binding Path=EndDateTime}"/>
+                                    <DataGridTextColumn Width="85" Header="低消方式" Binding="{Binding Path=ConsumerMode}"/>
+                                    <DataGridTextColumn Width="80" Header="低消金额" Binding="{Binding Path=ConsumerMoney}"/>
+                                </DataGrid.Columns>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="BorderThickness" Value="0.1"/>
+                                        <Setter Property="Height" Value="22"/>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="BorderThickness" Value="0.1"/>
+                                        <Setter Property="Height" Value="22"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Height="30" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="保存" Command="{Binding SaveType}" Width="75" Grid.Column="2" Grid.Row="1" />
+                <Label Width="30"></Label>
+                <Button Content="退出"  Width="75" Grid.Column="3" Grid.Row="1" Click="Button_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

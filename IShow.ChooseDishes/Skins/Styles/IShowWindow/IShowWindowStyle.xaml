@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:IShow.Common.Controls"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+
+    <Style x:Key="IShowWindowStyle" TargetType="Window">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Window">
+                    <Grid Margin="15" x:Name="Body">
+                        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="Black">
+                            <Rectangle.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="0" Opacity="0.8"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="Margin" TargetName="Body" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="local:WindowBehaviors.BorderlessWindowBehavior">
+            <Setter.Value>
+                <local:BorderlessWindowBehavior/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

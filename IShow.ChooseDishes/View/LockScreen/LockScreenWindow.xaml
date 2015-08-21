@@ -1,0 +1,42 @@
+﻿<Page x:Class="IShow.ChooseDishes.View.LockScreen.LockScreenWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:password="clr-namespace:IShow.Common.Controls;assembly=IShow.Common"
+                      DataContext="{Binding LockScreen, Source={StaticResource ViewModelLocator}}"
+                      ShowsNavigationUI="False"
+                      Title="锁定屏幕" Height="400" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="300*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="用户名"  HorizontalAlignment="Left" Margin="23,28,0,0" VerticalAlignment="Top" Width="86" FontSize="22" Height="39"/>
+        <TextBox Text="{Binding UserName,Mode=TwoWay}" Name="UserName" HorizontalAlignment="Left" Height="39" Margin="114,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" FontSize="20"/>
+        <Label Content="密码" HorizontalAlignment="Left" Margin="23,26,0,0" VerticalAlignment="Top" Width="86" FontSize="22" Grid.Row="1" Height="39"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="114,26,0,0" Grid.Row="1" VerticalAlignment="Top" Width="140" Height="39"
+                     password:PasswordBoxBindingHelper.IsPasswordBindingEnabled="True"
+                     password:PasswordBoxBindingHelper.BindedPassword="{Binding PassWord, Mode=TwoWay}"/>
+        <Button Content="确认" HorizontalAlignment="Left" Margin="23,24,0,0" Grid.Row="2" VerticalAlignment="Top" Width="106" Height="42" FontSize="18" Click="Button_Click"/>
+        <Button Content="取消" HorizontalAlignment="Left" Margin="161,24,0,0" Grid.Row="2" VerticalAlignment="Top" Width="106" Height="42" FontSize="18" Click="Button_Click_1"/>
+        <Button Command="{Binding Input}" CommandParameter="7" Content="7" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="72" Height="72" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="8" Content="8" Grid.Column="1" HorizontalAlignment="Left" Margin="203,10,0,0" VerticalAlignment="Top" Width="72" Height="72" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="9" Content="9" Grid.Column="1" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" Width="72" Height="72" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="4" Content="4" Grid.Column="1" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="1" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="5" Content="5" Grid.Column="1" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="1" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="6" Content="6" Grid.Column="1" HorizontalAlignment="Left" Margin="203,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="1" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="1" Content="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="2" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="2" Content="2" Grid.Column="1" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="2" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="3" Content="3" Grid.Column="1" HorizontalAlignment="Left" Margin="203,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="2" FontSize="36"/>
+        <Button Command="{Binding Input}" CommandParameter="0" Content="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="3" FontSize="36"/>
+        <Button Command="{Binding Small_Digit}" Content="." Grid.Column="1" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="3" FontSize="24"/>
+        <Button Command="{Binding Delete}" Content="c" Grid.Column="1" HorizontalAlignment="Left" Margin="203,10,0,0" VerticalAlignment="Top" Width="72" Height="72" Grid.Row="3" FontSize="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="70,24,0,0" Grid.Row="3" TextWrapping="Wrap" Text="锁定屏幕" VerticalAlignment="Top" Height="49" Width="147" TextAlignment="Center" FontSize="36"/>
+    </Grid>
+</Page>

@@ -1,0 +1,80 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.Table.TableMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:vn="clr-namespace:IShow.ChooseDishes.ViewModel"
+        DataContext="{Binding Table, Source={StaticResource ViewModelLocator}}"
+        Title="餐桌资料" Height="600.788" Width="910.075">
+    <Window.Resources>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="545"/>
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="206*"/>
+                <ColumnDefinition Width="245*"/>
+            </Grid.ColumnDefinitions>
+            <ToolBar HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="899" Grid.ColumnSpan="2">
+                <Button Content="新增" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding AddTable}"/>
+                <Button Content="修改" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding ModifyTable}"/>
+                <Button Content="删除" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding DeleteTable}"/>
+                <Button Content="批量新增" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding BatchAddTable}"/>
+
+                <Button Content="新增桌类" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding OpenTableTypeWin}"/>
+                <Button Content="修改桌类" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding OpenUpdateTypeWin}"/>
+                <Button Content="区域" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding OpenLocationWin}"/>
+                <Button Content="方位" Height="58" VerticalAlignment="Top" Width="75" Command="{Binding OpenBearingWin}"/>
+                <Button Content="退出" Height="58" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+            </ToolBar>
+            <TreeView HorizontalAlignment="Left" Height="470" Margin="0,68,0,0" VerticalAlignment="Top" Width="222" ItemsSource="{Binding TableTypeTree}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type vn:TableTypeTreeNode}" ItemsSource="{Binding Children}" >
+                        <StackPanel x:Name="TreeNodeStackPanel"  Orientation="Horizontal" Margin="2">
+                            <ContentPresenter  Content="{Binding Path=Name,Mode=OneTime}" Margin="2,0"/>
+                            <ContentPresenter Content="{Binding Path=Code,Mode=OneTime}" Margin="2,0"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True" />
+                        <Setter Property="IsSelected" Value="{Binding Selected}" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+            </TreeView>
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="227,68,0,0"  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"  Height="470" Width="672" Grid.ColumnSpan="2" ItemsSource="{Binding TableGrid,Mode=TwoWay}" SelectedItem="{Binding SelectedTable,Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Code}" Width="80"  ClipboardContentBinding="{x:Null}" Header="类型编号"  />
+                    <DataGridTextColumn Binding="{Binding Name}" Width="200" ClipboardContentBinding="{x:Null}" Header="类型名称"/>
+                    <DataGridTextColumn Binding="{Binding TableTypeId}" Width="150" ClipboardContentBinding="{x:Null}" Header="所属类型"/>
+                    <DataGridTextColumn Binding="{Binding LocationId}" Width="150" ClipboardContentBinding="{x:Null}" Header="所属区域"/>
+                    <DataGridTextColumn Binding="{Binding Seat}" Width="80" ClipboardContentBinding="{x:Null}" Header="人数" />
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0.1"/>
+                        <Setter Property="Height" Value="26"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="BorderThickness" Value="0.1"/>
+                        <Setter Property="Height" Value="26"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="1" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="910*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="500" Height="30" Foreground="Red"> 提示：先在左边选择餐桌类型，然后点击新增按钮来添加餐桌</TextBlock>
+        </Grid>
+    </Grid>
+</Window>

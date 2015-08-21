@@ -1,0 +1,89 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.PromotionsDish.PromotionsDishWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        DataContext="{Binding PromotionsDishRegist, Source={StaticResource ViewModelLocator}}"
+        Title="菜品促销" WindowState="Maximized"  Loaded="Window_Loaded"  ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="False"  >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="83*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="#ccc" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid Background="#AAA" Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding OpenSaveWin}" Content="新增单据" Margin="5" FontSize="12" />
+                <Button Command="{Binding OpenCheckPromotionsDish}" Grid.Column="1" Content="审核单据" Margin="5" FontSize="12" />
+                <Button Command="{Binding CopyPromotionsDish}" Grid.Column="2" Content="单据复制" Margin="5" FontSize="12" />
+                <Button Command="{Binding StopPromotionsDish}" Grid.Column="4" Content="停   用" Margin="5" FontSize="12" />
+                <Button Command="{Binding StartUpPromotionsDish}" Grid.Column="5" Content="启   用" Margin="5" FontSize="12" />
+                <Button Command="{Binding PrintPromotionsDish}" Grid.Column="7" Content="打   印" Margin="5" FontSize="12" />
+                <Button Command="{Binding RefreshPromotionsDish}" Grid.Column="8" Content="刷   新" Margin="5" FontSize="12" />
+                <Button Click="EXIT_WIN"  Grid.Column="10" Content="退   出" Margin="5" FontSize="12" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Label Content="开始时间 :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.328,0.577"/>
+                <DatePicker SelectedDate="{Binding SelectStartDate}"  HorizontalAlignment="Left" Margin="79,10,0,0" VerticalAlignment="Top" Width="125"/>
+                <Label Content="结束时间 :" HorizontalAlignment="Left" Margin="231,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.328,0.577"/>
+                <DatePicker SelectedDate="{Binding SelectEndDate}" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Width="125"/>
+                <RadioButton Content="全  部" Command="{Binding InputStatus}" CommandParameter="-1"  HorizontalAlignment="Left" Margin="472,15,0,0" VerticalAlignment="Top"/>
+                <RadioButton Content="已审核" Command="{Binding InputStatus}" CommandParameter="2" IsChecked="True"   HorizontalAlignment="Left" Margin="539,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.327,0.625"/>
+                <RadioButton Content="待审核" Command="{Binding InputStatus}" CommandParameter="1"   HorizontalAlignment="Left" Margin="609,15,0,0" VerticalAlignment="Top"/>
+                <RadioButton Content="已作废" Command="{Binding InputStatus}" CommandParameter="3"   HorizontalAlignment="Left" Margin="679,16,0,0" VerticalAlignment="Top"/>
+                <Button Content="检  索" Command="{Binding SelectPromotion}" HorizontalAlignment="Left" Margin="760,8,0,0" VerticalAlignment="Top" Width="60" Height="30" RenderTransformOrigin="0.6,0.967"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <DataGrid Margin="5,10,5,10" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding PromotionsDishLists}" SelectedValue="{Binding PromotionsDishSelected}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  Width="*"  Header="行号"/>
+                        <DataGridTextColumn Binding="{Binding TradeNo}" Width="2*"   Header="单据编号"/>
+                        <DataGridTextColumn Binding="{Binding Code}" Width="2*"   Header="菜品编码"/>
+                        <DataGridTextColumn Binding="{Binding DishName}" Width="2*"   Header="菜品名称"/>
+                        <DataGridTextColumn Binding="{Binding DishFormat}" Width="*"   Header="规格"/>
+                        <DataGridTextColumn Binding="{Binding Price}" Width="1.5*"   Header="加价金额"/>
+                        <DataGridTextColumn Binding="{Binding StartDate, StringFormat=\{0:yyyy-MM-dd \}}" Width="2*"   Header="促销开始日期"/>
+                        <DataGridTextColumn Binding="{Binding EndDate, StringFormat=\{0:yyyy-MM-dd \}}" Width="2*"   Header="促销结束日期"/>
+                        <DataGridTextColumn Binding="{Binding MarketTypeName}" Width="*"   Header="市别"/>
+                        <DataGridTextColumn Binding="{Binding StatusName}" Width="*"   Header="状态"/>
+                        <DataGridTextColumn Binding="{Binding UseingStatus}" Width="*"   Header="启用/停用"/>
+                        <DataGridTextColumn Binding="{Binding CreateBy}" Width="1.5*"   Header="制单人编号"/>
+                        <DataGridTextColumn Binding="{Binding CreateDatetime, StringFormat=\{0:yyyy-MM-dd \}}" Width="2*"   Header="制单时间"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="3">
+                <DataGrid Margin="5,10,5,10" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding DishLists}" SelectedValue="{Binding DishSelected}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  Width="50"  Header="行号"/>
+                        <DataGridTextColumn Binding="{Binding Id}" Width="100"   Header="单据编码"/>
+                        <DataGridTextColumn Binding="{Binding DishName}" Width="200"   Header="菜品名称"/>
+                        <DataGridTextColumn Binding="{Binding DishFormat}" Width="100"   Header="规格"/>
+                        <DataGridTextColumn Binding="{Binding DishNumber}" Width="100"   Header="赠送数量"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+
+        </Grid>
+    </Grid>
+</Metro:MetroWindow>

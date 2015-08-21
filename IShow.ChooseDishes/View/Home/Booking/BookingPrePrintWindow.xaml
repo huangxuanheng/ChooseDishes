@@ -1,0 +1,43 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.Home.Booking.BookingPrePrintWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
+        Title="预打账单（请选择需要打印的餐台）" ShowMaxRestoreButton="False" ShowMinButton="False" Height="400" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <ListBox ItemsSource="{Binding Dishes}" >
+                <ListBox.Template>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:DishBoxItem></controls:DishBoxItem>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                <ColumnDefinition Width="0.35*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="编码：" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Grid.Column="0"></Label>
+            <TextBox Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Metro:TextBoxHelper.ClearTextButton="True" Height="40" Width="180"></TextBox>
+            
+            <Button Grid.Column="2" HorizontalAlignment="Left" Content="确定" Width="80" Height="55" ></Button>
+            <Button Grid.Column="3" HorizontalAlignment="Left" Content="取消" Width="80" Height="55" ></Button>
+        </Grid>
+       
+    </Grid>
+</Metro:MetroWindow>

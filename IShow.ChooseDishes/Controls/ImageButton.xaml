@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="IShow.ChooseDishes.Controls.ImageButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="120" d:DesignWidth="120">
+    <Grid>
+        <Button>
+            <Button.Content>
+                <StackPanel>
+                    <Image Width="80" Height="80" ></Image>
+                    <Label Height="30" FontSize="18" FontWeight="Bold">系统参数</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

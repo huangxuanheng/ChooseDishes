@@ -1,0 +1,165 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.Dishes.RawMaterialView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        DataContext="{Binding Material, Source={StaticResource ViewModelLocator}}"
+        Title="原料信息" Height="600" Width="900">
+    <Grid>
+        <Grid Background="#CCC">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" x:Name="RecordControll">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="{Binding RawMaterialBean.CurrentScale}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Grid.Row="0" Grid.Column="1"  Content="上一条"  Command="{Binding PreviousRecord}" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="75"/>
+                    <Button Grid.Row="0" Grid.Column="2" Content="下一条"  Command="{Binding NextRecord}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" />
+                </Grid>
+                <Button Grid.Row="0" Grid.Column="4" Content="继续" Command="{Binding Continue}" x:Name="Continue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" />
+                <Button Grid.Row="0" Grid.Column="5" Content="保存" Command="{Binding Save}"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" />
+                <Button Grid.Row="0" Grid.Column="6" Content="退出" Click="Exit_Win" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Background="#ddd" Margin="10,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="原料编码 :" VerticalAlignment="Center" FontSize="16" Grid.Column="0" Grid.Row="1" />
+                <TextBox Grid.Column="2" Grid.Row="1" TextWrapping="Wrap" Text="{Binding RawMaterialBean.Code, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16" Background="#cccccc" IsReadOnly="True" />
+               
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="原料名称 :" VerticalAlignment="Center" FontSize="16"  Grid.Column="4" Grid.Row="1"/>
+                <TextBox Grid.Column="6" Grid.Row="1" TextWrapping="Wrap" Text="{Binding RawMaterialBean.MaterialName, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16" />
+               
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="规格 :" VerticalAlignment="Center"  Grid.Column="8" Grid.Row="1" FontSize="16" />
+                <TextBox Grid.Column="10" Grid.Row="1" TextWrapping="Wrap" Text="{Binding RawMaterialBean.Format, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"  />
+                
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="所属大类 :" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="3" FontSize="16" />
+                <TextBox Grid.Column="2" Grid.Row="3" TextWrapping="Wrap" Text="{Binding RawMaterialBean.BigType, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"  Background="#DDD" IsReadOnly="True"/>
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="拼音简码 :"  VerticalAlignment="Center"  Grid.Column="4" Grid.Row="3" FontSize="16" />
+                <TextBox Grid.Column="6" Grid.Row="3" TextWrapping="Wrap" Text="{Binding RawMaterialBean.Pinying, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"  />
+                
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="库存单位 :"  VerticalAlignment="Center"  Grid.Column="8" Grid.Row="5" FontSize="16" />
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name"   Grid.Column="10" Grid.Row="5" ItemsSource="{Binding RawMaterialBean.StockUnitItems, Mode=TwoWay}"  SelectedItem="{Binding RawMaterialBean.SelectedStockUnitItem}"  Margin="5"/>
+
+                <TextBlock HorizontalAlignment="Right"  TextWrapping="Wrap" Text="所属小类 :"  VerticalAlignment="Center"  Grid.Column="0" Grid.Row="5" FontSize="16" />
+                <TextBox Grid.Column="2" Grid.Row="5" TextWrapping="Wrap" Text="{Binding RawMaterialBean.LittleType, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16" Background="#DDD" IsReadOnly="True"  />
+                
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="进货单位 :" VerticalAlignment="Center"  Grid.Column="4" Grid.Row="5" FontSize="16" />
+                <ComboBox x:Name="UpdateInGoodsUnitBox" DisplayMemberPath="Name" SelectedValuePath="Name"   Grid.Column="6" Grid.Row="5" ItemsSource="{Binding RawMaterialBean.InGoodsUnitItems}"  SelectedItem="{Binding RawMaterialBean.SelectedInGoodsUnitItem}" Margin="5"/>
+                
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="进货单位:   库存单位   换算比例                        1   :  "  VerticalAlignment="Center"  Grid.Column="0" Grid.Row="7" FontSize="16" Grid.ColumnSpan="5"/>
+                <TextBox Grid.Column="6" Grid.Row="7" TextWrapping="Wrap" Text="{Binding RawMaterialBean.InGoodsStock, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"  />
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="配方单位:" VerticalAlignment="Center"  Grid.Column="8" Grid.Row="7" FontSize="16"/>
+                <ComboBox  DisplayMemberPath="Name" SelectedValuePath="Name"   Grid.Column="10" Grid.Row="7" ItemsSource="{Binding RawMaterialBean.FormulaUnitItems}"  SelectedItem="{Binding RawMaterialBean.SelectedFormulaUnitItem}"  Margin="5" />
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="库存单位:   进货单位   换算比例                        1   :  " VerticalAlignment="Center"  Grid.Column="0" Grid.Row="9" FontSize="16" Grid.ColumnSpan="5" />
+                <TextBox Grid.Column="6" Grid.Row="9" TextWrapping="Wrap" Text="{Binding RawMaterialBean.StockFormula, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"  />
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="建议采购价 :"  VerticalAlignment="Center"  Grid.Column="8" Grid.Row="9" FontSize="16" />
+                <TextBox Grid.Column="10" Grid.Row="9" TextWrapping="Wrap" Text="{Binding RawMaterialBean.InGoodsPrice, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"  />
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="6" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="库存上限 :" VerticalAlignment="Center" FontSize="16" Grid.Column="1" Grid.Row="1" />
+                <TextBox Grid.Column="3" Grid.Row="1" TextWrapping="Wrap" Text="{Binding RawMaterialBean.StockMax, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16" />
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="库存下限 :" VerticalAlignment="Center" FontSize="16"  Grid.Column="5" Grid.Row="1"/>
+                <TextBox Grid.Column="7" Grid.Row="1" TextWrapping="Wrap" Text="{Binding RawMaterialBean.StockMin, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16" />
+
+                <CheckBox Content="销售冲减库存" IsChecked="{Binding RawMaterialBean.WriteDowns}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="9" Grid.Row="1" FontSize="16" Grid.ColumnSpan="3"/>
+                <StackPanel  Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
+                    <CheckBox IsChecked="{Binding RawMaterialBean.orderRawAdd}" Content="点菜加料" VerticalAlignment="Center" FontSize="16" Margin="15,0"/>
+                    <TextBlock HorizontalAlignment="Right" Margin="10,0" TextWrapping="Wrap" Text="售价:" VerticalAlignment="Center"  FontSize="16" />
+                </StackPanel>
+                <TextBox Grid.Column="3" Grid.Row="3" TextWrapping="Wrap" Text="{Binding RawMaterialBean.RawAddPrice, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16"/>
+
+                <CheckBox HorizontalAlignment="Right" IsChecked="{Binding RawMaterialBean.isWeight}" Content="是否称重确认" VerticalAlignment="Center"  Grid.Column="5" Grid.Row="3" FontSize="16" />
+                <TextBlock TextWrapping="Wrap" Text="注: 售价按配方单位定价，库存按配方单位减价"  VerticalAlignment="Center"  Grid.Column="7" Grid.Row="3" FontSize="14"  Grid.ColumnSpan="4"/>
+
+                <TextBlock HorizontalAlignment="Right"  TextWrapping="Wrap" Text="销售单位 :"  VerticalAlignment="Center"  Grid.Column="1" Grid.Row="5" FontSize="16" />
+                <ComboBox  DisplayMemberPath="Name" SelectedValuePath="Name"   Grid.Column="3" Grid.Row="5" ItemsSource="{Binding RawMaterialBean.SaleUnitItems}"  SelectedItem="{Binding RawMaterialBean.SelectedSaleUnitItem}" Margin="3" />
+
+                <TextBlock TextWrapping="Wrap" Text="注: 销售单位必须是以计数方式管理数量的单位" VerticalAlignment="Center"  Grid.Column="5" Grid.Row="5" FontSize="16" Grid.ColumnSpan="5"/>
+
+                <CheckBox IsChecked="{Binding RawMaterialBean.checkDay}" Content="每日盘点" VerticalAlignment="Center"  Grid.Column="11" Grid.Row="5" FontSize="16" />
+
+
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="备注:" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="7" FontSize="16"/>
+
+                <TextBox Grid.Column="3" Grid.Row="7" TextWrapping="Wrap" Text="{Binding RawMaterialBean.Detail, Mode=TwoWay}" VerticalAlignment="Center" FontSize="16" Grid.ColumnSpan="9" />
+
+            </Grid>
+            
+        </Grid>
+
+    </Grid>
+</Metro:MetroWindow>

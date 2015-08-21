@@ -1,0 +1,130 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.Dishes.DishesWayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:IShow.ChooseDishes.ViewModel.Common"
+        DataContext="{Binding DishesWay, Source={StaticResource ViewModelLocator}}"
+        Title="菜品做法" WindowState="Maximized">
+    <Window.Resources>
+
+        <HierarchicalDataTemplate x:Key="TreeNodeTemplate" DataType="{x:Type local:TreeNodeModel}" ItemsSource="{Binding Children}">
+            <Border x:Name="TreeNodeStackPanel" Margin="2">
+                <Button Command="{Binding DishesWay.SelectedTree, Source={StaticResource ViewModelLocator}}"
+                        CommandParameter="{Binding}"
+                        Content="{Binding Path=Text,Mode=OneTime}" Margin="2,0">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border>
+                                            <ContentPresenter x:Name="contentPresenter"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            Margin="{TemplateBinding Padding}" 
+                            RecognizesAccessKey="True" 
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Border>
+        </HierarchicalDataTemplate>
+        <Style x:Key="TreeNodeStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding Expanded}" />
+            <Setter Property="IsSelected" Value="{Binding Selected}" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        
+        <Menu>
+            <MenuItem Height="60" Command="{Binding Add}" >
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="新增" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding UpdateDishesWayMenu}">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="修改" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem  Command="{Binding Deleted}">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="删除" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding DishesWayTypeMenu}">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="做法类型" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem  Command="{Binding PingYingMenu}">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="生成拼音简码" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem  Command="{Binding Refresh}">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="刷新" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding PrintedMenu}">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="打印" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Click="MenuItem_Click">
+                <MenuItem.Header>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="退出" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView Grid.Column="0" ItemTemplate="{StaticResource TreeNodeTemplate}" 
+                  ItemContainerStyle="{StaticResource TreeNodeStyle}" 
+                  ItemsSource="{Binding FirstGeneration}" Margin="0,0,20,0">
+            </TreeView>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DishesWayTableItems}" Margin="5" Grid.Column="1"  CanUserAddRows="False" SelectedItem="{Binding DishesWaySelectedItem}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=LineNumber}" Width="auto" Header="行号" />
+                    <DataGridTextColumn Binding="{Binding  Path=Code}" Width="auto"   Header="编码"/>
+                    <DataGridTextColumn Binding="{Binding  Path=Name}" Width="auto"  Header="做法说明"/>
+                    <DataGridTextColumn Binding="{Binding  Path=DischesWayName}" Width="auto"  Header="类型"/>
+                    <DataGridTextColumn Binding="{Binding  Path=PingYing}" Width="auto"  Header="拼音简码"/>
+                    <DataGridTextColumn Binding="{Binding  Path=AddPrice}" Width="auto"  Header="加价"/>
+                    <DataGridCheckBoxColumn Binding="{Binding  Path=addPriceByNum}"  Width="auto" Header="按数量加价" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Metro:MetroWindow>

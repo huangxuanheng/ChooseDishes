@@ -1,0 +1,49 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.Dishes.DishesSelectBeanWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding DishesSelectBean, Source={StaticResource ViewModelLocator}}"
+        Title="新增自定义菜牌菜品选择" Height="600" Width="900">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0" Background="#CCC">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="模糊条件:" FontSize="14px"  HorizontalAlignment="Left" Margin="4,25,0,0" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left"  x:Name="MoFuTiaoJian"  Text="{Binding MoFuSouSuo}"     Height="23" Margin="78,30,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="347" RenderTransformOrigin="1.586,0.261" Grid.ColumnSpan="2"/>
+                <Label Content="大类:" FontSize="14px"   HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.692,0.121"/>
+                <ComboBox HorizontalAlignment="Left" x:Name="DishTypeBigComBoBoxBase"  DisplayMemberPath="Name" SelectedValuePath="Name"    ItemsSource="{Binding DishTypeBig}"   SelectedItem="{Binding SelectedItemBig,Mode=TwoWay}"  Margin="78,63,0,0" VerticalAlignment="Top" Width="135"/>
+                <Label Content="小类:" FontSize="14px" HorizontalAlignment="Left" Margin="12,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.692,0.121" Grid.Column="1"/>
+                <ComboBox HorizontalAlignment="Left"  x:Name="DishTypeSmailComBoBoxBase"   DisplayMemberPath="Name" SelectedValuePath="Name"   ItemsSource="{Binding DishTypeSmail}"  SelectedItem="{Binding SelectedItemSmail,Mode=TwoWay}"   Margin="67,63,0,0" VerticalAlignment="Top" Width="135" Grid.Column="1"/>
+                <!-- Command="{Binding ResetSelectValue}" -->
+                <Button Content="条件重置" Click="ResetSelectValue_Fun"    FontSize="14px"  Grid.Column="2" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="92" Height="36"/>
+                <Button Content="应    用"  Command="{Binding YunYongSelectValue}"  FontSize="14px"  Grid.Column="3" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="92" Height="36"/>
+                <!-- Command="{Binding OkSelect}"  OkSelectSegin_Fun  -->
+                <Button Content="确    定" Click="OkSelect_FUN"  FontSize="14px" Grid.Column="4" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="92" Height="36"/>
+                <Button Content="退    出"  FontSize="14px" Click="EXIT_WIN" Grid.Column="5" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="92" Height="36"/>
+            </Grid>
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"    Margin="5"     ItemsSource="{Binding DishesMenusSelected}"   Grid.Row="1" Grid.Column="0"   >
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn IsReadOnly="False" Width="*" Binding="{Binding IsSelectedMenus}"  Header="选项" />
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Code}" Width="*"   Header="品码"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishName}" Width="*"  Header="品名"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishFormat}" Width="*"  Header="规格"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishUnitName}" Width="*"  Header="单位"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding PingYing}" Width="1.2*" Header="拼音简码"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishTypeBigName}" Width="1.2*"  Header="所属大类"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding DishTypeName}" Width="1.2*"  Header="所属小类"/>
+                    <DataGridTextColumn IsReadOnly="True"  Binding="{Binding AidNumber}" Width="1.2*"  Header="辅助编码"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

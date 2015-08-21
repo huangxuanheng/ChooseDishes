@@ -1,0 +1,105 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.OrgInfo.SystemLogDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        DataContext="{Binding SysLog, Source={StaticResource ViewModelLocator}}"
+        ResizeMode="NoResize"
+        Title="系统日志详情查看" Height="300" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Width="592" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="日志类型 :" VerticalAlignment="Center" FontSize="16" Grid.Column="0" Grid.Row="1" />
+            <StackPanel Grid.Column="2" Grid.Row="1" >
+                <Label Content="{Binding SystemLogBean.Module, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="功能 :" VerticalAlignment="Center" FontSize="16"  Grid.Column="4" Grid.Row="1"/>
+           <StackPanel Grid.Column="6" Grid.Row="1" >
+                <Label Content="{Binding SystemLogBean.Function, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="操作时间 :" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="3" FontSize="16" />
+            <StackPanel Grid.Column="2" Grid.Row="3" >
+                <Label Content="{Binding SystemLogBean.CreateDatetime, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="操作计算机 :"  VerticalAlignment="Center"  Grid.Column="4" Grid.Row="3" FontSize="16" />
+            <StackPanel Grid.Column="6" Grid.Row="3" >
+                <Label Content="{Binding SystemLogBean.OpenComputer, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+ 
+            <TextBlock HorizontalAlignment="Right"  TextWrapping="Wrap" Text="操作员 :"  VerticalAlignment="Center"  Grid.Column="0" Grid.Row="5" FontSize="16" />
+            <StackPanel Grid.Column="2" Grid.Row="5" >
+                <Label Content="{Binding SystemLogBean.Actor, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="授权人 :" VerticalAlignment="Center"  Grid.Column="4" Grid.Row="5" FontSize="16" />
+            <StackPanel Grid.Column="6" Grid.Row="5" >
+                <Label Content="{Binding SystemLogBean.Authorizer, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <!--
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="单据类型"  VerticalAlignment="Center"  Grid.Column="0" Grid.Row="7" FontSize="16"/>
+            <StackPanel Grid.Column="2" Grid.Row="7" >
+                <Label Content="{Binding SystemLogBean.authorizer, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="单据编号:" VerticalAlignment="Center"  Grid.Column="4" Grid.Row="7" FontSize="16"/>
+            <StackPanel Grid.Column="6" Grid.Row="7" >
+                <Label Content="{Binding SystemLogBean.MaterialName, Mode=TwoWay}"  VerticalAlignment="Center" Height="28" FontSize="16"/>
+                <Label Background="#000" Height="1" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            -->
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="详情描述 : "  VerticalAlignment="Center"  Grid.Column="0" Grid.Row="7" FontSize="16" />
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="退出前台营业系统"  VerticalAlignment="Center"  Grid.Column="2" Grid.Row="7" FontSize="16" />
+        </Grid>
+        <Grid Grid.Row="1" Background="#D4D0C8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="2" TextWrapping="Wrap" Text="{Binding SystemLogBean.CurrentScale}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Grid.Row="0" Grid.Column="0"  Content="上一条"  Command="{Binding PreviousRecord}" HorizontalAlignment="Right"  VerticalAlignment="Center" Width="75"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="下一条"  Command="{Binding NextRecord}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75" />
+            <Button Grid.Row="0" Grid.Column="6" Content="退出" Click="Exit_Win" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
+        </Grid>
+    </Grid>
+    
+</Metro:MetroWindow>

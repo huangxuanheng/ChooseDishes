@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="IShow.ChooseDishes.View.Controls.TableItemBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:IShow.ChooseDishes.Helper.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Width="125" MinHeight="100" Background="Transparent">
+    <UserControl.Resources>
+        <converter:TableStatusConverter x:Key="TableStatusConverter"/>
+        <converter:TableDateTimeVisiblityConverter x:Key="TableDateTimeVisiblityConverter"/>
+        <converter:TableDefaultPeopleVisibilityConverter x:Key="TableDefaultPeopleVisibilityConverter"/>
+        <converter:TableMoneyVisibilityConverter x:Key="TableMoneyVisibilityConverter"/>
+        <converter:TableDateTimeFormatConverter x:Key="TableDateTimeFormatConverter"/>
+        <converter:TableLockConverter x:Key="TableLockConverter"/>
+        <converter:TableDefaultSeatForeground x:Key="TableDefaultSeatForeground"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="35"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--显示餐桌名称-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Center">
+            <AccessText FontSize="16">(</AccessText>
+            <AccessText VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Name}" FontSize="16"/>
+            <AccessText FontSize="16">)桌</AccessText>
+        </StackPanel>
+        <!--锁图标-->
+        <Image Grid.Row="0" Grid.Column="1" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Source="../../Image/Home/ToolBtn/suoping_0.png" Height="30" Width="30" Visibility="{Binding Locked,Converter={StaticResource TableLockConverter}}"></Image>
+
+        <StackPanel  Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Center"  HorizontalAlignment="Center"  
+                       Visibility="{Binding Status, Converter={StaticResource TableMoneyVisibilityConverter}}">
+            <AccessText>￥</AccessText>
+            <!--餐桌价格-->
+            <TextBlock Text="{Binding Money}"/>
+
+        </StackPanel>
+
+        <StackPanel   Grid.Row="1"  Grid.ColumnSpan="2" Orientation="Horizontal"  VerticalAlignment="Center"  HorizontalAlignment="Center" 
+                   Visibility="{Binding Status, Converter={StaticResource TableDefaultPeopleVisibilityConverter}}">
+            <!--默认人数-->
+            <AccessText VerticalAlignment="Center"  HorizontalAlignment="Center" Text="{Binding DefaultSeats}"  />
+            <AccessText>人</AccessText>
+        </StackPanel>
+
+        <!--显示时间-->
+        <Grid Grid.Row="2"  Grid.ColumnSpan="2" Margin="5,0,5,5"
+                    Visibility="{Binding Status, Converter={StaticResource TableDateTimeVisiblityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <!--填充开台时间-->
+            <TextBlock Text="{Binding StartTime,Converter={StaticResource TableDateTimeFormatConverter}}" Grid.Column="0" HorizontalAlignment="Left"
+                         />
+            <!--就餐人数-->
+            <TextBlock Text="{Binding DiningNumber}" Grid.Column="1" HorizontalAlignment="Right"/>
+        </Grid>
+
+
+    </Grid>
+</UserControl>

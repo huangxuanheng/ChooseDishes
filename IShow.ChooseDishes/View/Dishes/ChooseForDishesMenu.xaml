@@ -1,0 +1,77 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.Dishes.ChooseForDishesMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:IShow.ChooseDishes.ViewModel.Common"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:page="clr-namespace:IShow.ChooseDishes.ViewModel.Dishes"
+        DataContext="{Binding ChooseForDishesMenu, Source={StaticResource ViewModelLocator}}"
+        Title="菜牌选菜" Height="600" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <page:ChooseForDishesMenuViewModel x:Key="pagingDataSource"/>
+            <Style TargetType="{x:Type local:PagingControl}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:PagingControl}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Name="PART_FirstPageButton" Content="&lt;&lt;" Grid.Column="0"/>
+                                <Button Name="PART_PreviousPageButton" Content="&lt;" Grid.Column="1"/>
+                                <TextBox Name="PART_PageTextBox" Grid.Column="2"/>
+                                <TextBlock Text="{Binding TotalPages, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="3"/>
+                                <Button Name="PART_NextPageButton" Content="&gt;" Grid.Column="4"/>
+                                <Button Name="PART_LastPageButton" Content="&gt;&gt;" Grid.Column="5"/>
+                                <ComboBox Name="PART_PageSizesCombobox" Grid.Column="6"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="21,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="193,42,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="343,41,0,0" VerticalAlignment="Top" Width="108"/>
+        <Button Content="查询" HorizontalAlignment="Left" Margin="493,41,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+        <Label Content="匹配" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.633,0.654"/>
+        <Label Content="大类" HorizontalAlignment="Left" Margin="193,11,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.633,0.654"/>
+        <Label Content="小类" HorizontalAlignment="Left" Margin="343,11,0,0" VerticalAlignment="Top" Width="108" RenderTransformOrigin="1.633,0.654"/>
+        <DataGrid AutoGenerateColumns="False" GridLinesVisibility="Horizontal" ItemsSource="{Binding ItemsSource,ElementName=pageControl, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" Height="449" Width="792">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Binding="{Binding Code}" Width="80" Header="编码"/>
+                <DataGridTextColumn Binding="{Binding Name}" Width="160" Header="菜品名称"/>
+                <DataGridTextColumn Binding="{Binding Unit}" Width="80" Header="规格"/>
+                <DataGridTextColumn Binding="{Binding Type}" Width="80" Header="单位"/>
+                <DataGridTextColumn Binding="{x:Null}" Width="100" ClipboardContentBinding="{x:Null}" Header="所属大类"/>
+                <DataGridTextColumn Binding="{x:Null}" Width="100" ClipboardContentBinding="{x:Null}" Header="小类"/>
+                <DataGridHyperlinkColumn Binding="{x:Null}" Width="80"  ContentBinding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="操作"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <local:PagingControl x:Name="pageControl" Grid.Row="1" Height="25"
+                              PageContract="{StaticResource pagingDataSource}"
+                              PreviewPageChange="pageControl_PreviewPageChange"
+                              PageChanged="pageControl_PageChanged">
+            <local:PagingControl.PageSizes>
+                <sys:UInt32>10</sys:UInt32>
+                <sys:UInt32>20</sys:UInt32>
+                <sys:UInt32>50</sys:UInt32>
+                <sys:UInt32>100</sys:UInt32>
+            </local:PagingControl.PageSizes>
+        </local:PagingControl>
+    </Grid>
+</Window>

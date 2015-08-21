@@ -1,0 +1,16 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.LockScreen.LockScreenWaitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="LockScreenWaitWindow" Height="300" Width="300" Loaded="LockScreenWait_Loaded">
+    <Border x:Name="mainBoder">
+        <Border.Background>
+            <ImageBrush ImageSource="E:\src\IShow.ChooseDishes\Image\lock.jpg"/>
+        </Border.Background>
+        <StackPanel Orientation="Vertical">
+            <Label Margin="0 100 0 0"  HorizontalAlignment="Center">
+                <TextBlock x:Name="txtPoint" TextWrapping="Wrap" Text="4532543254"></TextBlock>
+            </Label>
+        </StackPanel>
+    </Border>
+</Window>

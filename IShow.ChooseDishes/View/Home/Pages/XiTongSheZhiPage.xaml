@@ -1,0 +1,127 @@
+﻿<Page x:Class="IShow.ChooseDishes.View.Home.Pages.XiTongSheZhiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
+      DataContext="{Binding XiTongSheZhi, Source={StaticResource ViewModelLocator}}"
+	Title="XiTongSheZhiPage">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Skins/MainPageStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <controls:PageHeader Closing="OnClosingWindow"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="206"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="136"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <controls:NavigationBar1/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="589"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Width="136" Height="82" 
+                                Style="{StaticResource MainFeatureButtonStyle}"
+                                Margin="0,0,15,0" Click="BaseContentBtn_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="24" Height="24" Source="../../../Image/MainPage/jichuziliao.png"/>
+                                <AccessText Text="基础资料" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Width="136" Height="82" 
+                                Style="{StaticResource MainFeatureButtonStyle}"
+                                Margin="0,0,15,0" Click="ForeMgrBtn_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="24" Height="24" Source="../../../Image/MainPage/qiantaiguanli.png"/>
+                                <AccessText Text="前台管理" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Width="136" Height="82" 
+                                Style="{StaticResource MainFeatureButtonStyle}"
+                                Margin="0,0,15,0" Click="TableCenterBtn_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="24" Height="24" Source="../../../Image/MainPage/baobiaozhongxin.png"/>
+                                <AccessText Text="报表中心" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Width="136" Height="82" Background="#f2774b"
+                                Style="{StaticResource MainFeatureButtonStyle}"
+                                Click="SysSettingBtn_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="24" Height="24" Source="../../../Image/MainPage/xitongshezhi.png"/>
+                                <AccessText Text="系统设置" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="系统设置" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="20" />
+                    </Grid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,0,0">
+                        <Button Content="公司信息" Command="{Binding GongSiXinXi}" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                        <Button Content="数据库备份" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                        <Button Content="数据管理" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,0,0">
+                        <Button Content="员工资料" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                        <Button Content="操作员资料" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                        <Button Content="操作员权限" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,0,0">
+                        <Button Content="系统日志" Background="Transparent" Foreground="#ff254c6d" Width="65" Height="90" Margin="0,0,80,0" />
+                    </StackPanel>
+                    
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Column="1" Background="#ff254c6d">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
+                    <Button Content="初始化向导" Style="{StaticResource RightFeatureButtonStyle}"/>
+                    <Button Content="餐桌赠送设置" Style="{StaticResource RightFeatureButtonStyle}"/>
+                    <Button Content="自定义账单设置" Style="{StaticResource RightFeatureButtonStyle}"/>
+                    <Button Content="计价器设置" Style="{StaticResource RightFeatureButtonStyle}"/>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Page>

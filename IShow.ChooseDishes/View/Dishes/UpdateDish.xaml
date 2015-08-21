@@ -1,0 +1,110 @@
+﻿<Window x:Class="IShow.ChooseDishes.View.Dishes.UpdateDish"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding DishWin, Source={StaticResource ViewModelLocator}}"
+        Title="UpdateDish" Height="600" Width="900">
+    <Grid>
+        <Grid Background="#CCC">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="ShangXiaGrid" Grid.ColumnSpan="4"  >
+                <TextBlock Margin="106,18,460,0" TextWrapping="Wrap" Text="{Binding IndexTiao}" VerticalAlignment="Top" Height="23" RenderTransformOrigin="1.034,0.696"/>
+                <TextBlock HorizontalAlignment="Left" Margin="78,18,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Height="23" Width="45" Grid.ColumnSpan="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="49,18,0,0" TextWrapping="Wrap" Text="{Binding IndexAll}" VerticalAlignment="Top" Height="23" Width="50" RenderTransformOrigin="0.677,0.87"/>
+                <Button Content="上一条"  Command="{Binding OnOneIndex}" HorizontalAlignment="Left" Margin="278,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.747,0.818" Height="33"/>
+                <Button Content="下一条"  Command="{Binding NextIndex}" HorizontalAlignment="Left" Margin="162,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.747,0.818" Height="33"/>
+            </Grid>
+            <Button Content="保存"    Command="{Binding SaveDish}"   Grid.Column="4" HorizontalAlignment="Left" Margin="24,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.747,0.818" Height="33"/>
+            <Button Content="退出"    Click="Exit_Win"   Grid.Column="5" HorizontalAlignment="Left" Margin="51,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.747,0.818" Height="33"/>
+            <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6" Background="#AAA">
+                <TextBlock HorizontalAlignment="Left" Margin="77,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="菜品资料" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="20" FontSize="15" FontWeight="Bold"/>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Background="#ddd">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Right" Margin="26,21,0,0" TextWrapping="Wrap" Text="品码 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,21,0,0" TextWrapping="Wrap" Text="{Binding DishBean.Code, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,21,0,0" TextWrapping="Wrap" Text="菜品名称 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13"  Grid.Column="2" />
+                <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,21,0,0" TextWrapping="Wrap" Text="{Binding DishBean.DishName, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,21,0,0" TextWrapping="Wrap" Text="拼音简码 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.Column="4" />
+                <TextBox Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="10,21,0,0" TextWrapping="Wrap" Text="{Binding DishBean.PingYing, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,58,0,0" TextWrapping="Wrap" Text="辅助编码 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,58,0,0" TextWrapping="Wrap" Text="{Binding DishBean.AidNumber, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,58,0,0" TextWrapping="Wrap" Text="英文名称 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" RenderTransformOrigin="4.821,2.391" Grid.Column="2" />
+                <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,58,0,0" TextWrapping="Wrap" Text="{Binding DishBean.EnglishName, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,58,0,0" TextWrapping="Wrap" Text="单位 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" RenderTransformOrigin="9.537,2.304" Grid.Column="4" />
+                <ComboBox x:Name="UpdateDishComboBox" DisplayMemberPath="Name" SelectedValuePath="Name"   Grid.Column="5" Margin="10,58,10,227" ItemsSource="{Binding DishUnitItems}"  SelectedItem="{Binding SelectedItem}"   />
+                <TextBlock HorizontalAlignment="Right" Margin="0,96,0,0" TextWrapping="Wrap" Text="所属大类 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,96,0,0" TextWrapping="Wrap" Text="{Binding DishBean.DishTypeBigName, Mode=TwoWay}" VerticalAlignment="Top" Width="178"  IsReadOnly="True" Background="#DDD" />
+                <TextBlock HorizontalAlignment="Right" Margin="0,96,0,0" TextWrapping="Wrap" Text="所属小类 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" RenderTransformOrigin="4.687,3.87" Grid.Column="2" />
+                <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,96,0,0" TextWrapping="Wrap" Text="{Binding DishBean.DishTypeName, Mode=TwoWay}" VerticalAlignment="Top" Width="178"  IsReadOnly="True" Background="#DDD"  />
+                <TextBlock HorizontalAlignment="Right" Margin="0,96,0,0" TextWrapping="Wrap" Text="规格 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.Column="4" />
+                <TextBox Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="10,96,0,0" TextWrapping="Wrap" Text="{Binding DishBean.DishFormat, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,133,0,0" TextWrapping="Wrap" Text="售价1 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,133,0,0" TextWrapping="Wrap" Text="{Binding DishBean.Price1, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,133,0,0" TextWrapping="Wrap" Text="售价2 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.Column="2" />
+                <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,133,0,0" TextWrapping="Wrap" Text="{Binding DishBean.Price2, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,133,0,0" TextWrapping="Wrap" Text="售价3 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.Column="4" />
+                <TextBox Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="10,133,0,0" TextWrapping="Wrap" Text="{Binding DishBean.Price3, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,170,0,0" TextWrapping="Wrap" Text="会员价1 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,170,0,0" TextWrapping="Wrap" Text="{Binding DishBean.MemberPrice1, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,170,0,0" TextWrapping="Wrap" Text="会员价2 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.Column="2" />
+                <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,170,0,0" TextWrapping="Wrap" Text="{Binding DishBean.MemberPrice2, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,170,0,0" TextWrapping="Wrap" Text="会员价3 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.Column="4" />
+                <TextBox Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="10,170,0,0" TextWrapping="Wrap" Text="{Binding DishBean.MemberPrice3, Mode=TwoWay}" VerticalAlignment="Top" Width="178"/>
+                <Menu Grid.ColumnSpan="6" Margin="32,203,10,42" Background="#ddd">
+                    <CheckBox Content="称重确认"  IsChecked="{Binding DishBean.WeightConfirm, Mode=TwoWay}"  Margin="10"/>
+                    <CheckBox Content="计入低消"  IsChecked="{Binding DishBean.LowConsumerConfirm, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox Content="收服务费"  IsChecked="{Binding DishBean.ServerfreeConsumer, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox Content="临时菜品"  IsChecked="{Binding DishBean.SanpConfirm, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox Content="停用"  IsChecked="{Binding DishBean.IsStop, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox Content="可折扣"  IsChecked="{Binding DishBean.DiscountConfirm, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox Content="时价"  IsChecked="{Binding DishBean.PriceTimeConfirm, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox x:Name="CheckBoxTaoCai" Content="套菜"  IsChecked="{Binding DishBean.PackagesConfirm, Mode=TwoWay}"   Command="{Binding ClickTaoCai}"    Margin="10"/>
+                    <CheckBox Content="下传点菜机"  IsChecked="{Binding DishBean.PosConfirm, Mode=TwoWay}"   Margin="10"/>
+                    <CheckBox Content="拼菜菜品"  IsChecked="{Binding DishBean.FoodFight, Mode=TwoWay}"   Margin="10,4,5,10"/>
+                    <CheckBox x:Name="CheckBoxZhiXiao"  Content="是否是直销商品"  IsChecked="{Binding DishBean.LineConfirm, Mode=TwoWay}" Command="{Binding ChickZhiXiao}"   Margin="10,4,5,10"/>
+                </Menu>
+                <Menu Margin="32,276,0,0" Grid.ColumnSpan="6">
+                    <RadioButton x:Name="RadioButton1" Content="正常菜品"  Command="{Binding SelectDishType}"   Margin="10"/>
+                    <RadioButton x:Name="RadioButton2"  Content="一品多吃主菜"  Command="{Binding SelectDishType}"   Margin="10"/>
+                    <RadioButton x:Name="RadioButton3"  Content="一品多吃子菜"  Command="{Binding SelectDishType}"    Margin="10"/>
+                </Menu>
+            </Grid>
+            <DataGrid IsReadOnly="{Binding IsEditDishPrice}" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="6"  AutoGenerateColumns="False"   ItemsSource="{Binding DishePriceList}"  SelectedItem="{Binding SelectedDishPrice}" Margin="10,0,124,10"    >
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Width="*"  Header="行号"/>
+                    <DataGridTextColumn Binding="{Binding DishSpecification}"  Width="*"  Header="规格"/>
+                    <DataGridTextColumn Binding="{Binding Price1}" Width="*"  Header="售价1"/>
+                    <DataGridTextColumn Binding="{Binding Price2}" Width="*"  Header="售价2"/>
+                    <DataGridTextColumn Binding="{Binding Price3}" Width="*"  Header="售价3"/>
+                    <DataGridTextColumn Binding="{Binding MemberPrice1}" Width="*"  Header="会员价1"/>
+                    <DataGridTextColumn Binding="{Binding MemberPrice2}" Width="*"  Header="会员价2"/>
+                    <DataGridTextColumn Binding="{Binding MemberPrice3}" Width="*"  Header="会员价3"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="新增/修改规格" Command="{Binding AddDishPrice}" Grid.Column="5" HorizontalAlignment="Left" Margin="92,19,0,0" Grid.Row="3" VerticalAlignment="Top" Width="88" RenderTransformOrigin="0.787,-0.273" Height="28" Grid.RowSpan="2"/>
+            <Button Content="删除规格" Command="{Binding DeleteDishPrice}"  Grid.Column="5" HorizontalAlignment="Left" Margin="92,42,0,0" Grid.Row="4" VerticalAlignment="Top" Width="88" RenderTransformOrigin="0.787,-0.273" Height="28"/>
+        </Grid>
+
+    </Grid>
+</Window>

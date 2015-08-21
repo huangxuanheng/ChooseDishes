@@ -1,0 +1,88 @@
+﻿<controls:MetroWindow x:Class="IShow.ChooseDishes.View.OrgInfo.AddEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        DataContext="{Binding Employee, Source={StaticResource ViewModelLocator}}"
+        Title="员工资料"  WindowState="Maximized">
+    <Grid>
+        <Grid Background="#CCC">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6" Background="#ddd">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="1" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="69,44,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.DepartmentId, Mode=TwoWay}"  VerticalAlignment="Top" Width="178" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="69,44,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.UserId, Mode=TwoWay}"  VerticalAlignment="Top" Width="178" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="工号 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.JobNo, Mode=TwoWay}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="员工姓名 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2"   />
+                <TextBox Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Name, Mode=TwoWay}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="0" Grid.Column="4"  HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="行政部门 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Row="0" Grid.Column="5"  IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.DepartmentName, Mode=TwoWay}" VerticalAlignment="Top" Width="150"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="职务 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Position, Mode=TwoWay}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="电话 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Phone, Mode=TwoWay}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="手机 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Mobile, Mode=TwoWay}" VerticalAlignment="Top" Width="150"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="生日 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Birthday, Mode=TwoWay}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="身份证号 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2"  />
+                <TextBox Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Code, Mode=TwoWay}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="性别 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13"  />
+                <Menu Grid.Row="2" Grid.Column="5" Margin="0,18,1,0">
+                    <RadioButton x:Name="RadioButton1" Content="男"  Command="{Binding EditSex}" />
+                    <RadioButton x:Name="RadioButton2"  Content="女"  Command="{Binding EditSex}" />
+                </Menu>
+                <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="居住地址 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.ResidentialAddress, Mode=TwoWay}" VerticalAlignment="Top" Width="398"/>
+                <TextBlock Grid.Row="3" Grid.Column="4" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="E_mail :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <TextBox Grid.Row="3" Grid.Column="5"  HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Email, Mode=TwoWay}" VerticalAlignment="Top" Width="150"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="身份证地址 :" VerticalAlignment="Top" Width="80" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5"  HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.IDAddress, Mode=TwoWay}" VerticalAlignment="Top" Width="646" />
+                <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="备注 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="5" Grid.Column="1"   Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" Text="{Binding Employeexaml.Remark, Mode=TwoWay}" VerticalAlignment="Top" Width="398"/>
+                <TextBlock Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" Margin="20,18,0,0" TextWrapping="Wrap" Text="状态 :" VerticalAlignment="Top" Width="67" Height="23" FontSize="13" />
+                <Menu Grid.Row="5" Grid.Column="5" Margin="0,18,10,0">
+                    <RadioButton x:Name="RadioButton3" Content="在职"  Command="{Binding EditFlag}" />
+                    <RadioButton x:Name="RadioButton4"  Content="离职"  Command="{Binding EditFlag}" />
+                </Menu>
+            </Grid>
+
+            <Button Content="保存" Grid.Column="4" Grid.Row="2"  Margin="0,10,0,0" Command="{Binding AddWin}"    HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75"  Height="33" />
+            <Button Content="取消" Grid.Column="5" Grid.Row="2"  Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"  Height="33"  Click="Button_Click" />
+
+            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Background="#AAA">
+                <TextBlock HorizontalAlignment="Left" Margin="77,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="主要资料" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="20" FontSize="15" FontWeight="Bold"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</controls:MetroWindow>

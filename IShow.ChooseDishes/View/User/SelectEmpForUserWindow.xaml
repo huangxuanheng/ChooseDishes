@@ -1,0 +1,30 @@
+﻿<controls:MetroWindow x:Class="IShow.ChooseDishes.View.User.SelectEmpForUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+         DataContext="{Binding SelectEmpForUser, Source={StaticResource ViewModelLocator}}"
+        Title="SelectEmpForUserWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="420"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="0" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Index}" Width="40" ClipboardContentBinding="{x:Null}" Header="行号"/>
+                <DataGridTextColumn Binding="{Binding Path=JobNo}" Width="60"  ClipboardContentBinding="{x:Null}" Header="工号"/>
+                <DataGridTextColumn Binding="{Binding Path=Name}" Width="80" ClipboardContentBinding="{x:Null}" Header="员工姓名"/>
+                <DataGridTextColumn Binding="{Binding Path=DepartmentName}" Width="80" ClipboardContentBinding="{x:Null}" Header="行政部门"/>
+                <DataGridTextColumn Binding="{Binding Path=Index}" Width="60" ClipboardContentBinding="{x:Null}" Header="职务"/>
+                <DataGridTextColumn Binding="{Binding Path=Mobile}" Width="80" ClipboardContentBinding="{x:Null}" Header="联系电话"/>
+                <DataGridTextColumn Binding="{Binding Path=Index}" Width="80" ClipboardContentBinding="{x:Null}" Header="手机"/>
+                <DataGridTextColumn Binding="{Binding Path=Birthday}" Width="80" ClipboardContentBinding="{x:Null}" Header="生日"/>
+                <DataGridTextColumn Binding="{Binding Path=Index}" Width="60" ClipboardContentBinding="{x:Null}" Header="状态"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Button Name="Ok" Content="确定" Width="75" Height="41" Margin="437,10,280,0" Click="Ok_Click"/>
+            <Button Name="Cancel" Content="取消" Width="75" Height="41" Margin="626,10,91,0" Click="Cancel_Click"/>
+        </Grid>
+    </Grid>
+</controls:MetroWindow>

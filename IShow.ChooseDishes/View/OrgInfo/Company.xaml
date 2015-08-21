@@ -1,0 +1,39 @@
+﻿<controls:MetroWindow x:Class="IShow.ChooseDishes.View.OrgInfo.Company"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        DataContext="{Binding OrgInfo, Source={StaticResource ViewModelLocator}}"
+        Title="公司信息" Height="500" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3.7*"/>
+            <ColumnDefinition Width="6.3*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="名称" Grid.Column="0" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top"/>
+        <Label Content="负责人" Grid.Column="0" HorizontalAlignment="Left" Margin="50,65,0,0" VerticalAlignment="Top"/>
+        <Label Content="联系电话" Grid.Column="0" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="手机号码" Grid.Column="0" HorizontalAlignment="Left" Margin="50,135,0,0" VerticalAlignment="Top"/>
+        <Label Content="电子邮箱" Grid.Column="0" HorizontalAlignment="Left" Margin="50,170,0,0" VerticalAlignment="Top"/>
+        <Label Content="地址" Grid.Column="0" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top"/>
+        <Label Content="Logo图片" Grid.Column="0" HorizontalAlignment="Left" Margin="50,240,0,0" VerticalAlignment="Top"/>
+        <Label Content="店铺名称" Grid.Column="0" HorizontalAlignment="Left" Margin="50,275,0,0" VerticalAlignment="Top"/>
+        <Label Content="店铺名称/网址" Grid.Column="0" HorizontalAlignment="Left" Margin="50,310,0,0" VerticalAlignment="Top"/>
+        <Label Content="店铺地址" Grid.Column="0" HorizontalAlignment="Left" Margin="50,345,0,0" VerticalAlignment="Top"/>
+
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.CompanyId, Mode=TwoWay}" Visibility="Hidden" Margin="150,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.CompanyName, Mode=TwoWay}" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.Contacts, Mode=TwoWay}" Margin="10,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.Phone, Mode=TwoWay}" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.Mobile, Mode=TwoWay}" Margin="10,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.Email, Mode=TwoWay}" Margin="10,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.Addr, Mode=TwoWay}" Margin="10,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.Logo1, Mode=TwoWay}" Margin="10,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.DPName, Mode=TwoWay}" Margin="10,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.DPParam, Mode=TwoWay}" Margin="10,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Companyxaml.DPAddr, Mode=TwoWay}" Margin="10,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
+        <Button Content="保存" Grid.Column="1" HorizontalAlignment="Left" Margin="0,408,0,0" VerticalAlignment="Top" Command="{Binding AddWin}"  Width="75" />
+        <Button Content="取消" Grid.Column="1" HorizontalAlignment="Left" Margin="100,408,0,0" VerticalAlignment="Top"  Width="75" Click="Button_Click"/>
+        <Calendar HorizontalAlignment="Left" Height="100" Margin="715,471,-323,-101" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</controls:MetroWindow>

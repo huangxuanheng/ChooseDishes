@@ -1,0 +1,431 @@
+﻿<Metro:MetroWindow x:Class="IShow.ChooseDishes.View.Home.Booking.ChooseDishesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="餐桌点菜"
+                   WindowStartupLocation="CenterScreen" Icon="../../../Image/LOGO.png" 
+                   ResizeMode="NoResize" ShowMaxRestoreButton="False"  ShowMinButton="False" WindowState="Maximized">
+    <Metro:MetroWindow.RightWindowCommands>
+        <Metro:WindowCommands>
+            <AccessText Text="爱秀科技有限公司" FontSize="15" VerticalAlignment="Center" Foreground="{DynamicResource AccentColorBrush5}"></AccessText>
+        </Metro:WindowCommands>
+    </Metro:MetroWindow.RightWindowCommands>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Skins/ChooseDishesStyle.xaml" />
+                <ResourceDictionary Source="../../../Skins/ButtonStyle.xaml" />
+                <ResourceDictionary Source="../../../Skins/ScrollBarStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+           
+
+            <!--表单-->
+            <Grid  Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <AccessText Height="25" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0">餐 桌：</AccessText>
+                <TextBox Height="25" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Width="100"></TextBox>
+                <AccessText Height="25" HorizontalAlignment="Right"  Grid.Row="0" Grid.Column="2" >单 号：</AccessText>
+                <TextBox Height="25"  Grid.Row="0"  HorizontalAlignment="Left" Grid.Column="3" Width="100"></TextBox>
+
+                <AccessText Height="25"  HorizontalAlignment="Right"  Grid.Row="1" Grid.Column="0">人 数：</AccessText>
+                <Metro:NumericUpDown  HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="1" Width="100" Minimum="1" Value="1" Maximum="99"></Metro:NumericUpDown>
+                <AccessText Height="25"  HorizontalAlignment="Right"  Grid.Row="1" Grid.Column="2" >服务员：</AccessText>
+                <TextBox Height="25"  Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="3" Width="100"></TextBox>
+
+                <AccessText Height="25" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0">备 注：</AccessText>
+                <TextBox Height="25" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="220"></TextBox>
+
+
+                <AccessText HorizontalAlignment="Right" Height="25" Grid.Row="3" Grid.Column="0" >单 注：</AccessText>
+                <TextBox Height="25" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Width="220"></TextBox>
+
+
+                <DataGrid x:Name="OrderDishesDataGrid" Grid.Row="4" Grid.ColumnSpan="4" AutoGenerateColumns="False" Background="White" RowHeight="32"
+                              HorizontalScrollBarVisibility="Hidden">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="  序号" Width="50"    Binding="{Binding CaoZuoYuan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="菜品" Width="120" Binding="{Binding ShenQingShiJian, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="价格" Width="60" Binding="{Binding BeiYongJin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="数量" Width="60" Binding="{Binding JiaoBan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="退量" Width="60" Binding="{Binding JiaoBan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush3}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush5}"/>
+                            <Setter Property="Height" Value="32"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                </DataGrid>
+
+                <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--第4行，上一页，下一页-->
+                    <Button Width="80" Height="40" Style="{StaticResource NoBorderButtonStyle}" Content="上一页" Margin="0,0,20,0"></Button>
+                    <Button Width="80" Height="40" Style="{StaticResource NoBorderButtonStyle}" Content="下一页" Margin="20,0,0,0"></Button>
+                </StackPanel>
+
+
+                <!--第5行内容-->
+                <Border  Grid.Row="6" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"  Grid.Column="0" Grid.ColumnSpan="4" >
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <AccessText Margin="30,0,0,0" Grid.Column="0" FontSize="16" Text="合计：200042" Grid.Row="6" ></AccessText>
+                        <AccessText HorizontalAlignment="Right" Margin="0,0,30,0" Grid.Column="1" FontSize="16" Text="数量：3" Grid.Row="6" ></AccessText>
+                    </Grid>
+                </Border>
+                
+                
+            </Grid>
+
+            <!---中间按钮-->
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <Grid.Background>
+                    <SolidColorBrush Color="#254c6d"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                    <RowDefinition Height="0.083*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <RadioButton GroupName="DishesButtonGroup" x:Name="HandupButton" Grid.Row="0" Style="{StaticResource HoldonRadioButtonStyle}" Click="HandupButton_Click" Content="挂起" />
+
+                <RadioButton GroupName="DishesButtonGroup"  x:Name="HoldonButton" Grid.Row="1" Style="{StaticResource HoldonRadioButtonStyle}" Click="HoldonButton_Click" Content="催菜" />
+
+                <RadioButton GroupName="DishesButtonGroup"  x:Name="NumericButton" Grid.Row="2" Style="{StaticResource HoldonRadioButtonStyle}" Click="NumericButton_Click" Content="数量" />
+
+                <!--加号-->
+                <RadioButton GroupName="DishesButtonGroup"  x:Name="IncrementButton" Grid.Row="3" Style="{StaticResource HoldonRadioButtonStyle}" Content="-"/>
+                <!--减号-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="DecrementButton" Grid.Row="4" Style="{StaticResource HoldonRadioButtonStyle}" Content="-" />
+
+                <!--做法-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="CookieButton" Grid.Row="5" Style="{StaticResource HoldonRadioButtonStyle}" Content="做法"/>
+                <!--加料-->
+                <RadioButton GroupName="DishesButtonGroup"  x:Name="AddOnsButton" Grid.Row="6" Style="{StaticResource HoldonRadioButtonStyle}" Content="加料" />
+
+                <!--退菜-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="ReturnDishesButton" Grid.Row="7" Style="{StaticResource HoldonRadioButtonStyle}" />
+
+
+                <!--套菜-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="GroupDishesButton"  Grid.Row="8" Content="套菜" Style="{StaticResource HoldonRadioButtonStyle}" Click="GroupDishesButton_Click" />
+
+
+                <!--换菜-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="ExchangeDishesButton" Grid.Row="9" Content="换菜" Style="{StaticResource HoldonRadioButtonStyle}" Click="NumericButton_Click" />
+
+                <!--拼菜-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="DishesSharingButton"  Grid.Row="10" Content="拼菜" Style="{StaticResource HoldonRadioButtonStyle}" />
+
+                <!--其他-->
+                <RadioButton GroupName="DishesButtonGroup" x:Name="FunctionsButton"  Grid.Row="11" Content="其他" Style="{StaticResource HoldonRadioButtonStyle}" />
+                
+            </Grid>
+           
+
+           
+            <!--菜牌-->
+            <Grid Grid.Column="2" Background="{DynamicResource AccentColorBrush3}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!--菜品大类-->
+                <ListBox  Grid.Row="0" ItemsSource="{Binding FirstCategorys}" Style="{StaticResource listBoxWithAutoScroll_Horizontal}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <RadioButton VerticalContentAlignment="Center" FontSize="16" Style="{StaticResource FirstCategoryButtonStyle}" GroupName="DishesMenuItems" Content="{Binding}" Background="Transparent" Foreground="#ff254c6d" Width="80" Height="60" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <!--菜品分类-->
+                <ListBox  Grid.Row="1"  Background="#517da0" ItemsSource="{Binding FirstCategorys}" Style="{StaticResource listBoxWithAutoScroll_Horizontal}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <RadioButton GroupName="DishCategory" Height="48" Width="80" Style="{StaticResource SecondCatagoryRadioStyle}" Content="{Binding}"></RadioButton>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                
+                <!--中间按钮点击，切换Tab进行，不同的数据展示-->
+
+
+                <TabControl Grid.Row="2" x:Name="BookingTabControl" Background="{DynamicResource AccentColorBrush3}">
+                    <!--隐藏TabHeader-->
+                    <TabControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </TabControl.ItemContainerStyle>
+                    <!--###############################选菜-默认首页#########################-->
+                    <TabItem Header="选菜" x:Name="ChooseDishesTabControl">
+                        <Grid  Background="{DynamicResource AccentColorBrush3}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--分隔符-->
+                            <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                                <TextBlock FontSize="16" Text="请选择需要的菜品："></TextBlock>
+                            </StackPanel>
+
+                            <ListBox x:Name="DishesRecordsListBox" Grid.Row="1" BorderThickness="1" 
+                                 Style="{StaticResource ListBoxStyle}"
+                                 ItemContainerStyle="{StaticResource DishesItemBoxStyle}"                 
+                                 ItemsSource="{Binding Dishes}" SelectionMode="Multiple">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"  />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                            <Grid  Grid.Row="2" Background="{DynamicResource AccentColorBrush5}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel  Grid.Column="0" Orientation="Horizontal" Margin="1,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <TextBox Height="40" Width="150" FontSize="16" Grid.Column="1" VerticalContentAlignment="Center" Metro:TextBoxHelper.ClearTextButton="True" Text="{Binding Code}"></TextBox>
+                                    <Button Width="60" Height="40" Content="手写" Style="{StaticResource GrayButtonStyle}"></Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="结账" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="落单" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="主页" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+                    <!--##############################增加数量############################-->
+
+                    <TabItem x:Name="NumericTabItem" Header="增加数量">
+                        <Grid Background="{DynamicResource AccentColorBrush5}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <AccessText  VerticalAlignment="Center" FontSize="{DynamicResource NormalFontSize}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="当前数量:"></AccessText>
+                                    <AccessText  VerticalAlignment="Center" FontSize="{DynamicResource NormalFontSize}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Text="20"></AccessText>
+
+                                    <AccessText VerticalAlignment="Center" FontSize="{DynamicResource NormalFontSize}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="修改数量:"></AccessText>
+                                    <Metro:NumericUpDown  VerticalAlignment="Center"  Grid.Row="1"  Grid.Column="1" Width="80" Height="35" HorizontalAlignment="Left" ></Metro:NumericUpDown>
+                                </Grid>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <controls:NumericKeypad></controls:NumericKeypad>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
+                                <Button Height="50" Width="80" Style="{StaticResource OrangeButtonStyle}" Content="确定"></Button>
+                                <Button Margin="0,0,30,0" Height="50" Width="80" Style="{StaticResource OrangeButtonStyle}" Content="取消"></Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </TabItem>
+
+                    <!--##############################挂起############################-->
+                    <TabItem x:Name="HandupTabItem" Header="挂起">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--分隔符-->
+                            <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                                <TextBlock FontSize="16" Text="请选择挂起的菜品："></TextBlock>
+                            </StackPanel>
+
+                            <ListBox x:Name="ReturnDishesListBox" Grid.Row="1" BorderThickness="1" 
+                                 Style="{StaticResource ListBoxStyle}"
+                                 ItemContainerStyle="{StaticResource DishesItemBoxStyle}"                 
+                                 ItemsSource="{Binding Dishes}" SelectionMode="Multiple">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"  />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                            <Grid  Grid.Row="2" Background="{DynamicResource AccentColorBrush5}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel  Grid.Column="0" Orientation="Horizontal" Margin="1,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <TextBox Height="40" Width="150" FontSize="16" Grid.Column="1" VerticalContentAlignment="Center" Metro:TextBoxHelper.ClearTextButton="True" Text="{Binding Code}"></TextBox>
+                                    <Button Width="60" Height="40" Content="手写" Style="{StaticResource GrayButtonStyle}"></Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="单个挂起" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="整桌挂起" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="返回" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                    </TabItem>
+
+                    <!--##############################挂起############################-->
+                    <TabItem x:Name="HoldonTabItem" Header="催菜">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--分隔符-->
+                            <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                                <TextBlock FontSize="16" Text="请选择催菜的菜品："></TextBlock>
+                            </StackPanel>
+
+                            <ListBox x:Name="HoldonDishesListBox" Grid.Row="1" BorderThickness="1" 
+                                 Style="{StaticResource ListBoxStyle}"
+                                 ItemContainerStyle="{StaticResource DishesItemBoxStyle}"                 
+                                 ItemsSource="{Binding Dishes}" SelectionMode="Multiple">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"  />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                            <Grid  Grid.Row="2" Background="{DynamicResource AccentColorBrush5}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel  Grid.Column="0" Orientation="Horizontal" Margin="1,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <TextBox Height="40" Width="150" FontSize="16" Grid.Column="1" VerticalContentAlignment="Center" Metro:TextBoxHelper.ClearTextButton="True" Text="{Binding Code}"></TextBox>
+                                    <Button Width="60" Height="40" Content="手写" Style="{StaticResource GrayButtonStyle}"></Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="单个催菜" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="整桌催菜" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="返回" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+        <StatusBar Grid.Row="1">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0">
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <AccessText Text="点菜人："></AccessText>
+                    <AccessText>张三</AccessText>
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <AccessText>点菜时间:</AccessText>
+                    <AccessText>20:85:32</AccessText>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="2">
+                <StackPanel Orientation="Horizontal">
+                    <AccessText>餐台状态：</AccessText>
+                    <AccessText>张三</AccessText>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="3">
+                <StackPanel Orientation="Horizontal">
+                    <AccessText>餐台号：</AccessText>
+                    <AccessText>A0001</AccessText>
+                </StackPanel>
+            </StatusBarItem>
+
+        </StatusBar>
+    </Grid>
+</Metro:MetroWindow>
