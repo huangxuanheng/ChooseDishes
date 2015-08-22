@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IShow.ChooseDishes.ViewModel.Booking;
 using MahApps.Metro.Controls;
+using IShow.ChooseDishes.Model;
+using System.Collections.ObjectModel;
 
 namespace IShow.ChooseDishes.View.Home.Booking
 {
@@ -21,10 +23,12 @@ namespace IShow.ChooseDishes.View.Home.Booking
     /// </summary>
     public partial class ChooseDishesWindow : MetroWindow
     {
+        ChooseDishesViewModel ChooseDishes;
         public ChooseDishesWindow()
         {
             InitializeComponent();
-            this.DataContext = new ChooseDishesViewModel();
+            //this.DataContext = new ChooseDishesViewModel();
+            ChooseDishes = this.DataContext as ChooseDishesViewModel;
         }
 
 
@@ -48,5 +52,42 @@ namespace IShow.ChooseDishes.View.Home.Booking
         {
             HandupTabItem.IsSelected = true;
         }
+
+        private void FirstCategorys_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioBtn = (RadioButton)sender;
+            int id = (int)radioBtn.Tag;
+            if (id > 0)
+            {
+                ChooseDishes.SelectedItemFirstCategory(id);
+            }
+        }
+
+        private void SecondCategorys_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioBtn = (RadioButton)sender;
+            int id = (int)radioBtn.Tag;
+            if (id > 0)
+            {
+                ChooseDishes.SelectedItemSecondCategory(id);
+            }
+        }
+            private void SubmitOrders_Click(object sender, RoutedEventArgs e)
+        {
+            //DishBeanUtil a = (DishBeanUtil)this.DishesRecordsListBox.SelectedItem;
+            //ObservableCollection<DishBeanUtil> dishList = (ObservableCollection<DishBeanUtil>)this.DishesRecordsListBox.SelectedItems;
+            System.Collections.IList items = (System.Collections.IList)this.DishesRecordsListBox.SelectedItems;
+            var collection = items.Cast<DishBeanUtil>();
+            List<DishBeanUtil> list = collection.ToList();
+            ChooseDishes.SubmitOrders_Ation(list);
+        }
+
+            private void DishesRecordsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                System.Collections.IList items = (System.Collections.IList)this.DishesRecordsListBox.SelectedItems;
+                var collection = items.Cast<DishBeanUtil>();
+                List<DishBeanUtil> list = collection.ToList();
+                ChooseDishes.SubmitOrders_Ation(list);
+            }
     }
 }

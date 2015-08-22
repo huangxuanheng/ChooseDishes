@@ -11,6 +11,18 @@ namespace IShow.ChooseDishes.Model
     public class CashTypeBean : ObservableObject, IEditableObject
     {
         public int Id { get; set; }
+        int _index;
+        public int index
+        {
+            get
+            {
+                return _index;
+            }
+            set
+            {
+                Set("index", ref _index, value);
+            }
+        }
         string _Code;
         public string Code
         {

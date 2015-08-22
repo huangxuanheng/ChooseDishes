@@ -737,7 +737,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.DishCent' does not have a primar
           <Property Name="DishUnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="SaleType" Type="int" Nullable="false" />
-          <Property Name="OrderNum" Type="int" Nullable="false" />
+          <Property Name="OrderNum" Type="float" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="int" Nullable="false" />
           <Property Name="Deleted" Type="int" Nullable="false" />
@@ -3845,7 +3845,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="DishUnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="SaleType" Type="Int32" Nullable="false" />
-          <Property Name="OrderNum" Type="Int32" Nullable="false" />
+          <Property Name="OrderNum" Type="Double" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateBy" Type="Int32" Nullable="false" />
           <Property Name="Deleted" Type="Int32" Nullable="false" />

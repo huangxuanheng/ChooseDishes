@@ -8,6 +8,7 @@
              Width="100" MinHeight="75" Background="{DynamicResource AccentColorBrush5}" BorderThickness="1">
     <UserControl.Resources>
         <converter:TableStatusConverter x:Key="TableStatusConverter" />
+        <!--<converter:ItemTimeVisiblityConverter x:Key="ItemTimeVisiblityConverter" />-->
     </UserControl.Resources>
     <Grid Background="{Binding Status, Converter={StaticResource TableStatusConverter}}">
         <Grid.RowDefinitions>

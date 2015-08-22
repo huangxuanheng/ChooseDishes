@@ -405,6 +405,7 @@
     <Compile Include="Model\Booking\DishModel.cs" />
     <Compile Include="Model\Booking\TableStatus.cs" />
     <Compile Include="Model\Booking\TableItemModel.cs" />
+    <Compile Include="Model\Booking\TableTypeItemModel.cs" />
     <Compile Include="Model\ClearEstimateModel.cs" />
     <Compile Include="Model\CompanyBean.cs" />
     <Compile Include="Model\ConfigModel\BasicConfig.cs" />

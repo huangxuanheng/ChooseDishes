@@ -125,7 +125,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top">
-                    <ListBox ItemsSource="{Binding TypeItems}" SelectionChanged="TypeItems_SelectionChanged" SelectedItem="{Binding TypeSelectedItem}">
+                    <ListBox x:Name="TypeItems" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding TypeItems}" SelectedItem="{Binding TypeSelectedItem}">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Vertical" IsItemsHost="True"/>
@@ -134,7 +134,12 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource DishesAreaButtonStyle}" Content="所有桌类" />
+                                <Border>
+                                    <StackPanel>
+                                        <RadioButton Style="{StaticResource DishesAreaRadioButtonStyle}" Width="140" Content="{Binding Name}" Click="RadioButton_Click"/>
+                                
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

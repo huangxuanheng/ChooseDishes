@@ -50,8 +50,8 @@ namespace IShow.ChooseDishes.Model
             }
         }
 
-        public int _OrderNum;
-        public int OrderNum
+        public double _OrderNum;
+        public double OrderNum
         {
             get
             {

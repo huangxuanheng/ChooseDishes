@@ -22,7 +22,7 @@ namespace IShow.ChooseDishes.Data
         public int DishUnitId { get; set; }
         public string Name { get; set; }
         public int SaleType { get; set; }
-        public int OrderNum { get; set; }
+        public double OrderNum { get; set; }
         public System.DateTime CreateDatetime { get; set; }
         public int CreateBy { get; set; }
         public int Deleted { get; set; }

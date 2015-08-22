@@ -6,6 +6,7 @@ using IShow.ChooseDishes.Api;
 using IShow.ChooseDishes.Data;
 using IShow.ChooseDishes.Model;
 using IShow.ChooseDishes.Model.EnumSet;
+using IShow.ChooseDishes.Model.Util;
 using IShow.ChooseDishes.View.Dishes;
 using IShow.Common.Log;
 using System;
@@ -91,25 +92,34 @@ namespace IShow.ChooseDishes.ViewModel
 
         private void LoaderAddBaseData()
         {
-            MarketTypeBean = new Model.MarketTypeBean();
-            List<MarketType> mts = _DataService.FindAllMarketType();
-            if (mts != null)
+            new Task(() =>
             {
-                MarketType mt = mts.ElementAt(mts.Count - 1);
-                if (mt.Id + 1 < 10)
+                List<MarketType> mts = _DataService.FindAllMarketType();
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
-                    _MarketTypeBean.Code = "0" + (mt.Id + 1);
-                }
-                else if (mt.Id + 1 < 100)
-                {
-                    _MarketTypeBean.Code = "" + (mt.Id + 1);
-                }
-            }
-            else
-            {
-                _MarketTypeBean.Code = "01";
-            }
-            MarketTypeBean.StartTime = DateTime.Now;
+                    MarketTypeBean = new Model.MarketTypeBean();
+                    if (mts != null)
+                    {
+                        MarketType mt = mts.ElementAt(mts.Count - 1);
+                        if (mt.Id + 1 < 10)
+                        {
+                            _MarketTypeBean.Code = "0" + (mt.Id + 1);
+                        }
+                        else if (mt.Id + 1 < 100)
+                        {
+                            _MarketTypeBean.Code = "" + (mt.Id + 1);
+                        }
+                    }
+                    else
+                    {
+                        _MarketTypeBean.Code = "01";
+                    }
+                    MarketTypeBean.StartTime = DateTime.Now;
+                    MarketTypeSetView.IsTextBoxTextChanged = false;
+                });
+               
+            }).Start();
+           
         }
         RelayCommand _Update;
         public RelayCommand Update
@@ -138,7 +148,7 @@ namespace IShow.ChooseDishes.ViewModel
                 return;
             }
             //MessageBox.Show("时间"+DateTime.Now.ToLongTimeString());
-            _MarketTypeBean = SelectedItem;
+            MarketTypeBean =MarketTypeBean.CreateMarketTypeBean(SelectedItem);
 
             MarketTypeSetView = new View.Dishes.MarketTypeSetView();
             //隐藏上一条下一条等的控件
@@ -161,16 +171,24 @@ namespace IShow.ChooseDishes.ViewModel
                     }
                     MarketType mt = MarketTypeBean.CreateMarketType(SelectedItem);
                     mt.Deleted = 1;
-                    MarketType m=_DataService.UpdateMarketType(mt);
-                    if (m != null)
+                    new Task(() =>
                     {
-                        //修改状态成功
-                        InitMarketTypeData();
-                    }
-                    else
-                    {
-                        MessageBox.Show("删除失败！");
-                    }
+                        MarketType m = _DataService.UpdateMarketType(mt);
+                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                        {
+                            if (m != null)
+                            {
+                                //修改状态成功
+                                InitMarketTypeData();
+                            }
+                            else
+                            {
+                                MessageBox.Show("删除失败！");
+                            }
+                        });
+                       
+                    }).Start();
+                   
                     Logger.Log("删除市别", LOGSEVERITY.Debug);
 
                     Logger.LogMethodExit();
@@ -254,25 +272,32 @@ namespace IShow.ChooseDishes.ViewModel
             {
                 //文本框中有数据有变动，弹出提示
                 MessageBoxResult result = MessageBox.Show("数据有变动，是否保存？", "提示", MessageBoxButton.YesNoCancel);
-                MarketTypeSetView.IsTextBoxTextChanged = false;
                 if (result == MessageBoxResult.Yes)
                 {
+                   
                     if (MarketTypeSetView.Continue.IsVisible)
                     {   
                         SaveMarketType(ButtonEventType.ADD);
+                        LoaderAddBaseData();
                     }
                     else
                     {
                         SaveMarketType(ButtonEventType.UPDATE);
-                    }
-                    
-                    LoaderAddBaseData();
+                    }  
                 }
                 else if (result == MessageBoxResult.No)
                 {
                     LoaderAddBaseData();
                     return;
                 }
+            }
+            else
+            {
+                if (MarketTypeSetView.Continue.IsVisible)
+                {
+                    LoaderAddBaseData();
+                }
+                
             }
         }
         /// <summary>
@@ -284,11 +309,37 @@ namespace IShow.ChooseDishes.ViewModel
         {
             if (type.Equals(ButtonEventType.DEFAULT))  //3
             {
-                CheckedTextChanged();
+                if (CommonUtil.IsNullOrEmpty(MarketTypeBean.Name))
+                {
+                    LoaderAddBaseData();
+                    return;
+                }
+                
+            }
+            if (CommonUtil.IsNullOrEmpty(MarketTypeBean.Name))
+            {
+                MessageBox.Show("市别名称不能为空字符!");
                 return;
             }
+            if (CommonUtil.IsNullOrEmpty(MarketTypeBean.ShowStartTime))
+            {
+                MessageBox.Show("开始时间不能为空字符!");
+                return;
+            }
+            if (!CommonUtil.IsCorrectFormatTime(MarketTypeBean.ShowStartTime))
+            {
+                MessageBox.Show("开始时间格式不正确,请核实!");
+                return;
+            }
+            if (type.Equals(ButtonEventType.DEFAULT))  //3
+            {
+                CheckedTextChanged();  //数据有变动
+                return;
+            }
+            
             MarketType temp=null;
             MarketType mt=MarketTypeBean.CreateMarketType(MarketTypeBean);
+            
             switch (type)
             {
                 default:
@@ -309,7 +360,7 @@ namespace IShow.ChooseDishes.ViewModel
                     temp = _DataService.UpdateMarketType(mt);
                     break;
             }
-            if (mt != null)
+            if (temp != null)
             {
                 MarketTypeSetView.IsTextBoxTextChanged = false;
                 MessageBox.Show("保存成功");
@@ -351,7 +402,7 @@ namespace IShow.ChooseDishes.ViewModel
                 return;
             }
             SelectedItem = MarketTypeItems.ElementAt(currentItem);
-            MarketTypeBean = SelectedItem;
+            MarketTypeBean =MarketTypeBean.CreateMarketTypeBean( SelectedItem);
             MarketTypeSetView.IsTextBoxTextChanged = false;
         }
 
@@ -364,8 +415,11 @@ namespace IShow.ChooseDishes.ViewModel
             _DataService = dataService;
             InitMarketTypeData();
         }
+        private bool Selected = false;
+       
         private void InitMarketTypeData()
         {
+
             new Task(() =>
             {
                 List<MarketType> mts = _DataService.FindAllMarketTypeByDeletedStatus();
@@ -388,7 +442,12 @@ namespace IShow.ChooseDishes.ViewModel
                                 _MarketTypeBean.Code = "" + mt.Id;
                             }
                             _MarketTypeBean.CreateMarketTypeBean(mt);
-                            if (x == 0)
+                            if (!Selected)
+                            {
+                                _SelectedItem = _MarketTypeBean;
+                                Selected = true;
+                            }
+                            else if (_SelectedItem != null && _SelectedItem.Id == _MarketTypeBean.Id)
                             {
                                 _SelectedItem = _MarketTypeBean;
                             }

@@ -4,6 +4,7 @@
         xmlns:controls="clr-namespace:IShow.ChooseDishes.View.Controls"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Title="餐桌点菜"
+                   DataContext="{Binding ChooseDishes, Source={StaticResource ViewModelLocator}}"
                    WindowStartupLocation="CenterScreen" Icon="../../../Image/LOGO.png" 
                    ResizeMode="NoResize" ShowMaxRestoreButton="False"  ShowMinButton="False" WindowState="Maximized">
     <Metro:MetroWindow.RightWindowCommands>
@@ -71,14 +72,14 @@
                 <TextBox Height="25" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Width="220"></TextBox>
 
 
-                <DataGrid x:Name="OrderDishesDataGrid" Grid.Row="4" Grid.ColumnSpan="4" AutoGenerateColumns="False" Background="White" RowHeight="32"
+                <DataGrid x:Name="OrderDishesDataGrid" ItemsSource="{Binding OrderedDishes}" Grid.Row="4" Grid.ColumnSpan="4" AutoGenerateColumns="False" Background="White" RowHeight="32"
                               HorizontalScrollBarVisibility="Hidden">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="  序号" Width="50"    Binding="{Binding CaoZuoYuan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="菜品" Width="120" Binding="{Binding ShenQingShiJian, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="价格" Width="60" Binding="{Binding BeiYongJin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="数量" Width="60" Binding="{Binding JiaoBan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="退量" Width="60" Binding="{Binding JiaoBan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="  序号" Width="50" Binding="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="菜品" Width="120" Binding="{Binding DishName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="价格" Width="60" Binding="{Binding Price1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="数量" Width="60" Binding="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="退量" Width="60" Binding="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataGrid.Columns>
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
@@ -175,7 +176,7 @@
                     <RowDefinition Height="60"></RowDefinition>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--菜品大类-->
                 <ListBox  Grid.Row="0" ItemsSource="{Binding FirstCategorys}" Style="{StaticResource listBoxWithAutoScroll_Horizontal}">
                     <ListBox.ItemContainerStyle>
@@ -183,7 +184,7 @@
                             <Setter Property="ContentTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
-                                        <RadioButton VerticalContentAlignment="Center" FontSize="16" Style="{StaticResource FirstCategoryButtonStyle}" GroupName="DishesMenuItems" Content="{Binding}" Background="Transparent" Foreground="#ff254c6d" Width="80" Height="60" />
+                                        <RadioButton VerticalContentAlignment="Center" FontSize="16" Style="{StaticResource FirstCategoryButtonStyle}" GroupName="DishesMenuItems" Content="{Binding Name}" Checked="FirstCategorys_Click" Tag="{Binding DishTypeId}" Background="Transparent" Foreground="#ff254c6d" Width="80" Height="60" />
                                     </DataTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -192,14 +193,14 @@
                 </ListBox>
 
                 <!--菜品分类-->
-                <ListBox  Grid.Row="1"  Background="#517da0" ItemsSource="{Binding FirstCategorys}" Style="{StaticResource listBoxWithAutoScroll_Horizontal}">
+                <ListBox  Grid.Row="1"  Background="#517da0" ItemsSource="{Binding SecondCategorys}" Style="{StaticResource listBoxWithAutoScroll_Horizontal}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="VerticalAlignment" Value="Top"></Setter>
                             <Setter Property="ContentTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
-                                        <RadioButton GroupName="DishCategory" Height="48" Width="80" Style="{StaticResource SecondCatagoryRadioStyle}" Content="{Binding}"></RadioButton>
+                                        <RadioButton GroupName="DishCategory" Height="48" Width="80" Style="{StaticResource SecondCatagoryRadioStyle}" Content="{Binding Name}" Checked="SecondCategorys_Click" Tag="{Binding DishTypeId}"></RadioButton>
                                     </DataTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -233,7 +234,7 @@
                             <ListBox x:Name="DishesRecordsListBox" Grid.Row="1" BorderThickness="1" 
                                  Style="{StaticResource ListBoxStyle}"
                                  ItemContainerStyle="{StaticResource DishesItemBoxStyle}"                 
-                                 ItemsSource="{Binding Dishes}" SelectionMode="Multiple">
+                                 ItemsSource="{Binding Dishes}" SelectionMode="Multiple" SelectionChanged="DishesRecordsListBox_SelectionChanged">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal" IsItemsHost="True"  />
@@ -252,7 +253,7 @@
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button Content="结账" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
-                                    <Button Content="落单" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
+                                    <Button Content="落单" Width="80" Height="50" Click="SubmitOrders_Click" Style="{StaticResource OrangeButtonStyle}"></Button>
                                     <Button Content="主页" Width="80" Height="50" Style="{StaticResource OrangeButtonStyle}"></Button>
                                 </StackPanel>
                             </Grid>

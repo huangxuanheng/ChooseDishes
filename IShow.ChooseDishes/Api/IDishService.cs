@@ -67,7 +67,7 @@ namespace IShow.ChooseDishes
 
          int AddDishesUnit(DishUnit dishesUnit);
 
-         bool UpdateDishUnit(int DishUnitId, string name, int SaleType, int OrderNum);
+         bool UpdateDishUnit(int DishUnitId, string name, int SaleType, double OrderNum);
 
         bool RemoveDishesUnitById(int dishUnitId);
         #endregion 菜品單位

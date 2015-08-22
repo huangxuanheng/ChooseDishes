@@ -87,7 +87,7 @@ namespace IShow.ChooseDishes.Model
             }
             set
             {
-                ShowStartTime = value.ToLongTimeString();
+                ShowStartTime = value.ToShortTimeString();
                 Set("StartTime", ref _StartTime, value);
             }
         }
@@ -176,41 +176,6 @@ namespace IShow.ChooseDishes.Model
             }
         }
 
-
-        RelayCommand _AddTime;
-        public RelayCommand AddTime
-        {
-            get
-            {
-                return _AddTime ?? (_AddTime = new RelayCommand(() =>
-                {
-                    Logger.LogMethodEntry();
-                    StartTime = StartTime.AddMinutes(1);
-                    MessageBox.Show("时间" + ShowStartTime);
-                    Logger.Log("时间加1", LOGSEVERITY.Debug);
-
-                    Logger.LogMethodExit();
-                    return;
-                }));
-            }
-        }
-        RelayCommand _MinusTime;
-        public RelayCommand MinusTime
-        {
-            get
-            {
-                return _MinusTime ?? (_MinusTime = new RelayCommand(() =>
-                {
-                    Logger.LogMethodEntry();
-                    
-                    Logger.Log("时间减一", LOGSEVERITY.Debug);
-
-                    Logger.LogMethodExit();
-                    return;
-                }));
-            }
-        }
-
         public MarketTypeBean CreateMarketTypeBean(MarketType bean)
         {
             this.Id = bean.Id;
@@ -224,12 +189,27 @@ namespace IShow.ChooseDishes.Model
             this.UpdateBy = bean.UpdateBy;
             return this;
         }
+        public MarketTypeBean CreateMarketTypeBean(MarketTypeBean bean)
+        {
+            MarketTypeBean mt = new MarketTypeBean();
+            mt.Id = bean.Id;
+            mt.Code = bean.Code;
+            mt.Name = bean.Name;
+            mt.StartTime = bean.StartTime;
+            mt.CreateDatetime = bean.CreateDatetime;
+            mt.CreateBy = bean.CreateBy;
+            mt.Deleted = bean.Deleted;
+            mt.Status = bean.Status;
+            mt.UpdateDatetime = bean.UpdateDatetime;
+            mt.UpdateBy = bean.UpdateBy;
+            return mt;
+        }
         public MarketType CreateMarketType(MarketTypeBean bean)
         {
             MarketType beanBack = new MarketType();
             beanBack.Id = bean.Id;
             beanBack.Name = bean.Name;
-            beanBack.StartTime = Convert.ToDateTime(bean.ShowStartTime); ;
+            beanBack.StartTime = Convert.ToDateTime(bean.ShowStartTime);
             beanBack.CreateDatetime = bean.CreateDatetime;
             beanBack.CreateBy = bean.CreateBy;
             beanBack.Deleted = bean.Deleted;

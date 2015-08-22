@@ -16,8 +16,9 @@ namespace IShow.ChooseDishes.ViewModel.Booking
     {
         ITableService _TableService;
         #region 餐桌类型
-        private string _TypeSelectedItem;
-        public string TypeSelectedItem
+
+        TableTypeItemModel _TypeSelectedItem;
+        public TableTypeItemModel TypeSelectedItem
         {
             get {
                 return _TypeSelectedItem;
@@ -26,11 +27,12 @@ namespace IShow.ChooseDishes.ViewModel.Booking
                 Set("TypeSelectedItem", ref _TypeSelectedItem, value);
             }
         }
-        ObservableCollection<string> _TypeItems;
-        public ObservableCollection<string> TypeItems
+
+        ObservableCollection<TableTypeItemModel> _TypeItems;
+        public ObservableCollection<TableTypeItemModel> TypeItems
         {
             get {
-                return _TypeItems ?? (_TypeItems = new ObservableCollection<string>());
+                return _TypeItems ?? (_TypeItems = new ObservableCollection<TableTypeItemModel>());
             }
             set {
                 Set("TypeItems", ref _TypeItems, value);
@@ -70,7 +72,7 @@ namespace IShow.ChooseDishes.ViewModel.Booking
             _TableService = _Service;
             InitTableData();
         }
-
+        private bool flag=false; 
         private void InitTableData()
         {
             //for (int i = 0; i < 10; i++)
@@ -81,13 +83,20 @@ namespace IShow.ChooseDishes.ViewModel.Booking
             //    TableItems.Add(new TableItemModel(i * 10 + "00" + 3, "1000", 887.54, TableStatus.Using, 10, 3, true));
             //    TableItems.Add(new TableItemModel(i * 10 + "00" + 4, "1000", i % 2 == 0 ? 0 : 20.00, TableStatus.Waiting, 2, 4, true));
             //}
-            TypeItems.Add("所有桌台");
+            TypeItems.Clear();
+            TypeItems.Add(new TableTypeItemModel(1,"001","所有餐桌"));
             List<TableType>types=_TableService.GetAllTypes();
             TableItems.Clear();
             if(types!=null&&types.Count>0)
             foreach (var type in types)
             {
-                TypeItems.Add("桌台"+type.Name);
+                TableTypeItemModel ttms=new TableTypeItemModel(type.TableTypeId, type.Code, type.Name);
+                if (!flag)
+                {
+                    //TypeSelectedItem = ttms;
+                    flag = true;
+                }
+                TypeItems.Add(ttms);
                 ICollection<Table>tables=type.Table;
                 if (tables != null && tables.Count > 0)
                 {
@@ -123,6 +132,11 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         {
             ///TODO 开台或者点菜
             MessageBox.Show("确定要对" + TableSelectedItem.Name+"进行开台吗？","提示",MessageBoxButton.YesNo);
+        }
+
+        public void TypeItemSelectionChanged()
+        {
+            MessageBox.Show("确定要对进行开台吗？" + TypeSelectedItem.Name + TypeSelectedItem.Id, "提示", MessageBoxButton.YesNo);
         }
     }
 }

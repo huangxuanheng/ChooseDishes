@@ -593,6 +593,7 @@ namespace IShow.ChooseDishes.Model
             this.WeightConfirm = dish.WeightConfirm;
             this.DishPrice = dish.DishPrice;
             this.DishUnit = dish.DishUnit;
+            this.DishUnitName = this.DishUnit.Name;
             return this;
         }
         public DishBean CreateDishBean2DishWay(Dish dish,DishUnit unit)

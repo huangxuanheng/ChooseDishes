@@ -69,9 +69,15 @@ namespace IShow.ChooseDishes.View.Home.Booking
             new TableLockWindow().ShowDialog();
         }
 
-        private void TypeItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
+            var ViewModel = DataContext as HomePageViewModel;
+            ViewModel.TypeItemSelectionChanged();
+        }
 
-        }  
+        //private void TypeItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+
+        //}  
     }
 }

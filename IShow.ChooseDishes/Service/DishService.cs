@@ -391,7 +391,7 @@ namespace IShow.ChooseDishes
             }
         }
 
-        public bool UpdateDishUnit(int DishUnitId ,string name, int SaleType, int OrderNum) {
+        public bool UpdateDishUnit(int DishUnitId ,string name, int SaleType, double OrderNum) {
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
                 var type = entities.DishUnit.SingleOrDefault(bt => bt.DishUnitId == DishUnitId);
