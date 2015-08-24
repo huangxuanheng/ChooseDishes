@@ -24,5 +24,10 @@ namespace IShow.ChooseDishes.View.Home.Booking
         {
             InitializeComponent();
         }
+
+        private void Commit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

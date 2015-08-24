@@ -15,11 +15,7 @@ namespace IShow.ChooseDishes
     {
         //餐桌类型
         #region 餐桌类型
-        /// <summary>
-        /// 获取所有的餐桌类型及其下的所有餐桌和餐桌对应的餐桌状态
-        /// </summary>
-        /// <returns>如果有数据，则返回所有的餐桌类型，否则返回null</returns>
-        List<TableType> GetAllTypes();
+        
         //查询所有桌类
         List<TableType> LoadAllTableType();
         //根据ID查询桌类
@@ -107,12 +103,7 @@ namespace IShow.ChooseDishes
         Table LoadTableById(int tableId);
         //根据餐类ID查询餐桌
         List<Table> LoadTableByTypeId(int typeId);
-        /// <summary>
-        /// 根据餐桌类型id查询所有餐桌及其下餐桌状态
-        /// </summary>
-        /// <param name="typeId">typeId 餐桌类型id</param>
-        /// <returns></returns>
-        List<Table> LoadTableAndRefByTypeId(int typeId);
+      
         //新增桌类
         Hashtable SaveTable(Table table);
         //修改桌类
@@ -122,17 +113,6 @@ namespace IShow.ChooseDishes
 
         #endregion
 
-        #region 按区域查询餐桌
-        /// <summary>
-        /// 获取所有的区域及其下的所有餐桌及餐桌状态
-        /// </summary>
-        /// <returns>如果查找到，则返回区域集合，否则返回null</returns>
-        List<Location> GetAllLocation();
-        /// <summary>
-        /// 根据区域id获取其下的所有餐桌及餐桌状态
-        /// </summary>
-        /// <returns>如果查找到，则返回区域集合，否则返回null</returns>
-        Location GetLocationById(int Id);
-        #endregion
+       
     }
 }

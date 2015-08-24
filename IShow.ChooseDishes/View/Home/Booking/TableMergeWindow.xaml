@@ -33,7 +33,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <controls:SimleTableItemBox/>
+                                <controls:SimpleTableItemBox/>
                                 <!--<ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="Background" Value="Green"></Setter>

@@ -34,7 +34,7 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<IDishesMenuService>(() => new DishesMenuService());
 
             SimpleIoc.Default.Register<IConfigurationService>(() => new ConfigurationService());
-
+            SimpleIoc.Default.Register<ITableStatusService>(() => new TableStatusService());
 
             SimpleIoc.Default.Register<IDiscountDataService>(() => new DiscountDataService());
             SimpleIoc.Default.Register<IEmployeeService>(() => new EmployeeService());
@@ -112,6 +112,7 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<ITableItemService>(() => new TableItemService());
             SimpleIoc.Default.Register<TableLockViewModel>();
             SimpleIoc.Default.Register<HomePageViewModel>();
+            SimpleIoc.Default.Register<TableItemViewModel>();
         }
 
         public DishesWayViewModel DishesWay
@@ -507,6 +508,13 @@ namespace IShow.ChooseDishes.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<HomePageViewModel>();
+            }
+        }
+        public TableItemViewModel TableItem
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TableItemViewModel>();
             }
         }
         public static void Cleanup()

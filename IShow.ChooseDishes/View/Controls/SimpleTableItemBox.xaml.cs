@@ -18,9 +18,9 @@ namespace IShow.ChooseDishes.View.Controls
     /// <summary>
     /// SimleTableItemBox.xaml 的交互逻辑
     /// </summary>
-    public partial class SimleTableItemBox : UserControl
+    public partial class SimpleTableItemBox : UserControl
     {
-        public SimleTableItemBox()
+        public SimpleTableItemBox()
         {
             InitializeComponent();
         }

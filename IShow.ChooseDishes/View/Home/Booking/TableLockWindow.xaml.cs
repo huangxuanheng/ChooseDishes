@@ -25,7 +25,11 @@ namespace IShow.ChooseDishes.View.Home.Booking
         {
             InitializeComponent();
         }
-
+        //public TableLockWindow(HomePageViewModel d)
+        //{
+        //    InitializeComponent();
+        //    this.DataContext = new TableLockViewModel(d);
+        //}
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

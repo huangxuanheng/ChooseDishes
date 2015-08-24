@@ -41,7 +41,27 @@ namespace IShow.ChooseDishes.Service
             }
 
         }
+        /// <summary>
+        /// 根据指定参数名称修改指定的参数
+        /// 
+        /// </summary>
+        /// <param name="name">值</param>
+        /// <param name="value">状态</param>
+        public void Update(string name, string value,int status)
+        {
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                Config config = entities.Config.Single(c => c.Name.Equals(name));
+                if (null == config)
+                {
+                    throw new NotFoundException("参数名【" + name + "】未找到匹配的项！");
+                }
+                config.Value = value;
+                config.Disabled = status;
+                entities.SaveChanges();
+            }
 
+        }
         /// <summary>
         /// 通过名称获取该值,该接口未查找到相应的值时，抛出异常
         /// </summary>

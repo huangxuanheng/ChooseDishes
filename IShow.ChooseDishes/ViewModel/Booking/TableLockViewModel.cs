@@ -46,6 +46,7 @@ namespace IShow.ChooseDishes.ViewModel.Booking
             _DataService = dataService;
             InitTableData();
         }
+
         private List<TableItem> tts;
         private void InitTableData()
         {

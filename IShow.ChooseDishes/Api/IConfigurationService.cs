@@ -23,7 +23,13 @@ namespace IShow.ChooseDishes.Api
         /// <param name="name"></param>
         /// <param name="value"></param>
         void Update(string name,string value);
-
+        /// <summary>
+        /// 根据指定参数名称修改指定的参数
+        /// 
+        /// </summary>
+        /// <param name="name">值</param>
+        /// <param name="value">状态</param>
+        void Update(string name, string value, int status);
         /// <summary>
         /// 通过名称和所在模块获取该值
         /// </summary>

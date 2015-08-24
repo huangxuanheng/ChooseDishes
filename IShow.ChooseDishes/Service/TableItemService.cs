@@ -74,5 +74,37 @@ namespace IShow.ChooseDishes.Service
                 return null;
             }
         }
+        //TODO 建立与开台关联的关系和获取订单对象
+        public List<TableItem> GetDetailByTableId(int TableId)
+        {
+            List<TableItem> tis;
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                tis=entities.TableItem.Include(typeof(Table).Name).Include(typeof(DeskDishes).Name).Where(t => t.Deleted == 0&&t.TableId==TableId).ToList();
+                
+            }
+            return tis;
+        }
+        //TODO 建立与开台关联的关系和获取开台关联信息
+        public List<TableItem> GetDetailByStatus(int Status)
+        {
+            List<TableItem> tis;
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                tis = entities.TableItem.Include(typeof(Table).Name).Where(t => t.Deleted == 0&&t.Status==Status).ToList();
+
+            }
+            return tis;
+        }
+        public int GetNumByStatus(int Status)
+        {
+            List<TableItem> tis;
+            using (ChooseDishesEntities entities = new ChooseDishesEntities())
+            {
+                tis = entities.TableItem.Where(t => t.Deleted == 0 && t.Status == Status).ToList();
+
+            }
+            return tis.Count;
+        }
     }
 }

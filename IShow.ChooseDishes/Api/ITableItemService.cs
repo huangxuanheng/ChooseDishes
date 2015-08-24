@@ -35,6 +35,24 @@ namespace IShow.ChooseDishes.Api
         /// <param name="CreateTableId">开台id</param>
         /// <returns></returns>
         TableItem ModifyStatusBy(int TableId, int CreateTableId, int Status);
-
+        /// <summary>
+        /// 根据桌台id获取餐桌状态详情，包括开台信息和餐桌信息
+        /// get the detail TableItem by TableId
+        /// </summary>
+        /// <param name="TableId">餐桌id</param>
+        /// <returns></returns>
+        List<TableItem> GetDetailByTableId(int TableId);
+        /// <summary>
+        /// 根据餐桌状态获取餐桌信息详情，包括开台信息和餐桌信息
+        /// </summary>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        List<TableItem> GetDetailByStatus(int Status);
+        /// <summary>
+        /// 根据餐桌状态获取对应餐桌的数量
+        /// </summary>
+        /// <param name="Status">餐桌状态</param>
+        /// <returns></returns>
+        int GetNumByStatus(int Status);
     }
 }

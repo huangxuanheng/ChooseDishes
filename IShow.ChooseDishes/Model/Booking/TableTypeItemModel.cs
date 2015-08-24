@@ -20,7 +20,11 @@ namespace IShow.ChooseDishes.Model.Booking
         /// <summary>
         /// 桌类名称
         /// </summary>
-        public string _Name;
+        private string _Name;
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        private bool _Checked;
 
         public TableTypeItemModel(int _Id,string _Code,string _Name)
         {
@@ -28,8 +32,15 @@ namespace IShow.ChooseDishes.Model.Booking
             this._Code = _Code;
             this._Name = _Name;
         }
+        public TableTypeItemModel(string _Name):this(-1, null, _Name)
+        {
+            
+        }
+        public TableTypeItemModel(int _Id, string _Name)
+            : this(_Id, null, _Name)
+        {
 
-
+        }
         public int Id
         {
             get { return _Id; }
@@ -45,6 +56,13 @@ namespace IShow.ChooseDishes.Model.Booking
         {
             get { return _Code; }
             set { Set("Name", ref _Code, value); }
+        }
+        public bool Checked
+        {
+            get { return _Checked; }
+            set {
+                Set("Checked", ref _Checked, value);
+            }
         }
     }
 }

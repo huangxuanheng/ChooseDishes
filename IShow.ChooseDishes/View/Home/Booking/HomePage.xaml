@@ -34,7 +34,7 @@
                     <ContextMenu Placement="RelativePoint" >
                         <MenuItem Header="参数配置" Style="{StaticResource FirstMenuItemStyle}" x:Name="menu1"/>
                         <MenuItem Header="开钱箱" Style="{StaticResource SecondMenuItemStyle}"/>
-                        <MenuItem Header="桌类定位" Style="{StaticResource SecondMenuItemStyle}"/>
+                        <MenuItem x:Name="TableLocation" Header="桌类定位" Style="{StaticResource SecondMenuItemStyle}" Click="TableLocation_Click"/>
                         <MenuItem Header="菜类定位" Style="{StaticResource SecondMenuItemStyle}"/>
                         <MenuItem Header="密码修改" Style="{StaticResource SecondMenuItemStyle}"/>
                     </ContextMenu>
@@ -59,7 +59,7 @@
                         <MenuItem Header="搭台/拆台" Style="{StaticResource SecondMenuItemStyle}"/>
                         <MenuItem Header="并台" Style="{StaticResource SecondMenuItemStyle}"/>
                         <MenuItem Header="转台" Style="{StaticResource SecondMenuItemStyle}"/>
-                        <MenuItem Header="加台（席）" Style="{StaticResource SecondMenuItemStyle}"/>
+                        <MenuItem Header="加台（席）" Style="{StaticResource SecondMenuItemStyle}" x:Name="AddTable" Click="AddTable_Click"/>
                         <MenuItem Header="锁定（解锁）" Style="{StaticResource SecondMenuItemStyle}" Click="MenuItem_Click"/>
                         <MenuItem Header="计时管理" Style="{StaticResource SecondMenuItemStyle}"/>
                         <MenuItem Header="称重确认" Style="{StaticResource SecondMenuItemStyle}"/>
@@ -125,7 +125,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top">
-                    <ListBox x:Name="TypeItems" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding TypeItems}" SelectedItem="{Binding TypeSelectedItem}">
+                    <ListBox x:Name="TypeItems" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding TypeItems}" SelectedItem="{Binding TypeSelectedItem}" SelectionChanged="TypeItems_SelectionChanged">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Vertical" IsItemsHost="True"/>
@@ -136,7 +136,7 @@
                             <DataTemplate>
                                 <Border>
                                     <StackPanel>
-                                        <RadioButton Style="{StaticResource DishesAreaRadioButtonStyle}" Width="140" Content="{Binding Name}" Click="RadioButton_Click"/>
+                                        <Label Style="{StaticResource DishesAreaLabelStyle}" Content="{Binding Name}" />
                                 
                                     </StackPanel>
                                 </Border>
@@ -149,27 +149,25 @@
 
                 <Button Grid.Row="1" Style="{StaticResource KitchenPrintButtonStyle}" Content="厨打状态"/>
 
-                <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Top" Margin="0,20,0,0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                        <Rectangle Width="30" Height="15" RadiusX="2" RadiusY="2" Fill="#ffffffff" Margin="15,0,0,0"/>
-                        <TextBlock Text="空闲（28）" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                        <Rectangle Width="30" Height="15" RadiusX="2" RadiusY="2" Fill="#ff4ECDC4" Margin="15,0,0,0"/>
-                        <TextBlock Text="使用（38）" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                        <Rectangle Width="30" Height="15" RadiusX="2" RadiusY="2" Fill="#ff5AABE3" Margin="15,0,0,0"/>
-                        <TextBlock Text="待清（28）" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                        <Rectangle Width="30" Height="15" RadiusX="2" RadiusY="2" Fill="#ffF27835" Margin="15,0,0,0"/>
-                        <TextBlock Text="预订（28）" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                        <Rectangle Width="30" Height="15" RadiusX="2" RadiusY="2" Fill="#ff9B58B5" Margin="15,0,0,0"/>
-                        <TextBlock Text="超额（28）" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Top" Margin="0,20,0,0" >
+                    <ListBox x:Name="TableStatus" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding TableStatusItems}" SelectedItem="{Binding TableStatusSelectedItem}" SelectionChanged="TableStatus_SelectionChanged" >
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30" Width="140">
+                                        <Rectangle Width="30" Height="15" RadiusX="2" RadiusY="2" Fill="{Binding BgColor}" Margin="15,0,0,0"/>
+                                        <TextBlock Text="{Binding Name}" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
 
             </Grid>

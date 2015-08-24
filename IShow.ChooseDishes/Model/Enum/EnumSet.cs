@@ -99,6 +99,6 @@ namespace IShow.ChooseDishes.Model.EnumSet
     {
         BIGTYPE,LITTLETYPE,ITEM
     }
-
+    
   
 }

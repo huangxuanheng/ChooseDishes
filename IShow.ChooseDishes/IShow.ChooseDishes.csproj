@@ -106,6 +106,7 @@
     <Compile Include="Api\IRawUnitDataService.cs" />
     <Compile Include="Api\ITableService.cs" />
     <Compile Include="Api\ITableItemService.cs" />
+    <Compile Include="Api\ITableStatusService.cs" />
     <Compile Include="Api\ITakeoutOrderDataService.cs" />
     <Compile Include="Api\IUserService.cs" />
     <Compile Include="Api\IConfigurationService.cs" />
@@ -405,6 +406,7 @@
     <Compile Include="Model\Booking\DishModel.cs" />
     <Compile Include="Model\Booking\TableStatus.cs" />
     <Compile Include="Model\Booking\TableItemModel.cs" />
+    <Compile Include="Model\Booking\TableStatusModel.cs" />
     <Compile Include="Model\Booking\TableTypeItemModel.cs" />
     <Compile Include="Model\ClearEstimateModel.cs" />
     <Compile Include="Model\CompanyBean.cs" />
@@ -475,6 +477,7 @@
     <Compile Include="Service\RawUnitDataService.cs" />
     <Compile Include="Service\TableService.cs" />
     <Compile Include="Service\TableItemService.cs" />
+    <Compile Include="Service\TableStatusService.cs" />
     <Compile Include="Service\TakeoutOrderDataService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Utils\Internal\Function.cs" />
@@ -500,6 +503,7 @@
     <Compile Include="ViewModel\Booking\HandoverViewModel.cs" />
     <Compile Include="ViewModel\Booking\HomePageViewModel.cs" />
     <Compile Include="ViewModel\Booking\TableLockViewModel.cs" />
+    <Compile Include="ViewModel\Booking\TableItemViewModel.cs" />
     <Compile Include="ViewModel\BuyDishGiving\BuyDishesSelectedViewModel.cs" />
     <Compile Include="ViewModel\BuyDishGiving\BuyDishGivingViewModel.cs" />
     <Compile Include="ViewModel\BuyDishGiving\GivingDishSettingViewModel.cs" />
@@ -617,11 +621,17 @@
     <Compile Include="View\Common\ConfigSettingWindow.xaml.cs">
       <DependentUpon>ConfigSettingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\TableLocationBox.xaml.cs">
+      <DependentUpon>TableLocationBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\ControlsWindow.xaml.cs">
       <DependentUpon>ControlsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\DishItemBox.xaml.cs">
       <DependentUpon>DishItemBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\BaseTableItemBox.xaml.cs">
+      <DependentUpon>BaseTableItemBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\SimpleTableItemBox.xaml.cs">
       <DependentUpon>SimpleTableItemBox.xaml</DependentUpon>
@@ -763,6 +773,12 @@
     </Compile>
     <Compile Include="View\Dishes\UpdateFatherDishType.xaml.cs">
       <DependentUpon>UpdateFatherDishType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Booking\AddTableWindow.xaml.cs">
+      <DependentUpon>AddTableWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home\Booking\TableWindow.xaml.cs">
+      <DependentUpon>TableWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Home\Booking\TableLockWindow.xaml.cs">
       <DependentUpon>TableLockWindow.xaml</DependentUpon>
@@ -1105,6 +1121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Controls\TableLocationBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Controls\ControlsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1112,6 +1132,10 @@
     <Page Include="View\Controls\DishItemBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\BaseTableItemBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Controls\SimpleTableItemBox.xaml">
       <SubType>Designer</SubType>
@@ -1294,6 +1318,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Dishes\UpdateFatherDishType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Booking\AddTableWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\Booking\TableWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1712,6 +1744,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Cash\edit_add.png" />
+    <Resource Include="Image\Cash\yishenhe.png" />
+    <Resource Include="Image\Cash\yizuof.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

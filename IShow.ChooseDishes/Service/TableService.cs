@@ -17,33 +17,7 @@ namespace IShow.ChooseDishes
     {
         /***餐桌类型****/
         #region
-        /// <summary>
-        /// 获取所有的餐桌类型及其下的所有餐桌和餐桌对应的餐桌状态
-        /// </summary>
-        /// <returns>如果有数据，则返回所有的餐桌类型，否则返回null</returns>
-        public List<TableType> GetAllTypes()
-        {
-            List<TableType> types;
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
-            {
-                types = entities.TableType.Include(typeof(IShow.ChooseDishes.Data.Table).Name).Where(info => info.Deleted == 0).ToList();
-                foreach (var location in types)
-                {
-                    ICollection<IShow.ChooseDishes.Data.Table> tables = location.Table;
-                    if (tables != null && tables.Count > 0)
-                    {
-                        for (int x = 0; x < tables.Count; x++)
-                        {
-                            var table = tables.ElementAt(x);
-                            var tb = entities.Table.Include(typeof(TableItem).Name).SingleOrDefault(t => t.Deleted == 0 && t.TableId == table.TableId);
-                            table = tb;
-                        }
-
-                    }
-                }
-                return types;
-            };
-        }
+        
         //查询所有桌类
         public List<TableType> LoadAllTableType()
         {
@@ -469,21 +443,7 @@ namespace IShow.ChooseDishes
                 return tables;
             };
         }
-        /// <summary>
-        /// 根据餐桌类型id查询所有餐桌及其下餐桌状态
-        /// </summary>
-        /// <param name="typeId">typeId 餐桌类型id</param>
-        /// <returns></returns>
-        public List<IShow.ChooseDishes.Data.Table> LoadTableAndRefByTypeId(int typeId)
-        {
-            List<IShow.ChooseDishes.Data.Table> tables;
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
-            {
-                tables = entities.Table.Include(typeof(TableItem).Name).Where(info => info.Deleted == 0 && info.TableTypeId == typeId
-                ).ToList();
-                return tables;
-            };
-        }
+       
 
         //新增餐桌
         public Hashtable SaveTable(IShow.ChooseDishes.Data.Table table)
@@ -608,63 +568,7 @@ namespace IShow.ChooseDishes
         }
         #endregion
 
-        #region 查询区域
-        /// <summary>
-        /// 获取所有的区域及其下的所有餐桌及餐桌状态
-        /// </summary>
-        /// <returns>如果查找到，则返回区域集合，否则返回null</returns>
-        public List<Location> GetAllLocation()
-        {
-            List<Location> locations;
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
-            {
-                locations = entities.Location.Include(typeof(IShow.ChooseDishes.Data.Table).Name).Where(info => info.Deleted == 0).ToList();
-                if (locations != null && locations.Count > 0)
-                    foreach (var location in locations)
-                    {
-                        ICollection<IShow.ChooseDishes.Data.Table> tables = location.Table;
-                        if (tables != null && tables.Count > 0)
-                        {
-                            for (int x = 0; x < tables.Count; x++)
-                            {
-                                var table = tables.ElementAt(x);
-                                var tb = entities.Table.Include(typeof(TableItem).Name).SingleOrDefault(t => t.Deleted == 0 && t.TableId == table.TableId);
-                                table = tb;
-                            }
-
-                        }
-                    }
-                return locations;
-            };
-        }
-        /// <summary>
-        /// 根据区域id获取其下的所有餐桌及餐桌状态
-        /// </summary>
-        /// <returns>如果查找到，则返回区域集合，否则返回null</returns>
-        public Location GetLocationById(int Id)
-        {
-
-            using (ChooseDishesEntities entities = new ChooseDishesEntities())
-            {
-                Location location = entities.Location.Include(typeof(IShow.ChooseDishes.Data.Table).Name).SingleOrDefault(info => info.Deleted == 0 && info.LocationId == Id);
-                if (location != null)
-                {
-                    ICollection<IShow.ChooseDishes.Data.Table> tables = location.Table;
-                    if (tables != null && tables.Count > 0)
-                    {
-                        for (int x = 0; x < tables.Count; x++)
-                        {
-                            var table = tables.ElementAt(x);
-                            var tb = entities.Table.Include(typeof(TableItem).Name).SingleOrDefault(t => t.Deleted == 0 && t.TableId == table.TableId);
-                            table = tb;
-                        }
-
-                    }
-                }
-                return location;
-            };
-        }
-        #endregion
+      
         void Channel_Closed(object sender, EventArgs e)
         {
 

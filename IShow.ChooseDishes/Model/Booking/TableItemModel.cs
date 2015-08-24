@@ -63,7 +63,12 @@ namespace IShow.ChooseDishes.Model.Booking
             this.StartTime = DateTime.Now;
             this.Locked=_locked;
         }
-
+        public TableItemModel(string _id, string _name, bool _locked)
+        {
+            this.Id = _id;
+            this.Name = _name;
+            this.Locked = _locked;
+        }
         public TableItemModel(string _id, string _name, double _totalPrice, TableStatus _status)
         {
             this.Id = _id;
