@@ -18,7 +18,7 @@ namespace IShow.ChooseDishes.Service
                 return entities.TableItem.Include(typeof(Table).Name).Where(t => t.Deleted == 0).ToList();
             }
         }
-        public TableItem Add(int TableId, int CreateTableId)
+        public TableItem Add(int TableId)
         {
             //添加
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
@@ -28,7 +28,6 @@ namespace IShow.ChooseDishes.Service
                 {
                     TableItem mt = new TableItem();
                     mt.TableId = TableId;
-                    mt.CreateTableId = CreateTableId;
                     mt.CreateBy = SubjectUtils.GetAuthenticationId();
                     mt.CreateDatetime = DateTime.Now;
                     var market = entities.TableItem.Add(mt);
@@ -42,11 +41,11 @@ namespace IShow.ChooseDishes.Service
                 }
             }
         }
-        public bool Remove(int TableId, int CreateTableId)
+        public bool Remove(int TableId)
         {
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                var type = entities.TableItem.SingleOrDefault(bt => bt.Deleted == 0 && bt.TableId == TableId && bt.CreateTableId == CreateTableId);
+                var type = entities.TableItem.SingleOrDefault(bt => bt.Deleted == 0 && bt.TableId == TableId);
                 if (type != null)
                 {
                     type.UpdateBy = SubjectUtils.GetAuthenticationId();
@@ -58,20 +57,20 @@ namespace IShow.ChooseDishes.Service
             }
             return false;
         }
-        public TableItem ModifyStatusBy(int TableId, int CreateTableId, int Status)
+        public bool ModifyStatus(int TableId, int Status)
         {
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                var type = entities.TableItem.SingleOrDefault(bt => bt.Deleted == 0 && bt.TableId == TableId && bt.CreateTableId == CreateTableId);
+                var type = entities.TableItem.SingleOrDefault(bt => bt.Deleted == 0 && bt.TableId == TableId);
                 if (type != null)
                 {
                     type.UpdateBy = SubjectUtils.GetAuthenticationId();
                     type.UpdateDatetime = DateTime.Now;
                     type.Status = Status;
                     entities.SaveChanges();
-                    return type;
+                    return true;
                 }
-                return null;
+                return false;
             }
         }
         //TODO 建立与开台关联的关系和获取订单对象
@@ -105,6 +104,32 @@ namespace IShow.ChooseDishes.Service
 
             }
             return tis.Count;
+        }
+
+
+        public bool ModifyIdle(int TableId)
+        {
+            return ModifyStatus(TableId, 0);
+        }
+
+        public bool ModifyUsing(int TableId)
+        {
+            return ModifyStatus(TableId, 1);
+        }
+
+        public bool ModifyWaitting(int TableId)
+        {
+            return ModifyStatus(TableId, 2);
+        }
+
+        public bool ModifyScheduled(int TableId)
+        {
+            return ModifyStatus(TableId, 3);
+        }
+
+        public bool ModifyExcess(int TableId)
+        {
+            return ModifyStatus(TableId, 4);
         }
     }
 }

@@ -22,8 +22,8 @@ namespace IShow.ChooseDishes.Data
     
         public int DeskOrderId { get; set; }
         public int DeskDishesId { get; set; }
-        public string DishNum { get; set; }
-        public int Price { get; set; }
+        public int DishId { get; set; }
+        public double Price { get; set; }
         public int Num { get; set; }
         public int Quit { get; set; }
         public int SpecialPrice { get; set; }
@@ -43,6 +43,7 @@ namespace IShow.ChooseDishes.Data
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
+        public int TableId { get; set; }
     
         public virtual DeskDishes DeskDishes { get; set; }
         public virtual ICollection<DeskOrderMateria> DeskOrderMateria { get; set; }

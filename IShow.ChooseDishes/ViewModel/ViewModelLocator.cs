@@ -32,9 +32,10 @@ namespace IShow.ChooseDishes.ViewModel
             SimpleIoc.Default.Register<IChooseDishesDataService>(() => new ChooseDishesDataService());
             SimpleIoc.Default.Register<IDishService>(() => new DishService());
             SimpleIoc.Default.Register<IDishesMenuService>(() => new DishesMenuService());
-
+            
             SimpleIoc.Default.Register<IConfigurationService>(() => new ConfigurationService());
             SimpleIoc.Default.Register<ITableStatusService>(() => new TableStatusService());
+            SimpleIoc.Default.Register<IDeskDishesService>(() => new DeskDishesService());
 
             SimpleIoc.Default.Register<IDiscountDataService>(() => new DiscountDataService());
             SimpleIoc.Default.Register<IEmployeeService>(() => new EmployeeService());

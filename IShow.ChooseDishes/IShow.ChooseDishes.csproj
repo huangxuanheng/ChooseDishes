@@ -94,6 +94,7 @@
     <Compile Include="Api\Exception\ServiceException.cs" />
     <Compile Include="Api\IChooseDishesDataService.cs" />
     <Compile Include="Api\IChooseDishesDataServiceCallback.cs" />
+    <Compile Include="Api\IDeskDishesService.cs" />
     <Compile Include="Api\IDischesWayRefService.cs" />
     <Compile Include="Api\IDiscountDataService.cs" />
     <Compile Include="Api\IDishesMenuService.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Api\ILoggerService.cs" />
     <Compile Include="Api\IMarketTypeDataService.cs" />
     <Compile Include="Api\IMaterialDataService.cs" />
+    <Compile Include="Api\IOpenTable.cs" />
     <Compile Include="Api\IRawUnitDataService.cs" />
     <Compile Include="Api\ITableService.cs" />
     <Compile Include="Api\ITableItemService.cs" />
@@ -452,6 +454,8 @@
     <Compile Include="Model\ModuleModel.cs" />
     <Compile Include="Model\RawMaterialBean.cs" />
     <Compile Include="Model\RoleModel.cs" />
+    <Compile Include="Model\Serving\CreateDeskModel.cs" />
+    <Compile Include="Model\Serving\DeskDishesModel.cs" />
     <Compile Include="Model\SystemLogBean.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\User\RoleBean.cs" />
@@ -465,6 +469,7 @@
     <Compile Include="Service\ChooseDishesDataService.cs" />
     <Compile Include="Service\ChooseDishesDataServiceCallback.cs" />
     <Compile Include="Service\ConfigurationService.cs" />
+    <Compile Include="Service\DeskDishesService.cs" />
     <Compile Include="Service\DischesWayRefService.cs" />
     <Compile Include="Service\DiscountDataService .cs" />
     <Compile Include="Service\DishesMenuService.cs" />
@@ -474,12 +479,14 @@
     <Compile Include="Service\LoggerService.cs" />
     <Compile Include="Service\MarketTypeDataService.cs" />
     <Compile Include="Service\MaterialDataService.cs" />
+    <Compile Include="Service\OpenTable.cs" />
     <Compile Include="Service\RawUnitDataService.cs" />
     <Compile Include="Service\TableService.cs" />
     <Compile Include="Service\TableItemService.cs" />
     <Compile Include="Service\TableStatusService.cs" />
     <Compile Include="Service\TakeoutOrderDataService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Utils\FlowNum.cs" />
     <Compile Include="Utils\Internal\Function.cs" />
     <Compile Include="Utils\Internal\Functions.cs" />
     <Compile Include="Utils\Logger\Format.cs" />
@@ -774,8 +781,8 @@
     <Compile Include="View\Dishes\UpdateFatherDishType.xaml.cs">
       <DependentUpon>UpdateFatherDishType.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Home\Booking\AddTableWindow.xaml.cs">
-      <DependentUpon>AddTableWindow.xaml</DependentUpon>
+    <Compile Include="View\Home\Booking\BaseTableWindow.xaml.cs">
+      <DependentUpon>BaseTableWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Home\Booking\TableWindow.xaml.cs">
       <DependentUpon>TableWindow.xaml</DependentUpon>
@@ -1321,7 +1328,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Home\Booking\AddTableWindow.xaml">
+    <Page Include="View\Home\Booking\BaseTableWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

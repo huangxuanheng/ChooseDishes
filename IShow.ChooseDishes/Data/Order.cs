@@ -16,22 +16,23 @@ namespace IShow.ChooseDishes.Data
     {
         public Order()
         {
-            this.DeskDishes = new HashSet<DeskDishes>();
             this.OrderItem = new HashSet<OrderItem>();
         }
     
-        public string OrderId { get; set; }
-        public int TableId { get; set; }
-        public int Consume { get; set; }
-        public int Discount { get; set; }
-        public int Presented { get; set; }
-        public int Service { get; set; }
-        public int MinBalance { get; set; }
-        public int Coupon { get; set; }
-        public int Deposit { get; set; }
-        public int EraseZero { get; set; }
-        public int AvailableVoucher { get; set; }
-        public int Receivable { get; set; }
+        public int OrderId { get; set; }
+        public string OriginalNum { get; set; }
+        public string OrderNo { get; set; }
+        public string DiskIds { get; set; }
+        public double Consume { get; set; }
+        public double Discount { get; set; }
+        public double Presented { get; set; }
+        public double Service { get; set; }
+        public double MinBalance { get; set; }
+        public double Coupon { get; set; }
+        public double Deposit { get; set; }
+        public double EraseZero { get; set; }
+        public double AvailableVoucher { get; set; }
+        public double Receivable { get; set; }
         public int Paid { get; set; }
         public int MultiplePay { get; set; }
         public int TurnOver { get; set; }
@@ -42,7 +43,6 @@ namespace IShow.ChooseDishes.Data
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
     
-        public virtual ICollection<DeskDishes> DeskDishes { get; set; }
         public virtual ICollection<OrderItem> OrderItem { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace IShow.ChooseDishes.Data
             this.DeskDishes = new HashSet<DeskDishes>();
         }
     
-        public string OrderId { get; set; }
+        public int OrderId { get; set; }
         public int TableId { get; set; }
         public Nullable<int> Position { get; set; }
         public int Number { get; set; }
@@ -29,16 +29,16 @@ namespace IShow.ChooseDishes.Data
         public string Assistant { get; set; }
         public string Remark { get; set; }
         public string PeriodTime { get; set; }
-        public System.DateTime CreateTime { get; set; }
         public string Property { get; set; }
         public Nullable<int> Type { get; set; }
-        public Nullable<int> PerDeskPrice { get; set; }
+        public Nullable<double> PerDeskPrice { get; set; }
         public System.DateTime CreateDatetime { get; set; }
         public int CreateBy { get; set; }
         public int Deleted { get; set; }
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
+        public string OriginalNum { get; set; }
     
         public virtual ICollection<DeskDishes> DeskDishes { get; set; }
     }

@@ -22,7 +22,7 @@ namespace IShow.ChooseDishes.Data
     
         public int DeskDishesId { get; set; }
         public int TableId { get; set; }
-        public string OrderId { get; set; }
+        public int OrderId { get; set; }
         public int Take { get; set; }
         public int Merged { get; set; }
         public int Locked { get; set; }
@@ -38,9 +38,10 @@ namespace IShow.ChooseDishes.Data
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
+        public string OriginalNum { get; set; }
+        public Nullable<double> TotalPrice { get; set; }
     
         public virtual CreateDesk CreateDesk { get; set; }
-        public virtual Order Order { get; set; }
         public virtual ICollection<DeskOrder> DeskOrder { get; set; }
         public virtual ICollection<TimerProject> TimerProject { get; set; }
     }

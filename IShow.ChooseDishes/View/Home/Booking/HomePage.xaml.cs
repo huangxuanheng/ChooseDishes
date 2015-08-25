@@ -81,17 +81,46 @@ namespace IShow.ChooseDishes.View.Home.Booking
             var ViewModel = DataContext as HomePageViewModel;
             ViewModel.TableStatusSelectionChanged();
         }
-
+        /// <summary>
+        /// 餐桌定位
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TableLocation_Click(object sender, RoutedEventArgs e)
         {
             var ViewModel = DataContext as HomePageViewModel;
             ViewModel.InitTableLocation();
         }
-
+        /// <summary>
+        /// 加台
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTable_Click(object sender, RoutedEventArgs e)
         {
+            
             var ViewModel = DataContext as HomePageViewModel;
             ViewModel.InitAddTable();
+        }
+        /// <summary>
+        /// 并台
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Merge_Click(object sender, RoutedEventArgs e)
+        {
+            var ViewModel = DataContext as HomePageViewModel;
+            ViewModel.MergeTable();
+        }
+        /// <summary>
+        /// 搭台/拆台
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void JoinOrTear_Click(object sender, RoutedEventArgs e)
+        {
+            var ViewModel = DataContext as HomePageViewModel;
+            ViewModel.OpenJoinOrTear();
         }
 
        

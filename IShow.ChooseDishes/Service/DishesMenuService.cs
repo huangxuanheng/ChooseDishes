@@ -8,6 +8,7 @@ using IShow.ChooseDishes.Data;
 using IShow.ChooseDishes.Model;
 using System.Data.Common;
 using System.Data.SqlClient;
+using IShow.ChooseDishes.Security;
 
 namespace IShow.ChooseDishes.Service
 {
@@ -21,7 +22,7 @@ namespace IShow.ChooseDishes.Service
       public   List<DishesMenu> QueryAll() {
 
           using (ChooseDishesEntities entities = new ChooseDishesEntities()) {
-              return entities.DishesMenu.ToList();
+              return entities.DishesMenu.Where(bt=>bt.Deleted == 0 ).ToList();
           }
 
       }
@@ -30,10 +31,15 @@ namespace IShow.ChooseDishes.Service
       {
           using (ChooseDishesEntities entities = new ChooseDishesEntities())
           {
-              DishesMenu menu = DishesMenuModel.build(code, name, 1000);
-             entities.DishesMenu.Add(menu);
-             entities.SaveChanges();
-             return menu.MenusId;
+              var list = entities.DishesMenu.Where(t => t.Deleted == 0 && (t.Code == code || t.Name == name)).ToList();
+              if (list != null && list.Count > 0)
+              {
+                  return 0;
+              }
+              DishesMenu menu = DishesMenuModel.build(code, name, SubjectUtils.GetAuthenticationId());
+              entities.DishesMenu.Add(menu);
+              entities.SaveChanges();
+              return menu.MenusId;
           }
         
         }
@@ -46,7 +52,7 @@ namespace IShow.ChooseDishes.Service
               if (null == delObj) {
                  // throw new NotFoundException();
               }
-              entities.DishesMenu.Remove(delObj);
+              delObj.Deleted = 1;
               entities.SaveChanges();
           }
       }
@@ -101,6 +107,30 @@ namespace IShow.ChooseDishes.Service
           {
              var list= entities.DishesMenuRef.Where(t =>t.DishId == menuId).ToList();
              return DishesMenuItemModel.To(list);
+          } 
+      }
+      public bool update(int menusId, string code, string name) {
+          using (ChooseDishesEntities entities = new ChooseDishesEntities())
+          {
+              var list = entities.DishesMenu.Where(t => t.Deleted == 0 && (t.Code == code || t.Name == name)).ToList();
+              if (list != null && list.Count > 1) {
+                  return false;
+              }
+              var type = entities.DishesMenu.SingleOrDefault(t => t.Deleted == 0 && t.MenusId == menusId);
+              type.Code = code;
+              type.Name = name;
+              type.UpdateBy = SubjectUtils.GetAuthenticationId();
+              type.UpdateDatetime = DateTime.Now;
+              entities.SaveChanges();
+              return true;
+
+          } 
+      }
+      public DishesMenu FindDishesMenuByMenuId(int menuId) {
+          using (ChooseDishesEntities entities = new ChooseDishesEntities())
+          {
+              var type = entities.DishesMenu.SingleOrDefault(t => t.Deleted == 0 && t.MenusId == menuId);
+              return type;
           } 
       }
     }

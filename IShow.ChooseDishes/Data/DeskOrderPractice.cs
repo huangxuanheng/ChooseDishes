@@ -18,7 +18,7 @@ namespace IShow.ChooseDishes.Data
         public int DeskOrderId { get; set; }
         public string DishNum { get; set; }
         public int Code { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public int Num { get; set; }
         public int Quit { get; set; }
         public System.DateTime CreateDatetime { get; set; }

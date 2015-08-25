@@ -538,24 +538,18 @@ namespace IShow.ChooseDishes.Service
                 {
                     return null;
                 }
-                CashType newCashType = null;
                 using (ChooseDishesEntities entities = new ChooseDishesEntities())
                 {
                     //快捷键不能相同 编号不能相同
-                        var list = entities.CashType.Where(bt =>bt.Deleted==0 && (bt.Code == cashType.Code) || (bt.Keys == cashType.Keys)).ToList() ;
+                    var list = entities.CashType.Where(bt =>bt.Deleted==0 && (bt.Code == cashType.Code) || (bt.Keys == cashType.Keys)).ToList() ;
                     if (list != null&&list.Count>0)
                     {
                         return null;
                     }
                     entities.CashType.Add(cashType);
                     entities.SaveChanges();
-                    var typenew = entities.CashType.SingleOrDefault(bt => bt.Code == cashType.Code);
-                    if (typenew != null)
-                    {
-                        newCashType = typenew;
-                    }
                 }
-                return newCashType;
+                return cashType;
             //}
             //catch (Exception e)
             //{
@@ -862,7 +856,7 @@ namespace IShow.ChooseDishes.Service
                     foreach (var element in listref) {
                         listint.Add(element.DishId);
                     }
-                    list = entities.Dish.Include(bt => bt.DishUnit ).Include(bt=>bt.DishPrice).Where(bt => listint.Contains(bt.DishId)).ToList();
+                    list = entities.Dish.Include(bt => bt.DishUnit ).Include(bt=>bt.DishPrice).Where(bt => listint.Contains(bt.DishId) && bt.Deleted==0).ToList();
                 }
             
             }
@@ -873,7 +867,7 @@ namespace IShow.ChooseDishes.Service
             List<DishesMenuRef> list;
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                list = entities.DishesMenuRef.Where(bt => bt.MenusId == DishMenusId).ToList();
+                list = entities.DishesMenuRef.Where(bt => bt.Deleted==0 && bt.MenusId == DishMenusId).ToList();
             }
             return list;
             
@@ -893,7 +887,7 @@ namespace IShow.ChooseDishes.Service
             List<Dish> list;
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
-                list = entities.Dish.Where(bt => bt.Deleted == 0 && (value == null ? true : (bt.DishName.IndexOf(value) >= 0))).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt=>bt.DishType).ToList();
+                list = entities.Dish.Where(bt => bt.Deleted == 0 && (value == null ? true : (bt.DishName.IndexOf(value) >= 0||bt.Code.IndexOf(value)>=0||bt.PingYing.IndexOf(value)>=0))).Include(bt => bt.DishPrice).Include(bt => bt.DishUnit).Include(bt=>bt.DishType).ToList();
             }
             return list;
         }
@@ -1056,7 +1050,7 @@ namespace IShow.ChooseDishes.Service
         }
         public List<BargainDish> findBargainDishAll() {
             List<BargainDish> list;
-            string nowstr = DateTime.Now.ToShortTimeString().ToString();
+            string nowstr = DateTime.Now.ToString("HH:MM");
             using (ChooseDishesEntities entities = new ChooseDishesEntities())
             {
                 list = entities.BargainDish.Where(bt => bt.Deleted == 0 && ((DateTime.Compare(DateTime.Now, bt.StartDate)) >= 0) && ((DateTime.Compare(DateTime.Now, bt.EndDate)) <= 0) && ((nowstr.CompareTo(bt.StartTime)) >= 0) && ((nowstr.CompareTo(bt.EndTime)) <= 0)).Include(bt => bt.BargainDishPrice).Include(bt => bt.Dish).Include(bt => bt.Dish.DishUnit).ToList();

@@ -21,12 +21,13 @@ namespace IShow.ChooseDishes.Data
         }
     
         public int OrderItemId { get; set; }
-        public string OrderId { get; set; }
-        public string DishNum { get; set; }
-        public int Price { get; set; }
+        public int OrderId { get; set; }
+        public int DishId { get; set; }
+        public int TableId { get; set; }
+        public double Price { get; set; }
         public int Num { get; set; }
         public int Quit { get; set; }
-        public int Addprice { get; set; }
+        public double Addprice { get; set; }
         public int IsPay { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public System.DateTime CreateDatetime { get; set; }
@@ -39,6 +40,7 @@ namespace IShow.ChooseDishes.Data
         public int Pause { get; set; }
         public int Rebate { get; set; }
         public Nullable<int> Discount { get; set; }
+        public Nullable<double> DiskPrice { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual ICollection<OrderMateria> OrderMateria { get; set; }

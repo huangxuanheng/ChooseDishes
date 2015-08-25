@@ -99,6 +99,37 @@ namespace IShow.ChooseDishes.Model.EnumSet
     {
         BIGTYPE,LITTLETYPE,ITEM
     }
-    
+    /// <summary>
+    /// 餐桌前台点餐状态
+    /// JOIN,搭台
+    /// MERGED,并台
+    /// LOCKED,锁台
+    /// PARTY ，宴会开台
+    /// TIMER, 定时项目
+    /// TURN ,反结账
+    /// </summary>
+    public enum TableItemStatus
+    {
+        /// <summary>
+        /// 搭台
+        /// </summary>
+        JOIN, 
+        /// <summary>
+        /// 并台/宴会开台
+        /// </summary>
+        MERGED, 
+        /// <summary>
+        /// 锁台
+        /// </summary>
+        LOCKED, 
+        /// <summary>
+        /// 定时项目
+        /// </summary>
+        TIMER, 
+        /// <summary>
+        /// 反结账
+        /// </summary>
+        TURN
+    }
   
 }

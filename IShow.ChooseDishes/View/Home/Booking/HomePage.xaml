@@ -56,8 +56,8 @@
                 <Button.ContextMenu>
                     <ContextMenu Placement="RelativePoint">
                         <MenuItem Header="宴会开台" Style="{StaticResource FirstMenuItemStyle}"/>
-                        <MenuItem Header="搭台/拆台" Style="{StaticResource SecondMenuItemStyle}"/>
-                        <MenuItem Header="并台" Style="{StaticResource SecondMenuItemStyle}"/>
+                        <MenuItem Header="搭台/拆台" Style="{StaticResource SecondMenuItemStyle}" x:Name="JoinOrTear" Click="JoinOrTear_Click"/>
+                        <MenuItem Header="并台" Style="{StaticResource SecondMenuItemStyle}" x:Name="Merge" Click="Merge_Click"/>
                         <MenuItem Header="转台" Style="{StaticResource SecondMenuItemStyle}"/>
                         <MenuItem Header="加台（席）" Style="{StaticResource SecondMenuItemStyle}" x:Name="AddTable" Click="AddTable_Click"/>
                         <MenuItem Header="锁定（解锁）" Style="{StaticResource SecondMenuItemStyle}" Click="MenuItem_Click"/>

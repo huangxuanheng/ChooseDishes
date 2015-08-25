@@ -19,7 +19,7 @@ namespace IShow.ChooseDishes.Data
         public int DataType { get; set; }
         public Nullable<int> ConsumerMode { get; set; }
         public Nullable<int> StartUnit { get; set; }
-        public Nullable<System.DateTime> StartDateTime { get; set; }
+        public string StartDateTime { get; set; }
         public Nullable<double> OutMoney { get; set; }
         public Nullable<int> OutTime { get; set; }
         public Nullable<int> StartMoney { get; set; }
@@ -32,9 +32,9 @@ namespace IShow.ChooseDishes.Data
         public int Status { get; set; }
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
         public Nullable<int> UpdateBy { get; set; }
-        public Nullable<System.DateTime> EndDateTime { get; set; }
+        public string EndDateTime { get; set; }
         public Nullable<int> Rate { get; set; }
-        public Nullable<int> ServerfreeNum { get; set; }
+        public Nullable<double> ServerfreeNum { get; set; }
         public Nullable<int> ServerfreeAccountType { get; set; }
         public Nullable<int> ServerfreeNax { get; set; }
     

@@ -326,7 +326,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TableId" Type="int" Nullable="false" />
           <Property Name="Position" Type="int" />
           <Property Name="Number" Type="int" Nullable="false" />
@@ -336,16 +336,16 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           <Property Name="Assistant" Type="nvarchar" MaxLength="50" />
           <Property Name="Remark" Type="nvarchar" MaxLength="200" />
           <Property Name="PeriodTime" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="Property" Type="nvarchar" MaxLength="5" />
           <Property Name="Type" Type="int" />
-          <Property Name="PerDeskPrice" Type="int" />
+          <Property Name="PerDeskPrice" Type="float" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="int" Nullable="false" />
           <Property Name="Deleted" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
+          <Property Name="OriginalNum" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="DaySettlement">
           <Key>
@@ -382,7 +382,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           </Key>
           <Property Name="DeskDishesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TableId" Type="int" Nullable="false" />
-          <Property Name="OrderId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="Take" Type="int" Nullable="false" />
           <Property Name="Merged" Type="int" Nullable="false" />
           <Property Name="Locked" Type="int" Nullable="false" />
@@ -398,6 +398,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
+          <Property Name="OriginalNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPrice" Type="float" />
         </EntityType>
         <EntityType Name="DeskOrder">
           <Key>
@@ -405,8 +407,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           </Key>
           <Property Name="DeskOrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DeskDishesId" Type="int" Nullable="false" />
-          <Property Name="DishNum" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Num" Type="int" Nullable="false" />
           <Property Name="Quit" Type="int" Nullable="false" />
           <Property Name="SpecialPrice" Type="int" Nullable="false" />
@@ -426,6 +428,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
+          <Property Name="TableId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DeskOrderMateria">
           <Key>
@@ -435,7 +438,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           <Property Name="DeskOrderId" Type="int" Nullable="false" />
           <Property Name="DishNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Num" Type="int" Nullable="false" />
           <Property Name="Quit" Type="int" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
@@ -453,7 +456,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ConsumeItem' does not have a pri
           <Property Name="DeskOrderId" Type="int" Nullable="false" />
           <Property Name="DishNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Code" Type="int" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Num" Type="int" Nullable="false" />
           <Property Name="Quit" Type="int" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
@@ -955,18 +958,20 @@ warning 6002: The table/view 'IChooseDishes.dbo.KitchenBillItem' does not have a
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="TableId" Type="int" Nullable="false" />
-          <Property Name="Consume" Type="int" Nullable="false" />
-          <Property Name="Discount" Type="int" Nullable="false" />
-          <Property Name="Presented" Type="int" Nullable="false" />
-          <Property Name="Service" Type="int" Nullable="false" />
-          <Property Name="MinBalance" Type="int" Nullable="false" />
-          <Property Name="Coupon" Type="int" Nullable="false" />
-          <Property Name="Deposit" Type="int" Nullable="false" />
-          <Property Name="EraseZero" Type="int" Nullable="false" />
-          <Property Name="AvailableVoucher" Type="int" Nullable="false" />
-          <Property Name="Receivable" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginalNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiskIds" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Consume" Type="float" Nullable="false" />
+          <Property Name="Discount" Type="float" Nullable="false" />
+          <Property Name="Presented" Type="float" Nullable="false" />
+          <Property Name="Service" Type="float" Nullable="false" />
+          <Property Name="MinBalance" Type="float" Nullable="false" />
+          <Property Name="Coupon" Type="float" Nullable="false" />
+          <Property Name="Deposit" Type="float" Nullable="false" />
+          <Property Name="EraseZero" Type="float" Nullable="false" />
+          <Property Name="AvailableVoucher" Type="float" Nullable="false" />
+          <Property Name="Receivable" Type="float" Nullable="false" />
           <Property Name="Paid" Type="int" Nullable="false" />
           <Property Name="MultiplePay" Type="int" Nullable="false" />
           <Property Name="TurnOver" Type="int" Nullable="false" />
@@ -982,12 +987,13 @@ warning 6002: The table/view 'IChooseDishes.dbo.KitchenBillItem' does not have a
             <PropertyRef Name="OrderItemId" />
           </Key>
           <Property Name="OrderItemId" Type="int" Nullable="false" />
-          <Property Name="OrderId" Type="nvarchar" MaxLength="20" />
-          <Property Name="DishNum" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Num" Type="int" Nullable="false" />
           <Property Name="Quit" Type="int" Nullable="false" />
-          <Property Name="Addprice" Type="int" Nullable="false" />
+          <Property Name="Addprice" Type="float" Nullable="false" />
           <Property Name="IsPay" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
@@ -1000,13 +1006,15 @@ warning 6002: The table/view 'IChooseDishes.dbo.KitchenBillItem' does not have a
           <Property Name="Pause" Type="int" Nullable="false" />
           <Property Name="Rebate" Type="int" Nullable="false" />
           <Property Name="Discount" Type="int" />
+          <Property Name="DiskPrice" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IChooseDishes.dbo.OrderMateria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderMateria">
           <Key>
             <PropertyRef Name="OrderItemId" />
-            <PropertyRef Name="DishNum" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="DishId" />
             <PropertyRef Name="Code" />
             <PropertyRef Name="Price" />
             <PropertyRef Name="Num" />
@@ -1017,9 +1025,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.OrderMateria' does not have a pr
             <PropertyRef Name="Status" />
           </Key>
           <Property Name="OrderItemId" Type="int" Nullable="false" />
-          <Property Name="DishNum" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Num" Type="int" Nullable="false" />
           <Property Name="Quit" Type="int" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
@@ -1034,7 +1043,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a p
         <EntityType Name="OrderPractice">
           <Key>
             <PropertyRef Name="OrderItemId" />
-            <PropertyRef Name="DishNum" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="DishId" />
             <PropertyRef Name="Code" />
             <PropertyRef Name="Price" />
             <PropertyRef Name="Num" />
@@ -1045,9 +1055,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.OrderPractice' does not have a p
             <PropertyRef Name="Status" />
           </Key>
           <Property Name="OrderItemId" Type="int" Nullable="false" />
-          <Property Name="DishNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
           <Property Name="Code" Type="int" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Num" Type="int" Nullable="false" />
           <Property Name="Quit" Type="int" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
@@ -1429,7 +1440,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TableId" Type="int" Nullable="false" />
-          <Property Name="CreateTableId" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreateDatetime" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="int" Nullable="false" />
@@ -1472,7 +1482,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="DataType" Type="int" Nullable="false" />
           <Property Name="ConsumerMode" Type="int" />
           <Property Name="StartUnit" Type="int" />
-          <Property Name="StartDateTime" Type="datetime" />
+          <Property Name="StartDateTime" Type="nvarchar" MaxLength="20" />
           <Property Name="OutMoney" Type="float" />
           <Property Name="OutTime" Type="int" />
           <Property Name="StartMoney" Type="int" />
@@ -1485,9 +1495,9 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateDatetime" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
-          <Property Name="EndDateTime" Type="datetime" />
+          <Property Name="EndDateTime" Type="nvarchar" MaxLength="20" />
           <Property Name="Rate" Type="int" />
-          <Property Name="ServerfreeNum" Type="int" />
+          <Property Name="ServerfreeNum" Type="float" />
           <Property Name="ServerfreeAccountType" Type="int" />
           <Property Name="ServerfreeNax" Type="int" />
         </EntityType>
@@ -1764,18 +1774,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <End Role="DeskDishes" Type="Self.DeskDishes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CreateDesk">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="DeskDishes">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DESKDISH_REFERENCE_ORDER">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="DeskDishes" Type="Self.DeskDishes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
               <PropertyRef Name="OrderId" />
             </Principal>
             <Dependent Role="DeskDishes">
@@ -2084,7 +2082,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERITE_REFERENCE_ORDER">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -2494,7 +2492,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySet Name="OrderMateria" EntityType="Self.OrderMateria" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [OrderMateria].[OrderItemId] AS [OrderItemId], 
-    [OrderMateria].[DishNum] AS [DishNum], 
+    [OrderMateria].[OrderId] AS [OrderId], 
+    [OrderMateria].[DishId] AS [DishId], 
     [OrderMateria].[Code] AS [Code], 
     [OrderMateria].[Price] AS [Price], 
     [OrderMateria].[Num] AS [Num], 
@@ -2510,7 +2509,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySet Name="OrderPractice" EntityType="Self.OrderPractice" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [OrderPractice].[OrderItemId] AS [OrderItemId], 
-    [OrderPractice].[DishNum] AS [DishNum], 
+    [OrderPractice].[OrderId] AS [OrderId], 
+    [OrderPractice].[DishId] AS [DishId], 
     [OrderPractice].[Code] AS [Code], 
     [OrderPractice].[Price] AS [Price], 
     [OrderPractice].[Num] AS [Num], 
@@ -2600,10 +2600,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </AssociationSet>
           <AssociationSet Name="FK_DESKDISH_REFERENCE_CREATEDE" Association="Self.FK_DESKDISH_REFERENCE_CREATEDE">
             <End Role="CreateDesk" EntitySet="CreateDesk" />
-            <End Role="DeskDishes" EntitySet="DeskDishes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DESKDISH_REFERENCE_ORDER" Association="Self.FK_DESKDISH_REFERENCE_ORDER">
-            <End Role="Order" EntitySet="Order" />
             <End Role="DeskDishes" EntitySet="DeskDishes" />
           </AssociationSet>
           <AssociationSet Name="FK_DESKORDE_REFERENCE_DESKDISH" Association="Self.FK_DESKORDE_REFERENCE_DESKDISH">
@@ -2958,10 +2954,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <AssociationSet Name="FK_USERINFO_REFERENCE_DEPARTME" Association="IShow.ChooseDishes.Data.FK_USERINFO_REFERENCE_DEPARTME">
             <End Role="DepartmentInfo" EntitySet="DepartmentInfo" />
             <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DESKDISH_REFERENCE_ORDER" Association="IShow.ChooseDishes.Data.FK_DESKDISH_REFERENCE_ORDER">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="DeskDishes" EntitySet="DeskDishes" />
           </AssociationSet>
           <AssociationSet Name="FK_DESKORDE_REFERENCE_DESKDISH" Association="IShow.ChooseDishes.Data.FK_DESKORDE_REFERENCE_DESKDISH">
             <End Role="DeskDishes" EntitySet="DeskDishes" />
@@ -3422,7 +3414,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TableId" Type="Int32" Nullable="false" />
           <Property Name="Position" Type="Int32" />
           <Property Name="Number" Type="Int32" Nullable="false" />
@@ -3432,16 +3424,16 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Assistant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PeriodTime" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Property" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
-          <Property Name="PerDeskPrice" Type="Int32" />
+          <Property Name="PerDeskPrice" Type="Double" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateBy" Type="Int32" Nullable="false" />
           <Property Name="Deleted" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="OriginalNum" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeskDishes" Relationship="IShow.ChooseDishes.Data.FK_DESKDISH_REFERENCE_CREATEDE" FromRole="CreateDesk" ToRole="DeskDishes" />
         </EntityType>
         <EntityType Name="DaySettlement">
@@ -3480,7 +3472,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </Key>
           <Property Name="DeskDishesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TableId" Type="Int32" Nullable="false" />
-          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="Take" Type="Int32" Nullable="false" />
           <Property Name="Merged" Type="Int32" Nullable="false" />
           <Property Name="Locked" Type="Int32" Nullable="false" />
@@ -3496,8 +3488,9 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="OriginalNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPrice" Type="Double" />
           <NavigationProperty Name="CreateDesk" Relationship="IShow.ChooseDishes.Data.FK_DESKDISH_REFERENCE_CREATEDE" FromRole="DeskDishes" ToRole="CreateDesk" />
-          <NavigationProperty Name="Order" Relationship="IShow.ChooseDishes.Data.FK_DESKDISH_REFERENCE_ORDER" FromRole="DeskDishes" ToRole="Order" />
           <NavigationProperty Name="DeskOrder" Relationship="IShow.ChooseDishes.Data.FK_DESKORDE_REFERENCE_DESKDISH" FromRole="DeskDishes" ToRole="DeskOrder" />
           <NavigationProperty Name="TimerProject" Relationship="IShow.ChooseDishes.Data.FK_TIMERPRO_REFERENCE_DESKDISH" FromRole="DeskDishes" ToRole="TimerProject" />
         </EntityType>
@@ -3507,8 +3500,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </Key>
           <Property Name="DeskOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeskDishesId" Type="Int32" Nullable="false" />
-          <Property Name="DishNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Quit" Type="Int32" Nullable="false" />
           <Property Name="SpecialPrice" Type="Int32" Nullable="false" />
@@ -3528,6 +3521,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DeskDishes" Relationship="IShow.ChooseDishes.Data.FK_DESKORDE_REFERENCE_DESKDISH" FromRole="DeskOrder" ToRole="DeskDishes" />
           <NavigationProperty Name="DeskOrderMateria" Relationship="IShow.ChooseDishes.Data.FK_DESKORDE_REFERENCE_DESKORDE" FromRole="DeskOrder" ToRole="DeskOrderMateria" />
           <NavigationProperty Name="DeskOrderPractice" Relationship="IShow.ChooseDishes.Data.FK_DESKORDE_REFERENCE_DESKORDE2" FromRole="DeskOrder" ToRole="DeskOrderPractice" />
@@ -3540,7 +3534,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="DeskOrderId" Type="Int32" Nullable="false" />
           <Property Name="DishNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Quit" Type="Int32" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
@@ -3559,7 +3553,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="DeskOrderId" Type="Int32" Nullable="false" />
           <Property Name="DishNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Quit" Type="Int32" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
@@ -4060,18 +4054,20 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TableId" Type="Int32" Nullable="false" />
-          <Property Name="Consume" Type="Int32" Nullable="false" />
-          <Property Name="Discount" Type="Int32" Nullable="false" />
-          <Property Name="Presented" Type="Int32" Nullable="false" />
-          <Property Name="Service" Type="Int32" Nullable="false" />
-          <Property Name="MinBalance" Type="Int32" Nullable="false" />
-          <Property Name="Coupon" Type="Int32" Nullable="false" />
-          <Property Name="Deposit" Type="Int32" Nullable="false" />
-          <Property Name="EraseZero" Type="Int32" Nullable="false" />
-          <Property Name="AvailableVoucher" Type="Int32" Nullable="false" />
-          <Property Name="Receivable" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginalNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiskIds" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Consume" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Double" Nullable="false" />
+          <Property Name="Presented" Type="Double" Nullable="false" />
+          <Property Name="Service" Type="Double" Nullable="false" />
+          <Property Name="MinBalance" Type="Double" Nullable="false" />
+          <Property Name="Coupon" Type="Double" Nullable="false" />
+          <Property Name="Deposit" Type="Double" Nullable="false" />
+          <Property Name="EraseZero" Type="Double" Nullable="false" />
+          <Property Name="AvailableVoucher" Type="Double" Nullable="false" />
+          <Property Name="Receivable" Type="Double" Nullable="false" />
           <Property Name="Paid" Type="Int32" Nullable="false" />
           <Property Name="MultiplePay" Type="Int32" Nullable="false" />
           <Property Name="TurnOver" Type="Int32" Nullable="false" />
@@ -4081,7 +4077,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
-          <NavigationProperty Name="DeskDishes" Relationship="IShow.ChooseDishes.Data.FK_DESKDISH_REFERENCE_ORDER" FromRole="Order" ToRole="DeskDishes" />
           <NavigationProperty Name="OrderItem" Relationship="IShow.ChooseDishes.Data.FK_ORDERITE_REFERENCE_ORDER" FromRole="Order" ToRole="OrderItem" />
         </EntityType>
         <EntityType Name="OrderItem">
@@ -4089,12 +4084,13 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="OrderItemId" />
           </Key>
           <Property Name="OrderItemId" Type="Int32" Nullable="false" />
-          <Property Name="OrderId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DishNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Quit" Type="Int32" Nullable="false" />
-          <Property Name="Addprice" Type="Int32" Nullable="false" />
+          <Property Name="Addprice" Type="Double" Nullable="false" />
           <Property Name="IsPay" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
@@ -4107,6 +4103,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Pause" Type="Int32" Nullable="false" />
           <Property Name="Rebate" Type="Int32" Nullable="false" />
           <Property Name="Discount" Type="Int32" />
+          <Property Name="DiskPrice" Type="Double" />
           <NavigationProperty Name="Order" Relationship="IShow.ChooseDishes.Data.FK_ORDERITE_REFERENCE_ORDER" FromRole="OrderItem" ToRole="Order" />
           <NavigationProperty Name="OrderMateria" Relationship="IShow.ChooseDishes.Data.FK_ORDERMAT_REFERENCE_ORDERITE" FromRole="OrderItem" ToRole="OrderMateria" />
           <NavigationProperty Name="OrderPractice" Relationship="IShow.ChooseDishes.Data.FK_ORDERPRA_REFERENCE_ORDERITE" FromRole="OrderItem" ToRole="OrderPractice" />
@@ -4474,7 +4471,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TableId" Type="Int32" Nullable="false" />
-          <Property Name="CreateTableId" Type="Int32" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateBy" Type="Int32" Nullable="false" />
@@ -4520,7 +4516,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="DataType" Type="Int32" Nullable="false" />
           <Property Name="ConsumerMode" Type="Int32" />
           <Property Name="StartUnit" Type="Int32" />
-          <Property Name="StartDateTime" Type="DateTime" Precision="3" />
+          <Property Name="StartDateTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="OutMoney" Type="Double" />
           <Property Name="OutTime" Type="Int32" />
           <Property Name="StartMoney" Type="Int32" />
@@ -4533,9 +4529,9 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
-          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDateTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Rate" Type="Int32" />
-          <Property Name="ServerfreeNum" Type="Int32" />
+          <Property Name="ServerfreeNum" Type="Double" />
           <Property Name="ServerfreeAccountType" Type="Int32" />
           <Property Name="ServerfreeNax" Type="Int32" />
           <NavigationProperty Name="TableType" Relationship="IShow.ChooseDishes.Data.FK_TABLETYP_REFERENCE_TABLETYP" FromRole="TableTypeDetail" ToRole="TableType" />
@@ -4751,7 +4747,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
         <EntityType Name="OrderMateria">
           <Key>
             <PropertyRef Name="OrderItemId" />
-            <PropertyRef Name="DishNum" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="DishId" />
             <PropertyRef Name="Code" />
             <PropertyRef Name="Price" />
             <PropertyRef Name="Num" />
@@ -4762,9 +4759,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="Status" />
           </Key>
           <Property Name="OrderItemId" Type="Int32" Nullable="false" />
-          <Property Name="DishNum" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Quit" Type="Int32" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
@@ -4778,7 +4776,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
         <EntityType Name="OrderPractice">
           <Key>
             <PropertyRef Name="OrderItemId" />
-            <PropertyRef Name="DishNum" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="DishId" />
             <PropertyRef Name="Code" />
             <PropertyRef Name="Price" />
             <PropertyRef Name="Num" />
@@ -4789,9 +4788,10 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             <PropertyRef Name="Status" />
           </Key>
           <Property Name="OrderItemId" Type="Int32" Nullable="false" />
-          <Property Name="DishNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
           <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Quit" Type="Int32" Nullable="false" />
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
@@ -5047,18 +5047,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DESKDISH_REFERENCE_ORDER">
-          <End Type="IShow.ChooseDishes.Data.Order" Role="Order" Multiplicity="1" />
-          <End Type="IShow.ChooseDishes.Data.DeskDishes" Role="DeskDishes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="DeskDishes">
-              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5387,7 +5375,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERITE_REFERENCE_ORDER">
-          <End Type="IShow.ChooseDishes.Data.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="IShow.ChooseDishes.Data.Order" Role="Order" Multiplicity="1" />
           <End Type="IShow.ChooseDishes.Data.OrderItem" Role="OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -5872,6 +5860,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySetMapping Name="CreateDesk">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.CreateDesk">
               <MappingFragment StoreEntitySet="CreateDesk">
+                <ScalarProperty Name="OriginalNum" ColumnName="OriginalNum" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -5881,7 +5870,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="PerDeskPrice" ColumnName="PerDeskPrice" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Property" ColumnName="Property" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="PeriodTime" ColumnName="PeriodTime" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Assistant" ColumnName="Assistant" />
@@ -5930,6 +5918,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySetMapping Name="DeskDishes">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DeskDishes">
               <MappingFragment StoreEntitySet="DeskDishes">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OriginalNum" ColumnName="OriginalNum" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -5954,6 +5944,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySetMapping Name="DeskOrder">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.DeskOrder">
               <MappingFragment StoreEntitySet="DeskOrder">
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -5974,7 +5965,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="Quit" ColumnName="Quit" />
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="DishNum" ColumnName="DishNum" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
                 <ScalarProperty Name="DeskDishesId" ColumnName="DeskDishesId" />
                 <ScalarProperty Name="DeskOrderId" ColumnName="DeskOrderId" />
               </MappingFragment>
@@ -6509,7 +6500,9 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="Presented" ColumnName="Presented" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Consume" ColumnName="Consume" />
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="DiskIds" ColumnName="DiskIds" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OriginalNum" ColumnName="OriginalNum" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6517,6 +6510,7 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
           <EntitySetMapping Name="OrderItem">
             <EntityTypeMapping TypeName="IShow.ChooseDishes.Data.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="DiskPrice" ColumnName="DiskPrice" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Rebate" ColumnName="Rebate" />
                 <ScalarProperty Name="Pause" ColumnName="Pause" />
@@ -6533,7 +6527,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="Quit" ColumnName="Quit" />
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="DishNum" ColumnName="DishNum" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
               </MappingFragment>
@@ -6899,7 +6894,6 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDatetime" ColumnName="CreateDatetime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreateTableId" ColumnName="CreateTableId" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -7153,7 +7147,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="DishNum" ColumnName="DishNum" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7171,7 +7166,8 @@ warning 6002: The table/view 'IChooseDishes.dbo.ShiftItem' does not have a prima
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="DishNum" ColumnName="DishNum" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -16,7 +16,6 @@ namespace IShow.ChooseDishes.Data
     {
         public int Id { get; set; }
         public int TableId { get; set; }
-        public Nullable<int> CreateTableId { get; set; }
         public int Status { get; set; }
         public System.DateTime CreateDatetime { get; set; }
         public int CreateBy { get; set; }

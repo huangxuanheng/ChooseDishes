@@ -20,21 +20,21 @@ namespace IShow.ChooseDishes.Api
         /// <param name="TableId">餐桌id</param>
         /// <param name="CreateTableId">开台id</param>
         /// <returns></returns>
-        TableItem Add(int TableId, int CreateTableId);
+        TableItem Add(int TableId);
         /// <summary>
         /// 根据桌台id和开台id完成物理删除
         /// </summary>
         /// <param name="TableId">桌台id</param>
         /// <param name="CreateTableId">开台id</param>
         /// <returns></returns>
-        bool Remove(int TableId, int CreateTableId);
+        bool Remove(int TableId);
         /// <summary>
         /// 根据桌台id和开台id修改状态
         /// </summary>
         /// <param name="TableId">桌台id</param>
         /// <param name="CreateTableId">开台id</param>
         /// <returns></returns>
-        TableItem ModifyStatusBy(int TableId, int CreateTableId, int Status);
+        bool ModifyStatus(int TableId,int Status);
         /// <summary>
         /// 根据桌台id获取餐桌状态详情，包括开台信息和餐桌信息
         /// get the detail TableItem by TableId
@@ -54,5 +54,30 @@ namespace IShow.ChooseDishes.Api
         /// <param name="Status">餐桌状态</param>
         /// <returns></returns>
         int GetNumByStatus(int Status);
+        /// <summary>
+        /// 修改餐桌状态为空闲状态
+        /// </summary>
+        /// <param name="TableId"></param>
+        bool ModifyIdle(int TableId);
+        /// <summary>
+        /// 修改餐桌状态为正在使用
+        /// </summary>
+        /// <param name="TableId"></param>
+        bool ModifyUsing(int TableId);
+        /// <summary>
+        /// 修改餐桌状态为待清状态
+        /// </summary>
+        /// <param name="TableId"></param>
+        bool ModifyWaitting(int TableId);
+        /// <summary>
+        /// 修改餐桌状态为预定状态
+        /// </summary>
+        /// <param name="TableId"></param>
+        bool ModifyScheduled(int TableId);
+        /// <summary>
+        /// 修改餐桌状态为超额状态
+        /// </summary>
+        /// <param name="TableId"></param>
+        bool ModifyExcess(int TableId);
     }
 }

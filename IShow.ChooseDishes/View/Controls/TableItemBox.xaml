@@ -22,17 +22,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="35"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding MergeType}" Grid.Row="0" Grid.Column="0"/>
         <!--显示餐桌名称-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Center">
             <AccessText FontSize="16">(</AccessText>
             <AccessText VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Name}" FontSize="16"/>
             <AccessText FontSize="16">)桌</AccessText>
         </StackPanel>
         <!--锁图标-->
-        <Image Grid.Row="0" Grid.Column="1" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Source="../../Image/Home/ToolBtn/suoping_0.png" Height="30" Width="30" Visibility="{Binding Locked,Converter={StaticResource TableLockConverter}}"></Image>
+        <Image Grid.Row="0" Grid.Column="2" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Source="../../Image/Home/ToolBtn/suoping_0.png" Height="30" Width="30" Visibility="{Binding Locked,Converter={StaticResource TableLockConverter}}"></Image>
 
         <StackPanel  Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Center"  HorizontalAlignment="Center"  
                        Visibility="{Binding Status, Converter={StaticResource TableMoneyVisibilityConverter}}">

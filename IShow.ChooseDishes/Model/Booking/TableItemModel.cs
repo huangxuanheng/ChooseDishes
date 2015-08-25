@@ -52,6 +52,8 @@ namespace IShow.ChooseDishes.Model.Booking
 
         public bool _Locked;
 
+        private string _MergeType;
+
         public TableItemModel(string _id, string _name, double _totalPrice, TableStatus _status, int _defaultSeats, int _diningNumber,bool _locked)
         {
             this.Id = _id;
@@ -159,7 +161,11 @@ namespace IShow.ChooseDishes.Model.Booking
             }
         }
 
-
+        public string MergeType
+        {
+            get { return _MergeType; }
+            set { Set("MergeType", ref _MergeType, value); }
+        }
     }
 
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IShow.ChooseDishes.Model.Booking
 {
-    public class TableTypeItemModel : ViewModelBase
+    public class BaseTableModel : ViewModelBase
     {
         /// <summary>
         /// 桌类id
@@ -26,17 +26,17 @@ namespace IShow.ChooseDishes.Model.Booking
         /// </summary>
         private bool _Checked;
 
-        public TableTypeItemModel(int _Id,string _Code,string _Name)
+        public BaseTableModel(int _Id,string _Code,string _Name)
         {
             this._Id = _Id;
             this._Code = _Code;
             this._Name = _Name;
         }
-        public TableTypeItemModel(string _Name):this(-1, null, _Name)
+        public BaseTableModel(string _Name):this(-1, null, _Name)
         {
             
         }
-        public TableTypeItemModel(int _Id, string _Name)
+        public BaseTableModel(int _Id, string _Name)
             : this(_Id, null, _Name)
         {
 

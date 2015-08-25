@@ -29,10 +29,14 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         /// 参数设置业务接口
         /// </summary>
         IConfigurationService _ConfigurationService;
+        /// <summary>
+        /// 餐桌点餐业务接口
+        /// </summary>
+        IDeskDishesService _DeskDishesService;
         #region 餐桌类型
 
-        TableTypeItemModel _TypeSelectedItem;
-        public TableTypeItemModel TypeSelectedItem    //餐桌类型/区域的选中对象
+        BaseTableModel _TypeSelectedItem;
+        public BaseTableModel TypeSelectedItem    //餐桌类型/区域的选中对象
         {
             get {
                 return _TypeSelectedItem;
@@ -42,11 +46,11 @@ namespace IShow.ChooseDishes.ViewModel.Booking
             }
         }
 
-        ObservableCollection<TableTypeItemModel> _TypeItems;
-        public ObservableCollection<TableTypeItemModel> TypeItems   //所有餐桌类型/区域的集合
+        ObservableCollection<BaseTableModel> _TypeItems;
+        public ObservableCollection<BaseTableModel> TypeItems   //所有餐桌类型/区域的集合
         {
             get {
-                return _TypeItems ?? (_TypeItems = new ObservableCollection<TableTypeItemModel>());
+                return _TypeItems ?? (_TypeItems = new ObservableCollection<BaseTableModel>());
             }
             set {
                 Set("TypeItems", ref _TypeItems, value);
@@ -111,8 +115,8 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         
         #endregion 
         #region 餐台定位
-        TableTypeItemModel _LocationSelectedItem;
-        public TableTypeItemModel LocationSelectedItem
+        BaseTableModel _LocationSelectedItem;
+        public BaseTableModel LocationSelectedItem
         {
             get
             {
@@ -123,12 +127,12 @@ namespace IShow.ChooseDishes.ViewModel.Booking
                 Set("LocationSelectedItem", ref _LocationSelectedItem, value);
             }
         }
-        ObservableCollection<TableTypeItemModel> _TableLocationItems;
-        public ObservableCollection<TableTypeItemModel> TableLocationItems
+        ObservableCollection<BaseTableModel> _TableLocationItems;
+        public ObservableCollection<BaseTableModel> TableLocationItems
         {
             get
             {
-                return _TableLocationItems ?? (_TableLocationItems = new ObservableCollection<TableTypeItemModel>());
+                return _TableLocationItems ?? (_TableLocationItems = new ObservableCollection<BaseTableModel>());
             }
             set
             {
@@ -139,8 +143,8 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         TableWindow TableXaml { set; get; }
         #endregion
         #region 餐台加台、并台、拆台、搭台
-        TableTypeItemModel _BaseTableSelectedItem;
-        public TableTypeItemModel BaseTableSelectedItem
+        BaseTableModel _BaseTableSelectedItem;
+        public BaseTableModel BaseTableSelectedItem
         {
             get
             {
@@ -151,12 +155,12 @@ namespace IShow.ChooseDishes.ViewModel.Booking
                 Set("BaseTableSelectedItem", ref _BaseTableSelectedItem, value);
             }
         }
-        ObservableCollection<TableTypeItemModel> _BaseTableItems;
-        public ObservableCollection<TableTypeItemModel> BaseTableItems
+        ObservableCollection<BaseTableModel> _BaseTableItems;
+        public ObservableCollection<BaseTableModel> BaseTableItems
         {
             get
             {
-                return _BaseTableItems ?? (_BaseTableItems = new ObservableCollection<TableTypeItemModel>());
+                return _BaseTableItems ?? (_BaseTableItems = new ObservableCollection<BaseTableModel>());
             }
             set
             {
@@ -166,22 +170,20 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         /// <summary>
         /// 加台页面
         /// </summary>
-        AddTableWindow AddTableXaml { set; get; }
+        BaseTableWindow AddTableXaml { set; get; }
         #endregion
-        public HomePageViewModel(ITableStatusService _Service, ITableItemService _TableItemService, IConfigurationService _ConfigurationService, IMessenger messenger)
+        public HomePageViewModel(ITableStatusService _Service, ITableItemService _TableItemService, IConfigurationService _ConfigurationService, IDeskDishesService _DeskDishesService, IMessenger messenger)
         {
             this._TableStatusService = _Service;
             this._TableItemService = _TableItemService;
             this._ConfigurationService = _ConfigurationService;
+            this._DeskDishesService = _DeskDishesService;
             InitTableStatusNum();
             InitTableData();
         }
-        public ITableItemService GetITableItemService()
-        {
-            return _TableItemService;
-        }
+
         /// <summary>
-        /// 初始化餐桌定位
+        /// 初始化餐桌定位页面
         /// </summary>
         public void InitTableLocation(){
             TableXaml = new TableWindow();
@@ -193,7 +195,6 @@ namespace IShow.ChooseDishes.ViewModel.Booking
                 //餐桌定位的拼接类型是编码或者id直接使用下划线分割"_"
                 if (config.Disabled == 1)   //餐桌类型
                 {
-
                     TableXaml.TableType.IsChecked = true;
                     LoaderTableTypeLocation(value);
                 }
@@ -221,7 +222,7 @@ namespace IShow.ChooseDishes.ViewModel.Booking
             {
                 foreach (var tt in tts)
                 {
-                    TableTypeItemModel ttm=new TableTypeItemModel(tt.LocationId, tt.Name);
+                    BaseTableModel ttm=new BaseTableModel(tt.LocationId, tt.Name);
                     if (!flag)
                     {
                         LocationSelectedItem = ttm;
@@ -255,7 +256,7 @@ namespace IShow.ChooseDishes.ViewModel.Booking
                 foreach (var tt in types)
                 {
                     
-                    TableTypeItemModel ttm=new TableTypeItemModel(tt.TableTypeId, tt.Name);
+                    BaseTableModel ttm=new BaseTableModel(tt.TableTypeId, tt.Name);
                     if (!flag)
                     {
                         LocationSelectedItem = ttm;
@@ -294,44 +295,58 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         private void InitTableData()
         {
             TypeItems.Clear();
-            
-            Config config=_ConfigurationService.Find(TableLocationMapping.TableLocationName[TableLocation.NAME]);
-            if (config != null)
-            {
-                //餐桌定位的拼接类型是编码或者id直接使用下划线分割"_"
-                if (config.Disabled == 1)   //餐桌类型
-                {
-                    TypeItems.Add(new TableTypeItemModel("所有餐桌"));
-                    //
-                    string[] values=config.Value.Split(new char[]{'_'});
-                    List<TableType> types = _TableStatusService.GetTypesByIds(values);
-                    LoaderTableType(types);
-                }
-                else if (config.Disabled == 2)   //区域
-                {
-                    TypeItems.Add(new TableTypeItemModel("所有区域"));
-                    string[] values = config.Value.Split(new char[] { '_' });
-                    List<Location> locations=_TableStatusService.GetLocationByAllId(values);
-                    LoaderLocation(locations);
-                }
-            }
+
+            InitTableLocationItemData(0);
             //List<TableType> types = _TableService.GetAllTypes();
             //List<Location> locations = _TableService.GetAllLocation();
             
         }
         /// <summary>
+        /// 初始化餐桌定位数据，主要在主页面显示
+        /// status=0表示添加空闲的桌台，status=1表示添加正在使用的桌台，status=2添加待清的桌台
+        /// </summary>
+        ///  <param name="status">status=0表示初始化加载餐桌定位及桌台数据，status=1表示点击类型加载对应桌台数据</param>
+        private void InitTableLocationItemData(int status)
+        {
+            Config config = _ConfigurationService.Find(TableLocationMapping.TableLocationName[TableLocation.NAME]);
+            if (config != null)
+            {
+                //餐桌定位的拼接类型是编码或者id直接使用下划线分割"_"
+                if (config.Disabled == 1)   //餐桌类型
+                {
+                    if (status==0)
+                        TypeItems.Add(new BaseTableModel("所有餐桌"));
+                    //
+                    string[] values = config.Value.Split(new char[] { '_' });
+                    List<TableType> types = _TableStatusService.GetTypesByIds(values);
+                    LoaderTableType(types, status);
+                }
+                else if (config.Disabled == 2)   //区域
+                {
+                    if (status == 0)
+                    TypeItems.Add(new BaseTableModel("所有区域"));
+                    string[] values = config.Value.Split(new char[] { '_' });
+                    List<Location> locations = _TableStatusService.GetLocationByAllId(values);
+                    LoaderLocation(locations, status);
+                }
+            }
+        }
+        /// <summary>
         /// 加载餐桌类型
         /// </summary>
         /// <param name="types"></param>
-        private void LoaderTableType(List<TableType> types)
+        /// /// <param name="status">status=0表示初始化加载，status=1表示点击类型加载对应桌台</param>
+        private void LoaderTableType(List<TableType> types,int status)
         {
             TableItems.Clear();
             if (types != null && types.Count > 0)
                 foreach (var type in types)
                 {
-                    
-                    TableTypeItemModel ttms = new TableTypeItemModel(type.TableTypeId, type.Code, type.Name);
-                    TypeItems.Add(ttms);
+                    if (status == 0)
+                    {
+                        BaseTableModel ttms = new BaseTableModel(type.TableTypeId, type.Code, type.Name);
+                        TypeItems.Add(ttms);
+                    }
                     ICollection<Table> tables = type.Table;
                     LoaderTableItem(tables);
                 }
@@ -340,15 +355,17 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         /// 加载区域
         /// </summary>
         /// <param name="locations"></param>
-        private void LoaderLocation(List<Location> locations)
+        private void LoaderLocation(List<Location> locations, int status)
         {
             TableItems.Clear();
             if (locations != null && locations.Count > 0)
                 foreach (var location in locations)
                 {
-
-                    TableTypeItemModel ttms = new TableTypeItemModel(location.LocationId, location.Code, location.Name);
-                    TypeItems.Add(ttms);
+                    if (status == 0)
+                    {
+                        BaseTableModel ttms = new BaseTableModel(location.LocationId, location.Code, location.Name);
+                        TypeItems.Add(ttms);
+                    }
                     ICollection<Table> tables = location.Table;
                     LoaderTableItem(tables);
                 }
@@ -359,7 +376,6 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         /// <param name="type"></param>
         private void LoaderTableItem(ICollection<Table> tables)
         {
-           
             if (tables != null && tables.Count > 0)
             {
                 foreach (var table in tables)
@@ -369,6 +385,7 @@ namespace IShow.ChooseDishes.ViewModel.Booking
                     {
                         foreach (var item in items)
                         {
+                            DeskDishes dd=_DeskDishesService.GetDeskDischesByTableId(item.Id);
                             if (item.Status == 0)
                             {
                                 TableItems.Add(new TableItemModel(item.Id + "", table.Name, (double)item.Money, TableStatus.Idle,6 , (int)item.SeatedNum, false));
@@ -404,8 +421,7 @@ namespace IShow.ChooseDishes.ViewModel.Booking
             //MessageBox.Show("确定要对进行开台吗？" + TypeSelectedItem.Name + TypeSelectedItem.Id, "提示", MessageBoxButton.YesNo);
             if (TypeSelectedItem.Id == -1)
             {
-                List<TableType> types = _TableStatusService.GetAllTypes();
-                LoaderTableType(types);
+                InitTableLocationItemData(1);
             }
             else
             {
@@ -511,20 +527,233 @@ namespace IShow.ChooseDishes.ViewModel.Booking
         /// <summary>
         /// 跳出加台页面
         /// </summary>
-        internal void InitAddTable()
+        public void InitAddTable()
         {
-            BaseTableItems = new ObservableCollection<TableTypeItemModel>();
-            BaseTableItems.Add(new TableTypeItemModel("桌台1"));
+            InitBaseTableItemData(1);
 
-            AddTableXaml = new AddTableWindow();
+            AddTableXaml = new BaseTableWindow();
+            AddTableXaml.SelectedBtns.Visibility = Visibility.Collapsed;
+            AddTableXaml.Title = "加台(请选择需要加入的桌台!)";
             AddTableXaml.ShowDialog();
+        }
+        /// <summary>
+        /// 根据餐桌状态初始化基餐桌数据
+        /// status=0表示添加空闲的桌台，status=1表示添加正在使用的桌台，status=2添加待清的桌台
+        /// </summary>
+        /// <param name="status">status=0表示添加空闲的桌台，status=1表示添加正在使用的桌台，status=2添加待清的桌台</param>
+        private void InitBaseTableItemData(int status)
+        {
+            BaseTableItems = new ObservableCollection<BaseTableModel>();
+            //查数据库
+            Config config = _ConfigurationService.Find(TableLocationMapping.TableLocationName[TableLocation.NAME]);
+            if (config != null)
+            {
+                //餐桌定位的拼接类型是编码或者id直接使用下划线分割"_"
+                if (config.Disabled == 1)   //餐桌类型
+                {
+                    string[] values = config.Value.Split(new char[] { '_' });
+                    List<TableType> types = _TableStatusService.GetTypesByIds(values);
+                    if (types != null && types.Count > 0)
+                    {
+                        foreach (var type in types)
+                        {
+                            ICollection<Table> tables = type.Table;
+                            InitAddTableData(tables, status);
+                        }
+                    }
+                }
+                else if (config.Disabled == 2)   //区域
+                {
+                    string[] values = config.Value.Split(new char[] { '_' });
+                    List<Location> locations = _TableStatusService.GetLocationByAllId(values);
+                    if (locations != null && locations.Count > 0)
+                    {
+                        foreach (var type in locations)
+                        {
+                            ICollection<Table> tables = type.Table;
+                            InitAddTableData(tables, status);
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 初始化加台(加席)数据
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <param name="tables">status=0表示添加空闲的桌台，status=1表示添加正在使用的桌台，status=2添加待清的桌台</param>
+        private void InitAddTableData(ICollection<Table> tables,int status)
+        {
+            if (tables != null && tables.Count > 0)
+                foreach (var table in tables)
+                {
+                    ICollection<TableItem> tbItems = table.TableItem;
+                    if (tbItems != null && tbItems.Count > 0)
+                    {
+                        foreach (var item in tbItems)
+                        {
+                            if (item.Status == status)
+                            {
+                                BaseTableItems.Add(new BaseTableModel(table.TableId, table.Name));
+                            }
+                        }
+                    }
+                }
         }
         /// <summary>
         /// 加台页面选择的桌台
         /// </summary>
         internal void AddTableSelected()
         {
+            //foreach (var item in BaseTableItems)
+            //{
+            //    item.Checked = false;
+            //}
+
+            if (BaseTableSelectedItem != null)
+            {
+                BaseTableSelectedItem.Checked = !BaseTableSelectedItem.Checked;
+                if (AddTableXaml.Title.Contains("搭台"))
+                {
+                    //检查是否有过并台现象，如果有，弹出对话框提示是否要拆台，拆台后关闭页面
+                    
+                }
+            }
+        }
+        private ObservableCollection<BaseTableModel> _AddTableTemps;
+        /// <summary>
+        /// 选择新的桌台
+        /// </summary>
+        internal void SelectedNewTable()
+        {
             
+            if (!AddTableXaml.Title.Contains("被加入"))    
+            {
+                if (BaseTableSelectedItem == null || !BaseTableSelectedItem.Checked)
+                {
+                    MessageBox.Show("请选择需要加席的餐桌!");
+                    return;
+                }
+                _AddTableTemps = new ObservableCollection<BaseTableModel>();
+                _AddTableTemps.Add(BaseTableSelectedItem);
+                AddTableXaml.Title = "加台(请选择需要被加入的餐台)";
+                InitBaseTableItemData(0);
+            }
+            else
+            {
+                if (BaseTableSelectedItem == null || !BaseTableSelectedItem.Checked)
+                {
+                    MessageBox.Show("请选择需要被加入的餐台!");
+                    return;
+                }
+                if (_AddTableTemps!=null)
+                    _AddTableTemps.Add(BaseTableSelectedItem);
+                ///TODO 打开开台页面
+                MessageBox.Show("跳出加台页面");
+            }
+            
+        }
+        /// <summary>
+        /// 临时集合，用来记录已存在的餐桌
+        /// </summary>
+        ObservableCollection<BaseTableModel> obs;
+        /// <summary>
+        /// 根据输入的餐桌编号查找餐桌
+        /// </summary>
+        internal void QueryNum(string InputNum)
+        {
+            if (string.IsNullOrEmpty(InputNum) && AddTableXaml.Title.Contains("请选择需要加入的桌台"))
+            {
+                InitBaseTableItemData(1);
+                return;
+            }
+            else if (string.IsNullOrEmpty(InputNum) && AddTableXaml.Title.Contains("被加入"))
+            {
+                InitBaseTableItemData(0);
+                return;
+            }
+            if (obs == null)
+            {
+                obs = new ObservableCollection<BaseTableModel>();
+            }
+            obs.Clear();
+            foreach (var item in BaseTableItems)
+            {
+                if (item.Name.Contains(InputNum)|| item.Id.ToString() .Contains(InputNum))
+                {
+                    obs.Add(item);
+                }
+            }
+            BaseTableItems.Clear();
+            
+            foreach (var ob in obs)
+            {
+                BaseTableItems.Add(ob);
+            }
+        }
+
+        /// <summary>
+        /// 并台
+        /// </summary>
+        internal void MergeTable()
+        {
+            InitBaseTableItemData(1);
+
+            AddTableXaml = new BaseTableWindow();
+            AddTableXaml.Title = "餐桌并桌";
+            AddTableXaml.NotSelected.Visibility = Visibility.Collapsed;
+            AddTableXaml.Commit.Content = "并台";
+            AddTableXaml.ShowDialog();
+        }
+
+        /// <summary>
+        /// 确认合并所选餐桌
+        /// </summary>
+        internal void SelectedMergeTable()
+        {
+            _AddTableTemps = new ObservableCollection<BaseTableModel>();
+            foreach (var item in BaseTableItems)
+            {
+                if (item.Checked)
+                {
+                    _AddTableTemps.Add(item);
+                }
+            }
+            if (_AddTableTemps.Count < 2)
+            {
+                MessageBox.Show("至少选择两个或者以上的桌台否则不能并台!");
+                return;
+            }
+            
+        }
+        /// <summary>
+        /// 选择所有的桌台
+        /// </summary>
+        internal void SelectedAllTable()
+        {
+            foreach (var item in BaseTableItems)
+            {
+                item.Checked = true;
+            }
+        }
+        /// <summary>
+        /// 打开搭台/拆台页面
+        /// </summary>
+        internal void OpenJoinOrTear()
+        {
+            InitBaseTableItemData(1);
+
+            AddTableXaml = new BaseTableWindow();
+            AddTableXaml.SelectedBtns.Visibility = Visibility.Collapsed;
+            AddTableXaml.Title = "搭台(选择需要搭的餐台)";
+            AddTableXaml.ShowDialog();
+        }
+        /// <summary>
+        /// 打开开台页面
+        /// </summary>
+        internal void OpenCreateTable()
+        {
+            //记录已经选择的桌台
         }
     }
 }

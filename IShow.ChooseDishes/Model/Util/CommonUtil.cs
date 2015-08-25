@@ -27,6 +27,21 @@ namespace IShow.ChooseDishes.Model.Util
 
             return false;
         }
+
+        public static bool RegexpIsNumber(String value)
+        {
+            int a = 0;
+            if (int.TryParse(value, out a) == false) //判断是否可以转换为整型
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
         /// <summary>
         /// <para>author: huangxianheng </para>
         /// 检查输入的是否是英文字符
@@ -86,5 +101,5 @@ namespace IShow.ChooseDishes.Model.Util
             return true;
         }
     }
-    
+
 }

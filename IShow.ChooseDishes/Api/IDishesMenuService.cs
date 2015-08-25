@@ -13,6 +13,13 @@ namespace IShow.ChooseDishes.Api
        List<DishesMenu> QueryAll();
 
        int Add(string code,string name);
+       //修改菜牌
+       bool update(int menusId , string code, string name);
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="dishesMenuId"></param>
 
        void Delete(int dishesMenuId);
 
@@ -26,6 +33,7 @@ namespace IShow.ChooseDishes.Api
         void BatchRemoveDishes(int menuId, int[] dishesIds);
 
         List<DishesMenuItemModel> FindItemsById(int menuId);
+        DishesMenu FindDishesMenuByMenuId(int menuId);
 
     }
 }
